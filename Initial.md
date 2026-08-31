@@ -127,7 +127,7 @@ Phase 3: 集成融合 + 分阶段滚动预测
 | **时间** | hour_of_day, days_since_onset | 日周期/事件进度 |
 | | 是否第二风暴窗口(Mar 16-17) | 双峰结构 |
 
-> **关于标识符列的使用限制**: `fipsCode`、`stateAbbr` 等标识符列**不可直接作为模型输入特征**(文档明确标注 "Do not use as model input features")。州名只是地理/治理/地形的**粗糙代理变量(proxy)**,直接 one-hot 编码会违反规则且效果不如真实因子。正确做法:用 `fipsCode`/`stateAbbr` 作为**连接键(join key)**拼接外部数据,将底层因素的实际数值作为特征进入模型,而标识符本身不进模型。比赛文档已提供可选外部数据源:
+> **关于标识符列的使用限制**: `fipsCode`、`stateAbbr` 等标识符列**不可直接作为模型输入特征**(文档明确标注 "Do not use as model input features")。用 `fipsCode`/`stateAbbr` 作为**连接键(join key)**拼接外部数据,将底层因素的实际数值作为特征进入模型,而标识符本身不进模型。比赛文档已提供可选外部数据源:
 
 | 底层因素 | 外部数据源 | 对应维度 | 用法 |
 |---|---|---|---|
