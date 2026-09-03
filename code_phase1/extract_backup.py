@@ -3,7 +3,7 @@
 ============================================================
 在你的本地机器运行(TIF文件所在的位置), 不需要上传整个TIF。
 
-用途: 从 NLCD Land Cover 分类栅格中提取每个县的:
+用途: 从 lcnext-1.0-stratum-map-Clipped.tif 中提取每个县的:
   - 各土地覆盖类别的面积百分比
   - 主要类别占比(forest/developed/agriculture/water)
 
@@ -16,10 +16,7 @@
     --counties "path/to/tl_2024_us_county/tl_2024_us_county.shp" \
     --output "county_landcover.csv"
 
-输出: county_landcover.csv (约302行, <50KB), 上传到服务器即可。
-
-注意: 本脚本计算土地覆盖类别的面积比例，不计算 Tree Canopy Cover
-（树冠覆盖率）。树冠覆盖率是连续百分比栅格，需要使用均值等连续型统计。
+输出: county_landcover.csv (约302行, <50KB), 上传到服务器即可
 """
 
 import argparse
@@ -29,31 +26,6 @@ import geopandas as gpd
 from rasterstats import zonal_stats
 import csv
 import sys
-
-
-NLCD_CLASSES = {11, 12, 21, 22, 23, 24, 31, 41, 42, 43, 52, 71, 81, 82, 90, 95}
-
-
-def sample_classes(src, nodata, window_size=512, grid_size=5):
-    """从全图均匀分布的窗口取样，避免左上角样本不具代表性。"""
-    row_starts = np.linspace(0, max(0, src.height - window_size), grid_size, dtype=int)
-    col_starts = np.linspace(0, max(0, src.width - window_size), grid_size, dtype=int)
-    classes = set()
-
-    for row_start in row_starts:
-        for col_start in col_starts:
-            window = rasterio.windows.Window(
-                col_start,
-                row_start,
-                min(window_size, src.width - col_start),
-                min(window_size, src.height - row_start),
-            )
-            values = src.read(1, window=window)
-            if nodata is not None:
-                values = values[values != nodata]
-            classes.update(np.unique(values).tolist())
-
-    return sorted(classes)
 
 
 def main():
@@ -72,18 +44,12 @@ def main():
         print(f'  NoData: {nodata}')
         print(f'  Size: {src.width} x {src.height}')
 
-    # 取全图分散样本，避免左上角恰好都是 NoData 或单一类别。
+    # 先读取一小块看有哪些值
     with rasterio.open(args.raster) as src:
-        unique_vals = sample_classes(src, nodata)
-    print(f'  栅格值样本(全图分散取样): {unique_vals[:30]}')
+        sample = src.read(1, window=((0, min(1000, src.height)), (0, min(1000, src.width))))
+        unique_vals = np.unique(sample[sample != nodata]) if nodata else np.unique(sample)
+    print(f'  栅格值样本(前1000行): {unique_vals[:30]}')
     print(f'  总共{len(unique_vals)}种值')
-    unknown_sample_classes = sorted(set(unique_vals) - NLCD_CLASSES)
-    if unknown_sample_classes:
-        print(
-            '  警告: 检测到非标准 NLCD 编码 '
-            f'{unknown_sample_classes[:30]}。它们将保留在 cls_* 列和 '
-            'pct_unmapped 中，但不会被归入任何 NLCD 大类。'
-        )
 
     # 2. 读取县边界, 筛选4州
     print(f'\n[2/4] 读取县边界: {args.counties}')
@@ -120,9 +86,6 @@ def main():
         all_classes.update(s.keys())
     all_classes = sorted(all_classes)
     print(f'  所有类别: {all_classes}')
-    unknown_classes = sorted(set(all_classes) - NLCD_CLASSES)
-    if unknown_classes:
-        print(f'  警告: 县级统计中含未映射编码: {unknown_classes}')
 
     # NLCD标准分类映射(如果适用)
     # 如果TIF的值不是标准NLCD编码, 需要你根据实际值调整
@@ -174,9 +137,6 @@ def main():
             if group_vals:
                 count = sum(s.get(v, 0) for v in group_vals)
                 out[f'pct_{group_name}'] = round(100.0 * count / total_pixels, 2) if total_pixels > 0 else 0.0
-
-        unmapped_count = sum(s.get(v, 0) for v in unknown_classes)
-        out['pct_unmapped'] = round(100.0 * unmapped_count / total_pixels, 2) if total_pixels > 0 else 0.0
 
         # 各具体类别百分比(可选, 详细记录)
         for v in all_classes:

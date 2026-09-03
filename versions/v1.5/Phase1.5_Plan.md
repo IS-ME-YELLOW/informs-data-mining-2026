@@ -193,7 +193,7 @@ Phase 1 中 `hours_since_obs` 和 `last_osi` 占据了绝大多数 gain, 气象�
 | 文件 | 改动 |
 |---|---|
 | `features.py` | 在 OBSERVED_FEATURES, DERIVED_WEATHER_FEATURES, HORIZON_STAT_FEATURES 中新增列名; 新增 compute_threshold_exceedance(), compute_peak_window_mean(), compute_weather_changes(), compute_interactions(), compute_cumulative_exposure(), compute_obs_gust_profile() 函数; 在 build_feature_matrix() 中调用新函数 |
-| `config.py` | FEATURE_VERSION 从 'v1' 改为 'v2' |
+| `config.py` | FEATURE_VERSION 从 'v1' 改为 'v1.5' |
 | `cache.py` | 无改动(自动用新版本号) |
 | `model.py` | 无改动(特征数自动适应) |
 | `evaluate.py` | 新增: post_processing_threshold() 函数(预测后处理阈值) |
@@ -438,7 +438,7 @@ feat.update(compute_cumulative_exposure(county_df, t_idx))
 ### 6.2 config.py 改动
 
 ```python
-FEATURE_VERSION = 'v2'  # 从 'v1' 改为 'v2', 触发缓存重建
+FEATURE_VERSION = 'v1.5'  # 从 'v1' 改为 'v1.5', 触发缓存重建
 ```
 
 ### 6.3 evaluate.py 改动
@@ -463,11 +463,11 @@ for h in HORIZONS:
 
 ```bash
 # 1. 修改 features.py (新增函数+列名+调用)
-# 2. 修改 config.py (FEATURE_VERSION='v2')
+# 2. 修改 config.py (FEATURE_VERSION='v1.5')
 # 3. 修改 evaluate.py (新增post_process)
 # 4. 修改 main.py (调用post_process)
 # 5. 运行: python main.py --rebuild-features
-#    (特征从v2缓存重新构建, 模型训练+日志)
+#    (特征从v1.5缓存重新构建, 模型训练+日志)
 # 6. 对比 Phase 1 (v1) 的日志结果
 ```
 
@@ -479,7 +479,7 @@ for h in HORIZONS:
 
 | 检查项 | 方法 |
 |---|---|
-| RMSE是否改善 | `grep "Mean RMSE" logs/experiments.log` 对比v1 vs v2 |
+| RMSE是否改善 | `grep "Mean RMSE" logs/experiments.log` 对比v1 vs v1.5 |
 | 气象特征重要性是否提升 | `grep "gust" logs/experiments.log` 看 gain 排名变化 |
 | 零预测偏差是否改善 | `grep "zero%" logs/experiments.log` 对比 |
 | 新特征是否有贡献 | 日志中 feature importance top 15 是否出现新特征名 |
@@ -488,7 +488,7 @@ for h in HORIZONS:
 ### 决策树
 
 ```
-v2 RMSE vs v1:
+v1.5 RMSE vs v1:
 ├── 显著改善(>5%) → 继续P3-P6, 进入Phase 1.5第2轮
 ├── 微弱改善(1-5%) → 继续P3-P6, 但降低期望
 └── 无改善/恶化 → 分析特征重要性, 检查是否有数据泄露或冗余
@@ -497,11 +497,11 @@ v2 RMSE vs v1:
 
 ---
 
-## 八、Phase 1.5 (v2) 运行结果与下一步方向
+## 八、Phase 1.5 运行结果与下一步方向
 
-### 8.1 v1 → v2 结果对比
+### 8.1 v1 → v1.5 结果对比
 
-| Horizon | v1 RMSE | v2 RMSE | 改善 | v1 MAE | v2 MAE | 改善 |
+| Horizon | v1 RMSE | v1.5 RMSE | 改善 | v1 MAE | v1.5 MAE | 改善 |
 |---|---|---|---|---|---|---|
 | t+1h | 0.012824 | 0.012588 | **-1.8%** | 0.004188 | 0.004063 | **-3.0%** |
 | t+6h | 0.011404 | 0.011299 | **-0.9%** | 0.003972 | 0.003846 | **-3.2%** |
@@ -608,15 +608,15 @@ Phase 1.5 Round 2 (v3, 1-2天):
 
 当前存在的版本不一致问题:
 - `submission_phase1.csv` 硬编码文件名, 不含版本号 → 每次运行覆盖
-- 模型文件用 `lgbm_{horizon}_v2.txt` → 版本标签是 v2 但人读层面是 "Phase 1.5"
-- 日志中记录的 `feature_version: v2` 与 Results.md 中的 "Phase 1.5" 不统一
+- 模型文件用 `lgbm_{horizon}_v1.5.txt` → 版本标签是 v1.5 但人读层面是 "Phase 1.5"
+- 日志中记录的 `feature_version: v1.5` 与 Results.md 中的 "Phase 1.5" 不统一
 
 **统一命名规范:**
 
 | 阶段 | FEATURE_VERSION | 输出文件名 | 模型文件名 | 日志/文档标签 |
 |---|---|---|---|---|
 | Phase 1 (82维) | `v1` | `submission_v1.csv` | `lgbm_{horizon}_v1.txt` | Phase 1 (v1) |
-| Phase 1.5 (113维) | `v2` | `submission_v2.csv` | `lgbm_{horizon}_v2.txt` | Phase 1.5 (v2) |
+| Phase 1.5 (113维) | `v1.5` | `submission_v1.5.csv` | `lgbm_{horizon}_v1.5.txt` | Phase 1.5 (v1.5) |
 | Phase 1.5 R2 (方向1-3) | `v3` | `submission_v3.csv` | `lgbm_{horizon}_v3.txt` | Phase 1.5 R2 (v3) |
 | Phase 2 (GRU) | `v4` | `submission_v4.csv` | (GRU模型另命名) | Phase 2 (v4) |
 
