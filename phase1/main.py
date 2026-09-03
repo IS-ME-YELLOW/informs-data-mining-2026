@@ -30,11 +30,7 @@ from data_loader import load_train, load_test, load_submission, preprocess
 from cache import get_or_build
 from cv import get_cv_folds
 from model import train_all_horizons, predict, save_model
-<<<<<<< HEAD
 from evaluate import compute_metrics, compute_all_baselines, feature_importance, pred_stats, post_process
-=======
-from evaluate import compute_metrics, compute_all_baselines, feature_importance, pred_stats
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 from logger import ExperimentLogger
 
 
@@ -80,11 +76,7 @@ def main():
 
     log = ExperimentLogger(LOG_FILE)
 
-<<<<<<< HEAD
     print(f"=== LightGBM ({FEATURE_VERSION}) ===")
-=======
-    print("=== Phase 1: LightGBM Baseline ===")
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 
     # 步骤1: 加载数据
     print("[1/9] Loading data...")
@@ -117,19 +109,12 @@ def main():
     print("[6/9] Computing baselines...")
     baselines = compute_all_baselines(y_train, last_osis, folds)
 
-<<<<<<< HEAD
     # 步骤7: 预测测试集(clip到[0, 0.65] + 后处理阈值设零)
-=======
-    # 步骤7: 预测测试集(clip到[0, 0.65])
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     print("[7/9] Predicting on test set...")
     preds = {}
     for h in HORIZONS:
         preds[h] = predict(results[h]['model'], X_test)
-<<<<<<< HEAD
         preds[h] = post_process(preds[h])  # 后处理: pred<0.001 → 0, 改善零预测偏差
-=======
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 
     # 步骤8: 填充提交文件(超3/19的行设NaN, 不改标识列和行顺序)
     print("[8/9] Filling submission...")
@@ -170,12 +155,8 @@ def main():
     log.baselines(baselines)
 
     notes = (
-<<<<<<< HEAD
         f"Feature version {FEATURE_VERSION}. "
         f"Features: {X_train.shape[1]}. "
-=======
-        f"Phase 1 baseline. Feature version {FEATURE_VERSION}. "
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
         f"Models saved to models/. "
         f"Submission: {OUTPUT_FILE}"
     )

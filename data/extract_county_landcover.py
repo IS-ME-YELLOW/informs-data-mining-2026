@@ -3,11 +3,7 @@
 ============================================================
 在你的本地机器运行(TIF文件所在的位置), 不需要上传整个TIF。
 
-<<<<<<< HEAD
-用途: 从 lcnext-1.0-stratum-map-Clipped.tif 中提取每个县的:
-=======
 用途: 从 NLCD Land Cover 分类栅格中提取每个县的:
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
   - 各土地覆盖类别的面积百分比
   - 主要类别占比(forest/developed/agriculture/water)
 
@@ -20,14 +16,10 @@
     --counties "path/to/tl_2024_us_county/tl_2024_us_county.shp" \
     --output "county_landcover.csv"
 
-<<<<<<< HEAD
-输出: county_landcover.csv (约302行, <50KB), 上传到服务器即可
-=======
 输出: county_landcover.csv (约302行, <50KB), 上传到服务器即可。
 
 注意: 本脚本计算土地覆盖类别的面积比例，不计算 Tree Canopy Cover
 （树冠覆盖率）。树冠覆盖率是连续百分比栅格，需要使用均值等连续型统计。
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 """
 
 import argparse
@@ -39,8 +31,6 @@ import csv
 import sys
 
 
-<<<<<<< HEAD
-=======
 NLCD_CLASSES = {11, 12, 21, 22, 23, 24, 31, 41, 42, 43, 52, 71, 81, 82, 90, 95}
 
 
@@ -66,7 +56,6 @@ def sample_classes(src, nodata, window_size=512, grid_size=5):
     return sorted(classes)
 
 
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 def main():
     parser = argparse.ArgumentParser(description='提取县级土地覆盖统计')
     parser.add_argument('--raster', required=True, help='NLCD TIF栅格文件路径')
@@ -83,14 +72,6 @@ def main():
         print(f'  NoData: {nodata}')
         print(f'  Size: {src.width} x {src.height}')
 
-<<<<<<< HEAD
-    # 先读取一小块看有哪些值
-    with rasterio.open(args.raster) as src:
-        sample = src.read(1, window=((0, min(1000, src.height)), (0, min(1000, src.width))))
-        unique_vals = np.unique(sample[sample != nodata]) if nodata else np.unique(sample)
-    print(f'  栅格值样本(前1000行): {unique_vals[:30]}')
-    print(f'  总共{len(unique_vals)}种值')
-=======
     # 取全图分散样本，避免左上角恰好都是 NoData 或单一类别。
     with rasterio.open(args.raster) as src:
         unique_vals = sample_classes(src, nodata)
@@ -103,7 +84,6 @@ def main():
             f'{unknown_sample_classes[:30]}。它们将保留在 cls_* 列和 '
             'pct_unmapped 中，但不会被归入任何 NLCD 大类。'
         )
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 
     # 2. 读取县边界, 筛选4州
     print(f'\n[2/4] 读取县边界: {args.counties}')
@@ -140,12 +120,9 @@ def main():
         all_classes.update(s.keys())
     all_classes = sorted(all_classes)
     print(f'  所有类别: {all_classes}')
-<<<<<<< HEAD
-=======
     unknown_classes = sorted(set(all_classes) - NLCD_CLASSES)
     if unknown_classes:
         print(f'  警告: 县级统计中含未映射编码: {unknown_classes}')
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 
     # NLCD标准分类映射(如果适用)
     # 如果TIF的值不是标准NLCD编码, 需要你根据实际值调整
@@ -198,12 +175,9 @@ def main():
                 count = sum(s.get(v, 0) for v in group_vals)
                 out[f'pct_{group_name}'] = round(100.0 * count / total_pixels, 2) if total_pixels > 0 else 0.0
 
-<<<<<<< HEAD
-=======
         unmapped_count = sum(s.get(v, 0) for v in unknown_classes)
         out['pct_unmapped'] = round(100.0 * unmapped_count / total_pixels, 2) if total_pixels > 0 else 0.0
 
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
         # 各具体类别百分比(可选, 详细记录)
         for v in all_classes:
             count = s.get(v, 0)
@@ -221,11 +195,7 @@ def main():
         print(f'\n完成! 输出{len(rows_out)}行到 {args.output}')
         print(f'文件大小: 约{sys.getsizeof(rows_out[0]) * len(rows_out) / 1024:.0f}KB')
         print(f'\n请将 {args.output} 上传到服务器:')
-<<<<<<< HEAD
-        print(f'  INFORMS_DATA_MINING/data/raw/county_landcover.csv')
-=======
         print(f'  INFORMS_DATA_MINING/external_data/raw/county_landcover.csv')
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     else:
         print('错误: 没有输出行')
 

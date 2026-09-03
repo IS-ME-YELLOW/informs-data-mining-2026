@@ -26,20 +26,12 @@ MODEL_DIR = os.path.join(PROJECT_ROOT, 'models')        # 模型保存目录
 TRAIN_FILE = os.path.join(DATA_DIR, 'DM_Train.csv')
 TEST_FILE = os.path.join(DATA_DIR, 'DM_Test.csv')
 SUBMISSION_FILE = os.path.join(DATA_DIR, 'sample_submission.csv')
-<<<<<<< HEAD
 
 # --- 随机种子与版本 ---
 SEED = 42                          # 与比赛 train/test 划分一致
-FEATURE_VERSION = 'v1.5.2'         # v1=Phase1(82维), v1.5=Phase1.5(113维+P1-P6), v1.5.1=+目标时刻精确气象, v1.5.2=+外部数据(USDA/EIA/NLCD)
+FEATURE_VERSION = 'v1.5.3'         # v1=Phase1(82维), v1.5=Phase1.5(113维), v1.5.1=+目标时刻气象(129维), v1.5.2=+外部数据(141维), v1.5.3=冗余剪枝(115维)
 
 OUTPUT_FILE = os.path.join(DATA_DIR, f'submission_{FEATURE_VERSION}.csv')
-=======
-OUTPUT_FILE = os.path.join(DATA_DIR, 'submission_phase1.csv')
-
-# --- 随机种子与版本 ---
-SEED = 42                          # 与比赛 train/test 划分一致
-FEATURE_VERSION = 'v1'             # 改特征工程时递增 → 废弃旧缓存
->>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 
 # --- 时间窗口边界(全局小时索引, 每县0-215) ---
 PRE_EVENT_END = 48                 # 3月12日23:00 (预事件窗口结束)
