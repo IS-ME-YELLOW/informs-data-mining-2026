@@ -1,16 +1,26 @@
 # ============================================================
+<<<<<<< HEAD
 # features.py — 特征工程 (Phase 1.5, v2)
 # ============================================================
 # 职责: 从原始数据构建114维特征矩阵, 供LightGBM训练/预测使用
 #
 # 特征分10类:
 #   A. 观测窗口停电摘要 (25维): 从3月11-13(72h)停电数据提取, 每县固定
+=======
+# features.py — 特征工程
+# ============================================================
+# 职责: 从原始数据构建82维特征矩阵, 供LightGBM训练/预测使用
+#
+# 特征分6类:
+#   A. 观测窗口摘要 (25维): 从3月11-13(72h)停电数据提取, 每县固定
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 #   B. 当前气象 (24维): 预测时刻t的22个气象变量 + 风向sin/cos
 #   C. 目标时段气象统计 (20维): [t, t+h]窗口内gust_max/mean等, 4个horizon×5统计
 #   D. 派生气象 (6维): 结冰风险/阵风超限/土湿×风速交互等
 #   E. 时间特征 (6维): 小时/天/距观测结束小时数/风暴阶段
 #   F. 县级特征 (1维): log(customersTracked), 全程有值
 #
+<<<<<<< HEAD
 #   --- Phase 1.5 新增 ---
 #   G. 阈值超越时长 (10维): gust>30/40mph的累计小时数 [P1, 文献: Cerrai/Yang系列]
 #   H. 峰值窗口条件均值 (4维): 最强风4h窗口均值 [P2, 文献: Cerrai/Yang系列]
@@ -19,6 +29,8 @@
 #   K. 累计暴露量 (3维): 风暴开始以来的累计gust/tp [P5, 文献: Arora 2023]
 #   L. 观测窗口气象边界 (3维): 末尾gust/6h趋势 [P6, 文献: Alpay 2020, STO-CAST]
 #
+=======
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 # 合规要点:
 #   - 不使用预测窗口(3月14-19)的停电数据作输入(模拟测试条件)
 #   - 气象可用任意时刻(含未来, 规则允许)
@@ -37,9 +49,14 @@ from config import (
 # 特征列名定义(保证训练/测试列名一致)
 # ============================================================
 
+<<<<<<< HEAD
 # A. 观测窗口停电摘要 (25→32维, 新增P1观测2+P5观测1+P6边界3+原有25)
 OBSERVED_FEATURES = [
     # 原有25维
+=======
+# A. 观测窗口摘要特征 (25维, 从3月11-13停电数据提取, 每县固定不变)
+OBSERVED_FEATURES = [
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     'last_osi', 'last_P_t', 'last_N_t', 'last_D_t', 'last_R_t',
     'last_outage_pct',
     'osi_mean_72h', 'osi_max_72h', 'osi_std_72h',
@@ -49,12 +66,15 @@ OBSERVED_FEATURES = [
     'storm_onset_max_osi', 'storm_onset_mean_osi',
     'osi_trend_last6h', 'is_worsening', 'frac_zero_72h',
     'hours_since_peak', 'gust_mean_obs', 'gust_max_obs',
+<<<<<<< HEAD
     # P1: 观测窗口阈值超越时长 (文献: Cerrai/Yang 4篇)
     'gust_gt30_obs', 'gust_gt40_obs',
     # P5: 观测窗口累计风力暴露 (文献: Arora 2023)
     'cumul_gust_obs',
     # P6: 观测窗口末尾气象边界 (文献: Alpay 2020, STO-CAST 2026)
     'gust_last_obs', 'gust_max_last6h_obs', 'gust_trend_last6h_obs',
+=======
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 ]
 
 # B. 预测时刻t的气象特征 (24维, 随t变化)
@@ -66,6 +86,7 @@ WEATHER_AT_T_FEATURES = [
     'sdswrf_t', 'direct_rad_t', 'diffuse_rad_t', 'et0_t',
 ]
 
+<<<<<<< HEAD
 # D. 派生气象特征 (6→10维, 新增P4交互4维)
 DERIVED_WEATHER_FEATURES = [
     # 原有6维
@@ -110,6 +131,21 @@ for _h in ['1', '6', '24', '48']:
     TARGET_TIME_WEATHER_FEATURES.extend([
         f'gust_at_t{_h}h', f'wind_speed_at_t{_h}h',
         f't2m_at_t{_h}h', f'tp_at_t{_h}h',
+=======
+# D. 派生气象特征 (6维)
+DERIVED_WEATHER_FEATURES = [
+    'temp_c_t', 'dewpoint_c_t', 'icing_risk_t',
+    'gust_exceed_30', 'soil_moist_x_gust', 'is_snowing',
+]
+
+# C. 目标时段气象统计 (20维 = 5统计 × 4个horizon)
+HORIZON_STAT_FEATURES = []
+for _h in ['1', '6', '24', '48']:
+    HORIZON_STAT_FEATURES.extend([
+        f'gust_max_next_{_h}h', f'gust_mean_next_{_h}h',
+        f'wind_speed_max_next_{_h}h', f'total_tp_next_{_h}h',
+        f'min_t2m_next_{_h}h',
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     ])
 
 # E. 时间特征 (6维)
@@ -123,6 +159,7 @@ COUNTY_FEATURES = ['log_customers']
 
 # 全部特征列名(顺序固定, 训练/测试必须一致)
 ALL_FEATURE_NAMES = (
+<<<<<<< HEAD
     OBSERVED_FEATURES              # 32
     + WEATHER_AT_T_FEATURES        # 24
     + DERIVED_WEATHER_FEATURES     # 10
@@ -133,6 +170,15 @@ ALL_FEATURE_NAMES = (
     + TEMPORAL_FEATURES            # 6
     + COUNTY_FEATURES              # 1
 )                                  # 合计 130
+=======
+    OBSERVED_FEATURES
+    + WEATHER_AT_T_FEATURES
+    + DERIVED_WEATHER_FEATURES
+    + HORIZON_STAT_FEATURES
+    + TEMPORAL_FEATURES
+    + COUNTY_FEATURES
+)
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 
 
 # ============================================================
@@ -141,10 +187,16 @@ ALL_FEATURE_NAMES = (
 
 def compute_observed_features(county_df):
     """
+<<<<<<< HEAD
     从3月11-13观测窗口(hour_idx 0-71)提取32维县级摘要特征
     这些特征对同一县的所有144个预测小时保持不变(静态)
     包括: 最后观测值、72h统计量、预事件基线、第一波信号、趋势、
           阈值超越(P1)、累计暴露(P5)、气象边界(P6)
+=======
+    从3月11-13观测窗口(hour_idx 0-71)提取25维县级摘要特征
+    这些特征对同一县的所有144个预测小时保持不变(静态)
+    包括: 最后观测值、72h统计量、预事件基线、第一波信号、趋势
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     """
     obs = county_df[county_df['_hour_idx'] < OBSERVED_END]
     if len(obs) == 0:
@@ -179,6 +231,7 @@ def compute_observed_features(county_df):
     else:
         hours_since_peak = np.nan
 
+<<<<<<< HEAD
     # P6: 观测窗口末尾气象边界 (文献: Alpay 2020 lag=1, STO-CAST O(-6))
     last6_gust = obs.tail(6)['gust'].dropna().values
     if len(last6_gust) >= 2:
@@ -189,6 +242,9 @@ def compute_observed_features(county_df):
 
     feat = {
         # 原有25维
+=======
+    feat = {
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
         'last_osi': last['osi'] if not np.isnan(last['osi']) else 0.0,
         'last_P_t': last['P_t'],
         'last_N_t': last['N_t'],
@@ -215,6 +271,7 @@ def compute_observed_features(county_df):
         'hours_since_peak': hours_since_peak,
         'gust_mean_obs': np.mean(gust_vals) if len(gust_vals) > 0 else 0.0,
         'gust_max_obs': np.max(gust_vals) if len(gust_vals) > 0 else 0.0,
+<<<<<<< HEAD
         # P1: 观测窗口阈值超越时长 (30/40mph ≈ 13/18 m/s)
         'gust_gt30_obs': np.sum(gust_vals > 30) if len(gust_vals) > 0 else 0,
         'gust_gt40_obs': np.sum(gust_vals > 40) if len(gust_vals) > 0 else 0,
@@ -224,6 +281,8 @@ def compute_observed_features(county_df):
         'gust_last_obs': last['gust'] if not np.isnan(last['gust']) else 0.0,
         'gust_max_last6h_obs': np.max(last6_gust) if len(last6_gust) > 0 else 0.0,
         'gust_trend_last6h_obs': gust_trend,
+=======
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     }
     return feat
 
@@ -281,6 +340,7 @@ def compute_derived_weather(row, horizon_stats):
     }
 
 
+<<<<<<< HEAD
 def compute_interactions(row, feat_so_far):
     """
     P4: 气象×阶段交互 (4维)
@@ -303,6 +363,11 @@ def compute_interactions(row, feat_so_far):
 def compute_horizon_stats(county_df, t_idx, h):
     """
     计算目标时段[t, t+h]的气象统计(原有5维):
+=======
+def compute_horizon_stats(county_df, t_idx, h):
+    """
+    计算目标时段[t, t+h]的气象统计:
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     - gust_max/mean: 最大/平均阵风(核心驱动)
     - wind_speed_max: 最大持续风速
     - total_tp: 累计降水
@@ -323,6 +388,7 @@ def compute_horizon_stats(county_df, t_idx, h):
     }
 
 
+<<<<<<< HEAD
 def compute_threshold_exceedance(county_df, t_idx, h):
     """
     P1: 阈值超越时长 (文献: Cerrai 2019/2020, Yang 2020a/b — 4篇UConn系列)
@@ -425,6 +491,8 @@ def compute_target_time_weather(county_df, t_idx, horizons):
     return result
 
 
+=======
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 def compute_temporal_features(dt, hour_idx):
     """
     时间特征(6维):
@@ -458,6 +526,7 @@ def compute_county_features(row):
 
 def build_feature_matrix(df, is_train=True):
     """
+<<<<<<< HEAD
     主入口: 从原始数据构建114维特征矩阵
 
     流程:
@@ -475,13 +544,34 @@ def build_feature_matrix(df, is_train=True):
       合并所有行 → X(特征), y(目标, 仅训练), meta(元信息)
 
     返回: X(DataFrame, 114列), y(DataFrame, 4列或None), meta(DataFrame)
+=======
+    主入口: 从原始数据构建特征矩阵
+
+    流程:
+      对每个县:
+        1. 提取观测窗口(3月11-13) → 计算25维县级摘要(对所有预测小时固定)
+        2. 对预测窗口(3月14-19)每个小时t:
+           a. 提取t时刻气象(24维)
+           b. 计算4个horizon的气象统计(20维)
+           c. 计算派生气象(6维)
+           d. 计算时间特征(6维)
+           e. 计算县级特征(1维)
+           f. 拼装为单行82维特征
+      合并所有行 → X(特征), y(目标, 仅训练), meta(元信息)
+
+    返回: X(DataFrame, 82列), y(DataFrame, 4列或None), meta(DataFrame)
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     """
     rows_out = []
     meta_rows = []
 
     for fips, county_df in df.groupby('fipsCode'):
         county_df = county_df.sort_values('_hour_idx').reset_index(drop=True)
+<<<<<<< HEAD
         obs_feat = compute_observed_features(county_df)  # 每县计算一次(32维静态)
+=======
+        obs_feat = compute_observed_features(county_df)  # 每县计算一次
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 
         pred_df = county_df[(county_df['_hour_idx'] >= PRED_START)
                             & (county_df['_hour_idx'] < PRED_END)]
@@ -489,11 +579,19 @@ def build_feature_matrix(df, is_train=True):
         for _, row in pred_df.iterrows():
             t_idx = int(row['_hour_idx'])
 
+<<<<<<< HEAD
             # --- 基础特征(Phase 1) ---
             feat = dict(obs_feat)
             feat.update(compute_weather_at_t(row))
 
             # 4个horizon的气象统计(原有5维×4=20, 允许查看未来)
+=======
+            # 拼装特征: 观测摘要(静态) + 气象(随t) + 派生 + 时间 + 县级
+            feat = dict(obs_feat)
+            feat.update(compute_weather_at_t(row))
+
+            # 4个horizon的气象统计(允许查看未来, 规则允许)
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
             hs = {}
             for h_key, h_val in HORIZON_HOURS.items():
                 stats = compute_horizon_stats(county_df, t_idx, h_val)
@@ -506,6 +604,7 @@ def build_feature_matrix(df, is_train=True):
             feat.update(compute_temporal_features(row['_dt'], t_idx))
             feat.update(compute_county_features(row))
 
+<<<<<<< HEAD
             # --- Phase 1.5 新增特征 ---
             # P1: 阈值超越时长 (文献最验证有效的风特征)
             for h_key, h_val in HORIZON_HOURS.items():
@@ -532,6 +631,8 @@ def build_feature_matrix(df, is_train=True):
             # 方向1: 目标时刻精确气象 (STO-CAST: 未来精确值>窗口统计, corr+40%)
             feat.update(compute_target_time_weather(county_df, t_idx, HORIZON_HOURS))
 
+=======
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
             rows_out.append(feat)
 
             # 元信息(用于CV分组、提交匹配)

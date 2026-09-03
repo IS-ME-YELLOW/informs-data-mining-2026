@@ -67,6 +67,7 @@ def pred_stats(pred):
     }
 
 
+<<<<<<< HEAD
 def post_process(preds, threshold=0.001):
     """
     预测后处理: 低于阈值的预测设为0
@@ -78,6 +79,8 @@ def post_process(preds, threshold=0.001):
     return preds
 
 
+=======
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 def compute_all_baselines(y_df, last_osis, folds):
     """
     对4个horizon统一计算3个基线(Zero/Mean/Persistence)的CV指标

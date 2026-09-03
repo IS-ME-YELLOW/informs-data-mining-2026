@@ -5,8 +5,13 @@
 #   - 同一县(fipsCode)的所有144行样本在同一折(GroupKFold, 防信息泄漏)
 #   - 各折的州×severity_tier分布均衡(Stratified)
 #
+<<<<<<< HEAD
 # 实现: 手动分层分组KFold
 #   在每个stratum(州_严重度)内随机洗牌县, 轮询分配到5折
+=======
+# 优先用 sklearn 的 StratifiedGroupKFold, 未安装则用手动实现
+# 手动实现: 在每个stratum内随机洗牌县, 轮询分配到5折
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
 # ============================================================
 
 import numpy as np
@@ -17,7 +22,11 @@ from config import SEED, N_FOLDS
 
 def _manual_stratified_group_kfold(groups, strata_list, n_splits, seed):
     """
+<<<<<<< HEAD
     手动实现的分层分组KFold
+=======
+    手动实现的分层分组KFold(sklearn不可用时的fallback)
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     - groups: 每行的fipsCode(县ID)
     - strata_list: 每行对应的stratum(州_severity层级)
     - 在每个stratum内随机洗牌县, 轮询分配到n折
@@ -62,6 +71,10 @@ def get_cv_folds(meta_df, n_splits=N_FOLDS, seed=SEED):
     输出: [(train_idx, val_idx), ...] 5折
 
     stratum = 州_严重度层级 (如 'IN_3', 'OH_1')
+<<<<<<< HEAD
+=======
+    优先用 sklearn, 未安装则用手动实现
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
     """
     groups = meta_df['fipsCode'].values.tolist()
 
@@ -75,4 +88,25 @@ def get_cv_folds(meta_df, n_splits=N_FOLDS, seed=SEED):
     else:
         strata_list = groups
 
+<<<<<<< HEAD
     return _manual_stratified_group_kfold(groups, strata_list, n_splits, seed)
+=======
+    # 优先用sklearn的StratifiedGroupKFold
+    try:
+        from sklearn.model_selection import StratifiedGroupKFold
+        unique_groups = list(set(groups))
+        unique_strata = [stratum_map.get(g, g) for g in unique_groups] if 'stratum_map' in dir() else strata_list
+        sgkf = StratifiedGroupKFold(n_splits=n_splits, shuffle=True, random_state=seed)
+        raw_folds = list(sgkf.split(np.zeros(len(unique_groups)), unique_strata, unique_groups))
+        # 将县级fold转换为行级fold
+        group_to_idx = {g: i for i, g in enumerate(unique_groups)}
+        group_array = np.array([group_to_idx[g] for g in groups])
+        result = []
+        for train_g_idx, val_g_idx in raw_folds:
+            train_mask = np.isin(group_array, [unique_groups[i] for i in train_g_idx])
+            val_mask = np.isin(group_array, [unique_groups[i] for i in val_g_idx])
+            result.append((np.where(train_mask)[0], np.where(val_mask)[0]))
+        return result
+    except ImportError:
+        return _manual_stratified_group_kfold(groups, strata_list, n_splits, seed)
+>>>>>>> 0541cc420ad1f0f3fd384b1aeb9c3d2f63ee72fb
