@@ -22,9 +22,8 @@ from config import (
     LGBM_PARAMS, LGBM_NUM_BOOST_ROUND, LGBM_EARLY_STOPPING_ROUNDS,
     HORIZONS, SEED, OSI_MAX_OBSERVED, MODEL_DIR,
 )
-from evaluate import compute_metrics
+from evaluate import compute_metrics, post_process
 import os
-
 
 def train_one_horizon(X, y_col, folds, params=None):
     """
@@ -85,7 +84,9 @@ def train_one_horizon(X, y_col, folds, params=None):
             callbacks=callbacks,
         )
 
-        pred_val = model.predict(X_va)
+        # Match the submitted prediction path: physical-range clipping followed
+        # by the pre-specified zero threshold.
+        pred_val = post_process(np.clip(model.predict(X_va), 0, OSI_MAX_OBSERVED))
         oof_valid[va_f] = pred_val
         metrics = compute_metrics(y_va.values, pred_val)
         metrics['best_iter'] = model.best_iteration
@@ -96,10 +97,11 @@ def train_one_horizon(X, y_col, folds, params=None):
     oof[valid_indices] = oof_valid
 
     # 汇总指标
+    pooled_metrics = compute_metrics(y_valid.values, oof_valid)
     summary = {
-        'rmse': np.mean([m['rmse'] for m in fold_metrics]),
+        'rmse': pooled_metrics['rmse'],
         'rmse_std': np.std([m['rmse'] for m in fold_metrics]),
-        'mae': np.mean([m['mae'] for m in fold_metrics]),
+        'mae': pooled_metrics['mae'],
         'mae_std': np.std([m['mae'] for m in fold_metrics]),
     }
 
@@ -130,8 +132,10 @@ def train_all_horizons(X, y_df, folds, params=None):
             'fold_metrics': fold_metrics,
             'summary': summary,
         }
-        print(f"  Mean RMSE={summary['rmse']:.6f} ± {summary['rmse_std']:.6f}, "
-              f"MAE={summary['mae']:.6f} ± {summary['mae_std']:.6f}")
+        print(f"  Pooled OOF RMSE={summary['rmse']:.6f}, "
+              f"Fold RMSE SD={summary['rmse_std']:.6f}; "
+              f"Pooled OOF MAE={summary['mae']:.6f}, "
+              f"Fold MAE SD={summary['mae_std']:.6f}")
     return results
 
 

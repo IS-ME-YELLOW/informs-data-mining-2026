@@ -86,22 +86,30 @@ def compute_all_baselines(y_df, last_osis, folds):
     results = {}
     for h in HORIZONS:
         y = y_df[h].values
-        zero_pred = zero_baseline(y)
-        mean_pred = mean_baseline(y)
-        pers_pred = persistence_baseline(last_osis)
-
         all_metrics = {}
-        for name, pred in [('Zero', zero_pred), ('Mean', mean_pred),
-                           ('Persistence', pers_pred)]:
+        for name in ('Zero', 'Mean', 'Persistence'):
             fold_rmse = []
             fold_mae = []
-            for _, va_idx in folds:
-                m = compute_metrics(y[va_idx], pred[va_idx])
+            oof_pred = np.full(len(y), np.nan)
+            for tr_idx, va_idx in folds:
+                if name == 'Zero':
+                    pred = zero_baseline(y[va_idx])
+                elif name == 'Mean':
+                    # Compute the mean from this fold's training counties only.
+                    train_mean = np.nanmean(y[tr_idx])
+                    pred = np.full(len(va_idx), train_mean)
+                else:
+                    pred = persistence_baseline(last_osis[va_idx])
+                oof_pred[va_idx] = pred
+                m = compute_metrics(y[va_idx], pred)
                 fold_rmse.append(m['rmse'])
                 fold_mae.append(m['mae'])
+            pooled = compute_metrics(y, oof_pred)
             all_metrics[name] = {
-                'rmse': np.mean(fold_rmse),
-                'mae': np.mean(fold_mae),
+                'rmse': pooled['rmse'],
+                'mae': pooled['mae'],
+                'rmse_std': np.std(fold_rmse),
+                'mae_std': np.std(fold_mae),
             }
         results[h] = all_metrics
     return results

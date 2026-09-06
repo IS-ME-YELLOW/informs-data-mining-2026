@@ -17,8 +17,9 @@ import os
 
 # --- 路径配置(全部相对项目根目录, 保证可复现) ---
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = PROJECT_ROOT
+DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 CACHE_DIR = os.path.join(PROJECT_ROOT, 'cache')          # 特征缓存目录
+CV_DIR = os.path.join(PROJECT_ROOT, 'cv')                # Fixed CV assignment manifests
 LOG_DIR = os.path.join(PROJECT_ROOT, 'logs')             # 实验日志目录
 LOG_FILE = os.path.join(LOG_DIR, 'experiments.log')     # 日志文件(追加写)
 MODEL_DIR = os.path.join(PROJECT_ROOT, 'models')        # 模型保存目录
@@ -29,9 +30,15 @@ SUBMISSION_FILE = os.path.join(DATA_DIR, 'sample_submission.csv')
 
 # --- 随机种子与版本 ---
 SEED = 42                          # 与比赛 train/test 划分一致
-FEATURE_VERSION = 'v1.5.3'         # v1=Phase1(82维), v1.5=Phase1.5(113维), v1.5.1=+目标时刻气象(129维), v1.5.2=+外部数据(141维), v1.5.3=冗余剪枝(115维)
+FEATURE_VERSION = 'v1.5.3'
+CV_VERSION = 'balanced_v1'
+CV_ASSIGNMENT_FILE = os.path.join(
+    CV_DIR, f'cv_assignments_{CV_VERSION}_seed{SEED}.csv'
+)
 
-OUTPUT_FILE = os.path.join(DATA_DIR, f'submission_{FEATURE_VERSION}.csv')
+OUTPUT_FILE = os.path.join(
+    DATA_DIR, f'submission_{FEATURE_VERSION}_{CV_VERSION}.csv'
+)
 
 # --- 时间窗口边界(全局小时索引, 每县0-215) ---
 PRE_EVENT_END = 48                 # 3月12日23:00 (预事件窗口结束)

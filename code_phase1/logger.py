@@ -60,8 +60,10 @@ class ExperimentLogger:
         for i, fm in enumerate(fold_metrics):
             self._write(f'  Fold {i+1}: RMSE={fm["rmse"]:.6f}, MAE={fm["mae"]:.6f}  '
                         f'(best_iter={fm.get("best_iter","?")})')
-        self._write(f'  Mean RMSE={summary["rmse"]:.6f} ± {summary["rmse_std"]:.6f}, '
-                    f'Mean MAE={summary["mae"]:.6f} ± {summary["mae_std"]:.6f}')
+        self._write(f'  Pooled OOF RMSE={summary["rmse"]:.6f}, '
+                    f'Fold RMSE SD={summary["rmse_std"]:.6f}; '
+                    f'Pooled OOF MAE={summary["mae"]:.6f}, '
+                    f'Fold MAE SD={summary["mae_std"]:.6f}')
         self._write('')
 
     def baselines(self, baseline_metrics):

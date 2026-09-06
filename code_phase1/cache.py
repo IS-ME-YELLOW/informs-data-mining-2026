@@ -64,7 +64,12 @@ def _save_df(df, path):
 def _load_df(path):
     """加载DataFrame"""
     if USE_PARQUET:
-        return pd.read_parquet(path)
+        try:
+            return pd.read_parquet(path)
+        except OSError:
+            # Existing feature caches were written by a Parquet implementation
+            # that current PyArrow cannot read on this machine.
+            return pd.read_parquet(path, engine='fastparquet')
     else:
         with open(path, 'rb') as f:
             return pickle.load(f)

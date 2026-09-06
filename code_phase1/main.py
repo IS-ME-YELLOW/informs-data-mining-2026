@@ -22,7 +22,7 @@ import numpy as np
 import pandas as pd
 
 from config import (
-    SEED, FEATURE_VERSION, HORIZONS, HORIZON_HOURS, LGBM_PARAMS,
+    CV_VERSION, SEED, FEATURE_VERSION, HORIZONS, HORIZON_HOURS, LGBM_PARAMS,
     LOG_FILE, OUTPUT_FILE, TRAIN_FILE, TEST_FILE, SUBMISSION_FILE,
     LGBM_NUM_BOOST_ROUND, LGBM_EARLY_STOPPING_ROUNDS, N_FOLDS,
 )
@@ -50,24 +50,37 @@ def fill_submission(submission, preds, meta_test, horizon_hours):
     - 仅填4个评分目标列
     """
     sub = submission.copy()
+    required_columns = {'fipsCode', 'timestamp_et', *HORIZONS}
+    missing_columns = required_columns.difference(sub.columns)
+    if missing_columns:
+        raise ValueError(f'Submission template is missing columns: {sorted(missing_columns)}')
     # 建立 (fips, timestamp) → 行索引 的查找表
     key_to_idx = {}
     for i, row in sub.iterrows():
         key = (str(row['fipsCode']), row['timestamp_et'])
+        if key in key_to_idx:
+            raise ValueError(f'Duplicate submission key: {key}')
         key_to_idx[key] = i
 
     for h_idx, h in enumerate(HORIZONS):
+        if h not in preds or len(preds[h]) != len(meta_test):
+            raise ValueError(f'Prediction length for {h} does not match test metadata.')
         h_val = horizon_hours[h]
         col = sub.columns.get_loc(h)
         for j, row in meta_test.iterrows():
             key = (str(row['fipsCode']), row['timestamp_et'])
+            if key not in key_to_idx:
+                raise ValueError(f'Test feature row is absent from submission template: {key}')
             if key in key_to_idx:
                 idx = key_to_idx[key]
                 hour_idx = row['hour_idx']
                 if hour_idx + h_val > 215:
                     sub.iat[idx, col] = np.nan      # 超出数据末尾, 保持NaN
                 else:
-                    sub.iat[idx, col] = preds[h][j]
+                    value = preds[h][j]
+                    if not np.isfinite(value):
+                        raise ValueError(f'Non-finite prediction for {h} at {key}')
+                    sub.iat[idx, col] = value
     return sub
 
 
@@ -124,13 +137,14 @@ def main():
 
     # 步骤9: 保存模型
     for h in HORIZONS:
-        save_model(results[h]['model'], h, FEATURE_VERSION)
+        save_model(results[h]['model'], h, f'{FEATURE_VERSION}_{CV_VERSION}')
 
     # === 写实验日志 ===
     print("\n[Log] Writing experiment log...")
 
     config_dict = {
         'feature_version': FEATURE_VERSION,
+        'cv_version': CV_VERSION,
         'seed': SEED,
         'feature_count': X_train.shape[1],
         'train_samples': X_train.shape[0],
