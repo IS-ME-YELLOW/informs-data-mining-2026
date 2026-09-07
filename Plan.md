@@ -95,6 +95,8 @@ Phase 2: 序列模型 GRU/Transformer (捕捉时序动态)
 Phase 3: 集成融合 + 分阶段滚动预测
 ```
 
+**当前进展（2026-09-07）**：已完成固定 `balanced_v1` 县级五折下的三种直接 OSI 模型，以及 v2.1/v2.2/v2.3“先预测 P/N/D/R、再合成 OSI”的三种分量模型。当前 RMSE 最优组合是直接 XGBoost t+1h，加 v2.1 LightGBM t+6h/t+24h/t+48h；MAE 最优组合是 v2.2 t+1h/t+6h，加 v2.3 t+24h/t+48h。下一步优先基于六套同折 OOF 预测做按 horizon 的受约束融合和重复分组验证，再决定是否投入 GRU/Transformer。
+
 ### Phase 1: LightGBM 多目标回归基线
 
 **1.1 训练样本构造**
