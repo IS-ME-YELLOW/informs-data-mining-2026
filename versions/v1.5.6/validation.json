@@ -1,0 +1,32 @@
+{
+  "train": {
+    "rows": 34416,
+    "columns": 163,
+    "counties": 239,
+    "nan_cells": 75524,
+    "target_valid_counts": {
+      "osi_target_t01h": 34177,
+      "osi_target_t06h": 32982,
+      "osi_target_t24h": 28680,
+      "osi_target_t48h": 22944
+    }
+  },
+  "test": {
+    "rows": 9072,
+    "columns": 163,
+    "counties": 63,
+    "nan_cells": 20052,
+    "target_valid_counts": null
+  },
+  "official_targets_and_meta_unchanged": true,
+  "parent": "v1.5.5",
+  "new_features": {
+    "pct_unmapped": "unclassified share in county_landcover.csv; percent of valid pixels",
+    "pct_forest_classified": "100 * pct_forest / (100 - pct_unmapped)",
+    "window_len_next_{h}h": "number of available points in the existing [t,t+h] weather window",
+    "is_full_next_{h}h": "1 if the existing [t,t+h] weather window reaches t+h, else 0",
+    "tp_rate_next_{h}h": "total_tp_next_{h}h divided by window_len_next_{h}h",
+    "gust_gt30_frac_next_{h}h": "gust_gt30_next_{h}h divided by window_len_next_{h}h",
+    "has_weather_at_t{h}h": "1 if exact weather at t+h is available, else 0"
+  }
+}

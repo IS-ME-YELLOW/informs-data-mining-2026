@@ -1,0 +1,46 @@
+{
+  "version": "v1.5.6",
+  "parent": "v1.5.5",
+  "created_utc": "2026-09-08T08:37:54.254661+00:00",
+  "build_mode": "parent_cache_plus_landcover_sensitivity",
+  "feature_count": 163,
+  "inputs_sha256": {
+    "data/county_landcover.csv": "5f45587ba0498a1ee94161177814370b4f8f67e9e986ab79232d8f93c50c5996",
+    "data/county_features_v1.5.5.csv": "6eafddf4aca5b87fe819f2708d028d6cb01554f41e896d947e0791e635a952e4",
+    "cache/manifest_v1.5.5.json": "095175b36ae9500f6ce72b1597ffe4743b37e0818d9eff7aa4ed4e649d198dbb",
+    "cache/features_train_v1.5.5.parquet": "e8eef8e729b9d8e922dee90f378e52148227376391c6b2824478bce3821f59b1",
+    "cache/targets_train_v1.5.5.parquet": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9",
+    "cache/meta_train_v1.5.5.parquet": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+    "cache/features_test_v1.5.5.parquet": "a521ada17abbab0a4ffb84f68646f9d489ebd5b6f1e1370c1a673155b4ec790a",
+    "cache/meta_test_v1.5.5.parquet": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+    "cache/feature_names_v1.5.5.json": "8c3ef96ca11e2247d25bcbb62e6ab1145cdcc7af9f1a08f1520c7ff44e768bf9"
+  },
+  "source_sha256": {
+    "code_phase1/feature_dataset_v156.py": "7e7c27676277c929019da858f11e0635e1b19821f54c1acf793be0daed7be57c",
+    "versions/v1.5.6/build_features.py": "ad540f02b4022d6f9b0388eda13dcc5cdb0757ed6cb76241dfc8ff5ef9a8ebab",
+    "code_phase1/config.py": "6cc2b1d843d12e9ec784427f0ea000867e877229ee59a463e3f1866a7aa80a12",
+    "code_phase1/cache.py": "e0061839737ce9ba59436c7c5dfb455268e84ff85168dab4f637f58192c932de"
+  },
+  "runtime": {
+    "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3"
+  },
+  "semantics": {
+    "pct_unmapped": "from county_landcover.csv; percent of valid pixels not in modeled major groups",
+    "pct_forest_classified": "100 * pct_forest / (100 - pct_unmapped); sensitivity view only",
+    "window_quality": "availability and normalized-rate descriptors for existing [t,t+h] weather windows",
+    "parent_semantics": "v1.5.5"
+  },
+  "outputs_sha256": {
+    "cache/features_train_v1.5.6.parquet": "2d4753ed3a4cb4938ea8af5fe54cb80b04d8509ede84766bd786fef5f3dc6dff",
+    "cache/targets_train_v1.5.6.parquet": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9",
+    "cache/meta_train_v1.5.6.parquet": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+    "cache/features_test_v1.5.6.parquet": "75ce0e77c9caaf4885ef89bc6289d6e42258574b00e81ff6509dbe23b0f01d09",
+    "cache/meta_test_v1.5.6.parquet": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+    "cache/feature_names_v1.5.6.json": "44b484bad63b7f0b82eabbc5a2a894271ebf1e475a79ce933a3373a3cc627a2c",
+    "versions/v1.5.6/validation.json": "127db1dcd778f0347f7519733f00ff0e8799b92aa4ddb7d74b48f2a8b6587401",
+    "data/county_features_v1.5.6.csv": "b8cb56cecba09d072af5ea00d49e046321d6ad7d9ff536a906e0b8d67b9da577",
+    "versions/v1.5.6/feature_changes.csv": "72986962cbcba1925d46f6f8cb805ac3395cc74e74f4276e8f0a2ea85323faa0"
+  }
+}

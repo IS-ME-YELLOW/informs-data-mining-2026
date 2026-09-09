@@ -1,0 +1,30 @@
+{
+  "train": {
+    "rows": 34416,
+    "columns": 141,
+    "counties": 239,
+    "nan_cells": 75524,
+    "target_valid_counts": {
+      "osi_target_t01h": 34177,
+      "osi_target_t06h": 32982,
+      "osi_target_t24h": 28680,
+      "osi_target_t48h": 22944
+    },
+    "observed_reconstruction_differs_from_stored_osi": 0
+  },
+  "test": {
+    "rows": 9072,
+    "columns": 141,
+    "counties": 63,
+    "nan_cells": 20052,
+    "target_valid_counts": null,
+    "observed_reconstruction_differs_from_stored_osi": null
+  },
+  "utilities": {
+    "matched_counties": 302,
+    "changed_counties": 129,
+    "unmatched_counties": 0
+  },
+  "official_targets_and_meta_unchanged": true,
+  "build_mode": "parent_cache_patch"
+}

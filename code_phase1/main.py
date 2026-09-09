@@ -14,7 +14,7 @@
 #
 # 用法:
 #   python main.py                    # 用缓存特征训练
-#   python main.py --rebuild-features  # 强制重建特征
+#   python versions/v1.5.5/build_features.py --from-raw --overwrite  # 从项目根目录重建完整特征
 # ============================================================
 
 import argparse
@@ -35,9 +35,10 @@ from logger import ExperimentLogger
 
 
 def parse_args():
-    """解析命令行参数: --rebuild-features 强制重建特征缓存"""
+    """旧版重建参数保留；v1.5.5 的重建需使用专用完整数据集入口。"""
     p = argparse.ArgumentParser()
-    p.add_argument('--rebuild-features', action='store_true', default=False)
+    p.add_argument('--rebuild-features', action='store_true', default=False,
+                   help='Legacy only; v1.5.5: use versions/v1.5.5/build_features.py --from-raw --overwrite')
     return p.parse_args()
 
 

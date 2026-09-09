@@ -3,6 +3,8 @@
 版本: v1.5.2 | 日期: 2026-09-03
 来源: features.py (129维) + join_external.py (12维外部)
 
+2026-09-08 更正：本目录保留 v1.5.2 的历史特征集合，已校正 top4、窗口点数与 NaN 的文字解释。修复后的完整 141 列数据集另存为 v1.5.5；OSI 精度、电力公司计数及数据入口改动见 [v1.5.5 变更记录](../versions/v1.5.5/README.md)。本文历史取值和实验结果不代表新版效果。
+
 ---
 
 ## 特征总览
@@ -169,7 +171,7 @@ P_t + D_t 占了 OSI 的 96.1%。N_t 和 R_t 合计仅 7.2%(且 R_t 是减项)�
 | `min_t2m_next_{h}h` | 窗口最低温度(结冰风险) | — |
 | `gust_gt30_next_{h}h` | gust>30mph小时数 | P1(Cerrai/Yang系列, 最验证有效) |
 | `gust_gt40_next_{h}h` | gust>40mph小时数 | P1(显著损害阈值) |
-| `gust_peak4h_mean_next_{h}h` | 最强风4h窗口均值 | P2(Cerrai/Yang, >简单均值) |
+| `gust_peak4h_mean_next_{h}h` | 窗口内最高 min(4,有效点数) 个阵风值的均值，不要求连续 | 历史列名保留；不等于最大连续4小时均值 |
 
 特征号: 65-96 (4 horizon × 8 统计 = 32维)
 
@@ -226,7 +228,7 @@ P_t + D_t 占了 OSI 的 96.1%。N_t 和 R_t 合计仅 7.2%(且 R_t 是减项)�
 | 114-117 | `t2m_at_t{1,6,24,48}h` | 259-298 | 目标时刻精确温度 | 同上 | |
 | 118-121 | `tp_at_t{1,6,24,48}h` | 0-11.3 | 目标时刻精确降水 | 同上 | |
 
-NaN出现在t+h超出数据末尾(3/19 23:00)时, 对应行目标也是NaN, 不参与训练。
+NaN 出现在 t+h 超出数据末尾(3/19 23:00)时。仅相同 horizon 的目标也为 NaN、对应行不参与该 horizon 训练；其他 horizon 的有效训练行仍可能包含此列的 NaN，交由模型处理。聚合窗口则截短至数据末尾，不把未知气象填零。
 
 ---
 
@@ -308,7 +310,7 @@ NaN出现在t+h超出数据末尾(3/19 23:00)时, 对应行目标也是NaN, 不�
 | `last_P_t` | `last_outage_pct` | outage_pct = P_t × 100 (仅差系数) | 浪费1维 |
 | `osi_mean_72h` | `outage_pct_mean_72h` | OSI ≈ 0.40×outage_pct (近似线性) | 浪费1维 |
 | `gust_mean_obs` | `cumul_gust_obs` | cumul = mean × 72 (窗口等长) | 浪费1维 |
-| `gust_mean_next_1h` | `gust_peak4h_mean_next_1h` | h=1时 peak4h = 单值 = mean | 浪费1维 |
+| `gust_mean_next_1h` | `gust_peak4h_mean_next_1h` | h=1时窗口通常含 t、t+1 两点，末尾含一点；top4覆盖全部，等于mean | 浪费1维 |
 
 **建议**: 下次改版时删除 temp_c_t, dewpoint_c_t, last_outage_pct, outage_pct_mean_72h, cumul_gust_obs, gust_peak4h_mean_next_1h (保留前者)。不影响LightGBM性能, 但节省6维采样预算。
 
@@ -417,7 +419,7 @@ t+48h 的 gain 分布更平(最高仅 3.7), 共线影响较小, 但 `pct_forest`
 | `d2m_t` vs `dewpoint_c_t` | dewpoint_c = d2m - 273.15 | 删 dewpoint_c_t |
 | `last_P_t` vs `last_outage_pct` | outage_pct = P_t × 100, 仅差系数 | 删 last_outage_pct |
 | `gust_mean_obs` vs `cumul_gust_obs` | cumul = mean × 72(窗口等长) | 删 cumul_gust_obs |
-| `gust_mean_next_1h` vs `gust_peak4h_mean_next_1h` | h=1时窗口仅含1值, peak4h退化为mean | 删 peak4h_next_1h |
+| `gust_mean_next_1h` vs `gust_peak4h_mean_next_1h` | h=1时通常含2值、末尾1值；top4覆盖全部，退化为mean | 删 peak4h_next_1h |
 | `osi_mean_72h` vs `outage_pct_mean_72h` | OSI由P_t(权重0.40)主导 → 72h均值也近似线性 | 删 outage_pct_mean_72h |
 
 #### 第二类: 设计必然 (r 0.92-1.0, 特征定义本身导致)
@@ -471,5 +473,3 @@ t+48h 的 gain 分布更平(最高仅 3.7), 共线影响较小, 但 `pct_forest`
 | 设计必然 | 11对 | 权重/惯性/低变异/离散化导致 | 删冗余者 |
 | 物理相关-冗余 | 6对 | 同一过程, 信息重复 | 删冗余者 |
 | 物理相关-保留 | 8对 | 同一过程, 但不同物理含义 | **都保留** |
-
-

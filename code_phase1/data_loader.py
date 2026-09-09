@@ -52,25 +52,30 @@ def load_submission():
 
 def reconstruct_osi(df):
     """
-    重建OSI列: OSI = 0.40*P_t + 0.35*N_t + 0.25*D_t - 0.10*R_t (clip>=0)
-    训练集已有osi列(直接保留); 测试集无此列, 需从组件重建(仅3月11-13有值)
+    统一观测窗口的 OSI 特征口径：存储组件重建、下限裁剪、四位小数。
+
+    即使训练文件已有 osi，也只重建前72小时的特征值。预测窗口中已有的
+    训练 osi 和所有官方目标保持不变；缺少 osi 的测试预测窗口保留 NaN。
+    不能从 outageCount 的净变化替代官方存储的 N_t / R_t。
     """
-    if 'osi' in df.columns:
-        return df
-    p = df['P_t'].values
-    n = df['N_t'].values
-    d = df['D_t'].values
-    r = df['R_t'].values
-    mask = ~(np.isnan(p) | np.isnan(n) | np.isnan(d) | np.isnan(r))
-    osi = np.full(len(df), np.nan)
-    osi[mask] = (
-        OSI_WEIGHTS['P'] * p[mask]
-        + OSI_WEIGHTS['N'] * n[mask]
-        + OSI_WEIGHTS['D'] * d[mask]
-        - OSI_WEIGHTS['R'] * r[mask]
+    df = df.copy()
+    if '_hour_idx' in df:
+        observed = df['_hour_idx'].between(0, OBSERVED_END - 1)
+    else:
+        dates = pd.to_datetime(df['timestamp_et'], format='%m/%d/%Y %H:%M')
+        observed = dates.ge('2026-03-11') & dates.lt('2026-03-14')
+    components = df.loc[observed, ['P_t', 'N_t', 'D_t', 'R_t']]
+    if not np.isfinite(components.to_numpy(dtype=float)).all():
+        raise ValueError('Observed outage components contain missing or non-finite values.')
+    if 'osi' not in df:
+        df['osi'] = np.nan
+    values = (
+        OSI_WEIGHTS['P'] * components['P_t']
+        + OSI_WEIGHTS['N'] * components['N_t']
+        + OSI_WEIGHTS['D'] * components['D_t']
+        - OSI_WEIGHTS['R'] * components['R_t']
     )
-    osi = np.where(osi < 0, 0, osi)
-    df['osi'] = osi
+    df.loc[observed, 'osi'] = values.clip(lower=0).round(4)
     return df
 
 

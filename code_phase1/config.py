@@ -30,7 +30,7 @@ SUBMISSION_FILE = os.path.join(DATA_DIR, 'sample_submission.csv')
 
 # --- 随机种子与版本 ---
 SEED = 42                          # 与比赛 train/test 划分一致
-FEATURE_VERSION = 'v1.5.3'
+FEATURE_VERSION = 'v1.5.7'           # v1.5.6 + F1 target-moment weather trajectory (211 cols)
 CV_VERSION = 'balanced_v1'
 CV_ASSIGNMENT_FILE = os.path.join(
     CV_DIR, f'cv_assignments_{CV_VERSION}_seed{SEED}.csv'

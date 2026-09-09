@@ -1,0 +1,13 @@
+split,feature,changed_rows_exact,changed_rows_tolerance_1e-12,changed_counties,nan_status_changed_rows,max_abs_change
+train,n_utilities,14256,14256,99,0,15.0
+test,last_osi,8352,8352,58,0,4.9149999999999995e-05
+test,osi_mean_72h,9072,9072,63,0,9.847876388889305e-06
+test,osi_max_72h,9072,9072,63,0,4.9383200000000134e-05
+test,osi_std_72h,9072,9072,63,0,8.749334499510509e-06
+test,pre_event_mean_osi,8928,8928,62,0,1.3171883333333535e-05
+test,storm_onset_max_osi,9072,9072,63,0,4.9550199999999836e-05
+test,storm_onset_mean_osi,9072,9072,63,0,1.6580475000000034e-05
+test,osi_trend_last6h,8784,8784,61,0,1.5853055714284015e-05
+test,frac_zero_72h,8784,8784,61,0,0.5555555555555556
+test,hours_since_peak,576,576,4,144,1.0
+test,n_utilities,4320,4320,30,0,9.0

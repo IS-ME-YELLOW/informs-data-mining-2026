@@ -1096,3 +1096,279 @@ Feature version v1.5.3. Features: 115. Models saved to models/. Submission: D:\I
 
 ================================================================================
 
+================================================================================
+RUN 2026-09-08 17:18:29 | FEATURE_VERSION=v1.5.6 | SEED=42
+================================================================================
+
+--- Config ---
+  feature_version: v1.5.6
+  cv_version: balanced_v1
+  seed: 42
+  feature_count: 163
+  train_samples: 34416
+  test_samples: 9072
+  n_folds: 5
+  lgbm_params: {'objective': 'huber', 'metric': 'rmse', 'learning_rate': 0.05, 'num_leaves': 31, 'max_depth': -1, 'min_child_samples': 50, 'feature_fraction': 0.8, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'lambda_l1': 0.1, 'lambda_l2': 1.0, 'seed': 42, 'feature_fraction_seed': 42, 'bagging_seed': 42, 'drop_seed': 42, 'data_random_seed': 42}
+  num_boost_round: 2000
+  early_stopping_rounds: 100
+
+Train samples per horizon: osi_target_t01h: 34177, osi_target_t06h: 32982, osi_target_t24h: 28680, osi_target_t48h: 22944
+Feature count: 163
+
+[osi_target_t01h]
+  Fold 1: RMSE=0.006747, MAE=0.002758  (best_iter=118)
+  Fold 2: RMSE=0.010571, MAE=0.003788  (best_iter=257)
+  Fold 3: RMSE=0.013207, MAE=0.004068  (best_iter=211)
+  Fold 4: RMSE=0.016137, MAE=0.003987  (best_iter=279)
+  Fold 5: RMSE=0.011171, MAE=0.003351  (best_iter=166)
+  Pooled OOF RMSE=0.011979, Fold RMSE SD=0.003097; Pooled OOF MAE=0.003589, Fold MAE SD=0.000485
+
+[Feature Importance top 15 — osi_target_t01h]
+  1. hours_since_obs                gain=40.0
+  2. last_P_t                       gain=17.7
+  3. last_osi                       gain=12.9
+  4. last_outage_pct                gain=12.3
+  5. N_t_mean_72h                   gain=5.8
+  6. last_D_t                       gain=4.1
+  7. gust_x_hso                     gain=3.9
+  8. gust_x_phase                   gain=3.1
+  9. cumul_gust_since_onset         gain=3.0
+  10. t2m_at_t48h                    gain=2.4
+  11. last_N_t                       gain=2.0
+  12. pct_forest                     gain=2.0
+  13. min_t2m_next_24h               gain=1.3
+  14. osi_trend_last6h               gain=1.2
+  15. gust_gt30_since_onset          gain=1.1
+
+[osi_target_t01h] min=0.0000, max=0.3046, mean=0.0066, zero%=56.5%
+
+[osi_target_t06h]
+  Fold 1: RMSE=0.006529, MAE=0.002649  (best_iter=175)
+  Fold 2: RMSE=0.010117, MAE=0.004036  (best_iter=35)
+  Fold 3: RMSE=0.013197, MAE=0.004089  (best_iter=565)
+  Fold 4: RMSE=0.012910, MAE=0.003863  (best_iter=216)
+  Fold 5: RMSE=0.009161, MAE=0.003128  (best_iter=383)
+  Pooled OOF RMSE=0.010677, Fold RMSE SD=0.002479; Pooled OOF MAE=0.003551, Fold MAE SD=0.000568
+
+[Feature Importance top 15 — osi_target_t06h]
+  1. hours_since_obs                gain=17.4
+  2. last_osi                       gain=13.0
+  3. last_P_t                       gain=10.8
+  4. gust_x_hso                     gain=9.8
+  5. cumul_gust_since_onset         gain=7.4
+  6. pct_forest                     gain=2.1
+  7. last_outage_pct                gain=1.6
+  8. total_tp_next_6h               gain=1.4
+  9. pressure_change_6h             gain=1.4
+  10. t2m_at_t48h                    gain=1.3
+  11. gust_max_next_1h               gain=1.3
+  12. wind_sin_t                     gain=1.2
+  13. N_t_mean_72h                   gain=1.1
+  14. cumul_tp_since_onset           gain=1.1
+  15. osi_trend_last6h               gain=1.0
+
+[osi_target_t06h] min=0.0000, max=0.2646, mean=0.0055, zero%=56.7%
+
+[osi_target_t24h]
+  Fold 1: RMSE=0.004677, MAE=0.002043  (best_iter=152)
+  Fold 2: RMSE=0.008743, MAE=0.003553  (best_iter=13)
+  Fold 3: RMSE=0.012942, MAE=0.003872  (best_iter=527)
+  Fold 4: RMSE=0.006038, MAE=0.002772  (best_iter=38)
+  Fold 5: RMSE=0.007485, MAE=0.002487  (best_iter=453)
+  Pooled OOF RMSE=0.008464, Fold RMSE SD=0.002833; Pooled OOF MAE=0.002943, Fold MAE SD=0.000676
+
+[Feature Importance top 15 — osi_target_t24h]
+  1. hours_since_obs                gain=3.3
+  2. last_osi                       gain=2.8
+  3. mslma_t                        gain=2.8
+  4. cumul_gust_since_onset         gain=2.7
+  5. pct_forest                     gain=2.3
+  6. total_tp_next_24h              gain=1.5
+  7. gust_x_hso                     gain=0.8
+  8. min_t2m_next_48h               gain=0.7
+  9. last_P_t                       gain=0.6
+  10. pop_density                    gain=0.5
+  11. t2m_at_t24h                    gain=0.4
+  12. last_D_t                       gain=0.4
+  13. wind_speed_max_next_48h        gain=0.3
+  14. total_tp_next_48h              gain=0.3
+  15. log_customers                  gain=0.3
+
+[osi_target_t24h] min=0.0000, max=0.1365, mean=0.0031, zero%=61.0%
+
+[osi_target_t48h]
+  Fold 1: RMSE=0.003640, MAE=0.001612  (best_iter=221)
+  Fold 2: RMSE=0.005773, MAE=0.002440  (best_iter=15)
+  Fold 3: RMSE=0.013045, MAE=0.003312  (best_iter=255)
+  Fold 4: RMSE=0.004983, MAE=0.002041  (best_iter=29)
+  Fold 5: RMSE=0.007077, MAE=0.002113  (best_iter=116)
+  Pooled OOF RMSE=0.007644, Fold RMSE SD=0.003267; Pooled OOF MAE=0.002303, Fold MAE SD=0.000569
+
+[Feature Importance top 15 — osi_target_t48h]
+  1. gust_mean_next_48h             gain=3.6
+  2. pct_forest                     gain=2.7
+  3. last_osi                       gain=0.5
+  4. cumul_gust_since_onset         gain=0.5
+  5. gust_gt30_next_24h             gain=0.4
+  6. pct_wetland                    gain=0.4
+  7. log_customers                  gain=0.3
+  8. gust_mean_next_24h             gain=0.3
+  9. total_tp_next_48h              gain=0.3
+  10. wind_speed_max_next_24h        gain=0.2
+  11. osi_mean_72h                   gain=0.2
+  12. min_t2m_next_24h               gain=0.2
+  13. gust_mean_obs                  gain=0.2
+  14. gust_gt30_next_48h             gain=0.2
+  15. gust_peak4h_mean_next_24h      gain=0.2
+
+[osi_target_t48h] min=0.0000, max=0.1283, mean=0.0018, zero%=61.7%
+
+--- Baselines ---
+                     osi_target_t01h osi_target_t06h osi_target_t24h osi_target_t48h
+  Zero               0.023487 0.019820 0.012093 0.009868
+  Mean               0.022777 0.019208 0.011691 0.009636
+  Persistence        0.063264 0.064188 0.067150 0.069215
+
+--- Notes ---
+Feature version v1.5.6. Features: 163. Models saved. Submission: /home/yongyi.xie/INFORMS_DATA_MINING/data/submission_v1.5.6_balanced_v1.csv
+
+================================================================================
+
+================================================================================
+RUN 2026-09-08 17:58:24 | FEATURE_VERSION=v1.5.7 | SEED=42
+================================================================================
+
+--- Config ---
+  feature_version: v1.5.7
+  cv_version: balanced_v1
+  seed: 42
+  feature_count: 211
+  train_samples: 34416
+  test_samples: 9072
+  n_folds: 5
+  lgbm_params: {'objective': 'huber', 'metric': 'rmse', 'learning_rate': 0.05, 'num_leaves': 31, 'max_depth': -1, 'min_child_samples': 50, 'feature_fraction': 0.8, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'lambda_l1': 0.1, 'lambda_l2': 1.0, 'seed': 42, 'feature_fraction_seed': 42, 'bagging_seed': 42, 'drop_seed': 42, 'data_random_seed': 42}
+  num_boost_round: 2000
+  early_stopping_rounds: 100
+
+Train samples per horizon: osi_target_t01h: 34177, osi_target_t06h: 32982, osi_target_t24h: 28680, osi_target_t48h: 22944
+Feature count: 211
+
+[osi_target_t01h]
+  Fold 1: RMSE=0.007099, MAE=0.002918  (best_iter=140)
+  Fold 2: RMSE=0.011185, MAE=0.003839  (best_iter=78)
+  Fold 3: RMSE=0.012893, MAE=0.004076  (best_iter=171)
+  Fold 4: RMSE=0.017247, MAE=0.004626  (best_iter=150)
+  Fold 5: RMSE=0.011379, MAE=0.003261  (best_iter=452)
+  Pooled OOF RMSE=0.012404, Fold RMSE SD=0.003268; Pooled OOF MAE=0.003744, Fold MAE SD=0.000602
+
+[Feature Importance top 15 — osi_target_t01h]
+  1. last_osi                       gain=23.2
+  2. last_P_t                       gain=22.3
+  3. hours_since_obs                gain=15.3
+  4. gust_max_W48_s_6h              gain=14.5
+  5. gust_max_W48_s_1h              gain=6.8
+  6. cumul_gust_since_onset         gain=4.1
+  7. total_tp_W24_s_48h             gain=3.5
+  8. gust_mean_W24_s_48h            gain=3.2
+  9. t2m_at_t48h                    gain=2.9
+  10. N_t_mean_72h                   gain=2.5
+  11. pct_forest                     gain=2.1
+  12. gust_max_W48_s_24h             gain=2.0
+  13. last_outage_pct                gain=1.8
+  14. gust_max_W24_s_1h              gain=1.7
+  15. last_N_t                       gain=1.6
+
+[osi_target_t01h] min=0.0000, max=0.2912, mean=0.0064, zero%=53.8%
+
+[osi_target_t06h]
+  Fold 1: RMSE=0.006356, MAE=0.002631  (best_iter=249)
+  Fold 2: RMSE=0.010147, MAE=0.003661  (best_iter=204)
+  Fold 3: RMSE=0.013727, MAE=0.004409  (best_iter=208)
+  Fold 4: RMSE=0.013876, MAE=0.004187  (best_iter=95)
+  Fold 5: RMSE=0.009510, MAE=0.003085  (best_iter=368)
+  Pooled OOF RMSE=0.011092, Fold RMSE SD=0.002823; Pooled OOF MAE=0.003594, Fold MAE SD=0.000664
+
+[Feature Importance top 15 — osi_target_t06h]
+  1. last_P_t                       gain=17.3
+  2. hours_since_obs                gain=13.1
+  3. last_osi                       gain=12.1
+  4. gust_max_W48_s_6h              gain=7.8
+  5. gust_mean_W48_s_1h             gain=2.7
+  6. gust_max_W48_s_24h             gain=2.5
+  7. pct_forest                     gain=2.3
+  8. gust_max_W48_s_1h              gain=2.3
+  9. cumul_gust_since_onset         gain=2.1
+  10. gust_max_W24_s_1h              gain=1.8
+  11. total_tp_W24_s_1h              gain=1.6
+  12. N_t_mean_72h                   gain=1.4
+  13. t2m_at_t48h                    gain=1.2
+  14. osi_trend_last6h               gain=1.2
+  15. tree_canopy_std                gain=1.1
+
+[osi_target_t06h] min=0.0000, max=0.2516, mean=0.0054, zero%=56.4%
+
+[osi_target_t24h]
+  Fold 1: RMSE=0.004519, MAE=0.002010  (best_iter=210)
+  Fold 2: RMSE=0.008743, MAE=0.003616  (best_iter=12)
+  Fold 3: RMSE=0.013123, MAE=0.003894  (best_iter=450)
+  Fold 4: RMSE=0.005988, MAE=0.002740  (best_iter=34)
+  Fold 5: RMSE=0.007574, MAE=0.002492  (best_iter=332)
+  Pooled OOF RMSE=0.008511, Fold RMSE SD=0.002937; Pooled OOF MAE=0.002948, Fold MAE SD=0.000703
+
+[Feature Importance top 15 — osi_target_t24h]
+  1. last_osi                       gain=2.8
+  2. hours_since_obs                gain=2.7
+  3. cumul_gust_since_onset         gain=2.7
+  4. pct_forest                     gain=2.0
+  5. mslma_t                        gain=1.7
+  6. gust_mean_W24_s_6h             gain=1.5
+  7. min_t2m_next_48h               gain=0.8
+  8. gust_x_hso                     gain=0.7
+  9. total_tp_next_24h              gain=0.7
+  10. pop_density                    gain=0.6
+  11. log_customers                  gain=0.4
+  12. last_P_t                       gain=0.4
+  13. total_tp_W24_s_48h             gain=0.4
+  14. wind_speed_max_next_48h        gain=0.4
+  15. gust_mean_W24_s_48h            gain=0.4
+
+[osi_target_t24h] min=0.0000, max=0.1268, mean=0.0030, zero%=61.5%
+
+[osi_target_t48h]
+  Fold 1: RMSE=0.003779, MAE=0.001634  (best_iter=200)
+  Fold 2: RMSE=0.005741, MAE=0.001968  (best_iter=25)
+  Fold 3: RMSE=0.013237, MAE=0.003260  (best_iter=393)
+  Fold 4: RMSE=0.005106, MAE=0.002091  (best_iter=23)
+  Fold 5: RMSE=0.007053, MAE=0.002115  (best_iter=157)
+  Pooled OOF RMSE=0.007731, Fold RMSE SD=0.003300; Pooled OOF MAE=0.002215, Fold MAE SD=0.000551
+
+[Feature Importance top 15 — osi_target_t48h]
+  1. gust_mean_next_48h             gain=3.7
+  2. pct_forest                     gain=3.0
+  3. last_osi                       gain=0.7
+  4. cumul_gust_since_onset         gain=0.5
+  5. total_tp_W48_s_1h              gain=0.4
+  6. gust_gt30_next_24h             gain=0.4
+  7. log_customers                  gain=0.3
+  8. gust_mean_next_24h             gain=0.2
+  9. pct_wetland                    gain=0.2
+  10. gust_mean_W48_s_1h             gain=0.2
+  11. total_tp_W48_s_6h              gain=0.2
+  12. tp_rate_next_48h               gain=0.2
+  13. gust_gt30_next_48h             gain=0.2
+  14. tree_canopy_std                gain=0.2
+  15. pct_forest_classified          gain=0.2
+
+[osi_target_t48h] min=0.0000, max=0.1349, mean=0.0020, zero%=57.3%
+
+--- Baselines ---
+                     osi_target_t01h osi_target_t06h osi_target_t24h osi_target_t48h
+  Zero               0.023487 0.019820 0.012093 0.009868
+  Mean               0.022777 0.019208 0.011691 0.009636
+  Persistence        0.063264 0.064188 0.067150 0.069215
+
+--- Notes ---
+Feature version v1.5.7. Features: 211. v1.5.6 + F1 target-moment weather trajectory (48 cols). Models saved. Submission: /home/yongyi.xie/INFORMS_DATA_MINING/data/submission_v1.5.7_balanced_v1.csv
+
+================================================================================
+

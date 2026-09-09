@@ -1,5 +1,5 @@
-data/external/tl_2025_us_county/tl_2025_us_county.shp
-data/external/tl_2025_us_county.zip
+data/raw/tl_2025_us_county/tl_2025_us_county.shp
+data/raw/tl_2025_us_county.zip
 .python_packages/
 __pycache__/
 *.pyc

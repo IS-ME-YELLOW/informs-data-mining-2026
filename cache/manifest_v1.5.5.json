@@ -1,0 +1,54 @@
+{
+  "version": "v1.5.5",
+  "parent": "v1.5.2",
+  "created_utc": "2026-09-08T05:15:02.968134+00:00",
+  "build_mode": "parent_cache_patch",
+  "feature_count": 141,
+  "inputs_sha256": {
+    "data/DM_Train.csv": "12235f199ff241819854e1635acbfa7d149438d9c3451c2cfeb9f47c76263178",
+    "data/DM_Test.csv": "517fc0ae2418adc1c90e7db6b12d35ea8742be3bb9f2ec9e87ce644b8ddaad37",
+    "data/external/tl_2025_us_county/tl_2025_us_county.dbf": "966a258724c861daa722dfa64038df494fac089781c695a88615d9786e61a5cb",
+    "data/external/eia861_2024/Service_Territory_2024.xlsx": "0292f880da42e06b443704af4ce373c73923322371b5346e46cfd22573c7eae7",
+    "data/rural_urban_codes.csv": "ec455ee2a8bc5fc8e070575ea5bee7dce46fc6037f8c3449cbf56e8b45331fa7",
+    "data/county_landcover.csv": "5f45587ba0498a1ee94161177814370b4f8f67e9e986ab79232d8f93c50c5996",
+    "data/county_tree_canopy_2025.csv": "911d39256d2c65a99f7804fc6f253c20a600e35711bdb4169cb0d703dd05aabd",
+    "data/county_features.csv": "b40076fbc6d421be4eca85e6f0a9c99bcf3975df8a32c2c826a9b913600bf1e7",
+    "cv/cv_assignments_balanced_v1_seed42.csv": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+    "versions/v1.5.5/parent_inputs_sha256.json": "2c952cbb82f65517a49daf68434af031a420292f4aad0eb99adeffb32734af09",
+    "cache/features_train_v1.5.2.parquet": "0a0df441986e79653752989fc03b677253a9f058f052d41635af84d95a3de4aa",
+    "cache/targets_train_v1.5.2.parquet": "e8d6a40c9db32bdeeab50c24fb78264d1d1105404b93f48de6ff50e3322489d9",
+    "cache/meta_train_v1.5.2.parquet": "7f38b020166e742687b0225e1b63220d6505eb682a5e7b597267da1c9c364d1f",
+    "cache/features_test_v1.5.2.parquet": "01fadf740c6e066f46e1c3f778d07036bbc645a2d06dca7a6778b55d64ab6f45",
+    "cache/meta_test_v1.5.2.parquet": "e54bd952736bdaa5ead3266db9bd5faabeeb46a838433a598ae6820adda4970d"
+  },
+  "source_sha256": {
+    "code_phase1/feature_dataset.py": "66f857037c205a5daec713dd4ee898e31b05edd25b1e12fd4c82206c4bc61825",
+    "code_phase1/data_loader.py": "ba6472c97ca6041a8376d9ebfc903d5b1db1d026c84fc86000fc64c13762b1a1",
+    "code_phase1/features.py": "f3ad83e7f3aa97d77348f9f7eb9fca48e67b9adb55bf4bab91ded9dbaa3f1ad3",
+    "code_phase1/config.py": "22c769db85387a658c68c26fef5200c859eef17fd3706551796b7f9be217af70",
+    "data/external/scripts/build_county_features.py": "f295bd330cb5fad8b23a65f2122db9287ffcd6c831a6ed824ddc04639f71801d",
+    "versions/v1.5.5/build_features.py": "0447964845f23e82b4bea4cdb161a2487c9566fc3c6b963bdcc616117f26df13"
+  },
+  "runtime": {
+    "python": "3.13.13 (tags/v3.13.13:01104ce, Apr  7 2026, 19:25:48) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.5.1",
+    "pandas": "3.0.3"
+  },
+  "semantics": {
+    "observed_osi": "stored P/N/D/R weighted sum, clip lower=0, round(4), hours 0..71 only",
+    "weather_windows": "[t,t+h], truncated at hour 215",
+    "peak4h": "highest min(4, available) values; not necessarily consecutive"
+  },
+  "outputs_sha256": {
+    "cache/features_train_v1.5.5.parquet": "e8eef8e729b9d8e922dee90f378e52148227376391c6b2824478bce3821f59b1",
+    "cache/meta_train_v1.5.5.parquet": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+    "cache/targets_train_v1.5.5.parquet": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9",
+    "cache/features_test_v1.5.5.parquet": "a521ada17abbab0a4ffb84f68646f9d489ebd5b6f1e1370c1a673155b4ec790a",
+    "cache/meta_test_v1.5.5.parquet": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+    "cache/feature_names_v1.5.5.json": "8c3ef96ca11e2247d25bcbb62e6ab1145cdcc7af9f1a08f1520c7ff44e768bf9",
+    "versions/v1.5.5/validation.json": "1017c1ac40448d1e8ee1932616d84777c9936f735a930926e58af5a28aed3b0b",
+    "data/county_features_v1.5.5.csv": "6eafddf4aca5b87fe819f2708d028d6cb01554f41e896d947e0791e635a952e4",
+    "versions/v1.5.5/eia_county_matches.csv": "6024357208b0456b8a1d74c8d819d91ec07138abdc7707e248a097066837fa1f",
+    "versions/v1.5.5/feature_changes.csv": "47306e19f87aa3edcd24a13c192ca0552e0d0068529b3549f4fd5d7a83767c9f"
+  }
+}

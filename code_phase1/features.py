@@ -1,7 +1,7 @@
 # ============================================================
 # features.py — 特征工程 (Phase 1.5, v2)
 # ============================================================
-# 职责: 从原始数据构建114维特征矩阵, 供LightGBM训练/预测使用
+# 职责: 构建129维基础特征；feature_dataset.py 拼接12维外部特征后为141维
 #
 # 特征分10类:
 #   A. 观测窗口停电摘要 (25维): 从3月11-13(72h)停电数据提取, 每县固定
@@ -13,7 +13,7 @@
 #
 #   --- Phase 1.5 新增 ---
 #   G. 阈值超越时长 (10维): gust>30/40mph的累计小时数 [P1, 文献: Cerrai/Yang系列]
-#   H. 峰值窗口条件均值 (4维): 最强风4h窗口均值 [P2, 文献: Cerrai/Yang系列]
+#   H. 最高四点均值 (4维): 窗口中最高min(4,有效点数)个值的均值，不要求连续
 #   I. 气象变化率 (6维): gust/pressure/temp的1h/3h/6h差分 [P3, 文献: Alpay 2020]
 #   J. 气象×阶段交互 (4维): gust×hso, gust×phase等 [P4, 拆解时间-气象共线性]
 #   K. 累计暴露量 (3维): 风暴开始以来的累计gust/tp [P5, 文献: Arora 2023]
@@ -37,7 +37,7 @@ from config import (
 # 特征列名定义(保证训练/测试列名一致)
 # ============================================================
 
-# A. 观测窗口停电摘要 (25→32维, 新增P1观测2+P5观测1+P6边界3+原有25)
+# A. 观测窗口停电摘要 (25→31维, 新增P1观测2+P5观测1+P6边界3+原有25)
 OBSERVED_FEATURES = [
     # 原有25维
     'last_osi', 'last_P_t', 'last_N_t', 'last_D_t', 'last_R_t',
@@ -86,7 +86,7 @@ for _h in ['1', '6', '24', '48']:
         f'min_t2m_next_{_h}h',
         # P1: 阈值超越时长 (文献: Cerrai/Yang系列, 最验证有效的风特征)
         f'gust_gt30_next_{_h}h', f'gust_gt40_next_{_h}h',
-        # P2: 峰值窗口条件均值 (文献: 最强风4h窗口均值 > 简单均值)
+        # P2: 最高min(4,有效点数)个阵风值的均值；不要求连续
         f'gust_peak4h_mean_next_{_h}h',
     ])
 
@@ -123,7 +123,7 @@ COUNTY_FEATURES = ['log_customers']
 
 # 全部特征列名(顺序固定, 训练/测试必须一致)
 ALL_FEATURE_NAMES = (
-    OBSERVED_FEATURES              # 32
+    OBSERVED_FEATURES              # 31
     + WEATHER_AT_T_FEATURES        # 24
     + DERIVED_WEATHER_FEATURES     # 10
     + HORIZON_STAT_FEATURES        # 32
@@ -132,7 +132,7 @@ ALL_FEATURE_NAMES = (
     + TARGET_TIME_WEATHER_FEATURES # 16 (方向1新增)
     + TEMPORAL_FEATURES            # 6
     + COUNTY_FEATURES              # 1
-)                                  # 合计 130
+)                                  # 合计 129
 
 
 # ============================================================
@@ -141,7 +141,7 @@ ALL_FEATURE_NAMES = (
 
 def compute_observed_features(county_df):
     """
-    从3月11-13观测窗口(hour_idx 0-71)提取32维县级摘要特征
+    从3月11-13观测窗口(hour_idx 0-71)提取31维县级摘要特征
     这些特征对同一县的所有144个预测小时保持不变(静态)
     包括: 最后观测值、72h统计量、预事件基线、第一波信号、趋势、
           阈值超越(P1)、累计暴露(P5)、气象边界(P6)
@@ -342,9 +342,8 @@ def compute_threshold_exceedance(county_df, t_idx, h):
 
 def compute_peak_window_mean(county_df, t_idx, h):
     """
-    P2: 峰值窗口条件均值 (文献: Cerrai/Yang系列 "最强风4小时窗口均值")
-    [t, t+h]中gust最高的min(4, h)小时的均值
-    比简单全窗口均值保留更多破坏性信息
+    [t, t+h] 中最高 min(4, 有效点数) 个阵风值的均值，不要求连续。
+    v1.5.5 保留历史列名 peak4h 及数值；不是最大连续4小时均值。
     """
     end = min(t_idx + h + 1, len(county_df))
     window = county_df.iloc[t_idx:end]
@@ -458,11 +457,11 @@ def compute_county_features(row):
 
 def build_feature_matrix(df, is_train=True):
     """
-    主入口: 从原始数据构建114维特征矩阵
+    主入口: 从原始数据构建129维基础特征矩阵
 
     流程:
       对每个县:
-        1. 提取观测窗口(3月11-13) → 计算32维县级摘要(对所有预测小时固定)
+        1. 提取观测窗口(3月11-13) → 计算31维县级摘要(对所有预测小时固定)
         2. 对预测窗口(3月14-19)每个小时t:
            a. 提取t时刻气象(24维)
            b. 计算4个horizon的气象统计(20维原有)
@@ -471,17 +470,17 @@ def build_feature_matrix(df, is_train=True):
            e. 计算气象变化率(6维, P3)
            f. 计算累计暴露(3维, P5)
            g. 计算时间特征(6维) + 县级特征(1维)
-           h. 拼装为单行114维特征
+           h. 拼装为单行129维特征（含目标时刻16维气象）
       合并所有行 → X(特征), y(目标, 仅训练), meta(元信息)
 
-    返回: X(DataFrame, 114列), y(DataFrame, 4列或None), meta(DataFrame)
+    返回: X(DataFrame, 129列), y(DataFrame, 4列或None), meta(DataFrame)
     """
     rows_out = []
     meta_rows = []
 
     for fips, county_df in df.groupby('fipsCode'):
         county_df = county_df.sort_values('_hour_idx').reset_index(drop=True)
-        obs_feat = compute_observed_features(county_df)  # 每县计算一次(32维静态)
+        obs_feat = compute_observed_features(county_df)  # 每县计算一次(31维静态)
 
         pred_df = county_df[(county_df['_hour_idx'] >= PRED_START)
                             & (county_df['_hour_idx'] < PRED_END)]
@@ -514,7 +513,7 @@ def build_feature_matrix(df, is_train=True):
                 for name, val in te.items():
                     feat[f'{name}_next_{h_short}h'] = val
 
-            # P2: 峰值窗口条件均值 (最强风4h窗口均值 > 简单均值)
+            # P2: 最高min(4,有效点数)个阵风值的均值，不要求连续
             for h_key, h_val in HORIZON_HOURS.items():
                 h_short = str(h_val)
                 feat[f'gust_peak4h_mean_next_{h_short}h'] = \

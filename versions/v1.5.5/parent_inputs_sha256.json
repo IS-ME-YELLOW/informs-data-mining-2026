@@ -1,0 +1,9 @@
+{
+  "data/DM_Train.csv": "12235f199ff241819854e1635acbfa7d149438d9c3451c2cfeb9f47c76263178",
+  "data/DM_Test.csv": "517fc0ae2418adc1c90e7db6b12d35ea8742be3bb9f2ec9e87ce644b8ddaad37",
+  "cache/features_test_v1.5.2.parquet": "01fadf740c6e066f46e1c3f778d07036bbc645a2d06dca7a6778b55d64ab6f45",
+  "cache/features_train_v1.5.2.parquet": "0a0df441986e79653752989fc03b677253a9f058f052d41635af84d95a3de4aa",
+  "cache/meta_test_v1.5.2.parquet": "e54bd952736bdaa5ead3266db9bd5faabeeb46a838433a598ae6820adda4970d",
+  "cache/meta_train_v1.5.2.parquet": "7f38b020166e742687b0225e1b63220d6505eb682a5e7b597267da1c9c364d1f",
+  "cache/targets_train_v1.5.2.parquet": "e8d6a40c9db32bdeeab50c24fb78264d1d1105404b93f48de6ff50e3322489d9"
+}
