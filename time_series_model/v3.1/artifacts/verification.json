@@ -1,0 +1,62 @@
+{
+  "version": "v3.1",
+  "milestone": "M3",
+  "evaluation_status": "diagnostic_only",
+  "status": "passed",
+  "tolerance": 1e-06,
+  "county_fold_coverage": "每个训练县恰好作为一次外层验证集",
+  "checkpoint_details": [
+    {
+      "fold": 0,
+      "best_epoch": 3,
+      "validation_counties": 48,
+      "sha256": "c8f8d744b452654720ddbf0801bf0d42e28ab36332daa8865c6a10411c0bec3f"
+    },
+    {
+      "fold": 1,
+      "best_epoch": 6,
+      "validation_counties": 47,
+      "sha256": "2c5d93cf5f4431d2eda6949a14023caa919fcdd029f778c4da7701488362daf0"
+    },
+    {
+      "fold": 2,
+      "best_epoch": 5,
+      "validation_counties": 48,
+      "sha256": "7e8377349b4a9dd383cd8d1aba24bd9591c81d86630f15d6e77f20fcfeaef942"
+    },
+    {
+      "fold": 3,
+      "best_epoch": 6,
+      "validation_counties": 48,
+      "sha256": "20f8885254ab55e533549e8029f11a1711b2eb5eb5eddb70fd70f0dabc81bdba"
+    },
+    {
+      "fold": 4,
+      "best_epoch": 2,
+      "validation_counties": 48,
+      "sha256": "606ec01477c35b194ed35d8bbd566df55d6478700a8b4bd4b9e1c0e4243596e2"
+    }
+  ],
+  "max_absolute_differences": {
+    "oof_delta_from_checkpoints": 0.0,
+    "test_delta_from_checkpoints": 2.2405398630159779e-10,
+    "combined_oof": 0.0,
+    "combined_test": 2.6330754590575545e-10,
+    "summary.horizon_hours": 0.0,
+    "summary.rmse": 9.540979117872439e-17,
+    "summary.mae": 9.410874857174178e-17,
+    "summary.n": 0.0,
+    "summary.prediction_mean": 9.107298248878237e-17,
+    "summary.prediction_max": 5.551115123125783e-17,
+    "summary.zero_pct": 7.105427357601002e-15,
+    "oof_prediction_file": 0.0,
+    "test_prediction_file": 2.633075467731172e-10,
+    "submission.osi_target_t01h": 2.219429189043165e-10,
+    "submission.osi_target_t06h": 2.633074851904338e-10,
+    "submission.osi_target_t24h": 2.1843703235102652e-10,
+    "submission.osi_target_t48h": 2.286040939880607e-10
+  },
+  "submission_rows": 9072,
+  "fold_metric_rows": 20,
+  "verified_checksums": 10
+}

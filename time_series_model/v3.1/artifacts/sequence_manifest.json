@@ -1,0 +1,158 @@
+{
+  "version": "v3.1",
+  "evaluation_status": "diagnostic_only",
+  "baseline_version": "v1.5.6",
+  "observed_hours": [
+    0,
+    71
+  ],
+  "future_weather_hours": [
+    72,
+    215
+  ],
+  "observed_channels": [
+    "P_t",
+    "N_t",
+    "D_t",
+    "R_t",
+    "gust",
+    "wind_speed_10m",
+    "wind_dir_sin",
+    "wind_dir_cos",
+    "t2m",
+    "tp",
+    "sp",
+    "r2",
+    "csnow",
+    "soil_moist"
+  ],
+  "future_weather_channels": [
+    "gust",
+    "wind_speed_10m",
+    "wind_dir_sin",
+    "wind_dir_cos",
+    "t2m",
+    "tp",
+    "sp",
+    "r2",
+    "csnow",
+    "soil_moist"
+  ],
+  "static_numeric_columns": [
+    "pop_density",
+    "n_utilities",
+    "pct_forest",
+    "pct_wetland",
+    "tree_canopy_pct",
+    "tree_canopy_std"
+  ],
+  "static_categorical_column": "rural_urban_code",
+  "last_state_columns": [
+    "last_P_t",
+    "last_N_t",
+    "last_D_t",
+    "last_R_t",
+    "last_osi"
+  ],
+  "horizons": [
+    "osi_target_t01h",
+    "osi_target_t06h",
+    "osi_target_t24h",
+    "osi_target_t48h"
+  ],
+  "input_sha256": {
+    "data\\DM_Train.csv": "12235f199ff241819854e1635acbfa7d149438d9c3451c2cfeb9f47c76263178",
+    "data\\DM_Test.csv": "517fc0ae2418adc1c90e7db6b12d35ea8742be3bb9f2ec9e87ce644b8ddaad37",
+    "cache\\features_train_v1.5.6.parquet": "2d4753ed3a4cb4938ea8af5fe54cb80b04d8509ede84766bd786fef5f3dc6dff",
+    "cache\\features_test_v1.5.6.parquet": "75ce0e77c9caaf4885ef89bc6289d6e42258574b00e81ff6509dbe23b0f01d09",
+    "cache\\targets_train_v1.5.6.parquet": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9",
+    "cache\\meta_train_v1.5.6.parquet": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+    "cache\\meta_test_v1.5.6.parquet": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+    "cache\\feature_names_v1.5.6.json": "44b484bad63b7f0b82eabbc5a2a894271ebf1e475a79ce933a3373a3cc627a2c"
+  },
+  "build_summary": {},
+  "cache_verification": {
+    "train": {
+      "sha256": "4ce6d5bc05b6cdf71c5f116b2ba13f4d0c4012d4f6a57a43dde1d67f617f63c2",
+      "arrays": {
+        "county_fips": [
+          239
+        ],
+        "timestamps": [
+          216
+        ],
+        "observed": [
+          239,
+          72,
+          14
+        ],
+        "future_weather": [
+          239,
+          144,
+          10
+        ],
+        "static_numeric": [
+          239,
+          6
+        ],
+        "static_category": [
+          239
+        ],
+        "last_state": [
+          239,
+          5
+        ],
+        "row_index": [
+          239,
+          144
+        ],
+        "targets": [
+          239,
+          144,
+          4
+        ]
+      }
+    },
+    "test": {
+      "sha256": "45be5fce917e4e19f54ba06c8eb691f16d548d658952ef7ab0b72bea5b3a7919",
+      "arrays": {
+        "county_fips": [
+          63
+        ],
+        "timestamps": [
+          216
+        ],
+        "observed": [
+          63,
+          72,
+          14
+        ],
+        "future_weather": [
+          63,
+          144,
+          10
+        ],
+        "static_numeric": [
+          63,
+          6
+        ],
+        "static_category": [
+          63
+        ],
+        "last_state": [
+          63,
+          5
+        ],
+        "row_index": [
+          63,
+          144
+        ],
+        "targets": [
+          63,
+          144,
+          4
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "version": "v3.1",
+  "evaluation_status": "diagnostic_only",
+  "baseline_version": "v1.5.6",
+  "cv_version": "balanced_v1",
+  "seed": 42,
+  "lightgbm_version": "4.7.0",
+  "prediction_semantics": {
+    "oof_raw": "五折 LightGBM 后处理前折外预测；折内早停，供M3诊断使用",
+    "test_raw": "五个折模型对测试集原始预测的算术平均"
+  },
+  "input_sha256": {
+    "cache\\features_train_v1.5.6.parquet": "2d4753ed3a4cb4938ea8af5fe54cb80b04d8509ede84766bd786fef5f3dc6dff",
+    "cache\\features_test_v1.5.6.parquet": "75ce0e77c9caaf4885ef89bc6289d6e42258574b00e81ff6509dbe23b0f01d09",
+    "cache\\targets_train_v1.5.6.parquet": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9",
+    "cache\\meta_train_v1.5.6.parquet": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+    "cv\\cv_assignments_balanced_v1_seed42.csv": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021"
+  },
+  "output_sha256": "b314a7d02472dcd24fe85f9ca254b68000b0e2b378db5c28d0ed75151d0020fe",
+  "fold_metrics": [
+    {
+      "horizon": "osi_target_t01h",
+      "fold": 0,
+      "best_iteration": 118,
+      "rmse": 0.0067469594960947645,
+      "mae": 0.0027580723020106143,
+      "n": 6864
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "fold": 1,
+      "best_iteration": 257,
+      "rmse": 0.010571187648977265,
+      "mae": 0.003787790201269374,
+      "n": 6721
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "fold": 2,
+      "best_iteration": 211,
+      "rmse": 0.013206768052934397,
+      "mae": 0.004068154497334365,
+      "n": 6864
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "fold": 3,
+      "best_iteration": 279,
+      "rmse": 0.016136740602161116,
+      "mae": 0.003986596635134533,
+      "n": 6864
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "fold": 4,
+      "best_iteration": 166,
+      "rmse": 0.011170562285658898,
+      "mae": 0.003350820073388493,
+      "n": 6864
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "fold": 0,
+      "best_iteration": 175,
+      "rmse": 0.006529433148236702,
+      "mae": 0.002649356683160755,
+      "n": 6624
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "fold": 1,
+      "best_iteration": 35,
+      "rmse": 0.010116678439245042,
+      "mae": 0.00403628527441689,
+      "n": 6486
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "fold": 2,
+      "best_iteration": 565,
+      "rmse": 0.013196947012427233,
+      "mae": 0.004088744442385513,
+      "n": 6624
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "fold": 3,
+      "best_iteration": 216,
+      "rmse": 0.01291030434777477,
+      "mae": 0.003863075553207695,
+      "n": 6624
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "fold": 4,
+      "best_iteration": 383,
+      "rmse": 0.009161450343277783,
+      "mae": 0.0031277184543612277,
+      "n": 6624
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "fold": 0,
+      "best_iteration": 152,
+      "rmse": 0.004676682993211646,
+      "mae": 0.002042712177853166,
+      "n": 5760
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "fold": 1,
+      "best_iteration": 13,
+      "rmse": 0.008743468525111582,
+      "mae": 0.003552848654410227,
+      "n": 5640
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "fold": 2,
+      "best_iteration": 527,
+      "rmse": 0.01294150909584878,
+      "mae": 0.003871927631508058,
+      "n": 5760
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "fold": 3,
+      "best_iteration": 38,
+      "rmse": 0.006038402494602367,
+      "mae": 0.0027716584191973394,
+      "n": 5760
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "fold": 4,
+      "best_iteration": 453,
+      "rmse": 0.00748451248944393,
+      "mae": 0.0024872075143957777,
+      "n": 5760
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "fold": 0,
+      "best_iteration": 221,
+      "rmse": 0.003639645418708036,
+      "mae": 0.001611630788902187,
+      "n": 4608
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "fold": 1,
+      "best_iteration": 15,
+      "rmse": 0.005772820147779022,
+      "mae": 0.0024399082030299116,
+      "n": 4512
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "fold": 2,
+      "best_iteration": 255,
+      "rmse": 0.013045199895381785,
+      "mae": 0.0033120782708388977,
+      "n": 4608
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "fold": 3,
+      "best_iteration": 29,
+      "rmse": 0.00498290913178981,
+      "mae": 0.002041272071917311,
+      "n": 4608
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "fold": 4,
+      "best_iteration": 116,
+      "rmse": 0.007076946288214522,
+      "mae": 0.0021132699621036117,
+      "n": 4608
+    }
+  ],
+  "pooled_postprocessed_metrics": {
+    "osi_target_t01h": {
+      "rmse": 0.011979379161386963,
+      "mae": 0.0035894603675201875,
+      "n": 34177
+    },
+    "osi_target_t06h": {
+      "rmse": 0.010676993494381172,
+      "mae": 0.0035510141183561625,
+      "n": 32982
+    },
+    "osi_target_t24h": {
+      "rmse": 0.008463831869463107,
+      "mae": 0.0029427287130505816,
+      "n": 28680
+    },
+    "osi_target_t48h": {
+      "rmse": 0.007644415252022217,
+      "mae": 0.0023030616654518086,
+      "n": 22944
+    }
+  },
+  "params": {
+    "objective": "huber",
+    "metric": "rmse",
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "max_depth": -1,
+    "min_child_samples": 50,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 5,
+    "lambda_l1": 0.1,
+    "lambda_l2": 1.0,
+    "verbose": -1,
+    "seed": 42,
+    "feature_fraction_seed": 42,
+    "bagging_seed": 42,
+    "drop_seed": 42,
+    "data_random_seed": 42,
+    "num_threads": -1
+  }
+}
