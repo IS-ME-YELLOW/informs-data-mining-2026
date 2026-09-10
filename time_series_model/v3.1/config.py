@@ -41,6 +41,19 @@ SUMMARY_METRICS = ARTIFACT_DIR / "summary_metrics.csv"
 RUN_METADATA = ARTIFACT_DIR / "run_metadata.json"
 VERIFICATION_FILE = ARTIFACT_DIR / "verification.json"
 SUBMISSION_OUTPUT = HERE / "submission_v3.1_balanced_v1.csv"
+M4_DIR = ARTIFACT_DIR / "m4"
+M4_FOLD_DIR = M4_DIR / "folds"
+M4_CHECKPOINT_DIR = M4_DIR / "checkpoints"
+M4_PREDICTIONS = M4_DIR / "nested_oof_predictions.npz"
+M4_OOF_PARQUET = M4_DIR / "nested_oof_predictions.parquet"
+M4_FOLD_METRICS = M4_DIR / "fold_metrics.csv"
+M4_SUMMARY_METRICS = M4_DIR / "summary_metrics.csv"
+M4_COUNTY_METRICS = M4_DIR / "county_metrics.csv"
+M4_BOOTSTRAP = M4_DIR / "paired_bootstrap.csv"
+M4_TIME_METRICS = M4_DIR / "time_phase_metrics.csv"
+M4_CONSISTENCY = M4_DIR / "target_time_consistency.csv"
+M4_METADATA = M4_DIR / "run_metadata.json"
+M4_VERIFICATION = M4_DIR / "verification.json"
 
 OBSERVED_HOURS = 72
 TOTAL_HOURS = 216
@@ -130,8 +143,15 @@ MAX_EPOCHS_DIAGNOSTIC = 30
 EARLY_STOPPING_PATIENCE = 6
 GRADIENT_CLIP = 1.0
 ALPHA_BY_HORIZON = [1.0, 1.0, 1.0, 1.0]
+M4_ALPHA_GRID = [0.0, 0.25, 0.50, 0.75, 1.0]
+M4_MAX_EPOCHS = 50
+M4_EARLY_STOPPING_PATIENCE = 10
+M4_BOOTSTRAP_REPLICATES = 2000
 
 
 def ensure_artifact_dirs():
     ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
     CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
+    M4_DIR.mkdir(parents=True, exist_ok=True)
+    M4_FOLD_DIR.mkdir(parents=True, exist_ok=True)
+    M4_CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)

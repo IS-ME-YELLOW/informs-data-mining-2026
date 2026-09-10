@@ -1,0 +1,81 @@
+model,reference,purpose,horizon,metric,difference,ci_2_5,ci_97_5,bootstrap_improvement_probability,replicates,resampling_unit,evaluation_status
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t01h,rmse,-0.00011630176056913293,-0.00028759933284421967,2.5681613503400145e-05,0.9445,2000,county_full_trajectory,strict_nested_cv
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t01h,mae,-8.903126240308564e-05,-0.00014735364542309124,-2.874276708305692e-05,0.997,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t01h,rmse,2.538420446670381e-06,-9.875988418808897e-06,1.2553310269982014e-05,0.3685,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t01h,mae,-2.1118857998333063e-05,-2.9439480906536236e-05,-1.3593474584227133e-05,1.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t01h,rmse,0.0001188401810158033,-1.995435687449157e-05,0.0002829371814729414,0.05,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t01h,mae,6.791240440475257e-05,8.40235318732359e-06,0.00012660004738174047,0.0175,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t01h,rmse,2.538420446670381e-06,-9.875988418808897e-06,1.2553310269982014e-05,0.3685,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t01h,mae,-2.1118857998333063e-05,-2.9439480906536236e-05,-1.3593474584227133e-05,1.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t01h,rmse,2.538420446670381e-06,-9.875988418808897e-06,1.2553310269982014e-05,0.3685,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t01h,mae,-2.1118857998333063e-05,-2.9439480906536236e-05,-1.3593474584227133e-05,1.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t01h,rmse,-2.7062367315543873e-06,-1.1300295928624426e-05,4.995484313173156e-06,0.73,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t01h,mae,1.1747742485276273e-05,4.515094928052549e-06,1.9513174137100425e-05,0.001,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t01h,rmse,5.244657178224768e-06,-1.2651911626294704e-05,2.1635378295924153e-05,0.3015,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t01h,mae,-3.2866600483609336e-05,-4.787354313895825e-05,-1.9265270023144634e-05,1.0,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t01h,rmse,-1.8204491118792299e-06,-1.182147184496077e-05,1.0734191602907586e-05,0.588,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t01h,mae,1.4218583027810362e-05,5.978028252834322e-06,2.3110814218318396e-05,0.0,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t01h,rmse,4.8559315293107697e-05,-4.664294608182442e-05,0.00017648606756967759,0.164,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t01h,mae,0.00019782742037642576,0.00012203476527991555,0.0002886041613980555,0.0,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t01h,rmse,4.673886618122847e-05,-5.033530982471992e-05,0.0001778531547563749,0.178,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t01h,mae,0.00021204600340423612,0.0001351708927694898,0.0003035356284774802,0.0,2000,county_full_trajectory,strict_nested_cv
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t06h,rmse,-0.00022916694560360523,-0.00036168621020333765,-8.270052783545916e-05,0.9995,2000,county_full_trajectory,strict_nested_cv
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t06h,mae,-0.00016856544216194364,-0.00024774000503668205,-9.177569694252503e-05,1.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t06h,rmse,0.0,0.0,0.0,0.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t06h,mae,0.0,0.0,0.0,0.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t06h,rmse,0.00022916694560360523,8.270052783545907e-05,0.00036168621020333733,0.0005,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t06h,mae,0.00016856544216194364,9.1775696942525e-05,0.00024774000503668194,0.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t06h,rmse,-7.999798971014202e-05,-0.0002391938018850182,5.8179472903160086e-05,0.83,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t06h,mae,2.094769293253156e-05,-5.844790663251504e-06,4.7829278740232134e-05,0.062,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t06h,rmse,2.57493841104503e-06,-7.232490091987637e-07,7.141008057583116e-06,0.068,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t06h,mae,1.4579835412604353e-05,1.0549580399898278e-05,1.9005548046004322e-05,0.0,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t06h,rmse,-2.5555530250428657e-05,-0.00010445532807345083,5.16400562753222e-05,0.712,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t06h,mae,2.725686955383803e-05,6.432135720208269e-06,4.6647278258202574e-05,0.0075,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t06h,rmse,2.5555530250428657e-05,-5.1640056275322225e-05,0.00010445532807345081,0.288,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t06h,mae,-2.725686955383803e-05,-4.6647278258202574e-05,-6.432135720208274e-06,0.9925,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t06h,rmse,0.0,0.0,0.0,0.0,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t06h,mae,0.0,0.0,0.0,0.0,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t06h,rmse,6.077869402015476e-05,-4.430442559554019e-05,0.00019695012739819918,0.1465,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t06h,mae,0.0001083337751885639,3.5952991513962545e-05,0.0001969554431146743,0.0005,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t06h,rmse,6.077869402015476e-05,-4.430442559554019e-05,0.00019695012739819918,0.1465,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t06h,mae,0.0001083337751885639,3.5952991513962545e-05,0.0001969554431146743,0.0005,2000,county_full_trajectory,strict_nested_cv
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t24h,rmse,-0.0001328207590561882,-0.0003232877673280562,2.518457770091585e-05,0.946,2000,county_full_trajectory,strict_nested_cv
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t24h,mae,-9.121668151784506e-05,-0.00016266449027016157,-1.89895468529648e-05,0.994,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t24h,rmse,0.0001919116254055775,-9.282673449564891e-05,0.00048763248611745754,0.132,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t24h,mae,-4.7499396100869444e-05,-9.971964330702753e-05,3.3795798931582207e-06,0.965,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t24h,rmse,0.0003247323844617657,0.00011285762838570143,0.0005330406817423205,0.0015,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t24h,mae,4.371728541697562e-05,-4.1559843871235734e-05,0.00012244286373332627,0.146,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t24h,rmse,-0.0003057675969181141,-0.0005673544900885099,-3.53434207202946e-05,0.9875,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t24h,mae,-3.063878853324948e-05,-0.00011417176760071516,3.953276245227182e-05,0.7735,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t24h,rmse,0.0001919116254055775,-9.282673449564891e-05,0.00048763248611745754,0.132,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t24h,mae,-4.7499396100869444e-05,-9.971964330702753e-05,3.3795798931582207e-06,0.965,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t24h,rmse,-0.00019492402203793655,-0.00037072051945183333,-1.926988509198845e-05,0.9905,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t24h,mae,-9.984865892535832e-07,-3.8497717475328844e-05,3.433382494473467e-05,0.516,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t24h,rmse,0.00038683564744351404,-6.287424346632567e-05,0.0008588746733519877,0.073,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t24h,mae,-4.650090951161586e-05,-0.00011991947496927343,2.9791175496370657e-05,0.897,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t24h,rmse,-0.00019182204252721907,-0.00048756198137868466,9.266266039218506e-05,0.8675,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t24h,mae,4.7995519909344204e-05,-2.7668923727835427e-06,0.00010034891695052196,0.0325,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t24h,rmse,9.847315425150042e-05,-4.655149416704512e-05,0.0003116909330776768,0.128,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t24h,mae,0.0001584267020933233,7.866361353368642e-05,0.0002619316068455852,0.0,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t24h,rmse,-9.334888827571865e-05,-0.00044825896059781764,0.0002882493185256388,0.644,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t24h,mae,0.0002064222220026675,0.00011124065985552245,0.00031800925832153675,0.0,2000,county_full_trajectory,strict_nested_cv
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t48h,rmse,7.23199036385732e-05,-0.00021617761791548258,0.00030936455528356605,0.33,2000,county_full_trajectory,strict_nested_cv
+B1_target_aligned,B0_lightgbm,目标时刻对齐相对基线,osi_target_t48h,mae,-2.2529071483654364e-05,-9.77125536888706e-05,4.996457279317235e-05,0.7115,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t48h,rmse,0.00042038968297480016,-6.0096388898089596e-05,0.0008779223051995063,0.119,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B0_lightgbm,主 GRU 相对基线,osi_target_t48h,mae,-4.7209371607382766e-05,-0.00010862412206684529,2.4040387385214463e-05,0.9165,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t48h,rmse,0.00034806977933622696,4.847905582162874e-05,0.0006115669503663413,0.0085,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B1_target_aligned,主 GRU 相对目标时刻对齐,osi_target_t48h,mae,-2.46803001237284e-05,-0.00011029661416101132,5.934221824339911e-05,0.742,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t48h,rmse,-0.00035279575939012493,-0.0006498065741815303,-5.690935948808124e-06,0.9805,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B2_mlp_huber,GRU 时序相对非时序 MLP,osi_target_t48h,mae,1.123119733860466e-05,-4.477922591166255e-05,6.651235134987732e-05,0.3325,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t48h,rmse,0.00042038968297480016,-6.0096388898089596e-05,0.0008779223051995063,0.119,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B4_constant_mean,主 GRU 相对常数校正,osi_target_t48h,mae,-4.7209371607382766e-05,-0.00010862412206684529,2.4040387385214463e-05,0.9165,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t48h,rmse,-4.25447328141048e-05,-0.00010493773028149066,2.9882530145665746e-05,0.853,2000,county_full_trajectory,strict_nested_cv
+B3_gru_huber,B5_gru_no_future,加入未来气象相对无未来气象,osi_target_t48h,mae,2.0972891787481712e-05,1.6474898561088865e-06,4.18783970345137e-05,0.0155,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t48h,rmse,0.00046293441578890496,-8.012289205678385e-05,0.0009736350988886595,0.1265,2000,county_full_trajectory,strict_nested_cv
+B5_gru_no_future,B0_lightgbm,无未来气象 GRU 相对基线,osi_target_t48h,mae,-6.818226339486448e-05,-0.00013789020474331418,7.5843715067887956e-06,0.96,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t48h,rmse,-0.00042038968297480016,-0.0008779223051995066,6.009638889808959e-05,0.881,2000,county_full_trajectory,strict_nested_cv
+B6_gru_mse,B3_gru_huber,MSE 相对 Huber,osi_target_t48h,mae,4.7209371607382766e-05,-2.4040387385214496e-05,0.00010862412206684527,0.0835,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t48h,rmse,8.665884589701897e-05,-1.154967513573048e-05,0.00024817445940063487,0.044,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B6_gru_mse,高 OSI 加权相对普通 MSE,osi_target_t48h,mae,0.00014810176348956398,7.786162799021452e-05,0.00024797607153435663,0.0,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t48h,rmse,-0.0003337308370777812,-0.0008385777508110212,0.00023252775223141507,0.8445,2000,county_full_trajectory,strict_nested_cv
+B7_gru_weighted_mse,B3_gru_huber,高 OSI 加权相对主 GRU,osi_target_t48h,mae,0.00019531113509694675,9.298678788183115e-05,0.0003045785582974684,0.0,2000,county_full_trajectory,strict_nested_cv

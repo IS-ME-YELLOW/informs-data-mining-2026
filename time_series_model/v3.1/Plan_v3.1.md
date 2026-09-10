@@ -528,6 +528,11 @@ python time_series_model/v3.1/verify_artifacts.py
 - 完成 B0/B1/B2/B3 对照；
 - 完成按县 paired bootstrap 和误差诊断。
 
+**执行状态（2026-09-10）：已完成。** 已实现严格外层五折和 B0–B7 同折对照，
+包括常数残差、未来气象消融、MSE 与高 OSI 加权 MSE。完整结果见
+`M4_Strict_Nested_CV_Report_2026-09-10.md`。当前 B3 GRU 未通过晋级条件；B1 目标时刻
+对齐平均是 M5 的主要候选。
+
 ### 里程碑 M5：定版
 
 - 根据正式 OOF 冻结配置；

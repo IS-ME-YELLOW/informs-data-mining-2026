@@ -2,15 +2,16 @@
 
 ## 当前状态
 
-截至 2026-09-09，里程碑 M1、M2、M3 已完成。
+截至 2026-09-10，里程碑 M1、M2、M3、M4 已完成。
 
 - M1：将原始小时数据整理为县级定长序列缓存；
 - M2：实现双路 GRU 残差模型、折内预处理、掩码损失和检查点保存；
-- M3：生成诊断级 LightGBM OOF、GRU OOF、测试预测、指标及提交文件，并完成独立重载复算。
+- M3：生成诊断级 LightGBM OOF、GRU OOF、测试预测、指标及提交文件，并完成独立重载复算；
+- M4：完成严格外层五折、B0–B7 同折对照、县级配对 bootstrap 和 45 个模型检查点的独立复算。
 
-所有 M3 结果均标记为 `diagnostic_only`。它们用于确认工程闭环和观察模型行为，不能写入根目录 `Results.md` 作为正式模型收益。正式比较需要完成计划中的 M4 嵌套交叉验证。
+所有 M3 结果均标记为 `diagnostic_only`，只用于确认工程闭环。M4 结果标记为 `strict_nested_cv`，用于正式比较候选模型；M5 最终训练和测试提交尚未执行。
 
-完整设计见 [Plan_v3.1.md](Plan_v3.1.md)，本次实现与结果见 [M3_Implementation_Report_2026-09-09.md](M3_Implementation_Report_2026-09-09.md)。
+完整设计见 [Plan_v3.1.md](Plan_v3.1.md)。开发闭环见 [M3_Implementation_Report_2026-09-09.md](M3_Implementation_Report_2026-09-09.md)，正式嵌套验证见 [M4_Strict_Nested_CV_Report_2026-09-10.md](M4_Strict_Nested_CV_Report_2026-09-10.md)。
 
 ## 运行顺序
 
@@ -21,6 +22,9 @@ python time_series_model\v3.1\build_sequences.py --overwrite
 python time_series_model\v3.1\baseline_crossfit.py --overwrite
 python time_series_model\v3.1\train_diagnostic.py --max-epochs 30 --overwrite
 python time_series_model\v3.1\verify_artifacts.py
+python time_series_model\v3.1\train_nested_cv.py --max-epochs 50 --overwrite
+python time_series_model\v3.1\m4_pairwise_analysis.py
+python time_series_model\v3.1\verify_m4.py
 ```
 
 仅检查已有序列缓存时：
@@ -46,6 +50,10 @@ python time_series_model\v3.1\build_sequences.py --verify
 
 提交格式文件为 `submission_v3.1_balanced_v1.csv`。
 
+`artifacts/m4/` 保存严格嵌套 OOF 的 B0–B7 预测、20 个外层 LightGBM 检查点、25 个神经检查点、逐折/逐县指标、时间与风暴阶段诊断、目标时刻一致性及县级配对 bootstrap。M4 只做训练集严格 OOF，不生成测试提交。
+
+M4 结论是当前 GRU 不通过晋级条件。目标时刻对齐平均在 t+1h、t+6h、t+24h 改善 RMSE，其中 t+6h 的县级 bootstrap 区间完全低于零；t+48h 应保留 LightGBM。
+
 ## 依赖说明
 
 版本记录在 `requirements.txt`。CPU 版 PyTorch 可从官方 CPU wheel 源安装：
@@ -54,5 +62,4 @@ python time_series_model\v3.1\build_sequences.py --verify
 python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.14.0+cpu
 ```
 
-当前机器无法通过证书校验下载 SciPy 和 SymPy，因此本版本对受影响部分采用两个局部兼容措施：LightGBM 的密集 DataFrame 路径使用最小 `scipy.sparse` 类型占位；训练使用标准公式的本地 AdamW 实现。这两个措施只服务于当前精简环境，算法配置仍为 LightGBM 与 AdamW。在依赖完整的环境中可以换回库自带实现，并在 M4 做一次数值一致性检查。
-
+当前机器无法通过证书校验下载 SciPy 和 SymPy，因此本版本对受影响部分采用两个局部兼容措施：LightGBM 的密集 DataFrame 路径使用最小 `scipy.sparse` 类型占位；训练使用标准公式的本地 AdamW 实现。这两个措施只服务于当前精简环境，算法配置仍为 LightGBM 与 AdamW。在依赖完整的环境中若换回库自带实现，应另做一次同折数值一致性检查。
