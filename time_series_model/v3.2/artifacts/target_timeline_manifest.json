@@ -1,0 +1,58 @@
+{
+  "version": "v3.2",
+  "milestone": "M1",
+  "status": "passed",
+  "source": "v3.1 县级序列缓存，只读复用",
+  "target_hour_range": [
+    73,
+    215
+  ],
+  "target_hours": 143,
+  "horizons": [
+    "osi_target_t01h",
+    "osi_target_t06h",
+    "osi_target_t24h",
+    "osi_target_t48h"
+  ],
+  "horizon_hours": [
+    1,
+    6,
+    24,
+    48
+  ],
+  "train": {
+    "sha256": "dee6a27c8d2c2acb26a5cad489060e119d27133b5dfeaf2bf317f4aef8ab02bc",
+    "counties": 239,
+    "unique_positions": 34177,
+    "mapped_submission_cells": 118783,
+    "candidate_counts_by_target_hour": {
+      "1": 5,
+      "2": 18,
+      "3": 24,
+      "4": 96
+    }
+  },
+  "test": {
+    "sha256": "801f63b6c8915012dcb186452031474e8dd6e437e900f26855f6fc810c4d9224",
+    "counties": 63,
+    "unique_positions": 9009,
+    "mapped_submission_cells": 31311,
+    "candidate_counts_by_target_hour": {
+      "1": 5,
+      "2": 18,
+      "3": 24,
+      "4": 96
+    }
+  },
+  "source_sha256": {
+    "time_series_model\\v3.1\\artifacts\\sequences_train_v3.1.npz": "4ce6d5bc05b6cdf71c5f116b2ba13f4d0c4012d4f6a57a43dde1d67f617f63c2",
+    "time_series_model\\v3.1\\artifacts\\sequences_test_v3.1.npz": "45be5fce917e4e19f54ba06c8eb691f16d548d658952ef7ab0b72bea5b3a7919",
+    "time_series_model\\v3.1\\artifacts\\sequence_manifest.json": "8361364321e80bedd6fc694cfd53ea0894ac79900ae15b871f3562430c8a3855"
+  },
+  "v31_manifest_version": "v3.1",
+  "contracts": {
+    "same_target_label_tolerance": 1e-07,
+    "one_prediction_per_county_target_hour": true,
+    "postprocess_before_broadcast": true
+  }
+}
