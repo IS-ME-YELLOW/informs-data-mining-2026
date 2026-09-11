@@ -1,0 +1,35 @@
+**********************
+PowerShell transcript start
+Start time: 20260910182956
+Username: XY-INV\yongyi.xie
+RunAs User: XY-INV\yongyi.xie
+Configuration Name: 
+Machine: W83 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Users\yongyi.xie\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$env:PYTHONPATH=(Resolve-Path 'versions\v1.8\_compat').Path + ';' + (Resolve-Path '.python_packages').Path
+$env:PYTHONDONTWRITEBYTECODE='1'
+$env:PYTHONUTF8='1'
+$env:PYTHONIOENCODING='utf-8'
+Start-Transcript -Path 'versions\v1.8\run_console.log' -Force
+try {
+  python -u versions\v1.8\train_v18.py
+} finally {
+  Stop-Transcript
+}
+Process ID: 42580
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is versions\v1.8\run_console.log
+
+**********************
+PowerShell transcript end
+End time: 20260910183737
+**********************

@@ -1,0 +1,39 @@
+{
+  "verified_at": "2026-09-10T18:54:57+08:00",
+  "status": "passed",
+  "models_reloaded": 120,
+  "cv_models": 100,
+  "final_models": 20,
+  "model_hashes_verified": 120,
+  "max_prediction_discrepancy": 9.996344030316351e-17,
+  "c3_same_target_max_spread": 0.0,
+  "train_counties": 239,
+  "test_counties": 63,
+  "submission_nan_counts": {
+    "C0_direct_osi": {
+      "osi_target_t01h": 63,
+      "osi_target_t06h": 378,
+      "osi_target_t24h": 1512,
+      "osi_target_t48h": 3024
+    },
+    "C1_component_osi": {
+      "osi_target_t01h": 63,
+      "osi_target_t06h": 378,
+      "osi_target_t24h": 1512,
+      "osi_target_t48h": 3024
+    },
+    "C2_equal_blend": {
+      "osi_target_t01h": 63,
+      "osi_target_t06h": 378,
+      "osi_target_t24h": 1512,
+      "osi_target_t48h": 3024
+    },
+    "C3_aligned_component": {
+      "osi_target_t01h": 63,
+      "osi_target_t06h": 378,
+      "osi_target_t24h": 1512,
+      "osi_target_t48h": 3024
+    }
+  },
+  "verification_runtime_seconds": 10.639233300000342
+}
