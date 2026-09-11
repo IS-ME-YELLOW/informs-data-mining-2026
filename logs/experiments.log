@@ -845,9 +845,9 @@ Feature names: ['last_osi', 'last_P_t', 'last_N_t', 'last_D_t', 'last_R_t', 'las
   Fold 3: RMSE=0.013269, MAE=0.004119  (best_iter=434)
   Fold 4: RMSE=0.016450, MAE=0.004063  (best_iter=170)
   Fold 5: RMSE=0.011821, MAE=0.003483  (best_iter=456)
-  Mean RMSE=0.012232 �� 0.003190, Mean MAE=0.003654 �� 0.000516
+  Mean RMSE=0.012232 ± 0.003190, Mean MAE=0.003654 ± 0.000516
 
-[Feature Importance top 15 �� osi_target_t01h]
+[Feature Importance top 15 — osi_target_t01h]
   1. hours_since_obs                gain=34.2
   2. last_P_t                       gain=23.1
   3. last_osi                       gain=19.4
@@ -872,9 +872,9 @@ Feature names: ['last_osi', 'last_P_t', 'last_N_t', 'last_D_t', 'last_R_t', 'las
   Fold 3: RMSE=0.013021, MAE=0.004101  (best_iter=699)
   Fold 4: RMSE=0.013034, MAE=0.003853  (best_iter=181)
   Fold 5: RMSE=0.009002, MAE=0.003013  (best_iter=296)
-  Mean RMSE=0.010677 �� 0.002477, Mean MAE=0.003538 �� 0.000588
+  Mean RMSE=0.010677 ± 0.002477, Mean MAE=0.003538 ± 0.000588
 
-[Feature Importance top 15 �� osi_target_t06h]
+[Feature Importance top 15 — osi_target_t06h]
   1. hours_since_obs                gain=25.7
   2. last_P_t                       gain=14.2
   3. last_osi                       gain=13.8
@@ -899,9 +899,9 @@ Feature names: ['last_osi', 'last_P_t', 'last_N_t', 'last_D_t', 'last_R_t', 'las
   Fold 3: RMSE=0.013420, MAE=0.003863  (best_iter=421)
   Fold 4: RMSE=0.005887, MAE=0.002667  (best_iter=39)
   Fold 5: RMSE=0.007763, MAE=0.002519  (best_iter=336)
-  Mean RMSE=0.008637 �� 0.003035, Mean MAE=0.002934 �� 0.000688
+  Mean RMSE=0.008637 ± 0.003035, Mean MAE=0.002934 ± 0.000688
 
-[Feature Importance top 15 �� osi_target_t24h]
+[Feature Importance top 15 — osi_target_t24h]
   1. cumul_gust_since_onset         gain=3.0
   2. mslma_t                        gain=2.9
   3. last_osi                       gain=2.9
@@ -926,9 +926,9 @@ Feature names: ['last_osi', 'last_P_t', 'last_N_t', 'last_D_t', 'last_R_t', 'las
   Fold 3: RMSE=0.013245, MAE=0.003212  (best_iter=335)
   Fold 4: RMSE=0.005023, MAE=0.002036  (best_iter=30)
   Fold 5: RMSE=0.006921, MAE=0.002148  (best_iter=154)
-  Mean RMSE=0.007687 �� 0.003346, Mean MAE=0.002293 �� 0.000561
+  Mean RMSE=0.007687 ± 0.003346, Mean MAE=0.002293 ± 0.000561
 
-[Feature Importance top 15 �� osi_target_t48h]
+[Feature Importance top 15 — osi_target_t48h]
   1. gust_mean_next_48h             gain=3.7
   2. pct_forest                     gain=2.9
   3. last_osi                       gain=0.7
@@ -983,9 +983,9 @@ Feature names: ['last_osi', 'last_N_t', 'last_R_t', 'osi_mean_72h', 'osi_max_72h
   Fold 3: RMSE=0.013878, MAE=0.004306  (best_iter=235)
   Fold 4: RMSE=0.017266, MAE=0.004440  (best_iter=73)
   Fold 5: RMSE=0.013210, MAE=0.003658  (best_iter=219)
-  Mean RMSE=0.012858 �� 0.003512, Mean MAE=0.003802 �� 0.000577
+  Mean RMSE=0.012858 ± 0.003512, Mean MAE=0.003802 ± 0.000577
 
-[Feature Importance top 15 �� osi_target_t01h]
+[Feature Importance top 15 — osi_target_t01h]
   1. hours_since_obs                gain=35.9
   2. last_osi                       gain=34.8
   3. gust_x_hso                     gain=11.2
@@ -1010,9 +1010,9 @@ Feature names: ['last_osi', 'last_N_t', 'last_R_t', 'osi_mean_72h', 'osi_max_72h
   Fold 3: RMSE=0.013689, MAE=0.004242  (best_iter=421)
   Fold 4: RMSE=0.013704, MAE=0.003976  (best_iter=126)
   Fold 5: RMSE=0.009745, MAE=0.003088  (best_iter=179)
-  Mean RMSE=0.011096 �� 0.002710, Mean MAE=0.003599 �� 0.000608
+  Mean RMSE=0.011096 ± 0.002710, Mean MAE=0.003599 ± 0.000608
 
-[Feature Importance top 15 �� osi_target_t06h]
+[Feature Importance top 15 — osi_target_t06h]
   1. hours_since_obs                gain=23.3
   2. last_osi                       gain=22.7
   3. gust_x_hso                     gain=5.1
@@ -1037,9 +1037,9 @@ Feature names: ['last_osi', 'last_N_t', 'last_R_t', 'osi_mean_72h', 'osi_max_72h
   Fold 3: RMSE=0.013142, MAE=0.003823  (best_iter=585)
   Fold 4: RMSE=0.006192, MAE=0.002850  (best_iter=34)
   Fold 5: RMSE=0.007592, MAE=0.002590  (best_iter=339)
-  Mean RMSE=0.008550 �� 0.002870, Mean MAE=0.002953 �� 0.000607
+  Mean RMSE=0.008550 ± 0.002870, Mean MAE=0.002953 ± 0.000607
 
-[Feature Importance top 15 �� osi_target_t24h]
+[Feature Importance top 15 — osi_target_t24h]
   1. hours_since_obs                gain=4.0
   2. last_osi                       gain=2.9
   3. mslma_t                        gain=2.4
@@ -1064,9 +1064,9 @@ Feature names: ['last_osi', 'last_N_t', 'last_R_t', 'osi_mean_72h', 'osi_max_72h
   Fold 3: RMSE=0.013432, MAE=0.003210  (best_iter=320)
   Fold 4: RMSE=0.005253, MAE=0.002356  (best_iter=19)
   Fold 5: RMSE=0.006649, MAE=0.002100  (best_iter=111)
-  Mean RMSE=0.007765 �� 0.003336, Mean MAE=0.002402 �� 0.000482
+  Mean RMSE=0.007765 ± 0.003336, Mean MAE=0.002402 ± 0.000482
 
-[Feature Importance top 15 �� osi_target_t48h]
+[Feature Importance top 15 — osi_target_t48h]
   1. gust_mean_next_48h             gain=3.1
   2. pct_forest                     gain=2.8
   3. wind_speed_max_next_24h        gain=0.6
@@ -1371,4 +1371,43 @@ Feature count: 211
 Feature version v1.5.7. Features: 211. v1.5.6 + F1 target-moment weather trajectory (48 cols). Models saved. Submission: /home/yongyi.xie/INFORMS_DATA_MINING/data/submission_v1.5.7_balanced_v1.csv
 
 ================================================================================
+
+
+========================================================================
+Experiment: v1.8 | 2026-09-10T18:39:27+08:00
+Strategy: v1.5.6 direct OSI vs P/N/D/R LightGBM and controls
+Feature version: v1.5.6 (163 columns); CV: balanced_v1; seed: 42
+C0_direct_osi osi_target_t01h: RMSE=0.011979379, MAE=0.003589460, deltaRMSEvsC0=+0.0000%
+C0_direct_osi osi_target_t06h: RMSE=0.010676993, MAE=0.003551014, deltaRMSEvsC0=+0.0000%
+C0_direct_osi osi_target_t24h: RMSE=0.008463832, MAE=0.002942729, deltaRMSEvsC0=+0.0000%
+C0_direct_osi osi_target_t48h: RMSE=0.007644415, MAE=0.002303062, deltaRMSEvsC0=+0.0000%
+C1_component_osi osi_target_t01h: RMSE=0.011865427, MAE=0.003526920, deltaRMSEvsC0=-0.9512%
+C1_component_osi osi_target_t06h: RMSE=0.010512562, MAE=0.003389108, deltaRMSEvsC0=-1.5401%
+C1_component_osi osi_target_t24h: RMSE=0.008372824, MAE=0.002924813, deltaRMSEvsC0=-1.0753%
+C1_component_osi osi_target_t48h: RMSE=0.007593428, MAE=0.002306663, deltaRMSEvsC0=-0.6670%
+C2_equal_blend osi_target_t01h: RMSE=0.011900940, MAE=0.003532879, deltaRMSEvsC0=-0.6548%
+C2_equal_blend osi_target_t06h: RMSE=0.010567196, MAE=0.003434006, deltaRMSEvsC0=-1.0284%
+C2_equal_blend osi_target_t24h: RMSE=0.008403021, MAE=0.002919506, deltaRMSEvsC0=-0.7185%
+C2_equal_blend osi_target_t48h: RMSE=0.007607653, MAE=0.002291871, deltaRMSEvsC0=-0.4809%
+C3_aligned_component osi_target_t01h: RMSE=0.011676614, MAE=0.003502270, deltaRMSEvsC0=-2.5274%
+C3_aligned_component osi_target_t06h: RMSE=0.010320600, MAE=0.003300882, deltaRMSEvsC0=-3.3380%
+C3_aligned_component osi_target_t24h: RMSE=0.008329504, MAE=0.002778640, deltaRMSEvsC0=-1.5871%
+C3_aligned_component osi_target_t48h: RMSE=0.007666936, MAE=0.002251754, deltaRMSEvsC0=+0.2946%
+Models saved: 120 (100 CV + 20 final); independent reload verification passed
+Runtime: training/initial processing 461.0s; resume/artifact completion 23.6s; independent verification 10.6s
+Report: versions/v1.8/Report_v1.8.md
+========================================================================
+## 2026-09-11 — v1.9 分量专用 LightGBM + 县域响应画像
+
+- 状态：完成 M1–M4；未进入 M5，未晋级为正式基线。
+- 特征：v1.5.6 原 163 列完整保留，新增 27 个前 72 小时县域响应画像，共 190 列。
+- 数据：训练 34,416 行、239 县；测试 9,072 行、63 县。
+- 训练：80 个任务组合，576 个新模型；连同 v1.8 基线共 96 套候选预测。
+- 当前 v1.8 规则 RMSE：t+1 0.0116766，t+6 0.0103206，t+24 0.0083728，t+48 0.0075934。
+- v1.9 OOF 最优 RMSE：t+1 0.0116134（E1 aligned），t+6 0.0102507（E3 aligned），t+24 0.0083219（E1 aligned），t+48 0.0075914（E3 best subset）。
+- 相对改善：0.54% / 0.68% / 0.61% / 0.03%。
+- 县级 bootstrap 改善概率：85.05% / 90.60% / 68.50% / 62.35%；所有 95% 区间均跨 0。
+- 结论：存在小幅改善信号，但同一 OOF 多候选筛选后的稳定性不足，继续保留 v1.8。
+- 校验：576 个模型完成哈希，96 套预测复算最大差异 0，提交差异约 1e-16，状态 passed。
+- 报告：versions/v1.9/Report_v1.9.md
 

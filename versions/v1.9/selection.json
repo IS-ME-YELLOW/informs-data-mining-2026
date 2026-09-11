@@ -1,0 +1,78 @@
+{
+  "created_at": "2026-09-11T14:24:14+08:00",
+  "selected_specialized_candidate_by_single_replacement": {
+    "base": {
+      "osi_target_t01h": {
+        "P_t": "base__P_t__weighted_l2__osi_target_t01h",
+        "N_t": "base__N_t__tweedie__osi_target_t01h",
+        "D_t": "base__D_t__weighted_l2__osi_target_t01h",
+        "R_t": "base__R_t__hurdle__osi_target_t01h"
+      },
+      "osi_target_t06h": {
+        "P_t": "base__P_t__l2__osi_target_t06h",
+        "N_t": "base__N_t__tweedie__osi_target_t06h",
+        "D_t": "base__D_t__l2__osi_target_t06h",
+        "R_t": "base__R_t__hurdle__osi_target_t06h"
+      },
+      "osi_target_t24h": {
+        "P_t": "base__P_t__l2__osi_target_t24h",
+        "N_t": "base__N_t__tweedie__osi_target_t24h",
+        "D_t": "base__D_t__l2__osi_target_t24h",
+        "R_t": "base__R_t__tweedie__osi_target_t24h"
+      },
+      "osi_target_t48h": {
+        "P_t": "base__P_t__l2__osi_target_t48h",
+        "N_t": "base__N_t__tweedie__osi_target_t48h",
+        "D_t": "base__D_t__l2__osi_target_t48h",
+        "R_t": "base__R_t__hurdle__osi_target_t48h"
+      }
+    },
+    "profile": {
+      "osi_target_t01h": {
+        "P_t": "profile__P_t__l2__osi_target_t01h",
+        "N_t": "profile__N_t__tweedie__osi_target_t01h",
+        "D_t": "profile__D_t__weighted_l2__osi_target_t01h",
+        "R_t": "profile__R_t__hurdle__osi_target_t01h"
+      },
+      "osi_target_t06h": {
+        "P_t": "profile__P_t__l2__osi_target_t06h",
+        "N_t": "profile__N_t__tweedie__osi_target_t06h",
+        "D_t": "profile__D_t__l2__osi_target_t06h",
+        "R_t": "profile__R_t__hurdle__osi_target_t06h"
+      },
+      "osi_target_t24h": {
+        "P_t": "profile__P_t__l2__osi_target_t24h",
+        "N_t": "profile__N_t__tweedie__osi_target_t24h",
+        "D_t": "profile__D_t__l2__osi_target_t24h",
+        "R_t": "profile__R_t__hurdle__osi_target_t24h"
+      },
+      "osi_target_t48h": {
+        "P_t": "profile__P_t__l2__osi_target_t48h",
+        "N_t": "profile__N_t__hurdle__osi_target_t48h",
+        "D_t": "profile__D_t__weighted_l2__osi_target_t48h",
+        "R_t": "profile__R_t__hurdle__osi_target_t48h"
+      }
+    }
+  },
+  "best_subset_model_name": {
+    "E1": {
+      "osi_target_t01h": "E1_subset_1100",
+      "osi_target_t06h": "E1_subset_0000",
+      "osi_target_t24h": "E1_subset_0001",
+      "osi_target_t48h": "E1_subset_0001"
+    },
+    "E3": {
+      "osi_target_t01h": "E3_subset_0010",
+      "osi_target_t06h": "E3_subset_1000",
+      "osi_target_t24h": "E3_subset_0001",
+      "osi_target_t48h": "E3_subset_0001"
+    }
+  },
+  "v19_best_by_horizon_source": {
+    "osi_target_t01h": "E1_aligned",
+    "osi_target_t06h": "E3_aligned",
+    "osi_target_t24h": "E1_aligned",
+    "osi_target_t48h": "E3_best_subset"
+  },
+  "selection_warning": "候选在同一五折 OOF 上筛选；若形成晋级收益，需严格嵌套确认。"
+}

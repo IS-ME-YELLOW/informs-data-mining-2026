@@ -3,3 +3,5 @@ data/raw/tl_2025_us_county.zip
 .python_packages/
 __pycache__/
 *.pyc
+tmp
+data\raw\tl_2025_us_county\tl_2025_us_county.shp

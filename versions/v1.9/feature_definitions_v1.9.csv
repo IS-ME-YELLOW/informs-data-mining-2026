@@ -1,0 +1,28 @@
+feature,description_zh,source_hours
+N_nonzero_frac_obs,前72小时 N_t>0 的比例,0-71
+R_nonzero_frac_obs,前72小时 R_t>0 的比例,0-71
+P_mean_last24_obs,观测窗口最后24小时 P_t 均值,0-71
+D_mean_last24_obs,观测窗口最后24小时 D_t 均值,0-71
+N_mean_last24_obs,观测窗口最后24小时 N_t 均值,0-71
+R_mean_last24_obs,观测窗口最后24小时 R_t 均值,0-71
+flow_balance_last24_obs,最后24小时 mean(N_t)-mean(R_t),0-71
+restoration_ratio_obs,前72小时 sum(R_t)/sum(N_t),0-71
+P_D_gap_last_obs,第71小时 P_t-D_t,0-71
+hours_since_P_peak_obs,距前72小时 P_t 最早峰值的小时数,0-71
+hours_since_N_peak_obs,距实质 N_t 最早峰值的小时数,0-71
+hours_since_R_peak_obs,距实质 R_t 最早峰值的小时数,0-71
+first_material_N_hour_obs,首次 N_t>=0.001 的小时,0-71
+first_material_R_hour_obs,首次 R_t>=0.001 的小时,0-71
+P_trend_last24_obs,最后24小时 P_t 线性斜率,0-71
+D_trend_last24_obs,最后24小时 D_t 线性斜率,0-71
+P_post_peak_slope_obs,P_t 最早峰值至观测结束的线性斜率,0-71
+P_active_frac_obs,前72小时 P_t>=0.001 的比例,0-71
+has_material_P_obs,是否存在 P_t>=0.001,0-71
+has_material_N_obs,是否存在 N_t>=0.001,0-71
+has_material_R_obs,是否存在 R_t>=0.001,0-71
+gust_excess30_sum_obs,"前72小时 sum(max(gust-30,0))",0-71
+N_per_gust_excess_obs,前72小时 sum(N_t)/强风超额暴露,0-71
+P_change_per_gust_excess_obs,P末值相对前48小时均值变化/强风超额暴露,0-71
+gust_to_N_best_corr_obs,gust与随后0至3小时N_t的最大相关,0-71
+gust_to_N_best_lag_obs,最大gust-N相关对应滞后,0-71
+gust_at_first_material_N_obs,首次实质N_t时的gust,0-71

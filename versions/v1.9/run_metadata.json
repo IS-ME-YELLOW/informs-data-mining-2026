@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-09-11T14:25:22+08:00",
+  "experiment_version": "v1.9",
+  "status": "completed_no_promotion",
+  "milestones": {
+    "M1": "passed",
+    "M2": "passed",
+    "M3": "passed",
+    "M4": "completed_no_strong_candidate",
+    "M5": "not_entered"
+  },
+  "assets": {
+    "base_features": 163,
+    "response_profile_features": 27,
+    "total_features": 190,
+    "training_tasks": 80,
+    "new_model_files": 576,
+    "candidate_prediction_sets_including_v18": 96
+  },
+  "runtime_seconds": {
+    "initial_training": 1999.7806576,
+    "full_model_round_alignment_correction": 1093.5235677,
+    "final_independent_verification": 63.4778252
+  },
+  "decision": "保留 v1.8 当前规则为正式基线；v1.9 未达到预注册的稳定晋级门槛。"
+}
