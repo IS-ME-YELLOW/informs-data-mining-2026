@@ -1,0 +1,685 @@
+{
+  "source": "USGS 3DEP / TNM Access",
+  "dataset": "National Elevation Dataset (NED) 1 arc-second",
+  "query_url": "https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National+Elevation+Dataset+%28NED%29+1+arc-second&bbox=-88.09779357899998%2C37.77191162100007%2C-84.78469848599997%2C41.760711670000035&max=10000;https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National+Elevation+Dataset+%28NED%29+1+arc-second&bbox=-84.82019805899995%2C38.40321350100004%2C-80.51869964599996%2C41.97760772700008&max=10000;https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National+Elevation+Dataset+%28NED%29+1+arc-second&bbox=-80.52029418899997%2C39.71961212200006%2C-74.68949890099998%2C42.26982345500005&max=10000;https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National+Elevation+Dataset+%28NED%29+1+arc-second&bbox=-82.64439392099996%2C37.20221328700006%2C-77.71949768099995%2C40.637912750000055&max=10000",
+  "resolution": "1 arc-second (~30 m)",
+  "vertical_units": "meters, NAVD88 in conterminous US",
+  "terrain_ruggedness_definition": "mean valid 8-neighbour absolute elevation difference in meters",
+  "tiles": [
+    {
+      "tile": "n38w078",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w078/USGS_1_n38w078_20211220.tif",
+      "sizeInBytes": 68971774,
+      "publicationDate": "2021-12-20",
+      "lastUpdated": "2021-12-21T23:00:40.885-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w078_20211220.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w079",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w079/USGS_1_n38w079_20211229.tif",
+      "sizeInBytes": 68059000,
+      "publicationDate": "2021-12-29",
+      "lastUpdated": "2021-12-29T23:00:55.210-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w079_20211229.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w080",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w080/USGS_1_n38w080_20211229.tif",
+      "sizeInBytes": 66426271,
+      "publicationDate": "2021-12-29",
+      "lastUpdated": "2021-12-29T23:00:54.049-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w080_20211229.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w081",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w081/USGS_1_n38w081_20230816.tif",
+      "sizeInBytes": 57483868,
+      "publicationDate": "2023-08-16",
+      "lastUpdated": "2023-08-17T23:02:33.154-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w081_20230816.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w082",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w082/USGS_1_n38w082_20240923.tif",
+      "sizeInBytes": 59456614,
+      "publicationDate": "2024-09-23",
+      "lastUpdated": "2024-10-01T20:11:25.920-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w082_20240923.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w083",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w083/USGS_1_n38w083_20240923.tif",
+      "sizeInBytes": 62159172,
+      "publicationDate": "2024-09-23",
+      "lastUpdated": "2024-10-01T20:11:20.564-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w083_20240923.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w085",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w085/USGS_1_n38w085_20260227.tif",
+      "sizeInBytes": 58211949,
+      "publicationDate": "2026-02-27",
+      "lastUpdated": "2026-02-27T20:12:56.510-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w085_20260227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w086",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w086/USGS_1_n38w086_20240923.tif",
+      "sizeInBytes": 58879391,
+      "publicationDate": "2024-09-23",
+      "lastUpdated": "2024-10-01T20:11:10.618-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w086_20240923.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w087",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w087/USGS_1_n38w087_20240923.tif",
+      "sizeInBytes": 59101412,
+      "publicationDate": "2024-09-23",
+      "lastUpdated": "2024-10-01T20:11:05.205-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w087_20240923.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w088",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w088/USGS_1_n38w088_20260417.tif",
+      "sizeInBytes": 57115454,
+      "publicationDate": "2026-04-17",
+      "lastUpdated": "2026-04-20T20:14:23.794-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w088_20260417.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n38w089",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n38w089/USGS_1_n38w089_20260417.tif",
+      "sizeInBytes": 57157391,
+      "publicationDate": "2026-04-17",
+      "lastUpdated": "2026-04-20T20:14:23.723-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n38w089_20260417.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w078",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w078/USGS_1_n39w078_20260407.tif",
+      "sizeInBytes": 60741280,
+      "publicationDate": "2026-04-07",
+      "lastUpdated": "2026-04-20T20:14:35.855-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w078_20260407.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w079",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w079/USGS_1_n39w079_20250512.tif",
+      "sizeInBytes": 58816775,
+      "publicationDate": "2025-05-12",
+      "lastUpdated": "2025-05-12T20:11:02.709-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w079_20250512.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w080",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w080/USGS_1_n39w080_20230816.tif",
+      "sizeInBytes": 57073579,
+      "publicationDate": "2023-08-16",
+      "lastUpdated": "2023-08-17T23:01:57.578-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w080_20230816.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w081",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w081/USGS_1_n39w081_20230816.tif",
+      "sizeInBytes": 58144562,
+      "publicationDate": "2023-08-16",
+      "lastUpdated": "2023-08-17T23:01:56.104-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w081_20230816.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w082",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w082/USGS_1_n39w082_20230911.tif",
+      "sizeInBytes": 61458343,
+      "publicationDate": "2023-09-11",
+      "lastUpdated": "2023-09-11T23:01:33.273-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w082_20230911.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w083",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w083/USGS_1_n39w083_20260227.tif",
+      "sizeInBytes": 61548572,
+      "publicationDate": "2026-02-27",
+      "lastUpdated": "2026-02-27T20:12:09.650-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w083_20260227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w084",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w084/USGS_1_n39w084_20260227.tif",
+      "sizeInBytes": 59078257,
+      "publicationDate": "2026-02-27",
+      "lastUpdated": "2026-02-27T20:11:28.485-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w084_20260227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w085",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w085/USGS_1_n39w085_20260227.tif",
+      "sizeInBytes": 58501639,
+      "publicationDate": "2026-02-27",
+      "lastUpdated": "2026-02-27T20:11:23.722-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w085_20260227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w086",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w086/USGS_1_n39w086_20240923.tif",
+      "sizeInBytes": 57319163,
+      "publicationDate": "2024-09-23",
+      "lastUpdated": "2024-10-01T20:10:48.180-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w086_20240923.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w087",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w087/USGS_1_n39w087_20230407.tif",
+      "sizeInBytes": 58420351,
+      "publicationDate": "2023-04-07",
+      "lastUpdated": "2023-04-07T23:00:49.570-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w087_20230407.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w088",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w088/USGS_1_n39w088_20221205.tif",
+      "sizeInBytes": 55020382,
+      "publicationDate": "2022-12-05",
+      "lastUpdated": "2022-12-05T23:01:00.261-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w088_20221205.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n39w089",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n39w089/USGS_1_n39w089_20221205.tif",
+      "sizeInBytes": 53703354,
+      "publicationDate": "2022-12-05",
+      "lastUpdated": "2022-12-05T23:00:58.931-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n39w089_20221205.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w075",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w075/USGS_1_n40w075_20210624.tif",
+      "sizeInBytes": 39368198,
+      "publicationDate": "2021-11-16",
+      "lastUpdated": "2021-11-30T23:22:23.077-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w075_20210624.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w076",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w076/USGS_1_n40w076_20250507.tif",
+      "sizeInBytes": 56073467,
+      "publicationDate": "2025-05-07",
+      "lastUpdated": "2025-05-07T20:10:18.183-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w076_20250507.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w077",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w077/USGS_1_n40w077_20260512.tif",
+      "sizeInBytes": 55689115,
+      "publicationDate": "2026-05-12",
+      "lastUpdated": "2026-05-12T20:14:23.401-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w077_20260512.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w078",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w078/USGS_1_n40w078_20260512.tif",
+      "sizeInBytes": 58642512,
+      "publicationDate": "2026-05-12",
+      "lastUpdated": "2026-05-12T20:14:21.957-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w078_20260512.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w079",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w079/USGS_1_n40w079_20260512.tif",
+      "sizeInBytes": 58819868,
+      "publicationDate": "2026-05-12",
+      "lastUpdated": "2026-05-12T20:14:21.740-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w079_20260512.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w080",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w080/USGS_1_n40w080_20260512.tif",
+      "sizeInBytes": 56216851,
+      "publicationDate": "2026-05-12",
+      "lastUpdated": "2026-05-12T20:14:20.244-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w080_20260512.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w081",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w081/USGS_1_n40w081_20230911.tif",
+      "sizeInBytes": 59597240,
+      "publicationDate": "2023-09-11",
+      "lastUpdated": "2023-09-11T23:01:02.628-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w081_20230911.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w082",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w082/USGS_1_n40w082_20230911.tif",
+      "sizeInBytes": 59846952,
+      "publicationDate": "2023-09-11",
+      "lastUpdated": "2023-09-11T23:01:00.196-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w082_20230911.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w083",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w083/USGS_1_n40w083_20250915.tif",
+      "sizeInBytes": 57842110,
+      "publicationDate": "2025-09-15",
+      "lastUpdated": "2025-09-16T20:10:08.751-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w083_20250915.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w084",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w084/USGS_1_n40w084_20250915.tif",
+      "sizeInBytes": 52690236,
+      "publicationDate": "2025-09-15",
+      "lastUpdated": "2025-09-16T20:10:08.547-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w084_20250915.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w085",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w085/USGS_1_n40w085_20250915.tif",
+      "sizeInBytes": 54664845,
+      "publicationDate": "2025-09-15",
+      "lastUpdated": "2025-09-16T20:10:08.332-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w085_20250915.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w086",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w086/USGS_1_n40w086_20260528.tif",
+      "sizeInBytes": 53162258,
+      "publicationDate": "2026-05-28",
+      "lastUpdated": "2026-05-28T20:14:11.785-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w086_20260528.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w087",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w087/USGS_1_n40w087_20260528.tif",
+      "sizeInBytes": 56007954,
+      "publicationDate": "2026-05-28",
+      "lastUpdated": "2026-05-28T20:14:10.483-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w087_20260528.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w088",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w088/USGS_1_n40w088_20221205.tif",
+      "sizeInBytes": 54274906,
+      "publicationDate": "2022-12-05",
+      "lastUpdated": "2022-12-05T23:00:52.345-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w088_20221205.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n40w089",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n40w089/USGS_1_n40w089_20240104.tif",
+      "sizeInBytes": 52494472,
+      "publicationDate": "2024-01-04",
+      "lastUpdated": "2024-01-04T23:02:38.463-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n40w089_20240104.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w075",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w075/USGS_1_n41w075_20221115.tif",
+      "sizeInBytes": 59806932,
+      "publicationDate": "2022-11-15",
+      "lastUpdated": "2022-11-15T23:00:53.519-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w075_20221115.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w076",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w076/USGS_1_n41w076_20221115.tif",
+      "sizeInBytes": 58743809,
+      "publicationDate": "2022-11-15",
+      "lastUpdated": "2022-11-15T23:00:53.686-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w076_20221115.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w077",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w077/USGS_1_n41w077_20220429.tif",
+      "sizeInBytes": 57518647,
+      "publicationDate": "2022-04-29",
+      "lastUpdated": "2022-05-02T23:01:21.494-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w077_20220429.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w078",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w078/USGS_1_n41w078_20220429.tif",
+      "sizeInBytes": 57628142,
+      "publicationDate": "2022-04-29",
+      "lastUpdated": "2022-05-02T23:01:19.961-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w078_20220429.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w079",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w079/USGS_1_n41w079_20220429.tif",
+      "sizeInBytes": 56201075,
+      "publicationDate": "2022-04-29",
+      "lastUpdated": "2022-05-02T23:01:18.481-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w079_20220429.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w080",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w080/USGS_1_n41w080_20210630.tif",
+      "sizeInBytes": 57298234,
+      "publicationDate": "2021-11-16",
+      "lastUpdated": "2021-11-30T23:22:30.826-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w080_20210630.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w081",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w081/USGS_1_n41w081_20230911.tif",
+      "sizeInBytes": 57350092,
+      "publicationDate": "2023-09-11",
+      "lastUpdated": "2023-09-11T23:00:56.624-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w081_20230911.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w082",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w082/USGS_1_n41w082_20230911.tif",
+      "sizeInBytes": 56177145,
+      "publicationDate": "2023-09-11",
+      "lastUpdated": "2023-09-11T23:00:55.327-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w082_20230911.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w083",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w083/USGS_1_n41w083_20250915.tif",
+      "sizeInBytes": 53976922,
+      "publicationDate": "2025-09-15",
+      "lastUpdated": "2025-09-16T20:10:08.056-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w083_20250915.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w084",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w084/USGS_1_n41w084_20250915.tif",
+      "sizeInBytes": 50997734,
+      "publicationDate": "2025-09-15",
+      "lastUpdated": "2025-09-16T20:10:07.771-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w084_20250915.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w085",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w085/USGS_1_n41w085_20250915.tif",
+      "sizeInBytes": 50385599,
+      "publicationDate": "2025-09-15",
+      "lastUpdated": "2025-09-16T20:10:07.427-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w085_20250915.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w086",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w086/USGS_1_n41w086_20260528.tif",
+      "sizeInBytes": 51371071,
+      "publicationDate": "2026-05-28",
+      "lastUpdated": "2026-05-28T20:14:08.700-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w086_20260528.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w087",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w087/USGS_1_n41w087_20260528.tif",
+      "sizeInBytes": 52177390,
+      "publicationDate": "2026-05-28",
+      "lastUpdated": "2026-05-28T20:14:09.015-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w087_20260528.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w088",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w088/USGS_1_n41w088_20260323.tif",
+      "sizeInBytes": 52645632,
+      "publicationDate": "2026-03-23",
+      "lastUpdated": "2026-03-25T20:13:05.589-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w088_20260323.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n41w089",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n41w089/USGS_1_n41w089_20260902.tif",
+      "sizeInBytes": 52166226,
+      "publicationDate": "2026-09-02",
+      "lastUpdated": "2026-09-03T20:10:10.499-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n41w089_20260902.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w075",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w075/USGS_1_n42w075_20240925.tif",
+      "sizeInBytes": 57505456,
+      "publicationDate": "2024-09-25",
+      "lastUpdated": "2024-09-26T20:21:53.497-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w075_20240925.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w076",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w076/USGS_1_n42w076_20230227.tif",
+      "sizeInBytes": 55711731,
+      "publicationDate": "2023-02-27",
+      "lastUpdated": "2023-02-27T23:02:48.110-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w076_20230227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w077",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w077/USGS_1_n42w077_20230227.tif",
+      "sizeInBytes": 56647674,
+      "publicationDate": "2023-02-27",
+      "lastUpdated": "2023-02-27T23:02:47.904-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w077_20230227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w078",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w078/USGS_1_n42w078_20230227.tif",
+      "sizeInBytes": 56882170,
+      "publicationDate": "2023-02-27",
+      "lastUpdated": "2023-02-27T23:02:48.074-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w078_20230227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w079",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w079/USGS_1_n42w079_20220429.tif",
+      "sizeInBytes": 55890463,
+      "publicationDate": "2022-04-29",
+      "lastUpdated": "2022-05-02T23:01:10.620-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w079_20220429.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w080",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w080/USGS_1_n42w080_20220429.tif",
+      "sizeInBytes": 55917782,
+      "publicationDate": "2022-04-29",
+      "lastUpdated": "2022-05-02T23:01:07.689-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w080_20220429.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w081",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w081/USGS_1_n42w081_20230911.tif",
+      "sizeInBytes": 50561742,
+      "publicationDate": "2023-09-11",
+      "lastUpdated": "2023-09-11T23:00:51.666-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w081_20230911.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w082",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w082/USGS_1_n42w082_20230911.tif",
+      "sizeInBytes": 35045203,
+      "publicationDate": "2023-09-11",
+      "lastUpdated": "2023-09-11T23:00:50.646-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w082_20230911.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w083",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w083/USGS_1_n42w083_20230717.tif",
+      "sizeInBytes": 25093497,
+      "publicationDate": "2023-07-17",
+      "lastUpdated": "2023-07-17T23:00:53.070-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w083_20230717.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w084",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w084/USGS_1_n42w084_20230717.tif",
+      "sizeInBytes": 43434158,
+      "publicationDate": "2023-07-17",
+      "lastUpdated": "2023-07-17T23:00:52.904-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w084_20230717.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w085",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w085/USGS_1_n42w085_20230717.tif",
+      "sizeInBytes": 50703304,
+      "publicationDate": "2023-07-17",
+      "lastUpdated": "2023-07-17T23:00:53.106-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w085_20230717.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w086",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w086/USGS_1_n42w086_20210617.tif",
+      "sizeInBytes": 52377182,
+      "publicationDate": "2021-11-16",
+      "lastUpdated": "2021-11-30T23:22:04.137-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w086_20210617.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w087",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w087/USGS_1_n42w087_20210617.tif",
+      "sizeInBytes": 48367308,
+      "publicationDate": "2021-11-16",
+      "lastUpdated": "2021-11-30T23:22:03.903-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w087_20210617.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w088",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w088/USGS_1_n42w088_20260902.tif",
+      "sizeInBytes": 41802750,
+      "publicationDate": "2026-09-02",
+      "lastUpdated": "2026-09-03T20:10:09.190-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w088_20260902.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n42w089",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n42w089/USGS_1_n42w089_20260902.tif",
+      "sizeInBytes": 52458090,
+      "publicationDate": "2026-09-02",
+      "lastUpdated": "2026-09-03T20:10:08.593-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n42w089_20260902.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n43w075",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n43w075/USGS_1_n43w075_20241010.tif",
+      "sizeInBytes": 56265041,
+      "publicationDate": "2024-10-10",
+      "lastUpdated": "2024-10-10T20:10:23.730-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n43w075_20241010.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n43w076",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n43w076/USGS_1_n43w076_20230227.tif",
+      "sizeInBytes": 56180805,
+      "publicationDate": "2023-02-27",
+      "lastUpdated": "2023-02-27T23:02:32.971-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n43w076_20230227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n43w077",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n43w077/USGS_1_n43w077_20230227.tif",
+      "sizeInBytes": 53890235,
+      "publicationDate": "2023-02-27",
+      "lastUpdated": "2023-02-27T23:02:32.038-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n43w077_20230227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n43w078",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n43w078/USGS_1_n43w078_20230227.tif",
+      "sizeInBytes": 55081398,
+      "publicationDate": "2023-02-27",
+      "lastUpdated": "2023-02-27T23:02:32.229-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n43w078_20230227.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n43w079",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n43w079/USGS_1_n43w079_20220429.tif",
+      "sizeInBytes": 53606508,
+      "publicationDate": "2022-04-29",
+      "lastUpdated": "2022-05-02T23:00:51.526-06:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n43w079_20220429.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n43w080",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n43w080/USGS_1_n43w080_20211122.tif",
+      "sizeInBytes": 29545472,
+      "publicationDate": "2021-11-22",
+      "lastUpdated": "2021-11-30T23:23:23.526-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n43w080_20211122.tif",
+      "status": "downloaded_attempt_1"
+    },
+    {
+      "tile": "n43w081",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/historical/n43w081/USGS_1_n43w081_20210630.tif",
+      "sizeInBytes": 14477332,
+      "publicationDate": "2021-11-16",
+      "lastUpdated": "2021-11-30T23:22:29.152-07:00",
+      "local_path": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\data\\geo\\dem_3dep_1arcsec\\USGS_1_n43w081_20210630.tif",
+      "status": "downloaded_attempt_1"
+    }
+  ]
+}

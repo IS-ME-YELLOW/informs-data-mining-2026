@@ -1,4 +1,31 @@
-# Phase 2 — LightGBM + spatial GAT residual
+# Phase 2-D — LightGBM + spatial GAT + DEM residual
+
+This directory is an independent DEM-enhanced copy of the existing Phase 2
+code. It never overwrites `code_phase2` outputs.
+
+USGS 3DEP/NED 1 arc-second (~30 m) DEM tiles for Indiana, Ohio, Pennsylvania,
+and West Virginia have been summarized into `data/geo/county_terrain.csv`.
+The seven terrain fields are joined by `fipsCode`; `terrain_ruggedness` is the
+mean valid 8-neighbour absolute elevation difference in meters. Download
+metadata and tile URLs are in `data/geo/dem_3dep_1arcsec/manifest.json`.
+
+Build or rebuild the terrain table with:
+
+```bash
+conda activate myenv
+python code_phase2_dem/build_terrain.py --workers 4
+```
+
+Run the full DEM model with the original training scale:
+
+```bash
+conda activate myenv
+python code_phase2_dem/main.py --base-mode component_v21 --device cuda --epochs 220 --patience 35 --time-stride 1 --k 8
+```
+
+Outputs are written to `code_phase2_dem/outputs/`, including
+`submission_phase2_dem_gat.csv`, `cv_summary.csv`, `alpha_selection.csv`, and
+the saved GAT models. `rasterio>=1.3` is the additional dependency.
 
 中文完整文档：[`README_CN.md`](README_CN.md)；评估报告：[`评估报告_Phase2.md`](评估报告_Phase2.md)。
 

@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 tmp
 data\raw\tl_2025_us_county\tl_2025_us_county.shp
+*.tif
