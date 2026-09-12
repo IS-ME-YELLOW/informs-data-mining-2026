@@ -17,16 +17,17 @@ import numpy as np
 import pandas as pd
 import torch
 
-from base_model import load_cv_folds, train_base_models
+from base_model import load_component_v21_base, load_cv_folds, train_base_models
 from config import (DATA_DIR, GAT_ALPHA_GRID, GAT_DROPOUT, GAT_EPOCHS,
                     GAT_HEADS, GAT_HIDDEN, GAT_LR, GAT_PATIENCE,
                     GAT_WEIGHT_DECAY, HORIZON_HOURS, HORIZONS, MODEL_DIR,
                     OUTPUT_DIR, PRED_END, PRED_START, SEED, SUBMISSION_FILE,
                     GEO_DBF)
-from data import load_cached_data, make_county_time_view, make_state_map
+from data import (add_neighbor_feature_aggregates, load_cached_data,
+                  make_county_time_view, make_state_map)
 from gat_model import fit_gat, predict_gat
 from metrics import clip_osi, joint_score, metrics
-from spatial import build_knn_graph
+from spatial import build_spatial_graph
 
 
 def parse_args():
@@ -39,6 +40,8 @@ def parse_args():
                    help="Train GAT on every Nth forecast time; inference remains hourly")
     p.add_argument("--device", default="auto", choices=("auto", "cpu", "cuda"),
                    help="Torch device; auto selects CUDA when available")
+    p.add_argument("--base-mode", default="direct", choices=("direct", "component_v21"),
+                   help="LightGBM base: self-contained direct OSI or frozen v2.1 P/N/D/R")
     p.add_argument("--seed", type=int, default=SEED)
     return p.parse_args()
 
@@ -69,6 +72,15 @@ def alpha_select(y, base, correction, val_mask):
     return float(best["alpha"]), rows
 
 
+def residual_scale(residual, mask):
+    """Put small OSI residuals on a numerically useful training scale."""
+    values = np.asarray(residual)[np.asarray(mask, dtype=bool)]
+    values = values[np.isfinite(values)]
+    if len(values) == 0:
+        return 0.01
+    return float(max(np.std(values), 0.003))
+
+
 def main():
     args = parse_args()
     random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
@@ -89,12 +101,16 @@ def main():
     train_fips = sorted(meta_train["fips_str"].unique())
     test_fips = sorted(meta_test["fips_str"].unique())
     all_fips = sorted(set(train_fips + test_fips))
-    coords, edge_index = build_knn_graph(all_fips, GEO_DBF, k=args.k)
+    shp_path = GEO_DBF.with_suffix(".shp")
+    coords, edge_index, edge_attr = build_spatial_graph(all_fips, GEO_DBF, shp_path, k=args.k)
     state_map = make_state_map(meta_train, meta_test)
     train_node_mask = np.asarray([f in set(train_fips) for f in all_fips], dtype=bool)
     print(f"counties={len(all_fips)} train={train_node_mask.sum()} test={(~train_node_mask).sum()} edges={edge_index.shape[1]}")
 
-    base = train_base_models(X_train, y, meta_train, X_test, folds)
+    if args.base_mode == "component_v21":
+        base = load_component_v21_base(y, meta_train, meta_test, folds)
+    else:
+        base = train_base_models(X_train, y, meta_train, X_test, folds)
     summary_rows = []
     alpha_rows = []
     submission_predictions = {}
@@ -106,6 +122,9 @@ def main():
         features, _, train_rows, test_rows, _, _ = make_county_time_view(
             X_train, X_test, meta_train, meta_test, result["oof"], result["test"],
             horizon, coords, state_map)
+        features, spatial_feature_names = add_neighbor_feature_aggregates(
+            features, _, edge_index, horizon
+        )
         # Align the OOF target and base prediction to the same time/county grid.
         n_time, n_nodes = features.shape[:2]
         y_grid = np.full((n_time, n_nodes), np.nan, dtype=np.float32)
@@ -139,19 +158,26 @@ def main():
             fold_features, _, _, _, _, _ = make_county_time_view(
                 X_train, X_test, meta_train, meta_test, fold_train_base, fold_base,
                 horizon, coords, state_map)
+            fold_features, _ = add_neighbor_feature_aggregates(
+                fold_features, _, edge_index, horizon
+            )
             fold_base_grid = fold_features[:, :, 0].copy()
             fold_residual_grid = np.nan_to_num(y_grid - fold_base_grid, nan=0.0)
+            fold_scale = residual_scale(fold_residual_grid, mask)
             train_scaled, _, _ = standardize_features(fold_features, gat_train_nodes)
             fit_times = np.arange(0, n_time, max(1, args.time_stride), dtype=int)
             fit_times = np.unique(np.r_[fit_times, n_time - 1])
             gat_model, _, fit_info = fit_gat(
-                train_scaled[fit_times], fold_residual_grid[fit_times], mask[fit_times], edge_index,
+                train_scaled[fit_times], (fold_residual_grid / fold_scale)[fit_times],
+                mask[fit_times], edge_index,
                 epochs=args.epochs, patience=args.patience,
                 hidden=GAT_HIDDEN, heads=GAT_HEADS, dropout=GAT_DROPOUT,
                 lr=GAT_LR, weight_decay=GAT_WEIGHT_DECAY, seed=args.seed + fold_id,
                 device=device,
+                edge_attr=edge_attr,
             )
-            corr_grid = predict_gat(gat_model, train_scaled, edge_index, device=device)
+            corr_grid = predict_gat(gat_model, train_scaled, edge_index, device=device,
+                                    edge_attr=edge_attr) * fold_scale
             val_mask_rows = np.zeros(len(X_train), dtype=bool)
             for t in range(n_time):
                 for node in range(n_nodes):
@@ -176,16 +202,20 @@ def main():
         final_mask &= valid_time[:, None]
         final_mask &= np.isfinite(y_grid)
         final_scaled, mean_x, std_x = standardize_features(features, train_node_mask)
+        final_scale = residual_scale(residual_grid, final_mask)
         fit_times = np.arange(0, n_time, max(1, args.time_stride), dtype=int)
         fit_times = np.unique(np.r_[fit_times, n_time - 1])
         final_model, _, final_info = fit_gat(
-            final_scaled[fit_times], residual_grid[fit_times], final_mask[fit_times], edge_index,
+            final_scaled[fit_times], (residual_grid / final_scale)[fit_times],
+            final_mask[fit_times], edge_index,
             epochs=args.epochs, patience=args.patience,
             hidden=GAT_HIDDEN, heads=GAT_HEADS, dropout=GAT_DROPOUT,
             lr=GAT_LR, weight_decay=GAT_WEIGHT_DECAY, seed=args.seed + 100,
             device=device,
+            edge_attr=edge_attr,
         )
-        final_corr = predict_gat(final_model, final_scaled, edge_index, device=device)
+        final_corr = predict_gat(final_model, final_scaled, edge_index, device=device,
+                                 edge_attr=edge_attr) * final_scale
         # Select one global blend weight from all held-out county rows. This
         # is more stable than taking a median of fold-wise choices.
         global_valid = np.isfinite(y_arr) & np.isfinite(fold_oof_corr)
@@ -218,6 +248,7 @@ def main():
               f"GAT MAE={gat_summary['mae']:.6f}")
         torch.save({"model": final_model.state_dict(), "feature_mean": mean_x,
                     "feature_std": std_x, "edge_index": edge_index, "alpha": alpha,
+                    "residual_scale": final_scale, "edge_attr": edge_attr,
                     "fit_info": final_info}, MODEL_DIR / f"gat_residual_{horizon}.pt")
 
     # Fill the official template by its stable identifier key and preserve NaN
@@ -239,6 +270,10 @@ def main():
                 "device": device, "time_stride": args.time_stride,
                 "graph_k": args.k, "edge_count": int(edge_index.shape[1]),
                 "submission": str(out_file), "feature_cache": "v1.5.7",
+                "base_mode": args.base_mode,
+                "gat_feature_count": int(features.shape[-1]),
+                "residual_standardized_per_fold": True,
+                "residual_loss": "weighted_mse",
                 "causal_rule": "outage inputs only from hour_idx<72; weather full horizon"}
     (OUTPUT_DIR / "run_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     print(f"\nSaved submission: {out_file}")

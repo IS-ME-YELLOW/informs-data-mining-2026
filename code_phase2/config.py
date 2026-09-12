@@ -67,9 +67,12 @@ GAT_EPOCHS = 220
 GAT_PATIENCE = 35
 GAT_ALPHA_GRID = (0.0, 0.05, 0.10, 0.20, 0.35, 0.50, 0.75, 1.0)
 
-# Only clean Phase-1 features enter GAT. The base prediction is the first
-# feature; all others are available at prediction time under the competition
-# rules. Coordinates are appended by spatial.py.
+# All 211 Phase-1 cache columns have already passed the causal feature audit:
+# no prediction-window outage/OSI/lag/target column is present. Feeding the
+# complete clean cache lets the spatial model use the same weather trajectory,
+# land-cover and county context as the LightGBM base. Coordinates/state are
+# appended by data.py.
+GAT_USE_ALL_FEATURES = True
 GAT_FEATURES = [
     "last_osi", "last_P_t", "last_N_t", "last_D_t", "last_R_t",
     "osi_mean_72h", "osi_max_72h", "osi_std_72h", "osi_trend_last6h",

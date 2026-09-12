@@ -6,8 +6,8 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
-from config import (CV_FILE, HORIZONS, LGBM_EARLY_STOPPING, LGBM_PARAMS,
-                    LGBM_ROUNDS, MODEL_DIR, OSI_MAX)
+from config import (CV_FILE, DATA_DIR, HORIZONS, LGBM_EARLY_STOPPING,
+                    LGBM_PARAMS, LGBM_ROUNDS, MODEL_DIR, OSI_MAX, PROJECT_ROOT)
 from metrics import clip_osi, metrics
 
 
@@ -82,4 +82,70 @@ def train_base_models(X, y, meta, X_test, folds):
             "fold_metrics": fold_metrics, "summary": pooled,
         }
         print(f"  pooled OOF rmse={pooled['rmse']:.6f} mae={pooled['mae']:.6f}")
+    return results
+
+
+def load_component_v21_base(y, meta_train, meta_test, folds):
+    """Load the repository's frozen v2.1 component LightGBM artifact.
+
+    v2.1 predicts P/N/D/R independently and composes OSI with the official
+    weights. Its OOF file is keyed and therefore aligned explicitly rather
+    than relying on row order. This mode is an optional stronger base for the
+    spatial residual experiment; the default remains the self-contained
+    direct LightGBM retraining above.
+    """
+    artifact_dir = PROJECT_ROOT / "versions" / "v2" / "v2.1"
+    oof_path = artifact_dir / "oof_osi_predictions.csv"
+    test_path = artifact_dir / "test_component_predictions.csv"
+    if not oof_path.exists() or not test_path.exists():
+        raise FileNotFoundError(
+            "component_v21 mode requires versions/v2/v2.1/oof_osi_predictions.csv "
+            "and test_component_predictions.csv"
+        )
+    oof_frame = pd.read_csv(oof_path, dtype={"fipsCode": str})
+    test_frame = pd.read_csv(test_path, dtype={"fipsCode": str})
+    for frame in (oof_frame, test_frame, meta_train, meta_test):
+        frame["_key"] = (
+            frame["fipsCode"].astype(str).str.zfill(5) + "|" +
+            frame["timestamp_et"].astype(str)
+        )
+    oof_lookup = oof_frame.set_index("_key")
+    test_lookup = test_frame.set_index("_key")
+    results = {}
+    weights = {"P_t": 0.40, "N_t": 0.35, "D_t": 0.25, "R_t": 0.10}
+    for horizon in HORIZONS:
+        pred_col = f"pred_{horizon}"
+        if pred_col not in oof_lookup:
+            raise ValueError(f"Missing {pred_col} in component OOF artifact")
+        train_keys = meta_train["_key"]
+        test_keys = meta_test["_key"]
+        oof = oof_lookup.loc[train_keys, pred_col].to_numpy(dtype=float)
+        component_values = {}
+        for component, weight in weights.items():
+            col = f"pred_{component}target_{horizon.replace('osi_target_', '')}"
+            # v2.1 names are pred_P_t_target_t01h, etc.
+            col = f"pred_{component}_target_{horizon.replace('osi_target_', '')}"
+            if col not in test_lookup:
+                raise ValueError(f"Missing {col} in component test artifact")
+            component_values[component] = test_lookup.loc[test_keys, col].to_numpy(dtype=float)
+        test_pred = (
+            weights["P_t"] * component_values["P_t"] +
+            weights["N_t"] * component_values["N_t"] +
+            weights["D_t"] * component_values["D_t"] -
+            weights["R_t"] * component_values["R_t"]
+        )
+        test_pred = np.clip(test_pred, 0.0, OSI_MAX)
+        test_pred = np.where(test_pred < 0.001, 0.0, test_pred)
+        target = y[horizon].to_numpy(dtype=float)
+        pooled = metrics(target, oof)
+        results[horizon] = {
+            "oof": oof, "test": test_pred,
+            # The frozen artifact only exposes official OOF predictions, not
+            # its internal fold models. Replicating the same OOF base across
+            # GAT folds keeps this optional mode explicit and separate from
+            # the strict direct-base evaluation.
+            "train_by_fold": np.tile(oof[None, :], (len(folds), 1)),
+            "test_by_fold": np.tile(test_pred[None, :], (len(folds), 1)),
+            "fold_metrics": [], "summary": pooled,
+        }
     return results

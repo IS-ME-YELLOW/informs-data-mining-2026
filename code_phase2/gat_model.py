@@ -23,13 +23,14 @@ def _edge_softmax(scores, dst, n_nodes):
 
 
 class GATLayer(nn.Module):
-    def __init__(self, in_dim, out_dim, heads=4, concat=True, dropout=0.1):
+    def __init__(self, in_dim, out_dim, heads=4, concat=True, dropout=0.1, edge_dim=4):
         super().__init__()
         self.heads = heads
         self.out_dim = out_dim
         self.concat = concat
         self.dropout = nn.Dropout(dropout)
         self.linear = nn.Linear(in_dim, out_dim * heads, bias=False)
+        self.edge_linear = nn.Linear(edge_dim, heads, bias=False) if edge_dim else None
         self.att_src = nn.Parameter(torch.empty(heads, out_dim))
         self.att_dst = nn.Parameter(torch.empty(heads, out_dim))
         self.bias = nn.Parameter(torch.zeros(out_dim * heads if concat else out_dim))
@@ -37,10 +38,12 @@ class GATLayer(nn.Module):
         nn.init.xavier_uniform_(self.att_src)
         nn.init.xavier_uniform_(self.att_dst)
 
-    def forward(self, x, edge_index):
+    def forward(self, x, edge_index, edge_attr=None):
         src, dst = edge_index
         z = self.linear(x).view(-1, self.heads, self.out_dim)
         score = (z[src] * self.att_src).sum(-1) + (z[dst] * self.att_dst).sum(-1)
+        if self.edge_linear is not None and edge_attr is not None:
+            score = score + self.edge_linear(edge_attr)
         score = F.leaky_relu(score, negative_slope=0.2)
         alpha = _edge_softmax(score, dst, x.shape[0])
         alpha = self.dropout(alpha)
@@ -52,16 +55,16 @@ class GATLayer(nn.Module):
 
 
 class ResidualGAT(nn.Module):
-    def __init__(self, in_dim, hidden=24, heads=4, dropout=0.12):
+    def __init__(self, in_dim, hidden=24, heads=4, dropout=0.12, edge_dim=4):
         super().__init__()
-        self.gat1 = GATLayer(in_dim, hidden, heads=heads, concat=True, dropout=dropout)
-        self.gat2 = GATLayer(hidden * heads, hidden, heads=1, concat=False, dropout=dropout)
+        self.gat1 = GATLayer(in_dim, hidden, heads=heads, concat=True, dropout=dropout, edge_dim=edge_dim)
+        self.gat2 = GATLayer(hidden * heads, hidden, heads=1, concat=False, dropout=dropout, edge_dim=edge_dim)
         self.skip = nn.Linear(in_dim, hidden, bias=False)
         self.head = nn.Sequential(nn.Linear(hidden, hidden), nn.GELU(), nn.Dropout(dropout), nn.Linear(hidden, 1))
 
-    def forward(self, x, edge_index):
-        h = F.elu(self.gat1(x, edge_index))
-        h = F.elu(self.gat2(h, edge_index)) + self.skip(x)
+    def forward(self, x, edge_index, edge_attr=None):
+        h = F.elu(self.gat1(x, edge_index, edge_attr))
+        h = F.elu(self.gat2(h, edge_index, edge_attr)) + self.skip(x)
         return self.head(h).squeeze(-1)
 
 
@@ -72,9 +75,15 @@ def block_edges(edge_index, n_nodes, n_snapshots, device):
     return torch.stack((src.reshape(-1), dst.reshape(-1)), dim=0)
 
 
+def block_edge_attributes(edge_attr, n_snapshots, device):
+    if edge_attr is None:
+        return None
+    return torch.as_tensor(edge_attr, dtype=torch.float32, device=device).repeat(n_snapshots, 1)
+
+
 def fit_gat(features, residual, train_mask, edge_index, epochs=220, patience=35,
             hidden=24, heads=4, dropout=0.12, lr=0.003, weight_decay=2e-4,
-            seed=42, device="cpu"):
+            seed=42, device="cpu", edge_attr=None):
     """Fit on a [time, county, feature] tensor and return model + predictions."""
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -85,7 +94,9 @@ def fit_gat(features, residual, train_mask, edge_index, epochs=220, patience=35,
     if not bool(mask.any()):
         raise ValueError("GAT received no finite supervised county-time cells")
     edges = block_edges(torch.as_tensor(edge_index, dtype=torch.long), features.shape[1], features.shape[0], device)
-    model = ResidualGAT(features.shape[-1], hidden=hidden, heads=heads, dropout=dropout).to(device)
+    block_attr = block_edge_attributes(edge_attr, features.shape[0], device)
+    model = ResidualGAT(features.shape[-1], hidden=hidden, heads=heads, dropout=dropout,
+                        edge_dim=block_attr.shape[-1] if block_attr is not None else 0).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     best_state = None
     best_loss = float("inf")
@@ -93,9 +104,15 @@ def fit_gat(features, residual, train_mask, edge_index, epochs=220, patience=35,
     for epoch in range(int(epochs)):
         model.train()
         optimizer.zero_grad(set_to_none=True)
-        pred = model(x, edges)
-        # SmoothL1 limits the influence of a few exceptional outage counties.
-        loss = F.smooth_l1_loss(pred[mask], y[mask], beta=0.01)
+        pred = model(x, edges, block_attr)
+        # Weight larger residuals so the spatial model learns the rare severe
+        # outage counties that dominate RMSE, while clipping the weight keeps
+        # the fit stable for a single-event dataset.
+        abs_residual = torch.abs(y[mask])
+        # Residuals are standardized by the caller; 2.5 is a robust
+        # large-error threshold on that scale.
+        weights = 1.0 + 4.0 * torch.clamp(abs_residual / 2.5, 0.0, 1.0)
+        loss = (weights * (pred[mask] - y[mask]) ** 2).mean()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 2.0)
         optimizer.step()
@@ -116,11 +133,12 @@ def fit_gat(features, residual, train_mask, edge_index, epochs=220, patience=35,
     return model, pred, {"epochs": epoch + 1, "best_loss": best_loss}
 
 
-def predict_gat(model, features, edge_index, device="cpu"):
+def predict_gat(model, features, edge_index, device="cpu", edge_attr=None):
     """Run a fitted GAT on an arbitrary number of time snapshots."""
     device = torch.device(device)
     model = model.to(device).eval()
     x = torch.as_tensor(features, dtype=torch.float32, device=device).reshape(-1, features.shape[-1])
     edges = block_edges(torch.as_tensor(edge_index, dtype=torch.long), features.shape[1], features.shape[0], device)
+    block_attr = block_edge_attributes(edge_attr, features.shape[0], device)
     with torch.no_grad():
-        return model(x, edges).reshape(features.shape[0], features.shape[1]).cpu().numpy()
+        return model(x, edges, block_attr).reshape(features.shape[0], features.shape[1]).cpu().numpy()

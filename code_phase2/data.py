@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from config import (GAT_FEATURES, HORIZON_HOURS, PRED_END, PRED_START,
+from config import (GAT_FEATURES, GAT_USE_ALL_FEATURES, HORIZON_HOURS, PRED_END, PRED_START,
                     TEST_FEATURES, TEST_META, TRAIN_FEATURES, TRAIN_META,
                     TRAIN_TARGETS)
 
@@ -23,9 +23,10 @@ def make_county_time_view(X_train, X_test, meta_train, meta_test, base_train, ba
                           horizon, coords, state_map):
     """Construct features/base predictions in [144 timestamps, 302 counties]."""
     h = str(HORIZON_HOURS[horizon])
-    names = []
-    for template in GAT_FEATURES:
-        names.append(template.format(h=h))
+    if GAT_USE_ALL_FEATURES:
+        names = list(X_train.columns)
+    else:
+        names = [template.format(h=h) for template in GAT_FEATURES]
     missing = [n for n in names if n not in X_train.columns or n not in X_test.columns]
     if missing:
         raise ValueError(f"Missing GAT features: {missing}")
@@ -63,6 +64,42 @@ def make_county_time_view(X_train, X_test, meta_train, meta_test, base_train, ba
     fill(X_test, meta_test, base_test, test_rows, False)
     # Metadata arrays are easier to use for exact OOF indexing later.
     return features, base, train_rows, test_rows, all_fips, names
+
+
+def add_neighbor_feature_aggregates(features, names, edge_index, horizon):
+    """Append spatial means and self-minus-neighbour differences.
+
+    All selected outage summaries are fixed from hour_idx<72. Weather fields
+    are timestamp/horizon weather and may use the supplied future weather.
+    No future outage/OSI value is aggregated here.
+    """
+    h = str(HORIZON_HOURS[horizon])
+    templates = [
+        "last_osi", "last_P_t", "last_D_t", "last_N_t", "last_R_t",
+        "osi_mean_72h", "osi_max_72h", "osi_trend_last6h",
+        "gust_t", "wind_speed_t", "tp_t", "rain_t",
+        f"gust_max_next_{h}h", f"gust_mean_next_{h}h",
+        f"wind_speed_max_next_{h}h", f"total_tp_next_{h}h",
+    ]
+    indices = [names.index(n) for n in templates if n in names]
+    selected_names = [names[i] for i in indices]
+    source = features[:, :, 1:1 + len(names)][:, :, indices]
+    src, dst = edge_index
+    keep = src != dst
+    src = src[keep]; dst = dst[keep]
+    if len(src) == 0:
+        return features, []
+    count = np.bincount(dst, minlength=features.shape[1]).astype(np.float32)
+    count = np.maximum(count, 1.0)
+    sums = np.zeros((features.shape[0], features.shape[1], len(indices)), dtype=np.float32)
+    for j in range(len(indices)):
+        np.add.at(sums[:, :, j], (np.arange(features.shape[0])[:, None], dst[None, :]), source[:, src, j])
+    neighbour = sums / count[None, :, None]
+    own = source
+    delta = neighbour - own
+    extra = np.concatenate([neighbour, delta], axis=2)
+    extra_names = [f"neighbor_mean_{n}" for n in selected_names] + [f"neighbor_delta_{n}" for n in selected_names]
+    return np.concatenate([features, extra], axis=2), extra_names
 
 
 def make_state_map(meta_train, meta_test):
