@@ -1,0 +1,12 @@
+{
+  "seed": 42,
+  "epochs": 1,
+  "patience": 1,
+  "device": "cpu",
+  "time_stride": 1,
+  "graph_k": 8,
+  "edge_count": 3012,
+  "submission": "D:\\academic\\dataminingINFORMS\\informs-data-mining-2026\\code_phase2\\outputs\\submission_phase2_gat.csv",
+  "feature_cache": "v1.5.7",
+  "causal_rule": "outage inputs only from hour_idx<72; weather full horizon"
+}
