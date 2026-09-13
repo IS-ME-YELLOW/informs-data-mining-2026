@@ -1,0 +1,5 @@
+horizon,model,counties,replicates,rmse_delta,rmse_ci_low,rmse_ci_high,rmse_probability_improved,mae_delta,mae_ci_low,mae_ci_high,mae_probability_improved
+osi_target_t01h,tail_specialist_nested,239,2000,8.715911777856279e-05,-1.283081562283802e-05,0.00021836482072255244,0.0505,1.3561038670846515e-05,-1.0293281680144568e-05,4.112834896829475e-05,0.1395
+osi_target_t06h,tail_specialist_nested,239,2000,0.00012308516901940458,-6.714103460341578e-05,0.00036039050650422494,0.138,9.81922779137289e-06,-2.6613305856052356e-05,4.957350687082236e-05,0.3295
+osi_target_t24h,tail_specialist_nested,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+osi_target_t48h,tail_specialist_nested,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

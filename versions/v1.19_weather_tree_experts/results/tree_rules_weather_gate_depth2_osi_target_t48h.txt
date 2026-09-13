@@ -1,0 +1,10 @@
+|--- cumul_gust_since_onset <= 1506.75
+|   |--- min_t2m_next_48h <= 267.19
+|   |   |--- class: 0
+|   |--- min_t2m_next_48h >  267.19
+|   |   |--- class: 0
+|--- cumul_gust_since_onset >  1506.75
+|   |--- total_tp_next_48h <= 7.85
+|   |   |--- class: 0
+|   |--- total_tp_next_48h >  7.85
+|   |   |--- class: 0

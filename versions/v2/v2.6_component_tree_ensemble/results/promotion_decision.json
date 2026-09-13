@@ -1,0 +1,42 @@
+{
+  "primary_candidate": "safe_convex",
+  "horizons": {
+    "osi_target_t01h": {
+      "rmse_change_pct": 2.0880230723212767,
+      "improved_folds": 1,
+      "bootstrap_rmse_ci": [
+        -6.964882347224636e-05,
+        0.000649603822763264
+      ],
+      "passes": false
+    },
+    "osi_target_t06h": {
+      "rmse_change_pct": 2.2026653406368446,
+      "improved_folds": 1,
+      "bootstrap_rmse_ci": [
+        -1.655198639049409e-05,
+        0.00048510311672609057
+      ],
+      "passes": false
+    },
+    "osi_target_t24h": {
+      "rmse_change_pct": 0.7178356325277191,
+      "improved_folds": 1,
+      "bootstrap_rmse_ci": [
+        -0.00012433220277924443,
+        0.00022672990023470149
+      ],
+      "passes": false
+    },
+    "osi_target_t48h": {
+      "rmse_change_pct": 0.8611492347983418,
+      "improved_folds": 4,
+      "bootstrap_rmse_ci": [
+        -0.0001271112209774385,
+        0.00023298810020979925
+      ],
+      "passes": false
+    }
+  },
+  "promote": false
+}

@@ -1,0 +1,31 @@
+{
+  "fold": 3,
+  "train_rows": 27313,
+  "validation_rows": 6864,
+  "weights": [
+    0.0,
+    0.6324703099675766,
+    0.051727581365743416,
+    0.047957832616672205,
+    0.19554716331961425,
+    0.07229711273039353
+  ],
+  "safe_alpha": 0.9484491595344642,
+  "horizon": "osi_target_t01h",
+  "candidate_names": [
+    "lgbm_direct",
+    "lgbm_component",
+    "xgboost_direct",
+    "catboost_direct",
+    "xgboost_component",
+    "catboost_component"
+  ],
+  "baseline": "lgbm_component",
+  "post_process": {
+    "clip": [
+      0.0,
+      0.65
+    ],
+    "zero_threshold": 0.001
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "verified_at": "2026-09-11T18:33:22+08:00",
+  "status": "passed",
+  "version": "v2.4",
+  "feature_version": "v1.5.6",
+  "checks": [
+    "16 component OOF metric pairs recomputed",
+    "16 serialized final models reloaded",
+    "saved component test predictions reproduced at atol=1e-12",
+    "composed OOF OSI and its metrics recomputed",
+    "submission values, identifiers, and tail NaN masks verified"
+  ]
+}

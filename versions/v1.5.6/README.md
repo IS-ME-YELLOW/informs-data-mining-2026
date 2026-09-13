@@ -50,4 +50,8 @@ data = load_feature_dataset()
 X_train, y_train = data.X_train, data.y_train
 ```
 
-`code_phase1/config.py` 指向 `v1.5.6`，`code_phase1/cache.py` 通过专用加载器读取这套冻结数据。历史 v1.5.5 文件保持不变。
+本版可通过 `code_phase1.feature_dataset_v156` 的专用加载器读取。当前全局 `code_phase1/config.py` 已因后续 v1.5.7 诊断实验指向 v1.5.7，因此下游正式基线入口均显式指定 `v1.5.6`，不依赖全局版本。历史 v1.5.5 文件保持不变。
+
+## 下游树模型基线状态
+
+截至 2026-09-11，三种树模型的直接 OSI 与 P/N/D/R 分量实验均已在本版 163 列冻结特征上完成：LightGBM 见 `versions/v1.8/`，XGBoost 见 `versions/v1.9/` 和 `versions/v2/v2.4/`，CatBoost 见 `versions/v1.10/` 和 `versions/v2/v2.5/`。完整横向结果见项目根目录 `Results.md`。v1.5.7 的 211 列 F1 特征仍仅作为诊断版本，不替代本版 RMSE 基线。

@@ -1,0 +1,47 @@
+{
+  "baseline": "v1.12",
+  "primary_candidate": "tail_specialist_nested",
+  "horizons": {
+    "osi_target_t01h": {
+      "rmse_change_pct": 0.7464417297684101,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        -1.283081562283802e-05,
+        0.00021836482072255244
+      ],
+      "unchanged_by_safe_fallback": false,
+      "passes": false
+    },
+    "osi_target_t06h": {
+      "rmse_change_pct": 1.1926164265381178,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        -6.714103460341578e-05,
+        0.00036039050650422494
+      ],
+      "unchanged_by_safe_fallback": false,
+      "passes": false
+    },
+    "osi_target_t24h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_safe_fallback": true,
+      "passes": true
+    },
+    "osi_target_t48h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_safe_fallback": true,
+      "passes": true
+    }
+  },
+  "promote": false
+}

@@ -95,8 +95,11 @@ def clip_component(predictions: np.ndarray) -> np.ndarray:
     return np.clip(np.asarray(predictions, dtype=float), COMPONENT_MIN, COMPONENT_MAX)
 
 
-def prepare_component_targets(force: bool = False) -> tuple[pd.DataFrame, dict[str, Any]]:
-    data = direct_protocol.load_experiment_data()
+def prepare_component_targets(
+    force: bool = False,
+    feature_version: str = direct_protocol.FEATURE_VERSION,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
+    data = direct_protocol.load_experiment_data(feature_version)
     if TARGETS_FILE.exists() and TARGET_VALIDATION_FILE.exists() and not force:
         targets = pd.read_parquet(TARGETS_FILE)
         with TARGET_VALIDATION_FILE.open("r", encoding="utf-8") as handle:
@@ -203,7 +206,41 @@ def _validate_component_target_alignment(
     actual_time = pd.to_datetime(targets["timestamp_et"])
     expected_time = pd.to_datetime(data.meta_train["timestamp_et"])
     if not actual_fips.equals(expected_fips) or not actual_time.equals(expected_time):
-        raise ValueError("Component targets do not align with frozen v1.5.2 feature rows.")
+        raise ValueError("Component targets do not align with the selected feature rows.")
+
+
+def load_direct_osi_reference(
+    adapter,
+    feature_version: str,
+    metadata_path: Path | None,
+) -> tuple[dict[str, dict[str, float]], Path | None]:
+    if metadata_path is None:
+        return DIRECT_OSI_REFERENCE[adapter.family], None
+    metadata_path = metadata_path.resolve()
+    with metadata_path.open("r", encoding="utf-8") as handle:
+        metadata = json.load(handle)
+    if metadata.get("model_family") != adapter.family:
+        raise ValueError(
+            f"Direct-reference family mismatch: {metadata.get('model_family')} "
+            f"!= {adapter.family}."
+        )
+    if metadata.get("feature_version") != feature_version:
+        raise ValueError(
+            f"Direct-reference feature mismatch: {metadata.get('feature_version')} "
+            f"!= {feature_version}."
+        )
+    if metadata.get("cv_version") != direct_protocol.CV_VERSION:
+        raise ValueError("Direct-reference CV version does not match this experiment.")
+    metrics = metadata.get("metrics", {})
+    reference: dict[str, dict[str, float]] = {}
+    for horizon in direct_protocol.HORIZONS:
+        if horizon not in metrics:
+            raise ValueError(f"Direct-reference metadata is missing {horizon}.")
+        reference[horizon] = {
+            "rmse": float(metrics[horizon]["rmse"]),
+            "mae": float(metrics[horizon]["mae"]),
+        }
+    return reference, metadata_path
 
 
 def _fill_submission(
@@ -231,17 +268,24 @@ def run_component_experiment(
     max_rounds: int = MAX_BOOST_ROUNDS,
     early_stopping_rounds: int = EARLY_STOPPING_ROUNDS,
     validate_only: bool = False,
+    feature_version: str = direct_protocol.FEATURE_VERSION,
+    direct_metadata_path: Path | None = None,
 ) -> dict[str, Any] | None:
     output_dir.mkdir(parents=True, exist_ok=True)
     print(
         f"=== {experiment_version} {adapter.family}: P/N/D/R -> composed OSI "
-        f"on frozen v1.5.2 features ===",
+        f"on frozen {feature_version} features ===",
         flush=True,
     )
     print("[1/7] Loading features, folds, and component targets...", flush=True)
-    data = direct_protocol.load_experiment_data()
-    targets, target_validation = prepare_component_targets()
+    data = direct_protocol.load_experiment_data(feature_version)
+    targets, target_validation = prepare_component_targets(
+        feature_version=feature_version
+    )
     _validate_component_target_alignment(targets, data)
+    direct_references, resolved_direct_metadata = load_direct_osi_reference(
+        adapter, feature_version, direct_metadata_path
+    )
     print(
         f"  train={data.X_train.shape}, test={data.X_test.shape}, "
         f"component_targets={targets.shape}",
@@ -390,7 +434,7 @@ def run_component_experiment(
                 "valid_rows": len(valid_idx),
                 **score,
             })
-        direct_reference = DIRECT_OSI_REFERENCE[adapter.family][horizon]
+        direct_reference = direct_references[horizon]
         osi_summaries[horizon] = {
             **pooled,
             "rmse_std": float(np.std([score["rmse"] for score in fold_scores])),
@@ -446,19 +490,22 @@ def run_component_experiment(
 
     print("[6/7] Writing reproducibility metadata...", flush=True)
     input_paths = [
-        PROJECT_ROOT / "cache" / "features_train_v1.5.2.parquet",
-        PROJECT_ROOT / "cache" / "features_test_v1.5.2.parquet",
-        PROJECT_ROOT / "cache" / "meta_train_v1.5.2.parquet",
-        PROJECT_ROOT / "cache" / "meta_test_v1.5.2.parquet",
-        PROJECT_ROOT / "cache" / "targets_train_v1.5.2.parquet",
+        PROJECT_ROOT / "cache" / f"features_train_{feature_version}.parquet",
+        PROJECT_ROOT / "cache" / f"features_test_{feature_version}.parquet",
+        PROJECT_ROOT / "cache" / f"meta_train_{feature_version}.parquet",
+        PROJECT_ROOT / "cache" / f"meta_test_{feature_version}.parquet",
+        PROJECT_ROOT / "cache" / f"targets_train_{feature_version}.parquet",
+        PROJECT_ROOT / "cache" / f"feature_names_{feature_version}.json",
         PROJECT_ROOT / "cv" / "cv_assignments_balanced_v1_seed42.csv",
         TARGETS_FILE,
     ]
+    if resolved_direct_metadata is not None:
+        input_paths.append(resolved_direct_metadata)
     metadata = {
         "experiment_version": experiment_version,
         "strategy": "predict P_t/N_t/D_t/R_t independently, then compose OSI",
         "model_family": adapter.family,
-        "feature_version": "v1.5.2",
+        "feature_version": feature_version,
         "cv_version": direct_protocol.CV_VERSION,
         "seed": direct_protocol.SEED,
         "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
@@ -479,7 +526,11 @@ def run_component_experiment(
         "config": adapter.config(max_rounds, early_stopping_rounds),
         "component_target_validation": target_validation,
         "osi_metrics": osi_summaries,
-        "direct_osi_reference": DIRECT_OSI_REFERENCE[adapter.family],
+        "direct_osi_reference": direct_references,
+        "direct_osi_reference_file": (
+            str(resolved_direct_metadata.relative_to(PROJECT_ROOT)).replace("\\", "/")
+            if resolved_direct_metadata is not None else None
+        ),
         "baselines": direct_protocol.compute_baselines(data),
         "prediction_stats": {
             horizon: {

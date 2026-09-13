@@ -1,0 +1,11 @@
+horizon,model_a,model_b,residual_correlation
+osi_target_t24h,ET-A,v1.8_rule,0.9330157154953336
+osi_target_t24h,ET-A,v1.12,0.9477875944023162
+osi_target_t24h,ET-B,v1.8_rule,0.9410743975447884
+osi_target_t24h,ET-B,v1.12,0.9550136688716918
+osi_target_t24h,ET-A,ET-B,0.9942119832819417
+osi_target_t48h,ET-A,v1.8_rule,0.9347526110799035
+osi_target_t48h,ET-A,v1.12,0.9431841936572558
+osi_target_t48h,ET-B,v1.8_rule,0.9465394062089568
+osi_target_t48h,ET-B,v1.12,0.954702752540295
+osi_target_t48h,ET-A,ET-B,0.9949772557491905

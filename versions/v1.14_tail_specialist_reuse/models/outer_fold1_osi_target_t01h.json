@@ -1,0 +1,19 @@
+{
+  "mode": "tail_specialist",
+  "horizon": "osi_target_t01h",
+  "training_folds": [
+    0,
+    2,
+    3,
+    4
+  ],
+  "tail_quantile": 0.95,
+  "threshold": 0.045859085096806335,
+  "specialist": "profile_pd_weighted_l2",
+  "alpha": 0.7816644191716849,
+  "inner_fold_wins": 3,
+  "inner_score": 0.9916676788971668,
+  "fallback_reason": null,
+  "scope": "outer",
+  "outer_fold": 1
+}

@@ -1,0 +1,21 @@
+{
+  "family": "v1.12+RandomForest",
+  "source_names": [
+    "v1.12",
+    "RF"
+  ],
+  "weights": [
+    0.8320726430621668,
+    0.16792735693783317
+  ],
+  "selected_extratrees": null,
+  "tail_quantile": 0.95,
+  "risk_source": "v1.8",
+  "risk_threshold": 0.01270889239880478,
+  "fit_rows_below_threshold": 22332,
+  "uses_outer_labels": false,
+  "scope": "final_test_only",
+  "fold": "all",
+  "horizon": "osi_target_t48h",
+  "train_rows": 22944
+}

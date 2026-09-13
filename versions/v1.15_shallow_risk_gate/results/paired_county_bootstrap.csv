@@ -1,0 +1,5 @@
+horizon,model,counties,replicates,rmse_delta,rmse_ci_low,rmse_ci_high,rmse_probability_improved,mae_delta,mae_ci_low,mae_ci_high,mae_probability_improved
+osi_target_t01h,shallow_risk_gate,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+osi_target_t06h,shallow_risk_gate,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+osi_target_t24h,shallow_risk_gate,239,2000,1.6951879102198447e-06,-9.506399494159812e-06,1.6917771769258284e-05,0.3155,-9.198037752076831e-07,-7.849290461779963e-06,5.019710379822626e-06,0.5045
+osi_target_t48h,shallow_risk_gate,239,2000,1.7878689300013587e-06,-1.244240909850907e-06,5.7636727510498465e-06,0.1255,-7.060079346516909e-07,-3.659386597726479e-06,2.1064081888938314e-06,0.6805

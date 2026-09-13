@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "stage": "repeats",
+  "status": "not_run_primary_not_promoted",
+  "final_promoted": false,
+  "reason": "No primary winner passed all gates.",
+  "prohibited_baseline": "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.12_tail_protected_ensemble\\artifacts\\oof_predictions.parquet"
+}
