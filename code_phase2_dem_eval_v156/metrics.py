@@ -33,6 +33,12 @@ def clip_osi(pred):
     return np.clip(np.asarray(pred, dtype=float), 0.0, 0.65)
 
 
+def post_process_osi(pred, threshold=0.001):
+    """Match v1.5.6 Phase-1 post_process after physical clipping."""
+    values = clip_osi(pred)
+    return np.where(values < threshold, 0.0, values)
+
+
 def joint_score(y_true, y_pred):
     """Backward-compatible alias for the official pooled RMSE score."""
     return metrics(y_true, y_pred)["rmse"]

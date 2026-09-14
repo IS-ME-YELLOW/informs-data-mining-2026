@@ -2,6 +2,7 @@
 
 本目录是 `code_phase2_dem_eval` 的独立 v1.5.6 版本，不覆盖原 DEM-GAT 模型及其输出。
 LightGBM 和 GAT 均使用 `cache/features_*_v1.5.6.parquet`，共 163 个 Phase-1 特征；LightGBM 直接预测 OSI，使用 v1.5.6 的 Huber + RMSE 配置。v1.5.6 在 v1.5.5 的 141 列基础上增加 `pct_unmapped`、`pct_forest_classified` 和每个 horizon 的窗口长度、完整性、降水率、强阵风比例、目标时刻天气可用性，共 22 列。
+由于仓库中的 v1.5.6 文本 booster 在当前 LightGBM 4.6.0 环境中报 `Model format error`，本版本不加载这些冻结文件，而是使用完全相同的 v1.5.6 特征、Huber 参数、县级 CV 和 `<0.001` 置零后处理重新训练最终 booster，并保存到本目录。因此它是 v1.5.6 的兼容重训复现，不是原冻结文件本身。
 它根据 `evaluation_procedure.pdf` 做了三项调整：
 
 1. alpha 只按官方 pooled RMSE 选择，MAE 不再参与融合权重选择；

@@ -26,7 +26,7 @@ from config import (DATA_DIR, GAT_ALPHA_GRID, GAT_DROPOUT, GAT_EPOCHS,
 from data import (add_neighbor_feature_aggregates, load_cached_data,
                   load_terrain_features, make_county_time_view, make_state_map)
 from gat_model import fit_gat, predict_gat
-from metrics import clip_osi, metrics
+from metrics import clip_osi, metrics, post_process_osi
 from spatial import build_spatial_graph
 
 
@@ -238,7 +238,7 @@ def main():
             t = int(row["hour_idx"]) - PRED_START
             node = all_fips.index(row["fips_str"])
             if 0 <= t < n_time:
-                test_pred[row_idx] = clip_osi(test_pred[row_idx] + alpha * final_corr[t, node])
+                test_pred[row_idx] = post_process_osi(test_pred[row_idx] + alpha * final_corr[t, node])
         submission_predictions[horizon] = test_pred
         base_summary = result["summary"]
         # GAT CV OOF correction is assembled from fold-held-out predictions.
@@ -297,7 +297,7 @@ def main():
                                      "slope_mean_deg", "slope_std_deg",
                                      "terrain_ruggedness"],
                 "base_mode": "direct_v1.5.6",
-                "base_final_source": "versions/v1.5.6 frozen booster when available",
+                "base_final_source": "retrained v1.5.6-compatible booster; frozen text model skipped due to runtime format incompatibility",
                 "gat_feature_count": int(features.shape[-1]),
                 "residual_standardized_per_fold": True,
                 "residual_loss": args.gat_loss,

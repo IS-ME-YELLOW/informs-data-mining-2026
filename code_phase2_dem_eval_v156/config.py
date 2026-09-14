@@ -8,7 +8,6 @@ CACHE_DIR = PROJECT_ROOT / "cache"
 CV_FILE = PROJECT_ROOT / "cv" / "cv_assignments_balanced_v1_seed42.csv"
 OUTPUT_DIR = PROJECT_ROOT / "code_phase2_dem_eval_v156" / "outputs"
 MODEL_DIR = OUTPUT_DIR / "models"
-FROZEN_V156_MODEL_DIR = PROJECT_ROOT / "versions" / "v1.5.6"
 
 FEATURE_VERSION = "v1.5.6"
 TRAIN_FEATURES = CACHE_DIR / f"features_train_{FEATURE_VERSION}.parquet"

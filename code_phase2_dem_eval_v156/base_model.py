@@ -7,9 +7,8 @@ import numpy as np
 import pandas as pd
 
 from config import (CV_FILE, DATA_DIR, HORIZONS, LGBM_EARLY_STOPPING,
-                    LGBM_PARAMS, LGBM_ROUNDS, MODEL_DIR, OSI_MAX, PROJECT_ROOT,
-                    FROZEN_V156_MODEL_DIR)
-from metrics import clip_osi, metrics
+                    LGBM_PARAMS, LGBM_ROUNDS, MODEL_DIR, OSI_MAX, PROJECT_ROOT)
+from metrics import metrics, post_process_osi
 
 
 def load_cv_folds(meta, n_folds=5):
@@ -55,12 +54,12 @@ def train_base_models(X, y, meta, X_test, folds):
                 valid_sets=[val_set],
                 callbacks=[lgb.early_stopping(LGBM_EARLY_STOPPING, verbose=False), lgb.log_evaluation(0)],
             )
-            val_pred = clip_osi(model.predict(xv.iloc[va]))
+            val_pred = post_process_osi(model.predict(xv.iloc[va]))
             oof[valid_indices[va]] = val_pred
             fold_train_pred = np.full(len(X), np.nan, dtype=float)
-            fold_train_pred[valid_indices] = clip_osi(model.predict(X.iloc[valid_indices]))
+            fold_train_pred[valid_indices] = post_process_osi(model.predict(X.iloc[valid_indices]))
             train_by_fold.append(fold_train_pred)
-            test_pred = clip_osi(model.predict(X_test))
+            test_pred = post_process_osi(model.predict(X_test))
             test_by_fold.append(test_pred)
             m = metrics(yv[va], val_pred)
             m["fold"] = fold_id
@@ -74,16 +73,12 @@ def train_base_models(X, y, meta, X_test, folds):
         full_set = lgb.Dataset(X.iloc[valid_indices], label=yv)
         final = lgb.train(dict(LGBM_PARAMS), full_set, num_boost_round=best_iter,
                           callbacks=[lgb.log_evaluation(0)])
-        frozen_path = FROZEN_V156_MODEL_DIR / f"lgbm_{horizon}_v1.5.6_balanced_v1.txt"
-        if frozen_path.exists():
-            # Use the requested v1.5.6 full-data booster for final test
-            # inference. Fold models above still provide strict OOF residuals.
-            frozen = lgb.Booster(model_file=str(frozen_path))
-            test_pred = clip_osi(frozen.predict(X_test))
-            final_source = "versions/v1.5.6 frozen booster"
-        else:
-            test_pred = clip_osi(final.predict(X_test))
-            final_source = "retrained v1.5.6-compatible booster"
+        # The checked-in v1.5.6 text boosters are not readable by the current
+        # LightGBM 4.6.0 runtime (their headers contain a legacy/incompatible
+        # serialization). Retrain with the v1.5.6 feature set and parameters;
+        # this also keeps final test inference consistent with strict OOF.
+        test_pred = post_process_osi(final.predict(X_test))
+        final_source = "retrained v1.5.6-compatible booster"
         MODEL_DIR.mkdir(parents=True, exist_ok=True)
         final.save_model(str(MODEL_DIR / f"lightgbm_{horizon}.txt"))
         results[horizon] = {
