@@ -31,13 +31,6 @@ from component_experiment import (  # noqa: E402
 )
 
 
-<<<<<<< HEAD
-SPECS = {
-    "v2.1": ("lightgbm", ".txt"),
-    "v2.2": ("xgboost", ".json"),
-    "v2.3": ("catboost", ".cbm"),
-}
-=======
 SPECS = {
     "v2.1": ("lightgbm", ".txt", "v1.5.2"),
     "v2.2": ("xgboost", ".json", "v1.5.2"),
@@ -45,7 +38,6 @@ SPECS = {
     "v2.4": ("xgboost", ".json", "v1.5.6"),
     "v2.5": ("catboost", ".cbm", "v1.5.6"),
 }
->>>>>>> 38399578214d1cf5d0d3565457953e4df3f71a94
 
 
 def _normalized_keys(frame: pd.DataFrame) -> pd.MultiIndex:
@@ -74,14 +66,10 @@ def _load_model(family: str, path: Path):
     raise ValueError(f"Unknown family: {family}")
 
 
-<<<<<<< HEAD
-def verify_version(version: str, family: str, extension: str, data, targets, template) -> None:
-=======
 def verify_version(
     version: str, family: str, extension: str, feature_version: str,
     data, targets, template
 ) -> None:
->>>>>>> 38399578214d1cf5d0d3565457953e4df3f71a94
     output_dir = V2_ROOT / version
     component_summary = pd.read_csv(
         output_dir / "component_summary_metrics.csv"
