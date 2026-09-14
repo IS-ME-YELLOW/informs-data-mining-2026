@@ -1,0 +1,54 @@
+{
+  "created_at": "2026-09-13T13:08:23+08:00",
+  "python": "3.11.13 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:03:15) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "libraries": {
+    "numpy": "2.3.3",
+    "pandas": "2.3.3"
+  },
+  "experiment_version": "v1.13_weighted_target_alignment",
+  "feature_version": "v1.5.6",
+  "cv_version": "balanced_v1",
+  "seed": 42,
+  "lead_hours": [
+    1,
+    6,
+    24,
+    48
+  ],
+  "grid_step": 0.05,
+  "grid_candidate_count": 1540,
+  "robust_std_penalty": 0.25,
+  "strict_nested_cv": "Every outer lead-weight vector is selected on the other four county folds; final weights are test-only.",
+  "runtime_seconds": 35.4755734000064,
+  "input_hashes": {
+    "v18_oof_components": "bc494d9d04e6528c4506edf65d28fa7edef1c963615a83d0018b845167ade475",
+    "v18_test_components": "ead69a5307a16a7a23e410dc57913c2c54df10a04ac3770ba45f3aa9209a4710",
+    "v18_oof_controls": "004979c2f7f688dc6b6bab8592a88d57c02de8bfd7686ee3f42e4bf2da2c906b",
+    "v18_test_controls": "9e4823f1b82788fdba38d3c405f83856173f336e34038f8042218535f14c834f",
+    "v112_oof": "d5e0645aa9e93a21653d81f3c0f6bcbb62ed6bbe06e6cf64375f61c12629b794",
+    "v112_test": "a46f987870ac190bd5a24f0f666a2987906a32e456a8f985575e6b134841c6b7",
+    "v112_metadata": "aa58ed4eeb004e98028e900611e62b1754c3ece64932cdde8d6d16c352c5cdef",
+    "cv": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+    "submission_template": "0ea207a67d48550a0c488d8a24953ad36505e2511257df2a1c41920eee4007fd"
+  },
+  "artifact_hashes": {
+    "versions/v1.13_weighted_target_alignment/artifacts/alignment_report.json": "bc28c089804264c3a5335256b91492a1fddbd24e8863c0ff0eff9ec5c9ea3a2d",
+    "versions/v1.13_weighted_target_alignment/artifacts/oof_predictions.parquet": "4ae1da72a416e8154f0f885f5c75fb39b4f006b19cd0de86d2f5ab8dec63fb93",
+    "versions/v1.13_weighted_target_alignment/artifacts/submission_v1.13_weighted_alignment_balanced_v1.csv": "d42e87f5d33f3291113d8b9d7e2fbc6f9119be37cc7f901a3a831aa81305bb80",
+    "versions/v1.13_weighted_target_alignment/artifacts/test_predictions.csv": "cdd31546ed4ebe69a8208a4634f9e7afab0fe5997be13c045e1e3ad9fa0dd201",
+    "versions/v1.13_weighted_target_alignment/models/final.json": "93574b8616f03b3e2545854bec6d15ac941ae056dda0c6b2246731764417d39b",
+    "versions/v1.13_weighted_target_alignment/models/outer_fold0.json": "d5e7468aaabbf788f8a06ffec3d6501640596ca18cb881609f87130d3ab6f8ba",
+    "versions/v1.13_weighted_target_alignment/models/outer_fold1.json": "ec94791d1c8f33e2173bc9f6583b5212d93443c375c92314cf8be4b14ca04903",
+    "versions/v1.13_weighted_target_alignment/models/outer_fold2.json": "3add9c701273ae61108d4c79f8558b3e4b3b661f7d5982564b9af81c150c0933",
+    "versions/v1.13_weighted_target_alignment/models/outer_fold3.json": "461e7b57d3eb260c76c03dbc81daae15bf0509f3a9b6867b7a96b7316b2b6c95",
+    "versions/v1.13_weighted_target_alignment/models/outer_fold4.json": "5e77859d8ce261878e88275fe526751a82b8f1120a2cb1dcdcb70bfaa0d1a8b7",
+    "versions/v1.13_weighted_target_alignment/results/county_metrics.csv": "d96751f1c98b2f27f017999a586dce1a53f3c6118419b0da595c0193a3fc6a0f",
+    "versions/v1.13_weighted_target_alignment/results/fold_metrics.csv": "845ada1d3e70e2abdcb2de00247c95c757c1383fc0578d0ebf4ed3d3d44e5349",
+    "versions/v1.13_weighted_target_alignment/results/high_osi_metrics.csv": "9aa9908b99048ea08590ca9d2a0d21027bb318ba55c693dde8ae4ea487fde730",
+    "versions/v1.13_weighted_target_alignment/results/lead_weights.csv": "feddfee78c0e77acca8304cf410c85c85a8380e86b610c581b987e3e5cec71d9",
+    "versions/v1.13_weighted_target_alignment/results/paired_county_bootstrap.csv": "9e1ff0f1111e96451589f44072aeccba9bc396b56e9da803fafc5187ca93e46f",
+    "versions/v1.13_weighted_target_alignment/results/promotion_decision.json": "1b62add0954466da3d97dadea7d713b7c30bf13dc7e5a4d9fbaa67d16460a4ef",
+    "versions/v1.13_weighted_target_alignment/results/summary_metrics.csv": "06d5fa131b0628226ee01120e8f02c1f76c859695a2209addfd379102e083029"
+  }
+}

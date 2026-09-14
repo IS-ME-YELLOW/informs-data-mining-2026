@@ -1,0 +1,242 @@
+{
+  "inputs": {
+    "input_hashes": {
+      "feature_names": "44b484bad63b7f0b82eabbc5a2a894271ebf1e475a79ce933a3373a3cc627a2c",
+      "features_train": "2d4753ed3a4cb4938ea8af5fe54cb80b04d8509ede84766bd786fef5f3dc6dff",
+      "features_test": "75ce0e77c9caaf4885ef89bc6289d6e42258574b00e81ff6509dbe23b0f01d09",
+      "targets_train": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9",
+      "meta_train": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+      "meta_test": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+      "component_targets": "679ca67cb91a54c169dabb8cb420b5d4e9f076a24b34c35d519f6e7f4958e3b8",
+      "v18_oof_components": "bc494d9d04e6528c4506edf65d28fa7edef1c963615a83d0018b845167ade475",
+      "v18_test_components": "ead69a5307a16a7a23e410dc57913c2c54df10a04ac3770ba45f3aa9209a4710",
+      "primary_folds": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+      "v112_oof": "d5e0645aa9e93a21653d81f3c0f6bcbb62ed6bbe06e6cf64375f61c12629b794",
+      "v112_test": "a46f987870ac190bd5a24f0f666a2987906a32e456a8f985575e6b134841c6b7"
+    },
+    "v112_available": true
+  },
+  "folds": [
+    {
+      "split": "balanced_v1",
+      "path": "D:\\Stella\\Git\\informs-data-mining-2026\\cv\\cv_assignments_balanced_v1_seed42.csv",
+      "sha256": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+      "counties": 239,
+      "fold_counts": {
+        "0": 48,
+        "1": 47,
+        "2": 48,
+        "3": 48,
+        "4": 48
+      },
+      "assignment_fingerprint": "121a899a9231638ed8d48eafbdcd0c1836017f690eadd6b7f4fc7ba66a5f0f08"
+    },
+    {
+      "split": "repeat_seed20260921",
+      "path": "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\folds\\cv_assignments_state_severity_balanced_seed20260921.csv",
+      "sha256": "5dacb73f3ccc83c788251aec6ff6722645a3e4a9c9e1fd5edaf4cf0b0d3b8727",
+      "counties": 239,
+      "fold_counts": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 47,
+        "4": 48
+      },
+      "assignment_fingerprint": "30869b043886eb9881364545a732488c19a7c5117c69b9c23468c054ae8b7196"
+    },
+    {
+      "split": "repeat_seed20260922",
+      "path": "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\folds\\cv_assignments_state_severity_balanced_seed20260922.csv",
+      "sha256": "0c17ffd4ab66454b0e2eaa003ade1161808684e00dc87f894637f420e098ee92",
+      "counties": 239,
+      "fold_counts": {
+        "0": 47,
+        "1": 48,
+        "2": 48,
+        "3": 48,
+        "4": 48
+      },
+      "assignment_fingerprint": "7d0e7b1d5f576ad95601459c74bf6f8e584339722bf6f8e1adb552f80ec3ebab"
+    }
+  ],
+  "v18_c1": {
+    "c1_checks": [
+      {
+        "dataset": "oof",
+        "horizon": "osi_target_t24h",
+        "finite": 28680,
+        "min": 0.0,
+        "max": 0.12131757109497565
+      },
+      {
+        "dataset": "oof",
+        "horizon": "osi_target_t48h",
+        "finite": 22944,
+        "min": 0.0,
+        "max": 0.061932949881020403
+      },
+      {
+        "dataset": "test",
+        "horizon": "osi_target_t24h",
+        "finite": 9072,
+        "min": 0.0,
+        "max": 0.13615416447251608
+      },
+      {
+        "dataset": "test",
+        "horizon": "osi_target_t48h",
+        "finite": 9072,
+        "min": 0.0,
+        "max": 0.1380550291797767
+      }
+    ]
+  },
+  "v112": {
+    "status": "aligned",
+    "checks": [
+      {
+        "horizon": "osi_target_t24h",
+        "finite": 28680
+      },
+      {
+        "horizon": "osi_target_t48h",
+        "finite": 22944
+      }
+    ],
+    "oof_sha256": "d5e0645aa9e93a21653d81f3c0f6bcbb62ed6bbe06e6cf64375f61c12629b794",
+    "test_sha256": "a46f987870ac190bd5a24f0f666a2987906a32e456a8f985575e6b134841c6b7"
+  },
+  "models": {
+    "split": "balanced_v1",
+    "available_sidecars": 120,
+    "checked_models": [
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__dart_huber__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__dart_huber__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__dart_huber__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__dart_huber__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__dart_huber__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q50__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q50__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q50__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q50__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q50__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q90__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q90__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q90__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q90__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__quantile_q90__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p13__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p13__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p13__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p13__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p13__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p15__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p15__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p15__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p15__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p15__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p17__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p17__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p17__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p17__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t24h__tweedie_p17__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__dart_huber__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__dart_huber__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__dart_huber__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__dart_huber__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__dart_huber__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q50__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q50__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q50__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q50__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q50__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q90__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q90__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q90__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q90__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__quantile_q90__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p13__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p13__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p13__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p13__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p13__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p15__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p15__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p15__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p15__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p15__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p17__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p17__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p17__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p17__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__D_t__t48h__tweedie_p17__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__dart_huber__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__dart_huber__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__dart_huber__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__dart_huber__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__dart_huber__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q50__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q50__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q50__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q50__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q50__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q90__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q90__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q90__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q90__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__quantile_q90__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p13__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p13__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p13__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p13__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p13__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p15__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p15__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p15__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p15__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p15__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p17__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p17__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p17__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p17__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t24h__tweedie_p17__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__dart_huber__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__dart_huber__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__dart_huber__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__dart_huber__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__dart_huber__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q50__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q50__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q50__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q50__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q50__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q90__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q90__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q90__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q90__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__quantile_q90__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p13__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p13__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p13__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p13__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p13__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p15__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p15__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p15__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p15__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p15__fold4.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p17__fold0.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p17__fold1.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p17__fold2.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p17__fold3.txt",
+      "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\models\\balanced_v1\\balanced_v1__P_t__t48h__tweedie_p17__fold4.txt"
+    ]
+  },
+  "nested_predictions": {
+    "status": "verified",
+    "path": "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\predictions\\primary_all_candidates_nested_oof.parquet",
+    "sha256": "de02bc1ed7bb3b9054dc9f5309bc94d6a1d2aa5900a2ce6cbd4cf35f1185d525",
+    "columns": 96
+  }
+}

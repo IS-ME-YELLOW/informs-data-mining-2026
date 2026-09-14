@@ -1,0 +1,20 @@
+{
+  "mode": "tail_specialist",
+  "horizon": "osi_target_t06h",
+  "training_folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "tail_quantile": 0.95,
+  "threshold": 0.031178370179708325,
+  "specialist": "profile_pd_weighted_l2",
+  "alpha": 0.4022250266503809,
+  "inner_fold_wins": 3,
+  "inner_score": 0.9973118355659428,
+  "fallback_reason": null,
+  "scope": "final",
+  "evaluation_use": "test inference only"
+}

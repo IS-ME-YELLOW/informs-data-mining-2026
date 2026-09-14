@@ -1,0 +1,22 @@
+|--- cumul_gust_since_onset <= 1506.75
+|   |--- min_t2m_next_48h <= 267.19
+|   |   |--- total_tp_next_48h <= 12.75
+|   |   |   |--- class: 0
+|   |   |--- total_tp_next_48h >  12.75
+|   |   |   |--- class: 0
+|   |--- min_t2m_next_48h >  267.19
+|   |   |--- last_osi <= 0.07
+|   |   |   |--- class: 0
+|   |   |--- last_osi >  0.07
+|   |   |   |--- class: 0
+|--- cumul_gust_since_onset >  1506.75
+|   |--- total_tp_next_48h <= 7.85
+|   |   |--- min_t2m_next_48h <= 262.91
+|   |   |   |--- class: 0
+|   |   |--- min_t2m_next_48h >  262.91
+|   |   |   |--- class: 0
+|   |--- total_tp_next_48h >  7.85
+|   |   |--- gust_mean_next_48h <= 28.79
+|   |   |   |--- class: 0
+|   |   |--- gust_mean_next_48h >  28.79
+|   |   |   |--- class: 0

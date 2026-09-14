@@ -1,0 +1,5 @@
+horizon,model,reference,counties,replicates,rmse_delta,rmse_ci_low,rmse_ci_high,rmse_probability_improved,mae_delta,mae_ci_low,mae_ci_high,mae_probability_improved
+osi_target_t24h,weather_gate_depth2,v1.12,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+osi_target_t24h,weather_gate_depth3,v1.12,239,2000,4.1985519190317067e-07,-6.462374560551676e-07,1.7303759136443138e-06,0.256,4.272918648728745e-07,-3.5791210234678917e-07,1.5233491446024173e-06,0.152
+osi_target_t48h,weather_gate_depth2,v1.12,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+osi_target_t48h,weather_gate_depth3,v1.12,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

@@ -1,0 +1,22 @@
+{
+  "family": "v1.12+ExtraTrees",
+  "source_names": [
+    "v1.12",
+    "ET-B"
+  ],
+  "weights": [
+    0.3666212933380332,
+    0.6333787066619668
+  ],
+  "selected_extratrees": "ET-B",
+  "tail_quantile": 0.95,
+  "risk_source": "v1.8",
+  "risk_threshold": 0.01210319853212704,
+  "fit_rows_below_threshold": 17831,
+  "uses_outer_labels": false,
+  "scope": "outer",
+  "fold": 3,
+  "horizon": "osi_target_t48h",
+  "train_rows": 18336,
+  "outer_rows": 4608
+}

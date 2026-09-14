@@ -1,0 +1,12 @@
+{
+  "mode": "v1.12_unchanged",
+  "horizon": "osi_target_t06h",
+  "training_folds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "scope": "outer",
+  "outer_fold": 4
+}

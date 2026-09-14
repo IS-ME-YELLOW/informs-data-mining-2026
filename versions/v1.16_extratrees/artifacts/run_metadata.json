@@ -1,0 +1,99 @@
+{
+  "experiment_version": "v1.16_extratrees",
+  "family": "extratrees",
+  "feature_version": "v1.5.6",
+  "feature_count": 163,
+  "cv_version": "balanced_v1",
+  "seed": 42,
+  "horizons": [
+    "osi_target_t24h",
+    "osi_target_t48h"
+  ],
+  "configs": {
+    "ET-A": {
+      "n_estimators": 600,
+      "criterion": "squared_error",
+      "random_state": 42,
+      "n_jobs": -1,
+      "max_features": 0.5,
+      "min_samples_leaf": 5,
+      "bootstrap": false
+    },
+    "ET-B": {
+      "n_estimators": 600,
+      "criterion": "squared_error",
+      "random_state": 42,
+      "n_jobs": -1,
+      "max_features": 0.7,
+      "min_samples_leaf": 20,
+      "bootstrap": false
+    }
+  },
+  "pipeline": [
+    "SimpleImputer(strategy=median)",
+    "extratrees"
+  ],
+  "imputer_fit_scope": "each outer training fold only; final imputer uses all finite-target training rows for test inference",
+  "runtime_seconds": 331.51500290000695,
+  "created_at": "2026-09-13T16:06:34+08:00",
+  "python": "3.11.13 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:03:15) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "libraries": {
+    "numpy": "2.3.3",
+    "pandas": "2.3.3",
+    "sklearn": "1.7.2",
+    "joblib": "1.5.2"
+  },
+  "input_hashes": {
+    "versions/v1.12_tail_protected_ensemble/artifacts/oof_predictions.parquet": "d5e0645aa9e93a21653d81f3c0f6bcbb62ed6bbe06e6cf64375f61c12629b794",
+    "versions/v1.12_tail_protected_ensemble/artifacts/test_predictions.csv": "a46f987870ac190bd5a24f0f666a2987906a32e456a8f985575e6b134841c6b7",
+    "versions/v1.12_tail_protected_ensemble/artifacts/submission_v1.12_tail_protected_balanced_v1.csv": "ab434b3d31c7b43900ae77aefdec6ccd49719c6b132ebcf44adabc0d84362a9e",
+    "cache/features_train_v1.5.6.parquet": "2d4753ed3a4cb4938ea8af5fe54cb80b04d8509ede84766bd786fef5f3dc6dff",
+    "cache/targets_train_v1.5.6.parquet": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9",
+    "cache/meta_train_v1.5.6.parquet": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+    "cache/features_test_v1.5.6.parquet": "75ce0e77c9caaf4885ef89bc6289d6e42258574b00e81ff6509dbe23b0f01d09",
+    "cache/meta_test_v1.5.6.parquet": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+    "cache/feature_names_v1.5.6.json": "44b484bad63b7f0b82eabbc5a2a894271ebf1e475a79ce933a3373a3cc627a2c",
+    "cv/cv_assignments_balanced_v1_seed42.csv": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021"
+  },
+  "artifact_hashes": {
+    "versions/v1.16_extratrees/artifacts/alignment_report.json": "8b5b28ead6c475ba43ad44860a72d5b8d8dcfe4fc1aedc635e743bc0d58bf120",
+    "versions/v1.16_extratrees/artifacts/oof_predictions.parquet": "5a165e0037205bd9817360a3d52ee3d53ffc5e566b72fbb0cd71693103e6efc6",
+    "versions/v1.16_extratrees/artifacts/submission_ET-A_balanced_v1.csv": "3314f5683516f264586616d9438984c09651957df91ac9b011707c11a212bcd4",
+    "versions/v1.16_extratrees/artifacts/submission_ET-B_balanced_v1.csv": "dae80bac9a90dc1f5cc00f1a00d66907259dc5a070ed2a7f90c78159e8796cb0",
+    "versions/v1.16_extratrees/artifacts/test_predictions.parquet": "5d5d61ab83441a514b86689bd2d4790dd79cf77e8c101eacdce4ce6587a3b13b",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t24h_final.joblib": "5c9bbb247329efd47ae555e950cf90532e3ca63d9af0bd6413409183ecfcc7cd",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t24h_fold0.joblib": "7bf61bac6814c0e16745d3a83ad51237788a3520d92ebc01e03e5ff4eac3d2eb",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t24h_fold1.joblib": "0c4e48afecfdcd674971df454d9351992a2ec0359187fd629a5ce6f770991a43",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t24h_fold2.joblib": "fe3d5cfbfd211976c1bfe284c5868aa04ca1fb0cb9b04088ef0c5946b9f8cb22",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t24h_fold3.joblib": "504dbbfca96e04cddca7c7455dc9503c99dbd1e179dad5802f0db1cdb8d4cf3a",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t24h_fold4.joblib": "e6d7310c9bd5ac16c22f625f8b079d6c9487f5330c072414e6274e6d685424f8",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t48h_final.joblib": "3b0d74de7421e0d4a463669b54bff90825ea13335f856ed0d5dddb771d674d93",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t48h_fold0.joblib": "f7e54af93570b6b074ef515333332511dcfb1cdc4eb3ab1665dac0047259a0bd",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t48h_fold1.joblib": "0ec05b641c0c00e967fde66c8307c24a8038d73ae5c652ea116b8fce8049f68b",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t48h_fold2.joblib": "162dede19d770caf1084c2975b5ce88af5cba473e82476aee151ddd7be6515ba",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t48h_fold3.joblib": "8b7bbd8aeb21c491e2a37e4b24739d45ae0fde441428d16121cea6e5b4228d9d",
+    "versions/v1.16_extratrees/models/et_a_osi_target_t48h_fold4.joblib": "e4ce065c99a27156e08adc3a0760121c79dfc75d9285c61cc5b04d917e2d2461",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t24h_final.joblib": "a850961e63860870b1c4db504f9101120b9ff7a0210633a72beeda2397fbdfb0",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t24h_fold0.joblib": "ec46498f0c390abb9ba434848cfb8917c5c1d80d842b438d44d541d0e432638b",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t24h_fold1.joblib": "2099039d84f07323f5bf48d51ab608e08a6304faa9f3025a67732242a29eaf21",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t24h_fold2.joblib": "14f49bab0585aff1b9086fe2bd388078ef122bedcfa96467ba2ff89fac441cef",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t24h_fold3.joblib": "71966a90b0bdddeec72f7f8975cc1659cd40a85371b7fb6b3ab919fa6ed627e6",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t24h_fold4.joblib": "78c3443d2490e3d3af078103e10a0ec2a7842a55d30846191f5e359c7b754cd8",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t48h_final.joblib": "afc39e9ab54259cbd597736a7d1151106d4a133b8bd8ba05abf983993770faa7",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t48h_fold0.joblib": "2e837a4c6519e61bb47d3355dda21b559f1d3f6b09866398e64016c401c12505",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t48h_fold1.joblib": "e1582f184a906509715760c37ee2c5d165b14d93e97f50cb41a840d439df399d",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t48h_fold2.joblib": "5bbb98b72639c6de1b6c9797552f41eb0679ea76e8fe9da15b4639a9dd379275",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t48h_fold3.joblib": "23020e369b5e700dcb975b78704bf371cb9e984be16b2868f1c19697ef070a84",
+    "versions/v1.16_extratrees/models/et_b_osi_target_t48h_fold4.joblib": "5563e317840260c80f71926ebaab4a0860ff018203a169759ecb84ea66f6c20b",
+    "versions/v1.16_extratrees/results/county_metrics.csv": "ee8a7ea74ed96f1a7131db9bc114257aabfa3c362cac858674c9d7819ae8f495",
+    "versions/v1.16_extratrees/results/feature_importance.csv": "79e9435ea7972d85bcffc1bd831417514269cf100aa7416a9c0e592d2906ad49",
+    "versions/v1.16_extratrees/results/fit_runtime.csv": "d41efef06bd542d9b45747d774ff49698cada6bd3d77ab3f489fe67c32d2f744",
+    "versions/v1.16_extratrees/results/fold_metrics.csv": "4720c4ae37e6412bbbb265c070c74c9849f82581b2da21a7a9f85a1b898250ff",
+    "versions/v1.16_extratrees/results/high_osi_metrics.csv": "f38b2af9c631861baf113e87e3a6fa505982327a0cea226717664c843462189e",
+    "versions/v1.16_extratrees/results/paired_county_bootstrap.csv": "12f312fd86c50ba90f8a8fcc9755595d8dd00201d4f31e06714f3e937ab4463d",
+    "versions/v1.16_extratrees/results/prediction_disagreement.csv": "83385f5af28f94ee54cc7d43a86ce53c592229634f535be1546a158ac541db24",
+    "versions/v1.16_extratrees/results/residual_correlations.csv": "9998ebef8c24428490349d6ebd61b80790bf9f29974a9ecf7c4287d547175ddc",
+    "versions/v1.16_extratrees/results/summary_metrics.csv": "968bd4d298ff756b93d6885628ae5fcdedae80bbec1da7bdbec3aabe297fe110"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "family": "v1.12+ExtraTrees+RandomForest",
+  "source_names": [
+    "v1.12",
+    "ET-B",
+    "RF"
+  ],
+  "weights": [
+    0.6476866766202054,
+    0.34151469663158257,
+    0.010798626748212053
+  ],
+  "selected_extratrees": "ET-B",
+  "tail_quantile": 0.95,
+  "risk_source": "v1.8",
+  "risk_threshold": 0.011306512330508296,
+  "fit_rows_below_threshold": 17816,
+  "uses_outer_labels": false,
+  "scope": "outer",
+  "fold": 2,
+  "horizon": "osi_target_t48h",
+  "train_rows": 18336,
+  "outer_rows": 4608
+}

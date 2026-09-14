@@ -1,0 +1,82 @@
+{
+  "created_at": "2026-09-13T13:21:01+08:00",
+  "python": "3.11.13 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:03:15) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "libraries": {
+    "numpy": "2.3.3",
+    "pandas": "2.3.3"
+  },
+  "experiment_version": "v1.14_tail_specialist_reuse",
+  "feature_version": "v1.5.6",
+  "cv_version": "balanced_v1",
+  "seed": 42,
+  "bootstrap_seed": 20260916,
+  "specialists": {
+    "base_pd_weighted_l2": {
+      "P_t": "weighted_l2",
+      "N_t": "huber",
+      "D_t": "weighted_l2",
+      "R_t": "huber"
+    },
+    "profile_pd_weighted_l2": {
+      "P_t": "weighted_l2",
+      "N_t": "huber",
+      "D_t": "weighted_l2",
+      "R_t": "huber"
+    }
+  },
+  "specialist_preselection": "fixed unscreened P/D weighted-L2 with N/R Huber; does not use v1.9 best-subset selection",
+  "tail_quantile": 0.95,
+  "strict_nested_cv": "Every outer specialist, tail threshold, and alpha is learned on the other four county folds; final models are test-only.",
+  "runtime_seconds": 1.0430032000003848,
+  "input_hashes": {
+    "v18_oof": "004979c2f7f688dc6b6bab8592a88d57c02de8bfd7686ee3f42e4bf2da2c906b",
+    "v19_oof_components": "aa795a84b7cc4c9f48bf51a102c673a82339b15dd4e885661cec7b5233a05e42",
+    "v19_test_components": "7e16b1f4bd97b14d9bedfece82f06a9d4501d5e14088aa80d2130e3479b5d276",
+    "v19_test_controls": "285da247e522bdb4386e64320c3c8d2067f1cf5ce1f2d7882644edbd3bad6428",
+    "v19_metadata": "6bd16afadc02455ae4099b848bcde5c931baff4a62323f9854a7458b28c614da",
+    "v112_oof": "d5e0645aa9e93a21653d81f3c0f6bcbb62ed6bbe06e6cf64375f61c12629b794",
+    "v112_test": "a46f987870ac190bd5a24f0f666a2987906a32e456a8f985575e6b134841c6b7",
+    "v112_metadata": "aa58ed4eeb004e98028e900611e62b1754c3ece64932cdde8d6d16c352c5cdef",
+    "cv": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+    "submission_template": "0ea207a67d48550a0c488d8a24953ad36505e2511257df2a1c41920eee4007fd"
+  },
+  "artifact_hashes": {
+    "versions/v1.14_tail_specialist_reuse/artifacts/alignment_report.json": "74e9f9ee7f22432316a00df7606fadcdbd258ad34a1f458bbbd63328cb25d51b",
+    "versions/v1.14_tail_specialist_reuse/artifacts/oof_predictions.parquet": "2722e67ea424cb612ccb0cdd0315ce22aca510349490696719a364e5d21d5e0e",
+    "versions/v1.14_tail_specialist_reuse/artifacts/submission_v1.14_tail_specialist_balanced_v1.csv": "1b1f97aeede53e9c3ffb7b33e16fb9c4a5b4b09101c7b6bfcc9371d9643c1829",
+    "versions/v1.14_tail_specialist_reuse/artifacts/test_predictions.csv": "d82a3b262ddd1b2dd6bd4c5320343e30726d19663e4be06d342c52b05b2f312b",
+    "versions/v1.14_tail_specialist_reuse/models/final_osi_target_t01h.json": "5bf66ded301083fe52082d563ab18a153ab153d7cc2e3786c64c60041bbcce9a",
+    "versions/v1.14_tail_specialist_reuse/models/final_osi_target_t06h.json": "9552544f03575a3e20c0e2a2e768e552e5a67504cb90fb1278648153314c10fb",
+    "versions/v1.14_tail_specialist_reuse/models/final_osi_target_t24h.json": "7288501fc60a80090453bcd90b9720076723ba654b7fec5c2db6a78e17e4064a",
+    "versions/v1.14_tail_specialist_reuse/models/final_osi_target_t48h.json": "dc782d062c8b56ce548832a7f92ddd97b2ac30e25334cfcbaee1610623d87974",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold0_osi_target_t01h.json": "24c468b08d254916140effca0a7922f160806550764e86d479b95396c6913e86",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold0_osi_target_t06h.json": "d8046ee3427a1cf84c64e98c5923ebb2791ac3c960bf4896aa26ad67fd6d028c",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold0_osi_target_t24h.json": "9b6c40031a00574a7889df1da0bf02a31d0ac80702cecbba6d90fa0d5ee083d9",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold0_osi_target_t48h.json": "69f689556c12d26f1d8b6a548575fc4851f349e03d60ed3827ebac3e343cf54b",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold1_osi_target_t01h.json": "b3ec39831b75f2964decf66a93555934ea09a58855791fa2d3272c4dc18b8430",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold1_osi_target_t06h.json": "74798ce1811fc48337148e665ac87eed477d3e653b0180baa3d56dbfe81e8bf0",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold1_osi_target_t24h.json": "b3a6d12b432e05e0c9044c8a794c091433933b96b8dbcb890d94c2e750398653",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold1_osi_target_t48h.json": "0a387e81119bddc4493be82318fd10cc4fbea34e321c2278f710c3cec53de69c",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold2_osi_target_t01h.json": "20d041c414f7b8b1ac5176c5776b5a5db085981ca25fc5878a34142fdd505d79",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold2_osi_target_t06h.json": "3e99bdaddc5266ca29f01a0944ec7327c062e45a432b2f50d1bcba4acca3bca8",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold2_osi_target_t24h.json": "0b185e356bca9a27ecac583599f112c80da547f3277063ea8285bf620dcf3d85",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold2_osi_target_t48h.json": "5cd6f3b7a4fe78395d3ae2b62465c6f9f9382bcb761cf34b1c77e529a4134384",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold3_osi_target_t01h.json": "1ebc8eee4b14709791160291a176fac547554dad0348eee2fc4d775ebc32fee6",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold3_osi_target_t06h.json": "0946aa6fd1765686619686ffa071c6ba644d5f9e8b493684d23e9421ffa7fd4e",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold3_osi_target_t24h.json": "3dc7298488fd77642d9aebf2ed714a9a55bc5d579bc56035762b05df2a2f8ed9",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold3_osi_target_t48h.json": "52b1b7db78b0f4eb602aa6af1877a9556ccff7607b589f11eca4068b84d64879",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold4_osi_target_t01h.json": "e6d18fe494c01b109d0ba5c577cdc668f0dd799d32280f4c4a921b652bb3d4bd",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold4_osi_target_t06h.json": "75a5c5ec08d67aef49fa7b09ca5f3297844f77f4fb4f6b8f718ca89844616f67",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold4_osi_target_t24h.json": "5fbe1fa0c817e8f35a5009721d633d912b5770994b7d0d78f7d06824bc672754",
+    "versions/v1.14_tail_specialist_reuse/models/outer_fold4_osi_target_t48h.json": "64070c78db934e28e3eaa9a65312a31eb6df8c7b504a20cd66a9ca07c9d109bd",
+    "versions/v1.14_tail_specialist_reuse/results/county_metrics.csv": "9e8232fcb333b831cf578d2a567fc8a6f31fe6344835e8b5bcd2c49ed5976fd8",
+    "versions/v1.14_tail_specialist_reuse/results/fold_metrics.csv": "b81ba9721a2c939667b42770c72b0fa7a20a74e5802dbad2df101be7eac1a6e8",
+    "versions/v1.14_tail_specialist_reuse/results/high_osi_metrics.csv": "c3d710ce6f6692d7f1ba97ab5f7d9b483d3876e90c34e1e7cd68a1c226d64bb3",
+    "versions/v1.14_tail_specialist_reuse/results/inner_selection_diagnostics.json": "f9a9fc1deb1d3650f431ea62913ffa8ae2795f7f2a50dbdb1d3d13637e504b5e",
+    "versions/v1.14_tail_specialist_reuse/results/paired_county_bootstrap.csv": "135f0df7a23219df19b832364ecd5035ad6aacb34e5ffcc8147e3b91f5b05703",
+    "versions/v1.14_tail_specialist_reuse/results/promotion_decision.json": "721389d679446ffa4284027c26b5439a7ebabe601df2c2b1d4c0692105fa7595",
+    "versions/v1.14_tail_specialist_reuse/results/specialist_diagnostics.csv": "806d3cf8e7ecc701193536dd0e75889fc42ac3beefd487bc065f2e6f95b8241a",
+    "versions/v1.14_tail_specialist_reuse/results/summary_metrics.csv": "c29ecc9505d3c117854c043968ca5ad4ac36b56cc4b9260a12c827f18115ec9d"
+  }
+}

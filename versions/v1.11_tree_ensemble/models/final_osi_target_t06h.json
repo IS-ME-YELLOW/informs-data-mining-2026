@@ -1,0 +1,30 @@
+{
+  "train_rows": 32982,
+  "weights": [
+    0.0,
+    0.7053579223990679,
+    0.08007000650211406,
+    0.21457207109881804,
+    0.0,
+    0.0
+  ],
+  "safe_alpha": 0.9562040047510029,
+  "horizon": "osi_target_t06h",
+  "candidate_names": [
+    "lgbm_direct",
+    "lgbm_component",
+    "xgboost_direct",
+    "catboost_direct",
+    "xgboost_component",
+    "catboost_component"
+  ],
+  "baseline": "lgbm_component",
+  "post_process": {
+    "clip": [
+      0.0,
+      0.65
+    ],
+    "zero_threshold": 0.001
+  },
+  "evaluation_use": "test inference only; full-OOF fit is not used for reported OOF scores"
+}

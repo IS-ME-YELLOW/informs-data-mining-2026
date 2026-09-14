@@ -1,0 +1,69 @@
+{
+  "expected": {
+    "feature_version": "v1.5.6",
+    "cv_version": "balanced_v1",
+    "seed": 42
+  },
+  "sources": {
+    "lgbm": {
+      "path": "versions\\v1.8\\run_metadata.json",
+      "feature_version": "v1.5.6",
+      "cv_version": "balanced_v1",
+      "seed": 42
+    },
+    "xgb_direct": {
+      "path": "versions\\v1.9_xgboost\\run_metadata.json",
+      "feature_version": "v1.5.6",
+      "cv_version": "balanced_v1",
+      "seed": 42
+    },
+    "cat_direct": {
+      "path": "versions\\v1.10\\run_metadata.json",
+      "feature_version": "v1.5.6",
+      "cv_version": "balanced_v1",
+      "seed": 42
+    },
+    "xgb_component": {
+      "path": "versions\\v2\\v2.4\\run_metadata.json",
+      "feature_version": "v1.5.6",
+      "cv_version": "balanced_v1",
+      "seed": 42
+    },
+    "cat_component": {
+      "path": "versions\\v2\\v2.5\\run_metadata.json",
+      "feature_version": "v1.5.6",
+      "cv_version": "balanced_v1",
+      "seed": 42
+    }
+  },
+  "row_count": 34416,
+  "key_columns": [
+    "fipsCode",
+    "timestamp_et",
+    "hour_idx",
+    "stateAbbr"
+  ],
+  "alignment": {
+    "lgbm": "exact",
+    "xgb_direct": "exact",
+    "cat_direct": "exact",
+    "xgb_component": "exact",
+    "cat_component": "exact"
+  },
+  "target_and_prediction_masks": "exact for every source and horizon",
+  "lgbm_component_rule": {
+    "t01h": "C3",
+    "t06h": "C3",
+    "t24h": "C1",
+    "t48h": "C1"
+  },
+  "fold_alignment": "balanced_v1 county mapping applied identically to every aligned OOF source",
+  "fold_row_counts": {
+    "0": 6912,
+    "1": 6768,
+    "2": 6912,
+    "3": 6912,
+    "4": 6912
+  },
+  "county_count": 239
+}

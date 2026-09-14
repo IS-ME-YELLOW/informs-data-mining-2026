@@ -1,5 +1,46 @@
 # INFORMS 2026 Data Mining Society Data Challenge — 初版方案
 
+## 2026-09-13：不同树模型及树模型集成执行计划与结论
+
+- 已固定使用 v1.5.6 的 163 列特征、`balanced_v1` 县级五折与 `seed=42`，复用 LightGBM/XGBoost/CatBoost 的直接和分量 OOF，不改写历史实验。
+- v1.11 对六路 OSI 预测执行简单平均、按 horizon 的严格嵌套非负凸融合及安全回退融合；权重和回退系数只在外折之外的四折学习。
+- v2.6 对每个 P/N/D/R × horizon 独立执行同样的嵌套融合，再按官方公式与既有后处理重组 OSI。
+- 两阶段均保存完整 OOF、测试预测、权重、逐折/逐县/高 OSI/尾部指标、paired bootstrap、元数据、SHA-256 和可重载 JSON 模型，并由独立脚本逐模型复算。
+- 两阶段 RMSE 均未通过晋级门槛，因此正式基线继续使用 v1.8（t+1/t+6 为 C3，t+24/t+48 为 C1）。暂不扩大 GRU 或批量加入新树模型，也不继续搜索大量组合。
+- 后续若验证新树族，优先要求它先提供明显更低的 OOF 残差相关；若尝试浅层 gating，必须完整嵌套在县级外折内，并显式约束 t+48 与高 OSI 尾部。
+
+详见 `versions/v1.11_tree_ensemble/Plan_v1.11.md` 与 `versions/v2/v2.6_component_tree_ensemble/Plan_v2.6.md`。
+
+### 同日后续：尾部保护、提前量加权与浅层门控
+
+- v1.12 按 v1.11 的失败结构固定最小尾部保护：t+1/t+6 保留 v1.8；t+24/t+48 在内层 v1.8 正预测 q95 以下用六路简单平均，以上回退 v1.8。阈值逐外折从其他四折计算，不使用外折标签。
+- v1.12 在 t+24/t+48 的 RMSE 分别改善 1.957%/0.567%，达到 5/5、4/5 折改善，县级 bootstrap 95% 区间完全低于 0；短提前量不变，故通过既定晋级标准。
+- v1.13 检验 C3 的多提前量静态加权；v1.14 严格嵌套复用 v1.9 的 L2/加权 L2/Tweedie/hurdle 专家；v1.15 检验 q90/q95 三叶浅层风险门控。三者均未超过 v1.12，停止继续搜索相近权重或更深 gating。
+- 当前内部 OOF 最佳方案更新为 v1.12。由于 q95 方向来自同一套 OOF 的 v1.11 诊断，提交前仍建议用重复县级划分或榜单作一次独立确认；这不改变外层折阈值和评分无泄漏的事实。
+
+详见 `versions/v1.12_tail_protected_ensemble/`、`versions/v1.13_weighted_target_alignment/`、`versions/v1.14_tail_specialist_reuse/` 与 `versions/v1.15_shallow_risk_gate/`。
+
+### 同日继续：ExtraTrees、Random Forest、树族融合与天气专家
+
+- v1.16 只按 ET-A/ET-B 两个 600 树配置训练 t+24/t+48；v1.17 只按一个 600 树 RF 配置训练相同 horizon。中位数填充器严格逐折拟合并和森林一起保存。
+- ET/RF 单模相对 v1.8 的长提前量 RMSE 退化 4.53%–8.68%，因此不扩展 t+1/t+6，不做额外调参。
+- v1.18 固定比较 v1.12、v1.12+ET、v1.12+RF、v1.12+ET+RF。ET 变体、凸权重和高风险回退阈值全部只在其他四折学习；全部融合的池化 RMSE 都未超过 v1.12。
+- ET 融合在部分外折和高 OSI 子集仍有局部改善，因此按条件执行 v1.19 深度 2/3 天气机制门控。安全收缩几乎全部退回 v1.12，说明该局部多样性无法由浅树跨县泛化。
+- v1.16–v1.19 均完成实际运行、独立重载、哈希验证和结果记录，均不晋级。停止继续搜索普通 RF/ET、更多树族组合或更深天气 gating；当前内部最佳保持 v1.12。
+
+详见 `versions/v1.16_extratrees/` 至 `versions/v1.19_weather_tree_experts/`。
+
+### 同日继续：v1.20 分布敏感 LightGBM 目标
+
+- v1.20 固定 v1.5.6、`balanced_v1` 和 v1.12 比较基线，只在 t+24/t+48 替换同 horizon C1 的 P_t/D_t；测试 DART-Huber、Tweedie 1.3/1.5/1.7、quantile 0.5/0.9，共训练并重载验证 120 个折模型。
+- t+24 探索性最优为 P/D 均用 Tweedie 1.5，RMSE 仅改善 0.069%，高 OSI 前 5% RMSE 退化 0.757%，县级 bootstrap 区间跨 0，不晋级。
+- t+48 探索性最优为 P 使用 q90、D 使用 Tweedie 1.3，RMSE 改善 0.994%、5/5 折改善且高 OSI 尾部改善 1.328%，但 MAE 退化 9.482%，县级 bootstrap 区间跨 0，不晋级。
+- 残差与 v1.12 的 Pearson 相关仍达 0.998/0.993；quantile/Tweedie 的最佳迭代跨折波动很大，表明目标分布和尾部比例在县间不稳定。未执行重复训练、最终模型或提交，当前内部最佳继续保持 v1.12。
+- 当前实现只能称为“五折 OOF 候选 + 外折融合参数选择”，不是完全严格嵌套：用于外层训练行的部分候选 OOF 模型见过当前外层验证县；同时从 48 个候选中择优会产生 winner's curse。由于所有候选仍未通过门槛，该限制不会推翻“不晋级”，但任何后续 q90/尾部结论都必须在候选模型完全内嵌重训并使用独立重复县划分后才能作为晋级证据。
+- 停止继续扩大普通分布目标网格。若继续研究，只保留 t+48 q90-P 的 RMSE/MAE 冲突作为诊断，优先寻找能约束低值过预测、且在完全嵌套县级验证中提供低残差相关的方案。
+
+详见 `versions/v1.20_lgbm_distributional/`。
+
 ## 一、比赛概要
 
 **INFORMS 2026 Data Mining Society Data Challenge**
@@ -95,7 +136,7 @@ Phase 2: 序列模型 GRU/Transformer (捕捉时序动态)
 Phase 3: 集成融合 + 分阶段滚动预测
 ```
 
-**当前进展（2026-09-07）**：已完成固定 `balanced_v1` 县级五折下的三种直接 OSI 模型，以及 v2.1/v2.2/v2.3“先预测 P/N/D/R、再合成 OSI”的三种分量模型。当前 RMSE 最优组合是直接 XGBoost t+1h，加 v2.1 LightGBM t+6h/t+24h/t+48h；MAE 最优组合是 v2.2 t+1h/t+6h，加 v2.3 t+24h/t+48h。下一步优先基于六套同折 OOF 预测做按 horizon 的受约束融合和重复分组验证，再决定是否投入 GRU/Transformer。
+**当前进展（2026-09-11）**：三种树模型的直接 OSI 与 P/N/D/R 分量路线均已更新到 v1.5.6 的 163 列稳定特征集。对应版本为 v1.8 C0/C1（LightGBM）、v1.9_xgboost/v2.4（XGBoost；模型内部版本标识仍为 v1.9）和 v1.10/v2.5（CatBoost）。普通分量基线中 LightGBM 取得四个 horizon 的最低 RMSE；MAE 由 CatBoost 分量赢得 t+1/t+24/t+48、XGBoost 分量赢得 t+6。结合 v1.8 的目标小时对齐，当前 RMSE 候选为短期 t+1/t+6 使用 C3，长期尤其 t+48 保留 C1。下一步优先对这些同折 OOF 候选做约束融合和县级 paired bootstrap，不再使用 v1.5.2 的旧六套结果作为当前横向基线。
 
 ### Phase 1: LightGBM 多目标回归基线
 
