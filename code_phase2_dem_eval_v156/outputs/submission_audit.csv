@@ -1,0 +1,5 @@
+horizon,submission_rows,non_nan_rows,official_scoreable_rows,row_count_match,prediction_min,prediction_max,prediction_nan
+osi_target_t01h,9072,9009,9009,True,0.0,0.449663786509986,63
+osi_target_t06h,9072,8694,8694,True,0.0,0.30268533557334065,378
+osi_target_t24h,9072,7560,7560,True,0.0,0.14735879522682738,1512
+osi_target_t48h,9072,6048,6048,True,0.0,0.13807991852335996,3024
