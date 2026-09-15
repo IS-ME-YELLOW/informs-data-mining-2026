@@ -1,0 +1,20 @@
+{
+  "source_model": "v1.12 saved OOF",
+  "training_performed": false,
+  "scope": "diagnosis; no future outage information becomes a model input",
+  "oracle_warning": "Label-informed lower bounds quantify limitations; not deployable or estimated test performance.",
+  "focus": [
+    "42053",
+    "54015",
+    "54013",
+    "39115",
+    "39117",
+    "18013",
+    "54007"
+  ],
+  "checks": {
+    "target_alignment": true,
+    "gate_reconstruction": true,
+    "county_hour_uniqueness": true
+  }
+}

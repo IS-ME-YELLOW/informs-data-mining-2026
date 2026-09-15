@@ -1,0 +1,219 @@
+{
+  "date": "2026-09-14",
+  "scope": "reference; versions excluding archive/articles; time_series_model; active spatial branches",
+  "retrained_models": false,
+  "reader": "fastparquet; current pyarrow reader failed repetition-level histogram check",
+  "comparison": [
+    {
+      "model": "v1.5.6_direct",
+      "horizon": 1,
+      "n": 34177,
+      "rmse": 0.011979379161386963,
+      "mae": 0.003589460367520188,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.8_rule",
+      "horizon": 1,
+      "n": 34177,
+      "rmse": 0.011676613766703987,
+      "mae": 0.003502269606663692,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.12",
+      "horizon": 1,
+      "n": 34177,
+      "rmse": 0.011676613766703987,
+      "mae": 0.003502269606663692,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.5.6_direct",
+      "horizon": 6,
+      "n": 32982,
+      "rmse": 0.010676993494381172,
+      "mae": 0.003551014118356163,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.8_rule",
+      "horizon": 6,
+      "n": 32982,
+      "rmse": 0.01032059984086345,
+      "mae": 0.003300881630204454,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.12",
+      "horizon": 6,
+      "n": 32982,
+      "rmse": 0.01032059984086345,
+      "mae": 0.003300881630204454,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.5.6_direct",
+      "horizon": 24,
+      "n": 28680,
+      "rmse": 0.008463831869463107,
+      "mae": 0.0029427287130505816,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.8_rule",
+      "horizon": 24,
+      "n": 28680,
+      "rmse": 0.008372823768376928,
+      "mae": 0.0029248130640176667,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.12",
+      "horizon": 24,
+      "n": 28680,
+      "rmse": 0.008208972775349635,
+      "mae": 0.002576572092079163,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.5.6_direct",
+      "horizon": 48,
+      "n": 22944,
+      "rmse": 0.007644415252022217,
+      "mae": 0.002303061665451808,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.8_rule",
+      "horizon": 48,
+      "n": 22944,
+      "rmse": 0.007593428433818521,
+      "mae": 0.0023066625802577725,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "v1.12",
+      "horizon": 48,
+      "n": 22944,
+      "rmse": 0.007550371388803475,
+      "mae": 0.002048971348454991,
+      "evidence": "recomputed_saved_oof"
+    },
+    {
+      "model": "code_phase2_dem_eval",
+      "horizon": 1,
+      "n": 34177,
+      "rmse": 0.0119576848349751,
+      "mae": 0.0035909305794398,
+      "evidence": "saved_summary_not_independent_selection"
+    },
+    {
+      "model": "code_phase2_dem_eval",
+      "horizon": 6,
+      "n": 32982,
+      "rmse": 0.0105624359902642,
+      "mae": 0.0034586355280037,
+      "evidence": "saved_summary_not_independent_selection"
+    },
+    {
+      "model": "code_phase2_dem_eval",
+      "horizon": 24,
+      "n": 28680,
+      "rmse": 0.0083446661161519,
+      "mae": 0.0028749039825037,
+      "evidence": "saved_summary_not_independent_selection"
+    },
+    {
+      "model": "code_phase2_dem_eval",
+      "horizon": 48,
+      "n": 22944,
+      "rmse": 0.0075227626354732,
+      "mae": 0.0022715515875271,
+      "evidence": "saved_summary_not_independent_selection"
+    },
+    {
+      "model": "code_phase2_dem_eval_v156",
+      "horizon": 1,
+      "n": 34177,
+      "rmse": 0.0116273800295752,
+      "mae": 0.0037037034448231,
+      "evidence": "saved_summary_not_independent_selection"
+    },
+    {
+      "model": "code_phase2_dem_eval_v156",
+      "horizon": 6,
+      "n": 32982,
+      "rmse": 0.0106450994638671,
+      "mae": 0.0034956865165646,
+      "evidence": "saved_summary_not_independent_selection"
+    },
+    {
+      "model": "code_phase2_dem_eval_v156",
+      "horizon": 24,
+      "n": 28680,
+      "rmse": 0.0084507654692811,
+      "mae": 0.0029224371608757,
+      "evidence": "saved_summary_not_independent_selection"
+    },
+    {
+      "model": "code_phase2_dem_eval_v156",
+      "horizon": 48,
+      "n": 22944,
+      "rmse": 0.0076264917735447,
+      "mae": 0.0022420279554351,
+      "evidence": "saved_summary_not_independent_selection"
+    }
+  ],
+  "error_concentration": [
+    {
+      "horizon": 1,
+      "max_error_county": "42053",
+      "top1_county_sse_share": 0.27745304053103037,
+      "top5_county_sse_share": 0.5199622760614383,
+      "top10_county_sse_share": 0.6245248542751498,
+      "true_top5pct_sse_share": 0.8596214009229637
+    },
+    {
+      "horizon": 6,
+      "max_error_county": "42053",
+      "top1_county_sse_share": 0.18953824967531824,
+      "top5_county_sse_share": 0.441690855645222,
+      "top10_county_sse_share": 0.5682949751811197,
+      "true_top5pct_sse_share": 0.8383665623306096
+    },
+    {
+      "horizon": 24,
+      "max_error_county": "54015",
+      "top1_county_sse_share": 0.15646444328604414,
+      "top5_county_sse_share": 0.47349450187328873,
+      "top10_county_sse_share": 0.5997052978146966,
+      "true_top5pct_sse_share": 0.8534266023885724,
+      "protected_fraction_of_true_top5pct": 0.3729166666666667,
+      "protected_fraction_of_all_valid": 0.031241283124128313
+    },
+    {
+      "horizon": 48,
+      "max_error_county": "54015",
+      "top1_county_sse_share": 0.2372198951018948,
+      "top5_county_sse_share": 0.6070821243067519,
+      "top10_county_sse_share": 0.7105034530897728,
+      "true_top5pct_sse_share": 0.8891430726359397,
+      "protected_fraction_of_true_top5pct": 0.29930795847750863,
+      "protected_fraction_of_all_valid": 0.027545327754532774
+    }
+  ],
+  "v112_submission_checks": {
+    "rows": 9072,
+    "valid_rows": [
+      9009,
+      8694,
+      7560,
+      6048
+    ],
+    "identifiers_order_match": true,
+    "nan_mask_match": true
+  },
+  "cross_branch_raw_cv_hashes_equal": true,
+  "cross_branch_v156_feature_target_meta_values_equal": true
+}
