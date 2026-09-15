@@ -1,5 +1,7 @@
 # Phase 2-E 官方评估规则下的模型报告
 
+> 历史报告说明：本文件中的数值来自嵌套 alpha 修复前的运行。代码现已改为 v1.5.8-compatible 5-fold 嵌套选择，需重新训练后以 `outputs/cv_summary.csv` 和 `outputs/alpha_selection.csv` 为准。
+
 ## 1. 评估依据
 
 本报告使用比赛附件 `evaluation_procedure.pdf` 的官方规则：
@@ -103,4 +105,3 @@ alpha 现在只根据 pooled RMSE 选择，MAE 不再影响提交模型的融合
 3. 将静态图升级为天气条件动态边图；
 4. 保持完整 144 个时间片，加入 GRU/TCN 时间编码；
 5. 用隐藏测试集提交结果决定最终是否保留 DEM-GAT，而不是仅依据 OOF 结果增加更多静态 DEM 特征。
-

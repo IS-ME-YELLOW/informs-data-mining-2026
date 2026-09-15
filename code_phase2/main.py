@@ -24,7 +24,7 @@ from config import (DATA_DIR, GAT_ALPHA_GRID, GAT_DROPOUT, GAT_EPOCHS,
                     OUTPUT_DIR, PRED_END, PRED_START, SEED, SUBMISSION_FILE,
                     GEO_DBF)
 from data import (add_neighbor_feature_aggregates, load_cached_data,
-                  make_county_time_view, make_state_map)
+                  make_county_time_view, validate_feature_columns)
 from gat_model import fit_gat, predict_gat
 from metrics import clip_osi, joint_score, metrics
 from spatial import build_spatial_graph
@@ -103,7 +103,6 @@ def main():
     all_fips = sorted(set(train_fips + test_fips))
     shp_path = GEO_DBF.with_suffix(".shp")
     coords, edge_index, edge_attr = build_spatial_graph(all_fips, GEO_DBF, shp_path, k=args.k)
-    state_map = make_state_map(meta_train, meta_test)
     train_node_mask = np.asarray([f in set(train_fips) for f in all_fips], dtype=bool)
     print(f"counties={len(all_fips)} train={train_node_mask.sum()} test={(~train_node_mask).sum()} edges={edge_index.shape[1]}")
 
@@ -119,11 +118,16 @@ def main():
         result = base[horizon]
         y_arr = y[horizon].to_numpy(dtype=float)
         # View using OOF LightGBM predictions for every train county.
-        features, _, train_rows, test_rows, _, _ = make_county_time_view(
+        features, _, train_rows, test_rows, _, phase1_feature_names = make_county_time_view(
             X_train, X_test, meta_train, meta_test, result["oof"], result["test"],
-            horizon, coords, state_map)
+            horizon, coords)
         features, spatial_feature_names = add_neighbor_feature_aggregates(
-            features, _, edge_index, horizon
+            features, phase1_feature_names, edge_index, horizon
+        )
+        validate_feature_columns(
+            ["base_prediction", *phase1_feature_names, "latitude", "longitude",
+             *spatial_feature_names],
+            "GAT tensor features",
         )
         # Align the OOF target and base prediction to the same time/county grid.
         n_time, n_nodes = features.shape[:2]
@@ -155,11 +159,11 @@ def main():
             # leakage in both the residual targets and GAT input features.
             fold_train_base = result["train_by_fold"][fold_id]
             fold_base = result["test_by_fold"][fold_id]
-            fold_features, _, _, _, _, _ = make_county_time_view(
+            fold_features, _, _, _, _, fold_phase1_feature_names = make_county_time_view(
                 X_train, X_test, meta_train, meta_test, fold_train_base, fold_base,
-                horizon, coords, state_map)
+                horizon, coords)
             fold_features, _ = add_neighbor_feature_aggregates(
-                fold_features, _, edge_index, horizon
+                fold_features, fold_phase1_feature_names, edge_index, horizon
             )
             fold_base_grid = fold_features[:, :, 0].copy()
             fold_residual_grid = np.nan_to_num(y_grid - fold_base_grid, nan=0.0)

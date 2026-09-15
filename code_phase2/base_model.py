@@ -6,8 +6,9 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
-from config import (CV_FILE, DATA_DIR, HORIZONS, LGBM_EARLY_STOPPING,
-                    LGBM_PARAMS, LGBM_ROUNDS, MODEL_DIR, OSI_MAX, PROJECT_ROOT)
+from config import (CV_FILE, DATA_DIR, FORBIDDEN_INPUT_COLUMNS, HORIZONS,
+                    LGBM_EARLY_STOPPING, LGBM_PARAMS, LGBM_ROUNDS, MODEL_DIR,
+                    OSI_MAX, PROJECT_ROOT)
 from metrics import clip_osi, metrics
 
 
@@ -29,6 +30,13 @@ def train_base_models(X, y, meta, X_test, folds):
     test_by_fold is retained so GAT fold evaluation never gets a base
     prediction made by a LightGBM model trained on the validation counties.
     """
+    forbidden_train = sorted(set(map(str, X.columns)) & FORBIDDEN_INPUT_COLUMNS)
+    forbidden_test = sorted(set(map(str, X_test.columns)) & FORBIDDEN_INPUT_COLUMNS)
+    if forbidden_train or forbidden_test:
+        raise ValueError(
+            "LightGBM received competition-forbidden model input columns: "
+            f"train={forbidden_train}, test={forbidden_test}"
+        )
     results = {}
     for horizon in HORIZONS:
         print(f"[LightGBM] {horizon}")

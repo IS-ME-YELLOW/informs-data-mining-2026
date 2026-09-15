@@ -55,6 +55,13 @@ LGBM_ROUNDS = 2000
 LGBM_EARLY_STOPPING = 100
 N_FOLDS = 5
 
+# Competition compliance contract. These identifiers/metadata columns may be
+# used only for alignment, grouping, or CV construction - never as model input.
+FORBIDDEN_INPUT_COLUMNS = frozenset({
+    "timestamp_et", "fipsCode", "countyName", "stateName", "stateAbbr",
+    "in_event_window", "split", "severity_tier", "event_duration_h",
+})
+
 # Spatial graph and GAT settings. k=8 keeps the graph local while the
 # symmetrisation makes cross-county message passing stable near boundaries.
 GRAPH_K = 8
@@ -70,8 +77,8 @@ GAT_ALPHA_GRID = (0.0, 0.05, 0.10, 0.20, 0.35, 0.50, 0.75, 1.0)
 # All 211 Phase-1 cache columns have already passed the causal feature audit:
 # no prediction-window outage/OSI/lag/target column is present. Feeding the
 # complete clean cache lets the spatial model use the same weather trajectory,
-# land-cover and county context as the LightGBM base. Coordinates/state are
-# appended by data.py.
+# land-cover and county context as the LightGBM base. Coordinates are appended
+# as numeric spatial positions; identifiers and metadata are not appended.
 GAT_USE_ALL_FEATURES = True
 GAT_FEATURES = [
     "last_osi", "last_P_t", "last_N_t", "last_D_t", "last_R_t",

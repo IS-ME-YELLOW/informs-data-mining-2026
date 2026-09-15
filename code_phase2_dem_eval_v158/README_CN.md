@@ -1,10 +1,12 @@
-# Phase 2-E：按官方 RMSE 规则优化的 LightGBM + DEM + 空间 GAT 残差模型
+# Phase 2-F：v1.5.6 LightGBM + DEM + 空间 GAT 残差模型
 
-本目录是 `code_phase2_dem` 的独立评估版本，不覆盖原 DEM-GAT 模型及其输出。
+本目录是 `code_phase2_dem_eval` 的独立 v1.5.6 版本，不覆盖原 DEM-GAT 模型及其输出。
+LightGBM 和 GAT 均使用 `cache/features_*_v1.5.6.parquet`，共 163 个 Phase-1 特征；LightGBM 直接预测 OSI，使用 v1.5.6 的 Huber + RMSE 配置。v1.5.6 在 v1.5.5 的 141 列基础上增加 `pct_unmapped`、`pct_forest_classified` 和每个 horizon 的窗口长度、完整性、降水率、强阵风比例、目标时刻天气可用性，共 22 列。
+由于仓库中的 v1.5.6 文本 booster 在当前 LightGBM 4.6.0 环境中报 `Model format error`，本版本不加载这些冻结文件，而是使用完全相同的 v1.5.6 特征、Huber 参数、县级 CV 和 `<0.001` 置零后处理重新训练最终 booster，并保存到本目录。因此它是 v1.5.6 的兼容重训复现，不是原冻结文件本身。
 它根据 `evaluation_procedure.pdf` 做了三项调整：
 
-1. alpha 只按官方 pooled RMSE 选择，MAE 不再参与融合权重选择；
-2. direct LightGBM 使用与官方 RMSE 一致的 L2/regression 目标；
+1. alpha 使用严格嵌套县级 CV 选择：外层验证县只用于最终评分，MAE 仅作报告；
+2. direct LightGBM 使用 v1.5.6 冻结配置的 Huber objective 和 RMSE evaluation metric；
 3. GAT 默认使用 MSE，并同时输出 RMSE、MAE、MSE、MedAE、Bias、误差标准差、R²、最大绝对误差和有效样本数。
 
 官方排名规则：四个 horizon 分别计算 RMSE，最终排名是四个 horizon 的平均名次；若平均名次相同，用 t+1h RMSE 决胜。官方可评分行数为 9009、8694、7560、6048。本版本额外生成 `submission_audit.csv` 检查这些行数。
@@ -57,17 +59,17 @@ clean Phase-1 features + weather + observed outage summaries
 ### 3.1 数据路径
 
 ~~~text
-cache/features_train_v1.5.7.parquet
-cache/features_test_v1.5.7.parquet
-cache/meta_train_v1.5.7.parquet
-cache/meta_test_v1.5.7.parquet
-cache/targets_train_v1.5.7.parquet
+cache/features_train_v1.5.6.parquet
+cache/features_test_v1.5.6.parquet
+cache/meta_train_v1.5.6.parquet
+cache/meta_test_v1.5.6.parquet
+cache/targets_train_v1.5.6.parquet
 data/geo/c_16ap26.dbf
 data/geo/c_16ap26.shp
 data/geo/county_terrain.csv
 ~~~
 
-v1.5.7 clean cache 已经过预测窗口因果审计。DEM CSV 按 fipsCode 连接，是静态县级信息。
+v1.5.6 clean cache 已经过预测窗口因果审计。DEM CSV 按 fipsCode 连接，是静态县级信息。
 
 ### 3.2 时间设置
 
@@ -281,8 +283,7 @@ meta_train, meta_test
 base_train, base_test
 horizon
 coords
-state_map
-terrain
+    terrain
 ~~~
 
 输出：
@@ -299,16 +300,17 @@ feature_names
 其中 features 是县-时间规则张量。DEM 版本加入邻居统计前的维度：
 
 \[
-F_0=1+211+2+4+7=225.
+F_0=1+163+2+7=173.
 \]
 
 | 特征组 | 维度 | 说明 |
 |---|---:|---|
 | base prediction | 1 | 当前 horizon 的 OSI 主预测 |
-| clean Phase-1 features | 211 | 天气、历史观测、静态特征等 |
+| clean Phase-1 features | 163 | 天气、历史观测、静态特征等 |
 | coordinates | 2 | 纬度、经度 |
-| state one-hot | 4 | 四个州 |
 | DEM | 7 | 海拔、坡度、崎岖度统计 |
+
+州标识（`stateAbbr`）不进入模型。它只能用于数据整理或分层交叉验证；坐标是独立的数值空间位置，DEM 列是按 FIPS 连接后的地形数值。
 
 时间索引：
 
@@ -341,7 +343,7 @@ wind_speed_max_next_h, total_tp_next_h
 同时加入邻居均值和自身差异，最多新增 32 维。因此：
 
 \[
-F=225+32=257.
+F=173+32=205.
 \]
 
 时间规则：
@@ -353,7 +355,7 @@ F=225+32=257.
 
 ## 6. base_model.py：LightGBM 基模型
 
-代码支持 direct 和 component_v21 两种模式。
+本版本以 v1.5.8 的 163 个特征和 `balanced_v1` 五折为基线协议。支持 `direct`（C0 直接 OSI）、`component_v158`（C1 分量路线）以及兼容旧命令的 `component_v21`。最后一个入口不再读取旧 v2.1 模型，而是转到严格的 v1.5.8 分量重训。
 
 ### 6.1 direct 模式
 
@@ -362,13 +364,13 @@ train_base_models() 对每个 horizon 单独训练 OSI LightGBM。
 输入：
 
 ~~~text
-X_train    : [n_train, 211]
+ X_train    : [n_train, 163]
 y[horizon] : [n_train]
 X_test     : [n_test, 211]
 5 个 county-grouped folds
 ~~~
 
-每个 fold 只用训练县标签，向验证县生成 OOF prediction，并保存：
+每个外层 fold 只用外层训练县标签。外层训练县内部再使用其余四个固定县折生成 cross-fitted base prediction；外层验证县和测试县由只在外层训练县拟合的模型预测。这样整个外层 GAT 图中的 base prediction 都没有接触外层验证标签。保存：
 
 ~~~text
 oof            : [n_train]
@@ -391,22 +393,22 @@ r_i=y_i-\operatorname{OOF\_LGBM}(x_i).
 outputs/models/lightgbm_<horizon>.txt
 ~~~
 
-### 6.2 component_v21 模式
+### 6.2 component_v158 / component_v21 模式
 
-正式推荐：
+命令：
 
 ~~~bash
---base-mode component_v21
+--base-mode component_v158
 ~~~
 
-读取：
+`component_v21` 也可用于兼容旧命令，但实际执行同一套 v1.5.8 分量重训。它不读取：
 
 ~~~text
 versions/v2/v2.1/oof_osi_predictions.csv
 versions/v2/v2.1/test_component_predictions.csv
 ~~~
 
-v2.1 分别预测 P_t、N_t、D_t、R_t，再组合 OSI：
+每个 horizon 独立训练四个 v1.5.8 component LightGBM，预测 `P_t/N_t/D_t/R_t` 后组合 OSI。组件标签来自 v1.5.8 的县内 horizon 平移文件；各组件也执行同样的外层/内层 cross-fitting。
 
 \[
 b=0.40P_t+0.35N_t+0.25D_t-0.10R_t.
@@ -419,9 +421,7 @@ b\leftarrow\operatorname{clip}(b,0,0.65),
 \qquad b<0.001\Rightarrow b=0.
 \]
 
-该模式输出与 direct 相同，因此 GAT 不依赖 base 的具体来源。
-
-重要 caveat：v2.1 artifact 只提供官方 OOF prediction，不提供每个 component 模型的逐 fold prediction。代码在 GAT fold 评估中复制 OOF base 到 train_by_fold；最终 test inference 不使用测试标签。若需要最严格的 CV，应重新保存每个 component 模型的县折外预测。
+组件模型输出再统一执行 `[0, 0.65]` clip 和 `<0.001` 置零；该后处理与 direct、GAT OOF、提交文件一致。旧 v2.1 artifact 不再作为 Phase 2 基线，因为它的 141 个 v1.5.2 特征和已生成 OOF 不能保证当前外层图隔离。
 
 ## 7. spatial.py：空间图
 
@@ -488,7 +488,7 @@ e^{(3)}_{uv}=\cos\theta_{uv}.
 ### 8.1 输入
 
 ~~~text
-features  : [T,N,F] = [144,302,257]
+features  : [T,N,F] = [144,302,205]
 residual  : [T,N]
 train_mask: [T,N]
 edge_index: [2,3028]
@@ -505,7 +505,7 @@ X\in\mathbb R^{(T N)\times F}.
 
 ### 8.2 第一层
 
-输入 257，hidden=24，heads=4，拼接输出 96。
+输入 205，hidden=24，heads=4，拼接输出 96。
 
 \[
 z_u^k=W^kx_u.
@@ -640,19 +640,32 @@ M 是当前 fold 允许监督的县-时间单元。大 residual 权重更高，�
 r_{grid}(t,v)=y_{grid}(t,v)-b_{grid}(t,v).
 \]
 
-### 10.2 五折 GAT OOF
+### 10.2 五折外层 GAT OOF
 
 每个县折：
 
 1. 将验证县设为 held-out；
-2. 使用该 fold base prediction 构造 features 和 residual；
-3. 只用其余训练县监督 GAT；
+2. 使用该 outer fold 的 base prediction 构造 features 和 residual；
+3. 只用 outer-train 县监督 GAT；
 4. 对全图 inference；
-5. 只提取验证县 correction，写入 fold_oof_corr。
+5. 只提取 outer-validation 县 correction，写入 fold_oof_corr。
 
-这样 alpha 选择基于县级 held-out correction，而不是训练县内拟合结果。
+外层验证标签不会参与 alpha 选择。
 
 ### 10.3 alpha 选择
+
+CV 折与 `versions/xyy/v1.5.8` 完全对齐：`balanced_v1`、seed=42、5 个县级折。
+对每个 outer fold，使用其余 4 个固定县折作为 inner validation：
+
+~~~text
+outer fold i
+├─ inner folds j != i: 训练 GAT并预测 inner validation correction
+├─ 汇总其余4个inner validation预测
+├─ 只在outer-train标签上选择 alpha_i
+└─ outer validation: 固定 alpha_i，只评分
+~~~
+
+最终全训练集 GAT 使用 outer-fold 内部选择得到的 alpha 众数；不会再使用全部 outer OOF 标签重新选择 global alpha。
 
 候选：
 
@@ -661,7 +674,8 @@ r_{grid}(t,v)=y_{grid}(t,v)-b_{grid}(t,v).
 \]
 
 \[
-\hat y_\alpha=\operatorname{clip}(b+\alpha c,0,0.65).
+\hat y_\alpha=\operatorname{postprocess}(b+\alpha c),
+\qquad \operatorname{postprocess}(z)=\mathbf 1_{\operatorname{clip}(z,0,0.65)\ge 0.001}\operatorname{clip}(z,0,0.65).
 \]
 
 \[
@@ -670,13 +684,13 @@ RMSE=\sqrt{\frac1n\sum_i(y_i-\hat y_i)^2},
 MAE=\frac1n\sum_i|y_i-\hat y_i|.
 \]
 
-代码最小化：
+代码按比赛官方 RMSE 最小化；MAE、R² 等只用于报告：
 
 \[
-J(\alpha)=RMSE(\alpha)+MAE(\alpha).
+J(\alpha)=RMSE(\alpha).
 \]
 
-候选中包含 alpha=0，因此 GAT 没有稳定增益时会自动退回 base。结果写入：
+候选中包含 alpha=0，因此 GAT 没有稳定增益时会自动退回 base。每个 inner selection、outer evaluation 和最终 alpha 都写入：
 
 ~~~text
 outputs/alpha_selection.csv
@@ -684,7 +698,7 @@ outputs/alpha_selection.csv
 
 ### 10.4 final GAT 和 test prediction
 
-OOF 完成后，使用全部训练县 OOF residual 训练 final GAT：
+嵌套 OOF 完成后，使用全部训练县 OOF residual 训练 final GAT：
 
 - 所有训练县可监督；
 - 测试县无标签但在图中；
@@ -702,7 +716,7 @@ OOF 完成后，使用全部训练县 OOF residual 训练 final GAT：
 outputs/models/gat_residual_<horizon>.pt
 ~~~
 
-其中包含 state_dict、feature mean/std、edge_index、edge_attr、alpha、residual_scale、fit_info。
+其中包含 state_dict、feature mean/std、edge_index、edge_attr、嵌套选择后的 alpha、residual_scale、fit_info。
 
 ## 11. metrics.py
 
@@ -713,7 +727,7 @@ y_true : 真实 OSI
 y_pred : 预测 OSI
 ~~~
 
-metrics() 返回 RMSE 和 MAE，只在两者同时有限的位置计算。clip_osi() 限制预测到 [0,0.65]。joint_score() 返回 rmse+mae，仅用于 alpha 选择。
+metrics() 返回 RMSE 和 MAE，只在两者同时有限的位置计算。post_process_osi() 统一执行 [0,0.65] 裁剪和小于 0.001 置零。alpha 只按官方 RMSE 选择，MAE 仅用于诊断。
 
 ## 12. 输出文件
 
@@ -762,7 +776,7 @@ conda activate myenv
 pip install -r code_phase2_dem/requirements.txt
 
 python code_phase2_dem/main.py \
-  --base-mode component_v21 \
+  --base-mode direct \
   --device cuda \
   --epochs 220 \
   --patience 35 \

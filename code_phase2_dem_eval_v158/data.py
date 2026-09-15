@@ -3,9 +3,20 @@
 import numpy as np
 import pandas as pd
 
-from config import (GAT_FEATURES, GAT_USE_ALL_FEATURES, HORIZON_HOURS, PRED_END, PRED_START,
-                    TEST_FEATURES, TEST_META, TRAIN_FEATURES, TRAIN_META,
-                    TRAIN_TARGETS, TERRAIN_FILE)
+from config import (FORBIDDEN_INPUT_COLUMNS, GAT_FEATURES, GAT_USE_ALL_FEATURES,
+                    HORIZON_HOURS, PRED_END, PRED_START, TEST_FEATURES, TEST_META,
+                    TRAIN_FEATURES, TRAIN_META, TRAIN_TARGETS, TERRAIN_FILE)
+
+
+def validate_feature_columns(columns, source):
+    """Reject competition identifiers/metadata before any model tensor exists."""
+    names = {str(column) for column in columns}
+    forbidden = sorted(names & FORBIDDEN_INPUT_COLUMNS)
+    if forbidden:
+        raise ValueError(
+            f"{source} contains competition-forbidden model input columns: {forbidden}. "
+            "Identifiers/metadata may only be used for alignment, grouping, or CV."
+        )
 
 
 def load_cached_data():
@@ -14,6 +25,8 @@ def load_cached_data():
     meta_train = pd.read_parquet(TRAIN_META)
     meta_test = pd.read_parquet(TEST_META)
     y_train = pd.read_parquet(TRAIN_TARGETS)
+    validate_feature_columns(X_train.columns, str(TRAIN_FEATURES))
+    validate_feature_columns(X_test.columns, str(TEST_FEATURES))
     for meta in (meta_train, meta_test):
         meta["fips_str"] = meta["fipsCode"].astype(str).str.zfill(5)
     return X_train, X_test, meta_train, meta_test, y_train
@@ -43,7 +56,7 @@ def load_terrain_features():
 
 
 def make_county_time_view(X_train, X_test, meta_train, meta_test, base_train, base_test,
-                          horizon, coords, state_map, terrain):
+                          horizon, coords, terrain):
     """Construct features/base predictions in [144 timestamps, 302 counties]."""
     h = str(HORIZON_HOURS[horizon])
     if GAT_USE_ALL_FEATURES:
@@ -60,13 +73,12 @@ def make_county_time_view(X_train, X_test, meta_train, meta_test, base_train, ba
     n_time = PRED_END - PRED_START
     n_nodes = len(all_fips)
     terrain_names = list(terrain.columns)
-    n_feat = 1 + len(names) + 2 + 4 + len(terrain_names)
+    validate_feature_columns(names, "GAT Phase-1 features")
+    n_feat = 1 + len(names) + 2 + len(terrain_names)
     features = np.zeros((n_time, n_nodes, n_feat), dtype=np.float32)
     base = np.zeros((n_time, n_nodes), dtype=np.float32)
     train_rows = np.full((n_time, n_nodes), -1, dtype=np.int64)
     test_rows = np.full((n_time, n_nodes), -1, dtype=np.int64)
-    state_codes = {s: i for i, s in enumerate(sorted(set(state_map.values())))}
-
     def fill(X, meta, base_pred, row_lookup, is_train):
         for row_idx, row in meta.iterrows():
             t = int(row["hour_idx"]) - PRED_START
@@ -75,23 +87,21 @@ def make_county_time_view(X_train, X_test, meta_train, meta_test, base_train, ba
             node = node_of[row["fips_str"]]
             row_lookup[t, node] = row_idx
             values = X.iloc[row_idx][names].to_numpy(dtype=float)
-            state = state_codes[state_map[row["fips_str"]]]
             features[t, node, 0] = float(base_pred[row_idx])
             features[t, node, 1:1 + len(names)] = np.nan_to_num(values, nan=0.0, posinf=0.0, neginf=0.0)
             features[t, node, 1 + len(names):1 + len(names) + 2] = coords[node]
-            one_hot = np.zeros(4, dtype=np.float32)
-            if state < 4:
-                one_hot[state] = 1.0
-            state_start = 1 + len(names) + 2
-            features[t, node, state_start:state_start + 4] = one_hot
             terrain_values = terrain.loc[row["fips_str"], terrain_names].to_numpy(dtype=float)
-            start = state_start + 4
+            start = 1 + len(names) + 2
             features[t, node, start:start + len(terrain_names)] = terrain_values
 
     fill(X_train, meta_train, base_train, train_rows, True)
     fill(X_test, meta_test, base_test, test_rows, False)
     # Metadata arrays are easier to use for exact OOF indexing later.
-    return features, base, train_rows, test_rows, all_fips, names + terrain_names
+    # The final names value intentionally describes the Phase-1 slice only:
+    # add_neighbor_feature_aggregates indexes this slice starting at tensor
+    # column 1 (after base_prediction). Coordinates and DEM are not source
+    # columns for the weather/outage neighbor summaries.
+    return features, base, train_rows, test_rows, all_fips, names
 
 
 def add_neighbor_feature_aggregates(features, names, edge_index, horizon):
@@ -128,11 +138,3 @@ def add_neighbor_feature_aggregates(features, names, edge_index, horizon):
     extra = np.concatenate([neighbour, delta], axis=2)
     extra_names = [f"neighbor_mean_{n}" for n in selected_names] + [f"neighbor_delta_{n}" for n in selected_names]
     return np.concatenate([features, extra], axis=2), extra_names
-
-
-def make_state_map(meta_train, meta_test):
-    out = {}
-    for meta in (meta_train, meta_test):
-        for row in meta.itertuples():
-            out[row.fips_str] = row.stateAbbr
-    return out

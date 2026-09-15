@@ -5,16 +5,27 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
 CACHE_DIR = PROJECT_ROOT / "cache"
+FROZEN_V156_DIR = PROJECT_ROOT / "versions" / "xyy" / "v1.5.6"
 CV_FILE = PROJECT_ROOT / "cv" / "cv_assignments_balanced_v1_seed42.csv"
+CV_VERSION = "balanced_v1"
+CV_SEED = 42
 OUTPUT_DIR = PROJECT_ROOT / "code_phase2_dem_eval_v156" / "outputs"
 MODEL_DIR = OUTPUT_DIR / "models"
 
 FEATURE_VERSION = "v1.5.6"
-TRAIN_FEATURES = CACHE_DIR / f"features_train_{FEATURE_VERSION}.parquet"
-TEST_FEATURES = CACHE_DIR / f"features_test_{FEATURE_VERSION}.parquet"
-TRAIN_META = CACHE_DIR / f"meta_train_{FEATURE_VERSION}.parquet"
-TEST_META = CACHE_DIR / f"meta_test_{FEATURE_VERSION}.parquet"
-TRAIN_TARGETS = CACHE_DIR / f"targets_train_{FEATURE_VERSION}.parquet"
+
+
+def _feature_cache_file(name):
+    """Prefer a server-generated cache, otherwise use the frozen v1.5.6 cache."""
+    current = CACHE_DIR / name
+    return current if current.exists() else FROZEN_V156_DIR / name
+
+
+TRAIN_FEATURES = _feature_cache_file(f"features_train_{FEATURE_VERSION}.parquet")
+TEST_FEATURES = _feature_cache_file(f"features_test_{FEATURE_VERSION}.parquet")
+TRAIN_META = _feature_cache_file(f"meta_train_{FEATURE_VERSION}.parquet")
+TEST_META = _feature_cache_file(f"meta_test_{FEATURE_VERSION}.parquet")
+TRAIN_TARGETS = _feature_cache_file(f"targets_train_{FEATURE_VERSION}.parquet")
 SUBMISSION_FILE = DATA_DIR / "sample_submission.csv"
 GEO_DBF = DATA_DIR / "geo" / "c_16ap26.dbf"
 TERRAIN_FILE = DATA_DIR / "geo" / "county_terrain.csv"
@@ -51,10 +62,19 @@ LGBM_PARAMS = {
     "bagging_seed": SEED,
     "drop_seed": SEED,
     "data_random_seed": SEED,
+    "num_threads": -1,
 }
 LGBM_ROUNDS = 2000
 LGBM_EARLY_STOPPING = 100
 N_FOLDS = 5
+
+# Competition compliance contract.  These columns are identifiers/metadata
+# in Variable_Descriptions.pdf and may be used only for alignment, grouping,
+# or CV construction - never as numeric or categorical model inputs.
+FORBIDDEN_INPUT_COLUMNS = frozenset({
+    "timestamp_et", "fipsCode", "countyName", "stateName", "stateAbbr",
+    "in_event_window", "split", "severity_tier", "event_duration_h",
+})
 
 # Spatial graph and GAT settings. k=8 keeps the graph local while the
 # symmetrisation makes cross-county message passing stable near boundaries.
@@ -81,8 +101,8 @@ OFFICIAL_SCOREABLE_ROWS = {
 # All 163 v1.5.6 Phase-1 cache columns have already passed the causal feature audit:
 # no prediction-window outage/OSI/lag/target column is present. Feeding the
 # complete clean cache lets the spatial model use the same weather trajectory,
-# land-cover and county context as the LightGBM base. Coordinates/state are
-# appended by data.py.
+# land-cover and county context as the LightGBM base. Coordinates are appended
+# as numeric spatial positions; identifiers and metadata are not appended.
 GAT_USE_ALL_FEATURES = True
 GAT_FEATURES = [
     "last_osi", "last_P_t", "last_N_t", "last_D_t", "last_R_t",
