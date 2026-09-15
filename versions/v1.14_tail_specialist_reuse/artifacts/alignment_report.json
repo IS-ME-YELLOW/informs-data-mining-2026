@@ -1,0 +1,10 @@
+{
+  "row_alignment": "exact",
+  "feature_version": "v1.5.6",
+  "cv_version": "balanced_v1",
+  "tail_gate_inputs": [
+    "v1.8 deployable prediction"
+  ],
+  "gate_uses_labels": false,
+  "outer_selection": "specialist and alpha selected only on the other four county folds"
+}

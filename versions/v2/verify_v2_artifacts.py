@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import sys
+import argparse
+import json
+from datetime import datetime
 from pathlib import Path
 
 
@@ -29,9 +32,11 @@ from component_experiment import (  # noqa: E402
 
 
 SPECS = {
-    "v2.1": ("lightgbm", ".txt"),
-    "v2.2": ("xgboost", ".json"),
-    "v2.3": ("catboost", ".cbm"),
+    "v2.1": ("lightgbm", ".txt", "v1.5.2"),
+    "v2.2": ("xgboost", ".json", "v1.5.2"),
+    "v2.3": ("catboost", ".cbm", "v1.5.2"),
+    "v2.4": ("xgboost", ".json", "v1.5.6"),
+    "v2.5": ("catboost", ".cbm", "v1.5.6"),
 }
 
 
@@ -61,7 +66,10 @@ def _load_model(family: str, path: Path):
     raise ValueError(f"Unknown family: {family}")
 
 
-def verify_version(version: str, family: str, extension: str, data, targets, template) -> None:
+def verify_version(
+    version: str, family: str, extension: str, feature_version: str,
+    data, targets, template
+) -> None:
     output_dir = V2_ROOT / version
     component_summary = pd.read_csv(
         output_dir / "component_summary_metrics.csv"
@@ -145,17 +153,47 @@ def verify_version(version: str, family: str, extension: str, data, targets, tem
         if np.isnan(submitted[scored]).any() or np.isfinite(submitted[~scored]).any():
             raise AssertionError(f"{version}: submission NaN mask is wrong for {horizon}")
 
+    verification = {
+        "verified_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        "status": "passed",
+        "version": version,
+        "feature_version": feature_version,
+        "checks": [
+            "16 component OOF metric pairs recomputed",
+            "16 serialized final models reloaded",
+            "saved component test predictions reproduced at atol=1e-12",
+            "composed OOF OSI and its metrics recomputed",
+            "submission values, identifiers, and tail NaN masks verified",
+        ],
+    }
+    with (output_dir / "verification.json").open("w", encoding="utf-8") as handle:
+        json.dump(verification, handle, ensure_ascii=False, indent=2)
     print(f"{version}: 16 models, component OOF, composed OSI, and submission verified")
 
 
 def main() -> None:
-    data = direct_protocol.load_experiment_data()
-    targets, _ = prepare_component_targets()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("versions", nargs="*", choices=sorted(SPECS))
+    args = parser.parse_args()
+    selected = args.versions or list(SPECS)
     template = pd.read_csv(
         PROJECT_ROOT / "data" / "sample_submission.csv", dtype={"fipsCode": str}
     )
-    for version, (family, extension) in SPECS.items():
-        verify_version(version, family, extension, data, targets, template)
+    data_by_feature = {}
+    target_by_feature = {}
+    for version in selected:
+        family, extension, feature_version = SPECS[version]
+        if feature_version not in data_by_feature:
+            data_by_feature[feature_version] = direct_protocol.load_experiment_data(
+                feature_version
+            )
+            target_by_feature[feature_version], _ = prepare_component_targets(
+                feature_version=feature_version
+            )
+        verify_version(
+            version, family, extension, feature_version,
+            data_by_feature[feature_version], target_by_feature[feature_version], template
+        )
 
 
 if __name__ == "__main__":

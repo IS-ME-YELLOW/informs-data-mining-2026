@@ -1,0 +1,23 @@
+{
+  "fold": 2,
+  "train_rows": 27313,
+  "validation_rows": 6864,
+  "weights": [
+    0.20102106173020723,
+    0.38575476829920147,
+    0.41322416997059125
+  ],
+  "safe_alpha": 1.0,
+  "component": "R_t",
+  "horizon": "osi_target_t01h",
+  "candidate_names": [
+    "lightgbm",
+    "xgboost",
+    "catboost"
+  ],
+  "baseline": "lightgbm",
+  "component_clip": [
+    0.0,
+    1.0
+  ]
+}

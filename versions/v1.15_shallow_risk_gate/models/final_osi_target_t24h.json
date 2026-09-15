@@ -1,0 +1,40 @@
+{
+  "mode": "three_leaf_risk_gate",
+  "horizon": "osi_target_t24h",
+  "training_folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "risk_quantiles": [
+    0.9,
+    0.95
+  ],
+  "thresholds": [
+    0.010580419557078216,
+    0.016752192502383582
+  ],
+  "alphas": [
+    1.0,
+    1.0,
+    0.0
+  ],
+  "reference_alphas": [
+    1.0,
+    1.0,
+    0.0
+  ],
+  "leaf_definition": [
+    "risk<=q90",
+    "q90<risk<=q95",
+    "risk>q95"
+  ],
+  "gate_inputs": [
+    "v1.8 deployable prediction"
+  ],
+  "uses_labels_only_for_inner_alpha_fit": true,
+  "scope": "final",
+  "evaluation_use": "test inference only"
+}

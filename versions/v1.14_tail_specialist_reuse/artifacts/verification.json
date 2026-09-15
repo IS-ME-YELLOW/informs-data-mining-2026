@@ -1,0 +1,14 @@
+{
+  "status": "pass",
+  "loaded_models": 24,
+  "expected_models": 24,
+  "max_prediction_difference": 9.71445146547012e-17,
+  "input_hashes_valid": true,
+  "artifact_hashes_valid": true,
+  "bad_inputs": [],
+  "bad_artifacts": [],
+  "specialists_available": [
+    "base_pd_weighted_l2",
+    "profile_pd_weighted_l2"
+  ]
+}

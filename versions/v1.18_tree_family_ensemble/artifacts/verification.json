@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "loaded_models": 48,
+  "expected_models": 48,
+  "max_prediction_difference": 0.0,
+  "input_hashes_valid": true,
+  "artifact_hashes_valid": true,
+  "bad_inputs": [],
+  "bad_artifacts": []
+}

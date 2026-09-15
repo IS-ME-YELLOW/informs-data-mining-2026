@@ -1,0 +1,47 @@
+{
+  "primary_candidate": "tail_protected",
+  "predeclared_rule": "v1.8 for t+1/t+6; simple six-model average below inner positive-prediction q95 and v1.8 above it for t+24/t+48",
+  "horizons": {
+    "osi_target_t01h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_design": true,
+      "passes": true
+    },
+    "osi_target_t06h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_design": true,
+      "passes": true
+    },
+    "osi_target_t24h": {
+      "rmse_change_pct": -1.9569382750671882,
+      "improved_folds": 5,
+      "bootstrap_rmse_ci": [
+        -0.0002573670542538933,
+        -8.89674474361083e-05
+      ],
+      "unchanged_by_design": false,
+      "passes": true
+    },
+    "osi_target_t48h": {
+      "rmse_change_pct": -0.5670303656683862,
+      "improved_folds": 4,
+      "bootstrap_rmse_ci": [
+        -9.456255353215342e-05,
+        -5.370126821539323e-06
+      ],
+      "unchanged_by_design": false,
+      "passes": true
+    }
+  },
+  "promote": true
+}

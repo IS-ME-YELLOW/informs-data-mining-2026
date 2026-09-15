@@ -1,0 +1,47 @@
+{
+  "baseline": "v1.12",
+  "primary_candidate": "shallow_risk_gate",
+  "horizons": {
+    "osi_target_t01h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_design": true,
+      "passes": true
+    },
+    "osi_target_t06h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_design": true,
+      "passes": true
+    },
+    "osi_target_t24h": {
+      "rmse_change_pct": 0.020650426753876516,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        -9.506399494159812e-06,
+        1.6917771769258284e-05
+      ],
+      "unchanged_by_design": false,
+      "passes": false
+    },
+    "osi_target_t48h": {
+      "rmse_change_pct": 0.023679218384575762,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        -1.244240909850907e-06,
+        5.7636727510498465e-06
+      ],
+      "unchanged_by_design": false,
+      "passes": false
+    }
+  },
+  "promote": false
+}

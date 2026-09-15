@@ -1,0 +1,10 @@
+|--- cumul_tp_since_onset <= 6.15
+|   |--- gust_max_next_24h <= 38.85
+|   |   |--- class: 0
+|   |--- gust_max_next_24h >  38.85
+|   |   |--- class: 0
+|--- cumul_tp_since_onset >  6.15
+|   |--- total_tp_next_24h <= 6.35
+|   |   |--- class: 0
+|   |--- total_tp_next_24h >  6.35
+|   |   |--- class: 0

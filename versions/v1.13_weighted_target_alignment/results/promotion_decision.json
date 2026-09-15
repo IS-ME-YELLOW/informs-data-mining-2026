@@ -1,0 +1,47 @@
+{
+  "baseline": "v1.12",
+  "primary_candidate": "weighted_alignment_plus_tail",
+  "horizons": {
+    "osi_target_t01h": {
+      "rmse_change_pct": 0.0243379842006064,
+      "improved_folds": 2,
+      "bootstrap_rmse_ci": [
+        -6.854584156205747e-05,
+        7.686153957194854e-05
+      ],
+      "unchanged_by_design": false,
+      "passes": false
+    },
+    "osi_target_t06h": {
+      "rmse_change_pct": 0.03228109524089362,
+      "improved_folds": 2,
+      "bootstrap_rmse_ci": [
+        -7.873275254743263e-05,
+        8.913462692351048e-05
+      ],
+      "unchanged_by_design": false,
+      "passes": false
+    },
+    "osi_target_t24h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_design": true,
+      "passes": true
+    },
+    "osi_target_t48h": {
+      "rmse_change_pct": 0.0,
+      "improved_folds": 0,
+      "bootstrap_rmse_ci": [
+        0.0,
+        0.0
+      ],
+      "unchanged_by_design": true,
+      "passes": true
+    }
+  },
+  "promote": false
+}

@@ -1,0 +1,13 @@
+{
+  "verified_at": "2026-09-11T18:32:55+08:00",
+  "status": "passed",
+  "version": "v1.10",
+  "feature_version": "v1.5.6",
+  "checks": [
+    "OOF RMSE and MAE recomputed",
+    "four serialized final models reloaded",
+    "submission identifiers and keys match template",
+    "reloaded-model predictions match submission at atol=1e-12",
+    "tail NaN masks and [0, 0.65] prediction bounds verified"
+  ]
+}

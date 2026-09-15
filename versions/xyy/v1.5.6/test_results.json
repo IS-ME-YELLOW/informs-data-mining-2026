@@ -1,0 +1,9 @@
+{
+  "created_utc": "2026-09-08T08:38:17.652487+00:00",
+  "tests_run": 5,
+  "failures": 0,
+  "errors": 0,
+  "successful": true,
+  "manifest_sha256": "363b7568d8cc59d95ed747963468eaf4aad90e3641aaec44c96278fde20a1b76",
+  "test_script_sha256": "a7e4a505c03a1bcd8910acf7faee16e4dcaadadfa55d7cb1b32787565c39d5dd"
+}

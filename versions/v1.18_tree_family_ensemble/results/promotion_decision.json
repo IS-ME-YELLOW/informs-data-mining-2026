@@ -1,0 +1,31 @@
+{
+  "reference": "v1.12",
+  "selection_warning": "The best family is selected from the same five outer-fold scores and is exploratory; promotion requires all stated stability criteria.",
+  "horizons": {
+    "osi_target_t24h": {
+      "exploratory_best": "v1.12",
+      "rmse": 0.008208972775349635,
+      "rmse_change_pct_vs_v1.8": -1.9569382750671882,
+      "rmse_change_pct_vs_v1.12": 0.0,
+      "improved_folds_vs_v1.12": 0,
+      "bootstrap_ci_vs_v1.12": [
+        0.0,
+        0.0
+      ],
+      "passes": false
+    },
+    "osi_target_t48h": {
+      "exploratory_best": "v1.12",
+      "rmse": 0.007550371388803473,
+      "rmse_change_pct_vs_v1.8": -0.5670303656683862,
+      "rmse_change_pct_vs_v1.12": 0.0,
+      "improved_folds_vs_v1.12": 0,
+      "bootstrap_ci_vs_v1.12": [
+        0.0,
+        0.0
+      ],
+      "passes": false
+    }
+  },
+  "promote": false
+}

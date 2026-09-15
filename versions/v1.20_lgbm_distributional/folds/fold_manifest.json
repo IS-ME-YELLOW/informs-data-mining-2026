@@ -1,0 +1,44 @@
+[
+  {
+    "split": "balanced_v1",
+    "path": "D:\\Stella\\Git\\informs-data-mining-2026\\cv\\cv_assignments_balanced_v1_seed42.csv",
+    "counties": 239,
+    "fold_counts": {
+      "0": 48,
+      "1": 47,
+      "2": 48,
+      "3": 48,
+      "4": 48
+    },
+    "assignment_fingerprint": "121a899a9231638ed8d48eafbdcd0c1836017f690eadd6b7f4fc7ba66a5f0f08",
+    "sha256": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021"
+  },
+  {
+    "split": "repeat_seed20260921",
+    "path": "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\folds\\cv_assignments_state_severity_balanced_seed20260921.csv",
+    "counties": 239,
+    "fold_counts": {
+      "0": 48,
+      "1": 48,
+      "2": 48,
+      "3": 47,
+      "4": 48
+    },
+    "assignment_fingerprint": "30869b043886eb9881364545a732488c19a7c5117c69b9c23468c054ae8b7196",
+    "sha256": "5dacb73f3ccc83c788251aec6ff6722645a3e4a9c9e1fd5edaf4cf0b0d3b8727"
+  },
+  {
+    "split": "repeat_seed20260922",
+    "path": "D:\\Stella\\Git\\informs-data-mining-2026\\versions\\v1.20_lgbm_distributional\\folds\\cv_assignments_state_severity_balanced_seed20260922.csv",
+    "counties": 239,
+    "fold_counts": {
+      "0": 47,
+      "1": 48,
+      "2": 48,
+      "3": 48,
+      "4": 48
+    },
+    "assignment_fingerprint": "7d0e7b1d5f576ad95601459c74bf6f8e584339722bf6f8e1adb552f80ec3ebab",
+    "sha256": "0c17ffd4ab66454b0e2eaa003ade1161808684e00dc87f894637f420e098ee92"
+  }
+]

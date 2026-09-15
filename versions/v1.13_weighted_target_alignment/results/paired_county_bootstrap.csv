@@ -1,0 +1,5 @@
+horizon,model,counties,replicates,rmse_delta,rmse_ci_low,rmse_ci_high,rmse_probability_improved,mae_delta,mae_ci_low,mae_ci_high,mae_probability_improved
+osi_target_t01h,weighted_alignment_plus_tail,239,2000,2.841852413705548e-06,-6.854584156205747e-05,7.686153957194854e-05,0.46,4.771690394894017e-05,1.0909048546234127e-05,8.354141515481361e-05,0.006
+osi_target_t06h,weighted_alignment_plus_tail,239,2000,3.331602664061531e-06,-7.873275254743263e-05,8.913462692351048e-05,0.446,4.9445777280423577e-05,1.0399535615279681e-05,8.516594956667886e-05,0.0065
+osi_target_t24h,weighted_alignment_plus_tail,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+osi_target_t48h,weighted_alignment_plus_tail,239,2000,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

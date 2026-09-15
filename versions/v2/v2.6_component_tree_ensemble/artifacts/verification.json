@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "loaded_models": 96,
+  "expected_models": 96,
+  "max_prediction_difference": 9.999054535747565e-17,
+  "input_hashes_valid": true,
+  "artifact_hashes_valid": true,
+  "bad_inputs": [],
+  "bad_artifacts": [],
+  "oof_rows": 34416,
+  "test_rows": 9072
+}

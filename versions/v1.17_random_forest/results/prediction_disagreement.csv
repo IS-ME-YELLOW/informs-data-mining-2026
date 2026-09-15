@@ -1,0 +1,3 @@
+horizon,model_a,model_b,mean_abs_prediction_difference,rmse_prediction_difference
+osi_target_t24h,RF,v1.12,0.0009768397264077271,0.002472103162075095
+osi_target_t48h,RF,v1.12,0.000841427121561326,0.0022059279679465626

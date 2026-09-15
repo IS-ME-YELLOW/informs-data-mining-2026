@@ -1,10 +1,10 @@
-"""Shared, leakage-safe runner for the v1.6/v1.7 GBDT model-family trials.
+"""Shared, leakage-safe runner for versioned GBDT model-family trials.
 
-The runner deliberately loads the frozen v1.5.2 feature cache. It never calls
-the historical feature builder, whose current source no longer reproduces that
-cache. Model-specific behavior is supplied by the small adapters in v1.6 and
-v1.7; data validation, fixed county folds, scoring, post-processing, and output
-validation stay identical across both experiments.
+The caller selects an already frozen feature cache explicitly. The runner never
+calls a feature builder. Model-specific behavior is supplied by small adapters;
+data validation, fixed county folds, scoring, post-processing, and output
+validation stay identical across experiments. The default remains v1.5.2 so
+the historical v1.6/v1.7 entry points retain their original semantics.
 """
 
 from __future__ import annotations
@@ -136,11 +136,11 @@ def _load_folds(meta_train: pd.DataFrame) -> list[tuple[np.ndarray, np.ndarray]]
     expected = meta_counties.set_index("fipsCode").sort_index()
     actual = assignment.set_index("fipsCode").sort_index()
     if not expected.index.equals(actual.index):
-        raise ValueError("CV manifest and v1.5.2 training metadata have different FIPS sets.")
+        raise ValueError("CV manifest and selected training metadata have different FIPS sets.")
     if not expected[["stateAbbr", "severity_tier"]].equals(
         actual[["stateAbbr", "severity_tier"]]
     ):
-        raise ValueError("CV strata disagree with v1.5.2 training metadata.")
+        raise ValueError("CV strata disagree with selected training metadata.")
 
     fold_counts = assignment["fold"].value_counts().sort_index()
     if fold_counts.max() - fold_counts.min() > 1:
@@ -159,19 +159,21 @@ def _load_folds(meta_train: pd.DataFrame) -> list[tuple[np.ndarray, np.ndarray]]
     ]
 
 
-def load_experiment_data() -> ExperimentData:
-    names_path = CACHE_DIR / f"feature_names_{FEATURE_VERSION}.json"
+def load_experiment_data(feature_version: str = FEATURE_VERSION) -> ExperimentData:
+    names_path = CACHE_DIR / f"feature_names_{feature_version}.json"
     with names_path.open("r", encoding="utf-8") as handle:
         feature_names = json.load(handle)
 
-    X_train = pd.read_parquet(CACHE_DIR / f"features_train_{FEATURE_VERSION}.parquet")
-    y_train = pd.read_parquet(CACHE_DIR / f"targets_train_{FEATURE_VERSION}.parquet")
-    meta_train = pd.read_parquet(CACHE_DIR / f"meta_train_{FEATURE_VERSION}.parquet")
-    X_test = pd.read_parquet(CACHE_DIR / f"features_test_{FEATURE_VERSION}.parquet")
-    meta_test = pd.read_parquet(CACHE_DIR / f"meta_test_{FEATURE_VERSION}.parquet")
+    X_train = pd.read_parquet(CACHE_DIR / f"features_train_{feature_version}.parquet")
+    y_train = pd.read_parquet(CACHE_DIR / f"targets_train_{feature_version}.parquet")
+    meta_train = pd.read_parquet(CACHE_DIR / f"meta_train_{feature_version}.parquet")
+    X_test = pd.read_parquet(CACHE_DIR / f"features_test_{feature_version}.parquet")
+    meta_test = pd.read_parquet(CACHE_DIR / f"meta_test_{feature_version}.parquet")
 
     if list(X_train.columns) != feature_names or list(X_test.columns) != feature_names:
-        raise ValueError("Feature columns do not exactly match the frozen v1.5.2 name manifest.")
+        raise ValueError(
+            f"Feature columns do not exactly match the frozen {feature_version} name manifest."
+        )
     if list(y_train.columns) != list(HORIZONS):
         raise ValueError(f"Unexpected target columns: {y_train.columns.tolist()}")
     if len(X_train) != len(y_train) or len(X_train) != len(meta_train):
@@ -301,13 +303,14 @@ def run_experiment(
     max_rounds: int = MAX_BOOST_ROUNDS,
     early_stopping_rounds: int = EARLY_STOPPING_ROUNDS,
     validate_only: bool = False,
+    feature_version: str = FEATURE_VERSION,
 ) -> dict[str, Any] | None:
     if max_rounds < 1 or early_stopping_rounds < 1:
         raise ValueError("Boost rounds and early-stopping rounds must be positive.")
     output_dir.mkdir(parents=True, exist_ok=True)
-    print(f"=== {adapter.family} {adapter.version} on frozen {FEATURE_VERSION} features ===")
+    print(f"=== {adapter.family} {adapter.version} on frozen {feature_version} features ===")
     print("[1/6] Loading and validating frozen features and fixed folds...")
-    data = load_experiment_data()
+    data = load_experiment_data(feature_version)
     print(
         f"  train={data.X_train.shape}, test={data.X_test.shape}, "
         f"fold rows={[len(valid) for _, valid in data.folds]}"
@@ -433,19 +436,19 @@ def run_experiment(
     submission.to_csv(submission_path, index=False, date_format="%m/%d/%Y %H:%M")
 
     input_paths = [
-        CACHE_DIR / f"features_train_{FEATURE_VERSION}.parquet",
-        CACHE_DIR / f"targets_train_{FEATURE_VERSION}.parquet",
-        CACHE_DIR / f"meta_train_{FEATURE_VERSION}.parquet",
-        CACHE_DIR / f"features_test_{FEATURE_VERSION}.parquet",
-        CACHE_DIR / f"meta_test_{FEATURE_VERSION}.parquet",
-        CACHE_DIR / f"feature_names_{FEATURE_VERSION}.json",
+        CACHE_DIR / f"features_train_{feature_version}.parquet",
+        CACHE_DIR / f"targets_train_{feature_version}.parquet",
+        CACHE_DIR / f"meta_train_{feature_version}.parquet",
+        CACHE_DIR / f"features_test_{feature_version}.parquet",
+        CACHE_DIR / f"meta_test_{feature_version}.parquet",
+        CACHE_DIR / f"feature_names_{feature_version}.json",
         CV_FILE,
         SUBMISSION_TEMPLATE,
     ]
     metadata = {
         "experiment_version": adapter.version,
         "model_family": adapter.family,
-        "feature_version": FEATURE_VERSION,
+        "feature_version": feature_version,
         "cv_version": CV_VERSION,
         "seed": SEED,
         "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),

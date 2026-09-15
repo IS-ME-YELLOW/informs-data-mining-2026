@@ -1,0 +1,31 @@
+{
+  "fold": 4,
+  "train_rows": 26358,
+  "validation_rows": 6624,
+  "weights": [
+    0.0,
+    0.6480739899250818,
+    0.03914206233448828,
+    0.3127839477404298,
+    0.0,
+    0.0
+  ],
+  "safe_alpha": 0.9670428994980073,
+  "horizon": "osi_target_t06h",
+  "candidate_names": [
+    "lgbm_direct",
+    "lgbm_component",
+    "xgboost_direct",
+    "catboost_direct",
+    "xgboost_component",
+    "catboost_component"
+  ],
+  "baseline": "lgbm_component",
+  "post_process": {
+    "clip": [
+      0.0,
+      0.65
+    ],
+    "zero_threshold": 0.001
+  }
+}

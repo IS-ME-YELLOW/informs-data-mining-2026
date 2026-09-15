@@ -1,0 +1,22 @@
+{
+  "train_rows": 32982,
+  "weights": [
+    0.27471453443698746,
+    0.6340140960000424,
+    0.09127136956297001
+  ],
+  "safe_alpha": 1.0,
+  "component": "R_t",
+  "horizon": "osi_target_t06h",
+  "candidate_names": [
+    "lightgbm",
+    "xgboost",
+    "catboost"
+  ],
+  "baseline": "lightgbm",
+  "component_clip": [
+    0.0,
+    1.0
+  ],
+  "evaluation_use": "test inference only"
+}

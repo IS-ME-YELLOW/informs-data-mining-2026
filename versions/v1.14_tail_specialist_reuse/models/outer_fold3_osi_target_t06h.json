@@ -1,0 +1,19 @@
+{
+  "mode": "fallback_v1.12",
+  "horizon": "osi_target_t06h",
+  "training_folds": [
+    0,
+    1,
+    2,
+    4
+  ],
+  "tail_quantile": 0.95,
+  "threshold": 0.031243431693849667,
+  "specialist": "profile_pd_weighted_l2",
+  "alpha": 0.0,
+  "inner_fold_wins": 2,
+  "inner_score": 0.9989406775196885,
+  "fallback_reason": "requires alpha>0, at least 3 inner-fold wins, and robust score<1",
+  "scope": "outer",
+  "outer_fold": 3
+}

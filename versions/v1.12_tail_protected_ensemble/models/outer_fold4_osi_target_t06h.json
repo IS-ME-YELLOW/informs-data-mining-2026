@@ -1,0 +1,29 @@
+{
+  "mode": "baseline_only",
+  "tail_quantile": null,
+  "threshold": null,
+  "horizon": "osi_target_t06h",
+  "fold": 4,
+  "inner_rows": 26358,
+  "outer_rows": 6624,
+  "candidate_names": [
+    "lgbm_direct",
+    "lgbm_component",
+    "xgboost_direct",
+    "catboost_direct",
+    "xgboost_component",
+    "catboost_component"
+  ],
+  "average_weights": [
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666,
+    0.16666666666666666
+  ],
+  "gate_inputs": [
+    "v1.8_rule_prediction"
+  ],
+  "uses_labels_for_gate": false
+}

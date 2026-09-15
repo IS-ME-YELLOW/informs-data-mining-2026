@@ -1,0 +1,28 @@
+{
+  "reference": "v1.12",
+  "horizons": {
+    "osi_target_t24h": {
+      "exploratory_best": "weather_gate_depth2",
+      "rmse": 0.008208972775349635,
+      "rmse_change_pct_vs_v1.12": 0.0,
+      "improved_folds": 0,
+      "bootstrap_ci": [
+        0.0,
+        0.0
+      ],
+      "passes": false
+    },
+    "osi_target_t48h": {
+      "exploratory_best": "weather_gate_depth2",
+      "rmse": 0.007550371388803473,
+      "rmse_change_pct_vs_v1.12": 0.0,
+      "improved_folds": 0,
+      "bootstrap_ci": [
+        0.0,
+        0.0
+      ],
+      "passes": false
+    }
+  },
+  "promote": false
+}
