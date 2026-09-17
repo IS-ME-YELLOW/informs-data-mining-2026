@@ -40,7 +40,7 @@ MANIFEST = DEM_DIR / "manifest.json"
 TARGET_STATE_FIPS = {"18", "39", "42", "54"}
 TNM_URL = "https://tnmaccess.nationalmap.gov/api/v1/products"
 
-sys.path.insert(0, str(ROOT / "code_phase2_dem"))
+sys.path.insert(0, str(ROOT / "code_phase2_dem_eval_v158"))
 from spatial import read_dbf_fips_in_order, read_shp_polygons  # noqa: E402
 
 

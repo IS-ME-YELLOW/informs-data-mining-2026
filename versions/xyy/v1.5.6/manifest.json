@@ -1,0 +1,32 @@
+{
+  "feature_version": "v1.5.6",
+  "package_protocol": "frozen_phase1_feature_bundle",
+  "parquet_engine_reference": "pyarrow",
+  "tables": {
+    "features_train": {"rows": 34416, "columns": 163},
+    "features_test": {"rows": 9072, "columns": 163},
+    "meta_train": {"rows": 34416, "columns": 7},
+    "meta_test": {"rows": 9072, "columns": 6},
+    "targets_train": {"rows": 34416, "columns": 4}
+  },
+  "files": {
+    "features_train_v1.5.6.parquet": {
+      "sha256": "2D4753ED3A4CB4938EA8AF5FE54CB80B04D8509EDE84766BD786FEF5F3DC6DFF"
+    },
+    "features_test_v1.5.6.parquet": {
+      "sha256": "75CE0E77C9CAAF4885EF89BC6289D6E42258574B00E81FF6509DBE23B0F01D09"
+    },
+    "meta_train_v1.5.6.parquet": {
+      "sha256": "C18E97EE2EE78D91E41B50766EDA5AECB1E034DE96C7704C80E41A80B841A463"
+    },
+    "meta_test_v1.5.6.parquet": {
+      "sha256": "DD74922B79911321F411F63E94C2487CD1E865751E7F92B78E43145C919C908A"
+    },
+    "targets_train_v1.5.6.parquet": {
+      "sha256": "86273A1FAD914694927AB405E6F9FA52581EC1243C32E800FB4F42AAC630C3C9"
+    },
+    "feature_names_v1.5.6.json": {
+      "sha256": "44B484BAD63B7F0B82EABBC5A2A894271EBF1E475A79CE933A3373A3CC627A2C"
+    }
+  }
+}

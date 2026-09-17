@@ -1,460 +1,869 @@
-"""Phase 2 runner: LightGBM base + spatial GAT residual correction.
+"""CLI for the dem_v158_nested_v2 leakage-isolated experiment."""
 
-Example (from the project root):
-    D:\\app\\anacnda1\\envs\\myenv\\python.exe code_phase2/main.py
-
-The script writes a competition-format submission and CV diagnostics under
-code_phase2/outputs. It never reads outage variables after the observed
-window; all modelling inputs come from the clean Phase-1 feature caches.
-"""
+from __future__ import annotations
 
 import argparse
+import hashlib
+import importlib
+import importlib.metadata
 import json
+import os
 import random
+import re
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import torch
 
-from base_model import (
-    load_cv_folds,
-    load_component_v21_base,
-    train_base_models,
-    train_component_v158_base,
+from config import (
+    COMPONENT_TARGETS_FILE,
+    BOOTSTRAP_REPLICATES,
+    BOOTSTRAP_SEED,
+    CV_FILE,
+    CV_VERSION,
+    DEFAULT_FEATURE_DIR,
+    EXPERIMENT_VERSION,
+    FEATURE_VERSION,
+    GAT_EPOCHS,
+    GAT_LOSS,
+    GAT_PATIENCE,
+    GAT_TIME_STRIDE,
+    GEO_DBF,
+    GRAPH_K,
+    HORIZON_HOURS,
+    HORIZONS,
+    N_FOLDS,
+    OFFICIAL_SCOREABLE_ROWS,
+    OUTPUT_ROOT,
+    PARQUET_ENGINE,
+    PRED_END,
+    PRED_START,
+    PROTOCOL,
+    SUBMISSION_FILE,
+    TERRAIN_FILE,
 )
-from config import (DATA_DIR, GAT_ALPHA_GRID, GAT_DROPOUT, GAT_EPOCHS,
-                    GAT_HEADS, GAT_HIDDEN, GAT_LR, GAT_PATIENCE,
-                    GAT_WEIGHT_DECAY, CV_VERSION, HORIZON_HOURS, HORIZONS, MODEL_DIR,
-                    OUTPUT_DIR, PRED_END, PRED_START, SEED, SUBMISSION_FILE,
-                    GEO_DBF, GAT_LOSS, OFFICIAL_METRIC, OFFICIAL_SCOREABLE_ROWS)
-from data import (add_neighbor_feature_aggregates, load_cached_data,
-                  load_terrain_features, make_county_time_view,
-                  validate_feature_columns)
-from gat_model import fit_gat, predict_gat
-from metrics import metrics, post_process_osi
-from spatial import build_spatial_graph
+from data import (
+    add_neighbor_feature_aggregates,
+    load_component_targets,
+    load_feature_bundle,
+    load_supervision,
+    load_terrain_features,
+    make_county_time_view,
+)
+from metrics import pooled_metrics, post_process_osi
 
 
-def parse_args():
-    p = argparse.ArgumentParser()
-    p.add_argument("--epochs", type=int, default=GAT_EPOCHS)
-    p.add_argument("--patience", type=int, default=GAT_PATIENCE)
-    p.add_argument("--folds", type=int, default=5,
-                   help="Must be 5: v1.5.8-compatible outer county folds")
-    p.add_argument("--k", type=int, default=8)
-    p.add_argument("--time-stride", type=int, default=1,
-                   help="Train GAT on every Nth forecast time; inference remains hourly")
-    p.add_argument("--device", default="auto", choices=("auto", "cpu", "cuda"),
-                   help="Torch device; auto selects CUDA when available")
-    p.add_argument(
-        "--base-mode", default="direct",
-        choices=("direct", "component_v158", "component_v21"),
-        help=("direct=C0 v1.5.8-compatible direct OSI; "
-              "component_v158=C1 v1.5.8-compatible component route; "
-              "component_v21=legacy alias to strict component_v158 retraining"),
-    )
-    p.add_argument("--seed", type=int, default=SEED)
-    p.add_argument("--gat-loss", default=GAT_LOSS,
-                   choices=("mse", "weighted_mse", "huber"),
-                   help="GAT residual loss; mse matches official pooled RMSE")
-    return p.parse_args()
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--stage", choices=("preflight", "cv", "final", "all"), default="preflight")
+    parser.add_argument("--run-id", default=None)
+    parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--feature-dir", default=None)
+    parser.add_argument("--parquet-engine", choices=("pyarrow", "fastparquet"), default=PARQUET_ENGINE)
+    parser.add_argument("--base-mode", choices=("direct", "component_v158"), default="direct")
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
+    parser.add_argument("--epochs", type=int, default=GAT_EPOCHS)
+    parser.add_argument("--patience", type=int, default=GAT_PATIENCE)
+    parser.add_argument("--time-stride", type=int, default=GAT_TIME_STRIDE)
+    parser.add_argument("--k", type=int, default=GRAPH_K)
+    parser.add_argument("--gat-loss", choices=(GAT_LOSS,), default=GAT_LOSS)
+    args = parser.parse_args(argv)
+    if args.run_id is None:
+        args.run_id = f"{PROTOCOL}_{args.base_mode}_seed{args.seed}"
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+", args.run_id):
+        raise ValueError("run-id may contain only letters, digits, '.', '_' and '-'")
+    if args.stage == "preflight" and args.resume:
+        raise ValueError("--resume is only valid for cv/final/all")
+    if args.epochs < 1 or args.patience < 1 or args.time_stride < 1:
+        raise ValueError("epochs, patience and time-stride must be >= 1")
+    if args.time_stride != GAT_TIME_STRIDE:
+        raise ValueError("dem_v158_nested_v2 fixes --time-stride=1")
+    if args.k != GRAPH_K:
+        raise ValueError("dem_v158_nested_v2 fixes --k=8")
+    return args
 
 
-def standardize_features(features, train_node_mask):
-    """Scale on training county-time cells only, preserving all graph nodes."""
-    flat = features.reshape(-1, features.shape[-1])
-    mask = np.broadcast_to(train_node_mask[None, :], features.shape[:2]).reshape(-1)
-    train_values = flat[mask]
-    mean = np.nanmean(train_values, axis=0)
-    std = np.nanstd(train_values, axis=0)
-    mean = np.nan_to_num(mean, nan=0.0, posinf=0.0, neginf=0.0)
-    std[~np.isfinite(std) | (std < 1e-6)] = 1.0
-    out = (np.nan_to_num(features, nan=0.0, posinf=0.0, neginf=0.0) - mean) / std
-    return out.astype(np.float32), mean, std
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
-def alpha_select(y, base, correction, val_mask):
-    yv = y[val_mask]
-    bv = base[val_mask]
-    cv = correction[val_mask]
-    rows = []
-    for alpha in GAT_ALPHA_GRID:
-        pred = post_process_osi(bv + alpha * cv)
-        m = metrics(yv, pred)
-        rows.append({"alpha": float(alpha), **m,
-                     "official_score_rmse": m["rmse"]})
-    # The competition ranks by RMSE per horizon. MAE is reported for
-    # diagnostics, but must not influence alpha selection.
-    best = min(rows, key=lambda r: (r["official_score_rmse"], r["alpha"]))
-    return float(best["alpha"]), rows
+def _atomic_json(path: Path, value: dict):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
+    os.replace(temporary, path)
 
 
-def nested_inner_folds(folds, outer_fold, outer_train_indices):
-    """Use the v1.5.8 fixed county folds as inner folds inside one outer fold."""
-    outer_train_indices = np.asarray(outer_train_indices, dtype=int)
-    for inner_fold, (_, inner_valid_full) in enumerate(folds):
-        if inner_fold == outer_fold:
-            continue
-        inner_valid = np.intersect1d(outer_train_indices, inner_valid_full)
-        inner_train = np.setdiff1d(outer_train_indices, inner_valid, assume_unique=False)
-        if len(inner_train) == 0 or len(inner_valid) == 0:
-            raise ValueError(
-                f"Nested CV produced an empty split: outer={outer_fold}, inner={inner_fold}"
-            )
-        yield inner_fold, inner_train, inner_valid
-
-
-def aggregate_nested_alphas(alphas):
-    """Choose a deterministic alpha for the final all-county fit.
-
-    This aggregation uses only alpha values selected inside outer-training
-    folds. It never reads outer-fold labels or the pooled outer OOF score.
-    Ties are resolved toward the smaller correction for conservative blending.
-    """
-    if not alphas:
-        return 0.0
-    counts = {float(alpha): alphas.count(alpha) for alpha in set(alphas)}
-    best_count = max(counts.values())
-    return float(min(alpha for alpha, count in counts.items() if count == best_count))
-
-
-def grid_to_rows(grid, train_rows, n_rows):
-    """Map a [time, county] grid back to the original training row order."""
-    values = np.full(n_rows, np.nan, dtype=float)
-    for t in range(train_rows.shape[0]):
-        for node in range(train_rows.shape[1]):
-            row_idx = train_rows[t, node]
-            if row_idx >= 0:
-                values[row_idx] = grid[t, node]
-    return values
-
-
-def residual_scale(residual, mask):
-    """Put small OSI residuals on a numerically useful training scale."""
-    values = np.asarray(residual)[np.asarray(mask, dtype=bool)]
-    values = values[np.isfinite(values)]
-    if len(values) == 0:
-        return 0.01
-    return float(max(np.std(values), 0.003))
-
-
-def main():
-    args = parse_args()
-    random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
-    # Use more host threads when CUDA is unavailable; this does not change
-    # training scale and keeps the full graph/time-snapshot workload intact.
-    torch.set_num_threads(max(1, min(16, torch.get_num_threads())))
-    if args.device == "auto":
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-    elif args.device == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError("--device cuda requested but torch.cuda.is_available() is False")
+def _atomic_dataframe(path: Path, frame: pd.DataFrame):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    if path.suffix == ".parquet":
+        frame.to_parquet(temporary, engine="pyarrow", index=False)
     else:
-        device = args.device
-    print(f"torch_device={device}; time_stride={args.time_stride}; gat_epochs={args.epochs}")
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True); MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    print("=== Phase 2: v1.5.6 LightGBM + DEM spatial GAT residual ===")
-    X_train, X_test, meta_train, meta_test, y = load_cached_data()
+        frame.to_csv(temporary, index=False)
+    os.replace(temporary, path)
+
+
+def _versions():
+    names = ("numpy", "pandas", "pyarrow", "fastparquet", "lightgbm", "torch", "shapely")
+    result = {}
+    for name in names:
+        try:
+            result[name] = importlib.metadata.version(name)
+        except importlib.metadata.PackageNotFoundError:
+            result[name] = None
+    return result
+
+
+def _version_tuple(value):
+    if not value:
+        return (0,)
+    return tuple(int(part) if part.isdigit() else 0 for part in str(value).split(".")[:3])
+
+
+def _resolve_device(requested: str) -> str:
+    import torch
+
+    if requested == "auto":
+        return "cuda" if torch.cuda.is_available() else "cpu"
+    if requested == "cuda" and not torch.cuda.is_available():
+        raise RuntimeError("--device cuda requested but CUDA is unavailable")
+    return requested
+
+
+def _seed_process(seed: int, device: str):
+    import torch
+
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if device == "cuda":
+        torch.cuda.manual_seed_all(seed)
+    torch.set_num_threads(1)
+    try:
+        torch.use_deterministic_algorithms(True)
+    except RuntimeError as exc:
+        raise RuntimeError("the selected Torch device cannot satisfy deterministic algorithms") from exc
+
+
+def _load_training_modules():
+    """Lazy import so preflight can report missing training dependencies cleanly."""
+
+    try:
+        from base_model import BaseModelStore, load_cv_folds
+        from stacking import StackContext
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(f"missing training dependency: {exc.name}") from exc
+    return BaseModelStore, load_cv_folds, StackContext
+
+
+def _graph_identity(all_fips, edge_index, edge_attr):
+    digest = hashlib.sha256()
+    digest.update(json.dumps(list(all_fips), separators=(",", ":")).encode())
+    digest.update(np.asarray(edge_index, dtype=np.int64).tobytes())
+    digest.update(np.asarray(edge_attr, dtype=np.float32).tobytes())
+    return digest.hexdigest()
+
+
+def _package_identity(feature_side_hash: str, target_hash: str | None) -> str | None:
+    """Derive the full five-table identity without reading labels in inference."""
+
+    if target_hash is None:
+        return None
+    payload = json.dumps(
+        {"feature_side_hash": str(feature_side_hash), "targets_train_sha256": str(target_hash)},
+        sort_keys=True, separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _preflight(args, *, load_supervision_data=True):
+    versions = _versions()
+    missing = [name for name in ("numpy", "pandas", "pyarrow", "torch", "lightgbm", "shapely") if versions.get(name) is None]
+    minimums = {"numpy": (2, 0), "pandas": (2, 2), "pyarrow": (15, 0), "lightgbm": (4, 0), "shapely": (2, 0), "torch": (2, 1)}
+    incompatible = [name for name, minimum in minimums.items() if versions.get(name) is not None and _version_tuple(versions[name]) < minimum]
+    if missing or incompatible:
+        raise RuntimeError(f"preflight dependency check failed; missing={missing}, incompatible={incompatible}, versions={versions}")
+    from spatial import build_spatial_graph
+    bundle = load_feature_bundle(args.feature_dir, args.parquet_engine)
+    expected_feature_side_hash = getattr(args, "expected_feature_side_hash", None)
+    if expected_feature_side_hash is not None and bundle.input_hash != expected_feature_side_hash:
+        raise ValueError("feature-side package hash differs from the frozen run manifest")
+    supervision = (
+        load_supervision(feature_bundle=bundle, parquet_engine=args.parquet_engine)
+        if load_supervision_data else None
+    )
+    if args.parquet_engine == "fastparquet":
+        reference = load_feature_bundle(args.feature_dir, "pyarrow")
+        pairs = [
+            (bundle.X_train, reference.X_train), (bundle.X_test, reference.X_test),
+            (bundle.meta_train, reference.meta_train), (bundle.meta_test, reference.meta_test),
+        ]
+        if load_supervision_data:
+            reference_supervision = load_supervision(feature_bundle=reference, parquet_engine="pyarrow")
+            pairs.append((supervision.y_train, reference_supervision.y_train))
+        for left, right in pairs:
+            if list(left.columns) != list(right.columns) or left.shape != right.shape:
+                raise ValueError("fastparquet and pyarrow schema/shape differ")
+            pd.testing.assert_frame_equal(left, right, check_dtype=False, check_exact=False, rtol=1e-12, atol=1e-12)
+    BaseModelStore, load_cv_folds, _ = _load_training_modules()
+    folds = load_cv_folds(bundle.meta_train)
     terrain = load_terrain_features()
-    folds = load_cv_folds(meta_train)
-    if args.folds != 5:
-        raise ValueError(
-            "Strict nested alpha selection requires all 5 v1.5.8-compatible county folds"
-        )
-    train_fips = sorted(meta_train["fips_str"].unique())
-    test_fips = sorted(meta_test["fips_str"].unique())
-    all_fips = sorted(set(train_fips + test_fips))
+    all_fips = sorted(set(bundle.meta_train["fips_str"]) | set(bundle.meta_test["fips_str"]))
+    if len(all_fips) != 302:
+        raise ValueError("expected 302 graph counties")
     shp_path = GEO_DBF.with_suffix(".shp")
     coords, edge_index, edge_attr = build_spatial_graph(all_fips, GEO_DBF, shp_path, k=args.k)
-    train_node_mask = np.asarray([f in set(train_fips) for f in all_fips], dtype=bool)
-    print(f"counties={len(all_fips)} train={train_node_mask.sum()} test={(~train_node_mask).sum()} edges={edge_index.shape[1]}")
+    if edge_index.shape != (2, 3028) or edge_attr.shape != (3028, 4):
+        raise ValueError(f"unexpected graph shape: {edge_index.shape}, {edge_attr.shape}")
+    zeros_train = np.zeros(len(bundle.X_train), dtype=float)
+    zeros_test = np.zeros(len(bundle.X_test), dtype=float)
+    features, _, _, _, _, names = make_county_time_view(
+        bundle.X_train, bundle.X_test, bundle.meta_train, bundle.meta_test,
+        zeros_train, zeros_test, HORIZONS[0], coords, terrain, bundle.feature_names,
+    )
+    features, extra_names = add_neighbor_feature_aggregates(features, names, edge_index, HORIZONS[0])
+    if features.shape != (144, 302, 205) or not np.isfinite(features).all():
+        raise ValueError("D3 graph input preflight failed")
+    component_targets = (
+        load_component_targets(bundle.meta_train, args.parquet_engine)
+        if load_supervision_data else None
+    )
+    component_recomposition = None
+    if load_supervision_data:
+        from data import validate_component_recomposition
+        component_recomposition = validate_component_recomposition(
+            component_targets, supervision.y_train
+        )
+    target_hash = None if supervision is None else supervision.target_hash
+    package_hash = _package_identity(bundle.input_hash, target_hash)
+    if package_hash is None:
+        package_hash = getattr(args, "expected_feature_package_hash", None)
+    return {
+        "bundle": bundle,
+        "folds": folds,
+        "terrain": terrain,
+        "all_fips": all_fips,
+        "coords": coords,
+        "edge_index": edge_index,
+        "edge_attr": edge_attr,
+        "graph_hash": _graph_identity(all_fips, edge_index, edge_attr),
+        "graph_feature_names": [
+            "base", *names, "latitude", "longitude", *list(terrain.columns), *extra_names,
+        ],
+        "component_target_count": 0 if component_targets is None else len(component_targets),
+        "supervision": supervision,
+        "component_targets": component_targets,
+        "component_recomposition": component_recomposition,
+        "feature_side_hash": bundle.input_hash,
+        "target_hash": target_hash,
+        "feature_package_hash": package_hash,
+        "versions": versions,
+    }
 
-    if args.base_mode == "direct":
-        base = train_base_models(X_train, y, meta_train, X_test, folds)
-        effective_base_mode = "direct_v1.5.8_C0"
-    elif args.base_mode == "component_v158":
-        base = train_component_v158_base(X_train, y, meta_train, X_test, folds)
-        effective_base_mode = "component_v1.5.8_C1"
+
+def _input_manifest(preflight: dict):
+    bundle = preflight["bundle"]
+    return {
+        "experiment_version": EXPERIMENT_VERSION,
+        "feature_version": FEATURE_VERSION,
+        "feature_dir": str(bundle.feature_dir),
+        "parquet_engine": bundle.parquet_engine,
+        "package_manifest": bundle.manifest,
+        "feature_side_hash": preflight["feature_side_hash"],
+        "feature_package_hash": preflight["feature_package_hash"],
+        "targets_train_sha256": preflight["target_hash"],
+        "component_targets": str(COMPONENT_TARGETS_FILE),
+        "component_targets_sha256": _sha256(COMPONENT_TARGETS_FILE),
+        "component_target_version": "v1.5.8",
+        "cv_file": str(CV_FILE),
+        "cv_sha256": _sha256(CV_FILE),
+        "terrain_file": str(TERRAIN_FILE),
+        "terrain_sha256": _sha256(TERRAIN_FILE),
+        "graph_hash": preflight["graph_hash"],
+        "all_fips": preflight["all_fips"],
+    }
+
+
+def _create_or_resume_run(args, preflight: dict):
+    run_dir = OUTPUT_ROOT / "runs" / args.run_id
+    resolved_device = _resolve_device(args.device)
+    manifest = {
+        "protocol": PROTOCOL,
+        "experiment_version": EXPERIMENT_VERSION,
+        "run_id": args.run_id,
+        "base_mode": args.base_mode,
+        "feature_version": FEATURE_VERSION,
+        "seed": args.seed,
+        "stage": args.stage,
+        "parameters": {
+            "k": args.k, "epochs": args.epochs, "patience": args.patience,
+            "time_stride": args.time_stride, "gat_loss": args.gat_loss,
+            "device": resolved_device,
+        },
+        "inputs": _input_manifest(preflight),
+    }
+    existing = run_dir.exists()
+    if existing and not args.resume:
+        raise FileExistsError(f"run already exists; use --resume only after identity validation: {run_dir}")
+    if existing:
+        manifest_path = run_dir / "run_manifest.json"
+        if not manifest_path.exists():
+            raise ValueError("cannot resume a run without run_manifest.json")
+        old = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if (run_dir / "COMPLETE").exists():
+            raise FileExistsError("this run is already COMPLETE and immutable")
+        comparable = {
+            key: old.get(key)
+            for key in ("protocol", "experiment_version", "run_id", "base_mode", "feature_version", "seed", "parameters", "inputs")
+        }
+        if comparable != {key: manifest.get(key) for key in comparable}:
+            raise ValueError("resume manifest identity mismatch")
+        if args.stage in {"cv", "all"} and (run_dir / "CV_COMPLETE").exists():
+            raise FileExistsError("CV evidence is already frozen; resume with --stage final")
     else:
-        base = load_component_v21_base(
-            y, meta_train, meta_test, folds, X=X_train, X_test=X_test
-        )
-        effective_base_mode = "component_v1.5.8_C1_legacy_alias"
-    summary_rows = []
-    alpha_rows = []
-    submission_predictions = {}
-    for horizon in HORIZONS:
-        print(f"\n[GAT residual] {horizon}")
-        result = base[horizon]
-        y_arr = y[horizon].to_numpy(dtype=float)
-        # View using OOF LightGBM predictions for every train county.
-        features, _, train_rows, test_rows, _, phase1_feature_names = make_county_time_view(
-            X_train, X_test, meta_train, meta_test, result["oof"], result["test"],
-            horizon, coords, terrain)
-        features, spatial_feature_names = add_neighbor_feature_aggregates(
-            features, phase1_feature_names, edge_index, horizon
-        )
-        validate_feature_columns(
-            ["base_prediction", *phase1_feature_names, "latitude", "longitude",
-             *list(terrain.columns), *spatial_feature_names],
-            "GAT tensor features",
-        )
-        # Align the OOF target and base prediction to the same time/county grid.
-        n_time, n_nodes = features.shape[:2]
-        y_grid = np.full((n_time, n_nodes), np.nan, dtype=np.float32)
-        base_grid = features[:, :, 0].copy()
-        for t in range(n_time):
-            for node in range(n_nodes):
-                idx = train_rows[t, node]
-                if idx >= 0:
-                    y_grid[t, node] = y_arr[idx]
-        residual_grid = np.nan_to_num(y_grid - base_grid, nan=0.0)
-        valid_time = np.arange(PRED_START, PRED_END) + HORIZON_HOURS[horizon] <= PRED_END - 1
-        # For final prediction, all train county residuals are supervised. A
-        # fold's validation counties are held out from the GAT loss.
-        fold_oof_corr = np.full(len(X_train), np.nan, dtype=float)
-        alpha_by_row = np.full(len(X_train), np.nan, dtype=float)
-        fold_records = []
-        selected_alphas = []
-        for fold_id, (_, val_full) in enumerate(folds):
-            val_fips = set(meta_train.iloc[val_full]["fips_str"])
-            gat_train_nodes = train_node_mask.copy()
-            for node, fips in enumerate(all_fips):
-                if fips in val_fips:
-                    gat_train_nodes[node] = False
-            mask = np.broadcast_to(gat_train_nodes[None, :], (n_time, n_nodes)).copy()
-            mask &= valid_time[:, None]
-            # Only finite labels may supervise GAT; the last h rows are NaN.
-            mask &= np.isfinite(y_grid)
-            # Fold-specific train/test base predictions prevent validation
-            # leakage in both the residual targets and GAT input features.
-            fold_train_base = result["train_by_fold"][fold_id]
-            fold_base = result["test_by_fold"][fold_id]
-            fold_features, _, _, _, _, fold_phase1_feature_names = make_county_time_view(
-                X_train, X_test, meta_train, meta_test, fold_train_base, fold_base,
-                horizon, coords, terrain)
-            fold_features, _ = add_neighbor_feature_aggregates(
-                fold_features, fold_phase1_feature_names, edge_index, horizon
-            )
-            fold_base_grid = fold_features[:, :, 0].copy()
-            fold_base_rows = grid_to_rows(fold_base_grid, train_rows, len(X_train))
-            fold_residual_grid = np.nan_to_num(y_grid - fold_base_grid, nan=0.0)
-            fold_scale = residual_scale(fold_residual_grid, mask)
-            train_scaled, _, _ = standardize_features(fold_features, gat_train_nodes)
-            fit_times = np.arange(0, n_time, max(1, args.time_stride), dtype=int)
-            fit_times = np.unique(np.r_[fit_times, n_time - 1])
-            gat_model, _, fit_info = fit_gat(
-                train_scaled[fit_times], (fold_residual_grid / fold_scale)[fit_times],
-                mask[fit_times], edge_index,
-                epochs=args.epochs, patience=args.patience,
-                hidden=GAT_HIDDEN, heads=GAT_HEADS, dropout=GAT_DROPOUT,
-                lr=GAT_LR, weight_decay=GAT_WEIGHT_DECAY, seed=args.seed + fold_id,
-                device=device,
-                edge_attr=edge_attr, loss_mode=args.gat_loss,
-            )
-            corr_grid = predict_gat(gat_model, train_scaled, edge_index, device=device,
-                                    edge_attr=edge_attr) * fold_scale
+        run_dir.mkdir(parents=True)
+        _atomic_json(run_dir / "run_manifest.json", manifest)
+    return run_dir, manifest
 
-            # Strict nested alpha selection. The outer validation counties
-            # below are never passed to alpha_select. Inner validation is the
-            # other four fixed v1.5.8 county folds inside this outer train set.
-            inner_oof_corr = np.full(len(X_train), np.nan, dtype=float)
-            inner_fold_ids = []
-            for inner_fold, inner_train_full, inner_valid_full in nested_inner_folds(
-                    folds, fold_id, folds[fold_id][0]):
-                inner_fold_ids.append(inner_fold)
-                inner_train_fips = set(meta_train.iloc[inner_train_full]["fips_str"])
-                inner_train_nodes = np.asarray(
-                    [f in inner_train_fips for f in all_fips], dtype=bool
-                )
-                inner_mask = np.broadcast_to(
-                    inner_train_nodes[None, :], (n_time, n_nodes)
-                ).copy()
-                inner_mask &= valid_time[:, None]
-                inner_mask &= np.isfinite(y_grid)
-                inner_scale = residual_scale(fold_residual_grid, inner_mask)
-                inner_scaled, _, _ = standardize_features(fold_features, inner_train_nodes)
-                inner_model, _, inner_info = fit_gat(
-                    inner_scaled[fit_times],
-                    (fold_residual_grid / inner_scale)[fit_times],
-                    inner_mask[fit_times], edge_index,
-                    epochs=args.epochs, patience=args.patience,
-                    hidden=GAT_HIDDEN, heads=GAT_HEADS, dropout=GAT_DROPOUT,
-                    lr=GAT_LR, weight_decay=GAT_WEIGHT_DECAY,
-                    seed=args.seed + 1000 + fold_id * 10 + inner_fold,
-                    device=device, edge_attr=edge_attr, loss_mode=args.gat_loss,
-                )
-                inner_corr_grid = predict_gat(
-                    inner_model, inner_scaled, edge_index, device=device,
-                    edge_attr=edge_attr,
-                ) * inner_scale
-                inner_corr_rows = grid_to_rows(
-                    inner_corr_grid, train_rows, len(X_train)
-                )
-                inner_oof_corr[inner_valid_full] = inner_corr_rows[inner_valid_full]
-                alpha_rows.append({
-                    "horizon": horizon,
-                    "scope": "nested_inner_fit",
-                    "outer_fold": fold_id,
-                    "inner_fold": inner_fold,
-                    "alpha": np.nan,
-                    "inner_train_counties": int(len(inner_train_fips)),
-                    "inner_valid_counties": int(
-                        meta_train.iloc[inner_valid_full]["fips_str"].nunique()
-                    ),
-                    "epochs": inner_info["epochs"],
-                })
 
-            nested_valid = np.isfinite(y_arr) & np.isfinite(inner_oof_corr)
-            alpha, alpha_table = alpha_select(
-                y_arr, fold_base_rows, inner_oof_corr, nested_valid
-            )
-            alpha_rows.extend([
-                {**row, "horizon": horizon, "scope": "nested_inner_selection",
-                 "outer_fold": fold_id, "inner_fold": "pooled"}
-                for row in alpha_table
-            ])
-            outer_corr_rows = grid_to_rows(corr_grid, train_rows, len(X_train))
-            fold_oof_corr[val_full] = outer_corr_rows[val_full]
-            val_mask_rows = np.zeros(len(X_train), dtype=bool)
-            val_mask_rows[val_full] = True
-            val_mask_rows &= np.isfinite(y_arr) & np.isfinite(fold_oof_corr)
-            alpha_by_row[val_mask_rows] = alpha
-            selected_alphas.append(alpha)
-            outer_base_metrics = metrics(y_arr[val_mask_rows], fold_base_rows[val_mask_rows])
-            outer_pred = post_process_osi(
-                fold_base_rows[val_mask_rows] + alpha * fold_oof_corr[val_mask_rows]
-            )
-            outer_gat_metrics = metrics(y_arr[val_mask_rows], outer_pred)
-            fold_records.append({
-                "fold": fold_id, "alpha": alpha, "epochs": fit_info["epochs"],
-                "base_rmse": outer_base_metrics["rmse"],
-                "gat_rmse": outer_gat_metrics["rmse"],
-                "gat_mae": outer_gat_metrics["mae"],
+def _make_context(
+    args, preflight: dict, run_dir: Path, resume=False, strict_resume=False,
+    inference_only=False,
+):
+    BaseModelStore, load_cv_folds, StackContext = _load_training_modules()
+    bundle = preflight["bundle"]
+    folds = load_cv_folds(bundle.meta_train)
+    model_dir = run_dir / "models" / "base"
+    store = BaseModelStore(
+        bundle.X_train, bundle.X_test, bundle.meta_train, folds,
+        y_train=None if inference_only else preflight["supervision"].y_train,
+        global_seed=args.seed, model_dir=model_dir, parquet_engine=args.parquet_engine,
+        component_targets=None if inference_only else preflight["component_targets"],
+        feature_package_hash=preflight["feature_package_hash"],
+        feature_schema_hash=hashlib.sha256(
+            json.dumps(list(bundle.feature_names), separators=(",", ":")).encode()
+        ).hexdigest(),
+        protocol=PROTOCOL,
+    )
+    if resume:
+        store.load_from_run(run_dir)
+    return StackContext(
+        bundle=bundle,
+        terrain=preflight["terrain"],
+        folds=folds,
+        coords=preflight["coords"],
+        edge_index=preflight["edge_index"],
+        edge_attr=preflight["edge_attr"],
+        base_store=store,
+        global_seed=args.seed,
+        device=_resolve_device(args.device),
+        epochs=args.epochs,
+        patience=args.patience,
+        time_stride=args.time_stride,
+        model_dir=run_dir / "models" / "gat",
+        loss_mode=args.gat_loss,
+        resume_only=strict_resume,
+        reuse_existing=resume,
+        inference_only=inference_only,
+        graph_hash=preflight["graph_hash"],
+        feature_package_hash=bundle.input_hash,
+    )
+
+
+def _write_static_artifacts(run_dir: Path, args, preflight: dict):
+    bundle = preflight["bundle"]
+    folds = preflight["folds"]
+    fold_rows = []
+    for fold, (_, valid) in enumerate(folds):
+        for row_id in valid:
+            fold_rows.append({
+                "row_id": int(row_id),
+                "fipsCode": str(bundle.meta_train.iloc[row_id]["fips_str"]),
+                "fold": fold,
+                "stateAbbr": str(bundle.meta_train.iloc[row_id]["stateAbbr"]),
+                "severity_tier": int(bundle.meta_train.iloc[row_id]["severity_tier"]),
             })
-            alpha_rows.append({
-                "horizon": horizon, "scope": "outer_evaluation", "outer_fold": fold_id,
-                "inner_fold": "not_used_for_selection", "alpha": alpha,
-                "n": outer_gat_metrics["n"], "rmse": outer_gat_metrics["rmse"],
-                "mae": outer_gat_metrics["mae"],
-            })
-            print(f"  fold={fold_id} alpha={alpha:.2f} val_base_rmse={fold_records[-1]['base_rmse']:.6f} "
-                  f"gat_rmse={fold_records[-1]['gat_rmse']:.6f} epochs={fit_info['epochs']} "
-                  f"inner_folds={inner_fold_ids}")
+    _atomic_dataframe(run_dir / "folds.csv", pd.DataFrame(fold_rows))
+    _atomic_json(run_dir / "environment.json", {
+        "python": sys.version,
+        "versions": preflight["versions"],
+        "device": _resolve_device(args.device),
+        "torch_threads": 1,
+    })
+    _atomic_json(run_dir / "inputs_manifest.json", _input_manifest(preflight))
+    _atomic_json(run_dir / "feature_schema.json", {
+        "experiment_version": EXPERIMENT_VERSION,
+        "feature_version": FEATURE_VERSION,
+        "ordered_phase1_features": list(bundle.feature_names),
+        "graph_schema": preflight["graph_feature_names"],
+        "graph_input_dim": 205,
+    })
+    np.savez_compressed(
+        run_dir / "graph.npz",
+        coords=preflight["coords"], edge_index=preflight["edge_index"], edge_attr=preflight["edge_attr"],
+        all_fips=np.asarray(preflight["all_fips"], dtype=object),
+    )
 
-        # A single final GAT sees all training counties' OOF residuals. Its
-        # inference graph includes test counties but no test labels.
-        final_mask = np.broadcast_to(train_node_mask[None, :], (n_time, n_nodes)).copy()
-        final_mask &= valid_time[:, None]
-        final_mask &= np.isfinite(y_grid)
-        final_scaled, mean_x, std_x = standardize_features(features, train_node_mask)
-        final_scale = residual_scale(residual_grid, final_mask)
-        fit_times = np.arange(0, n_time, max(1, args.time_stride), dtype=int)
-        fit_times = np.unique(np.r_[fit_times, n_time - 1])
-        final_model, _, final_info = fit_gat(
-            final_scaled[fit_times], (residual_grid / final_scale)[fit_times],
-            final_mask[fit_times], edge_index,
-            epochs=args.epochs, patience=args.patience,
-            hidden=GAT_HIDDEN, heads=GAT_HEADS, dropout=GAT_DROPOUT,
-            lr=GAT_LR, weight_decay=GAT_WEIGHT_DECAY, seed=args.seed + 100,
-            device=device,
-            edge_attr=edge_attr, loss_mode=args.gat_loss,
+
+def _base_manifest(ctx, run_dir: Path, args):
+    rows = []
+    for fit in ctx.base_store.fits.values():
+        safe = f"{fit.component}_{fit.horizon.replace('osi_target_', '')}_S{'-'.join(map(str, fit.scope))}.txt"
+        valid_mask = (
+            np.isin(ctx.row_fold, np.asarray(fit.scope, dtype=int))
+            & (ctx.bundle.meta_train["hour_idx"].to_numpy(dtype=int) + HORIZON_HOURS[fit.horizon] <= PRED_END - 1)
         )
-        final_corr = predict_gat(final_model, final_scaled, edge_index, device=device,
-                                 edge_attr=edge_attr) * final_scale
-        # The final all-county GAT uses an alpha aggregated from nested
-        # selections only. Outer OOF labels are never used to choose it.
-        alpha = aggregate_nested_alphas(selected_alphas)
-        alpha_rows.append({
-            "horizon": horizon, "scope": "final_alpha", "outer_fold": "all",
-            "inner_fold": "nested_mode", "alpha": alpha,
-            "selected_outer_alphas": json.dumps(selected_alphas),
+        rows.append({
+            "protocol": PROTOCOL, "base_mode": args.base_mode,
+            "horizon": fit.horizon, "component": fit.component,
+            "allowed_folds": json.dumps(fit.scope),
+            "valid_rows": int(valid_mask.sum()),
+            "best_iterations": json.dumps(fit.best_iterations),
+            "final_rounds": fit.final_rounds, "seed": fit.seed,
+            "model_id": fit.model_id, "model_path": str(Path("models/base") / safe),
+            "model_sha256": _sha256(run_dir / "models" / "base" / safe),
+            "feature_package_hash": ctx.bundle.input_hash,
+            "feature_schema_hash": hashlib.sha256(
+                json.dumps(list(ctx.bundle.feature_names), separators=(",", ":")).encode()
+            ).hexdigest(),
+            "probe_records": json.dumps(fit.probe_records, default=str),
         })
-        test_pred = result["test"].copy()
-        for row_idx, row in meta_test.iterrows():
-            t = int(row["hour_idx"]) - PRED_START
-            node = all_fips.index(row["fips_str"])
-            if 0 <= t < n_time:
-                test_pred[row_idx] = post_process_osi(test_pred[row_idx] + alpha * final_corr[t, node])
-        submission_predictions[horizon] = test_pred
-        base_summary = result["summary"]
-        # GAT CV OOF correction is assembled from fold-held-out predictions.
-        valid_oof = np.isfinite(y_arr) & np.isfinite(fold_oof_corr) & np.isfinite(alpha_by_row)
-        gat_oof = post_process_osi(
-            result["oof"][valid_oof] + alpha_by_row[valid_oof] * fold_oof_corr[valid_oof]
-        )
-        gat_summary = metrics(y_arr[valid_oof], gat_oof)
-        summary_rows.extend([
-            {"horizon": horizon, "model": "lightgbm_base", **base_summary},
-            {"horizon": horizon, "model": "gat_residual", **gat_summary},
-        ])
-        print(f"  final alpha={alpha:.2f}; base OOF RMSE={base_summary['rmse']:.6f}, "
-              f"GAT OOF RMSE={gat_summary['rmse']:.6f}, base MAE={base_summary['mae']:.6f}, "
-              f"GAT MAE={gat_summary['mae']:.6f}")
-        torch.save({"model": final_model.state_dict(), "feature_mean": mean_x,
-                    "feature_std": std_x, "edge_index": edge_index, "alpha": alpha,
-                    "residual_scale": final_scale, "edge_attr": edge_attr,
-                    "fit_info": final_info}, MODEL_DIR / f"gat_residual_{horizon}.pt")
+    _atomic_dataframe(run_dir / "base_fit_manifest.parquet", pd.DataFrame(rows))
 
-    # Fill the official template by its stable identifier key and preserve NaN
-    # for horizons whose target time is outside March 11-19.
-    submission = pd.read_csv(SUBMISSION_FILE)
-    key_to_idx = {(str(r.fipsCode), r.timestamp_et): i for i, r in submission.iterrows()}
-    for horizon in HORIZONS:
-        for i, row in meta_test.iterrows():
-            key = (str(row.fipsCode), row.timestamp_et)
-            if int(row.hour_idx) + HORIZON_HOURS[horizon] > PRED_END - 1:
-                submission.loc[key_to_idx[key], horizon] = np.nan
-            else:
-                submission.loc[key_to_idx[key], horizon] = submission_predictions[horizon][i]
-    out_file = OUTPUT_DIR / "submission_phase2_dem_gat.csv"
-    submission.to_csv(out_file, index=False)
-    pd.DataFrame(summary_rows).to_csv(OUTPUT_DIR / "cv_summary.csv", index=False)
-    pd.DataFrame(alpha_rows).to_csv(OUTPUT_DIR / "alpha_selection.csv", index=False)
-    audit_rows = []
-    for horizon in HORIZONS:
-        values = pd.to_numeric(submission[horizon], errors="coerce").to_numpy(dtype=float)
-        finite = np.isfinite(values)
-        audit_rows.append({
+
+def _append_inner_records(rows, selection, outer_fold, horizon, mode, bundle, row_fold, supervision):
+    labels = supervision.scoped(selection.scope, horizon, "osi")
+    for inner_fold in selection.scope:
+        allowed = tuple(fold for fold in selection.scope if fold != inner_fold)
+        mask = (row_fold == inner_fold) & (bundle.meta_train["hour_idx"].to_numpy(dtype=int) + HORIZON_HOURS[horizon] <= PRED_END - 1)
+        for row_id in np.flatnonzero(mask):
+            rows.append({
+                "protocol": PROTOCOL, "base_mode": mode,
+                "outer_fold": outer_fold, "inner_fold": inner_fold,
+                "allowed_folds": json.dumps(allowed),
+                "fipsCode": str(bundle.meta_train.iloc[row_id]["fips_str"]),
+                "timestamp_et": str(bundle.meta_train.iloc[row_id]["timestamp_et"]),
+                "hour_idx": int(bundle.meta_train.iloc[row_id]["hour_idx"]),
+                "horizon": horizon,
+                "is_scoreable": True,
+                "y_true": float(labels.take(np.asarray([row_id]))[0]),
+                "base_prediction": float(selection.inner_base[row_id]),
+                "correction_osi": float(selection.inner_correction[row_id]),
+                "base_source_id": str(selection.inner_source_ids[row_id]),
+                "stack_id": str(selection.inner_source_ids[row_id]),
+                "selection_id": selection.selection_id,
+            })
+
+
+def _serialise_alpha_candidate(candidate: dict) -> dict:
+    result = dict(candidate)
+    if "scope" in result:
+        result["allowed_folds"] = json.dumps(tuple(int(value) for value in result.pop("scope")))
+    return result
+
+
+def _county_metrics_and_bootstrap(outer: pd.DataFrame):
+    """Recompute county SSE/RMSE and paired county bootstrap from outer OOF."""
+
+    scoreable = outer[outer["is_scoreable"].astype(bool)].copy()
+    if scoreable.empty:
+        raise ValueError("county metrics have no scoreable outer rows")
+    county_rows = []
+    for (horizon, fips), group in scoreable.groupby(["horizon", "fipsCode"], sort=True):
+        if group["outer_fold"].nunique() != 1:
+            raise ValueError(f"county belongs to multiple outer folds: {horizon}/{fips}")
+        y = group["y_true"].to_numpy(dtype=float)
+        base = post_process_osi(group["base_prediction"].to_numpy(dtype=float))
+        gat = group["prediction"].to_numpy(dtype=float)
+        if not (np.isfinite(y).all() and np.isfinite(base).all() and np.isfinite(gat).all()):
+            raise FloatingPointError(f"non-finite county metric inputs for {horizon}/{fips}")
+        base_error = base - y
+        gat_error = gat - y
+        county_rows.append({
             "horizon": horizon,
-            "submission_rows": int(len(values)),
-            "non_nan_rows": int(finite.sum()),
-            "official_scoreable_rows": int(OFFICIAL_SCOREABLE_ROWS[horizon]),
-            "row_count_match": bool(finite.sum() == OFFICIAL_SCOREABLE_ROWS[horizon]),
-            "prediction_min": float(np.nanmin(values)) if finite.any() else np.nan,
-            "prediction_max": float(np.nanmax(values)) if finite.any() else np.nan,
-            "prediction_nan": int((~finite).sum()),
+            "fipsCode": str(fips),
+            "outer_fold": int(group["outer_fold"].iloc[0]),
+            "n": int(len(group)),
+            "base_sse": float(np.sum(base_error * base_error, dtype=np.float64)),
+            "gat_sse": float(np.sum(gat_error * gat_error, dtype=np.float64)),
+            "base_rmse": float(np.sqrt(np.mean(base_error * base_error))),
+            "gat_rmse": float(np.sqrt(np.mean(gat_error * gat_error))),
+            "gat_minus_base_sse": float(np.sum(gat_error * gat_error, dtype=np.float64) - np.sum(base_error * base_error, dtype=np.float64)),
+            "gat_better": bool(np.sum(gat_error * gat_error) < np.sum(base_error * base_error)),
         })
-    pd.DataFrame(audit_rows).to_csv(OUTPUT_DIR / "submission_audit.csv", index=False)
-    metadata = {"seed": args.seed, "epochs": args.epochs, "patience": args.patience,
-                "device": device, "time_stride": args.time_stride,
-                "graph_k": args.k, "edge_count": int(edge_index.shape[1]),
-                "cv_version": CV_VERSION,
-                "cv_protocol": "v1.5.8-compatible balanced_v1 fixed county-level 5-fold; seed=42",
-                "alpha_selection": "nested inner county CV only; outer validation labels used once for final scoring",
-                "alpha_outer_oof_selection": False,
-                "submission": str(out_file), "feature_cache": "v1.5.6",
-                "terrain_file": str(DATA_DIR / "geo" / "county_terrain.csv"),
-                "terrain_features": ["elevation_mean_m", "elevation_std_m",
-                                     "elevation_min_m", "elevation_max_m",
-                                     "slope_mean_deg", "slope_std_deg",
-                                     "terrain_ruggedness"],
-                "base_mode": effective_base_mode,
-                "base_protocol": "v1.5.8; nested county cross-fit for outer GAT evaluation",
-                "base_final_source": result.get("final_source", "retrained v1.5.8-compatible booster"),
-                "base_nested_cross_fit": True,
-                "gat_feature_count": int(features.shape[-1]),
-                "residual_standardized_per_fold": True,
-                "residual_loss": args.gat_loss,
-                "official_metric": OFFICIAL_METRIC,
-                "official_ranking": "average rank across t+1h, t+6h, t+24h, t+48h",
-                "official_tie_break": "t+1h RMSE",
-                "official_scoreable_rows": OFFICIAL_SCOREABLE_ROWS,
-                "causal_rule": "outage inputs only from hour_idx<72; weather full horizon"}
-    (OUTPUT_DIR / "run_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
-    print(f"\nSaved submission: {out_file}")
-    print(pd.DataFrame(summary_rows).to_string(index=False))
+    county = pd.DataFrame(county_rows)
+    if county.duplicated(["horizon", "fipsCode"]).any():
+        raise ValueError("county metrics contain duplicate horizon/county keys")
+
+    rng = np.random.default_rng(BOOTSTRAP_SEED)
+    bootstrap_rows = []
+    for horizon, group in county.groupby("horizon", sort=True):
+        sse_base = group["base_sse"].to_numpy(dtype=np.float64)
+        sse_gat = group["gat_sse"].to_numpy(dtype=np.float64)
+        counts = group["n"].to_numpy(dtype=np.int64)
+        n_counties = len(group)
+        draws = rng.integers(0, n_counties, size=(BOOTSTRAP_REPLICATES, n_counties))
+        sampled_base = sse_base[draws].sum(axis=1, dtype=np.float64)
+        sampled_gat = sse_gat[draws].sum(axis=1, dtype=np.float64)
+        sampled_n = counts[draws].sum(axis=1, dtype=np.float64)
+        base_rmse = np.sqrt(sampled_base / sampled_n)
+        gat_rmse = np.sqrt(sampled_gat / sampled_n)
+        delta = gat_rmse - base_rmse
+        bootstrap_rows.append({
+            "horizon": horizon,
+            "replicates": int(BOOTSTRAP_REPLICATES),
+            "seed": int(BOOTSTRAP_SEED),
+            "n_counties": int(n_counties),
+            "base_rmse": float(np.sqrt(group["base_sse"].sum() / group["n"].sum())),
+            "gat_rmse": float(np.sqrt(group["gat_sse"].sum() / group["n"].sum())),
+            "delta_rmse_gat_minus_base": float(np.sqrt(group["gat_sse"].sum() / group["n"].sum()) - np.sqrt(group["base_sse"].sum() / group["n"].sum())),
+            "delta_ci_low": float(np.quantile(delta, 0.025)),
+            "delta_ci_high": float(np.quantile(delta, 0.975)),
+            "gat_better_probability": float(np.mean(delta < 0.0)),
+        })
+    return county, pd.DataFrame(bootstrap_rows)
+
+
+def _append_outer_records(rows, stack, selection, outer_fold, horizon, mode, ctx):
+    bundle = ctx.bundle
+    row_fold = ctx.row_fold
+    n_rows = len(bundle.X_train)
+    base_rows = stack.train_base_rows(n_rows)
+    correction_rows = stack.train_correction_rows(n_rows)
+    labels = ctx.base_store.supervision.scoped((outer_fold,), horizon, "osi")
+    for row_id in np.flatnonzero(row_fold == outer_fold):
+        hour = int(bundle.meta_train.iloc[row_id]["hour_idx"])
+        scoreable = hour + HORIZON_HOURS[horizon] <= PRED_END - 1
+        before = float(base_rows[row_id] + selection.alpha * correction_rows[row_id]) if scoreable else np.nan
+        prediction = float(post_process_osi(before)) if scoreable else np.nan
+        record = {
+            "run_id": ctx.run_id,
+            "protocol": PROTOCOL, "base_mode": mode,
+            "fipsCode": str(bundle.meta_train.iloc[row_id]["fips_str"]),
+            "timestamp_et": str(bundle.meta_train.iloc[row_id]["timestamp_et"]),
+            "hour_idx": hour,
+            "target_timestamp": str(pd.to_datetime(bundle.meta_train.iloc[row_id]["timestamp_et"]) + pd.Timedelta(hours=HORIZON_HOURS[horizon])),
+            "horizon": horizon, "outer_fold": outer_fold,
+            "is_scoreable": scoreable,
+            "y_true": float(labels.take(np.asarray([row_id]))[0]) if scoreable else np.nan,
+            "base_prediction": float(base_rows[row_id]),
+            "correction_osi": float(correction_rows[row_id]),
+            "alpha": selection.alpha,
+            "prediction_before_postprocess": before,
+            "prediction": prediction,
+            "base_source_id": str(stack.inputs.train_source_id[row_id]),
+            "stack_id": stack.stack_id,
+            "inner_selection_id": selection.selection_id,
+        }
+        if mode == "component_v158":
+            for component, values in stack.inputs.base_parts["train_parts"].items():
+                record[f"base_{component}"] = float(values[row_id])
+                record[f"base_source_{component}"] = str(
+                    stack.inputs.base_parts["train_source_by_component"][component][row_id]
+                )
+        rows.append(record)
+
+
+def evaluate_outer(ctx, outer_fold: int, horizon: str, mode: str):
+    """Evaluate one outer county fold with its own inner-selected alpha.
+
+    This is the only public scoring path for an outer fold: training receives
+    A=F-{outer_fold}, while the official labels of the held-out fold are read
+    here solely for the final score and row-level evidence.
+    """
+
+    outer_fold = int(outer_fold)
+    if outer_fold < 0 or outer_fold >= N_FOLDS:
+        raise ValueError(f"invalid outer fold: {outer_fold}")
+    allowed = tuple(fold for fold in range(N_FOLDS) if fold != outer_fold)
+    selection = ctx.select_alpha(allowed, horizon, mode)
+    stack = ctx.fit_stack(allowed, horizon, mode)
+    n_rows = len(ctx.bundle.X_train)
+    base_rows = stack.train_base_rows(n_rows)
+    correction_rows = stack.train_correction_rows(n_rows)
+    hours = ctx.bundle.meta_train["hour_idx"].to_numpy(dtype=int)
+    expected = (ctx.row_fold == outer_fold) & (hours + HORIZON_HOURS[horizon] <= PRED_END - 1)
+    if not expected.any():
+        raise ValueError("outer fold has no expected scoring rows")
+    labels = ctx.base_store.supervision.scoped((outer_fold,), horizon, "osi")
+    alpha = float(selection.alpha)
+    if not np.isfinite(alpha):
+        raise FloatingPointError("outer alpha is non-finite")
+    expected_rows = np.flatnonzero(expected)
+    y_expected = labels.take(expected_rows)
+    if not (np.isfinite(y_expected).all() and np.isfinite(base_rows[expected]).all()
+            and np.isfinite(correction_rows[expected]).all()):
+        raise FloatingPointError("outer score inputs are non-finite")
+    base_prediction = post_process_osi(base_rows[expected])
+    gat_prediction = post_process_osi(base_rows[expected] + alpha * correction_rows[expected])
+    if not np.isfinite(gat_prediction).all():
+        raise FloatingPointError("outer post-processed prediction is non-finite")
+    return {
+        "allowed_folds": allowed,
+        "selection": selection,
+        "stack": stack,
+        "expected": expected,
+        "base_metric": pooled_metrics(y_expected, base_prediction),
+        "gat_metric": pooled_metrics(y_expected, gat_prediction),
+    }
+
+
+def _run_cv(ctx, args, run_dir):
+    if (run_dir / "CV_COMPLETE").exists():
+        raise FileExistsError("CV evidence already exists and is immutable")
+    ctx.run_id = args.run_id
+    outer_rows, inner_rows, alpha_rows, fold_rows, summary_rows = [], [], [], [], []
+    row_fold = ctx.row_fold
+    all_folds = tuple(range(N_FOLDS))
+    for horizon in HORIZONS:
+        for outer_fold in all_folds:
+            evaluated = evaluate_outer(ctx, outer_fold, horizon, args.base_mode)
+            allowed = evaluated["allowed_folds"]
+            selection = evaluated["selection"]
+            stack = evaluated["stack"]
+            _append_inner_records(
+                inner_rows, selection, outer_fold, horizon, args.base_mode,
+                ctx.bundle, row_fold, ctx.base_store.supervision,
+            )
+            _append_outer_records(outer_rows, stack, selection, outer_fold, horizon, args.base_mode, ctx)
+            fold_rows.extend([
+                {"horizon": horizon, "outer_fold": outer_fold, "model": "base", "alpha": 0.0, **evaluated["base_metric"]},
+                {"horizon": horizon, "outer_fold": outer_fold, "model": "gat", "alpha": selection.alpha, **evaluated["gat_metric"]},
+            ])
+            alpha_rows.extend({
+                "protocol": PROTOCOL, "base_mode": args.base_mode,
+                "selection_type": "outer_train_inner_cv", "outer_fold": outer_fold,
+                "inner_fold": "pooled", "horizon": horizon,
+                "selection_id": selection.selection_id,
+                **_serialise_alpha_candidate(candidate),
+            } for candidate in selection.candidates)
+    outer = pd.DataFrame(outer_rows)
+    inner = pd.DataFrame(inner_rows)
+    if len(outer) != len(ctx.bundle.X_train) * len(HORIZONS):
+        raise ValueError("outer OOF row count is not 34416*4")
+    if outer.duplicated(["fipsCode", "timestamp_et", "horizon"]).any():
+        raise ValueError("outer OOF county-time-horizon key is not unique")
+    for horizon in HORIZONS:
+        subset = outer[outer["horizon"] == horizon]
+        expected = subset["is_scoreable"].to_numpy(dtype=bool)
+        if int(expected.sum()) != OFFICIAL_SCOREABLE_ROWS[horizon]:
+            raise ValueError(f"outer OOF valid-row count mismatch for {horizon}")
+        if not np.isfinite(subset["base_prediction"].to_numpy(dtype=float)).all():
+            raise FloatingPointError(f"outer base prediction is non-finite for {horizon}")
+        if not np.isfinite(subset["correction_osi"].to_numpy(dtype=float)).all():
+            raise FloatingPointError(f"outer correction is non-finite for {horizon}")
+        for column in ("y_true", "prediction"):
+            values = subset[column].to_numpy(dtype=float)
+            if not np.isfinite(values[expected]).all():
+                raise FloatingPointError(f"outer {column} is non-finite on expected rows for {horizon}")
+            if np.isfinite(values[~expected]).any():
+                raise ValueError(f"outer {column} is finite in an unscoreable tail for {horizon}")
+        if not np.isfinite(subset["alpha"].to_numpy(dtype=float)[expected]).all():
+            raise FloatingPointError(f"outer alpha is non-finite on expected rows for {horizon}")
+        summary_rows.extend([
+            {"horizon": horizon, "model": "base", **pooled_metrics(subset.loc[expected, "y_true"].to_numpy(), post_process_osi(subset.loc[expected, "base_prediction"].to_numpy()))},
+            {"horizon": horizon, "model": "gat", **pooled_metrics(subset.loc[expected, "y_true"].to_numpy(), subset.loc[expected, "prediction"].to_numpy())},
+        ])
+    county_metrics, county_bootstrap = _county_metrics_and_bootstrap(outer)
+    _atomic_dataframe(run_dir / "outer_oof.parquet", outer)
+    _atomic_dataframe(run_dir / "inner_oof.parquet", inner)
+    _atomic_dataframe(run_dir / "alpha_selection.parquet", pd.DataFrame(alpha_rows))
+    _atomic_dataframe(run_dir / "fold_metrics.csv", pd.DataFrame(fold_rows))
+    _atomic_dataframe(run_dir / "cv_summary.csv", pd.DataFrame(summary_rows))
+    _atomic_dataframe(run_dir / "county_metrics.csv", county_metrics)
+    _atomic_dataframe(run_dir / "county_bootstrap.csv", county_bootstrap)
+    _base_manifest(ctx, run_dir, args)
+    cv_artifact_names = (
+        "outer_oof.parquet", "inner_oof.parquet", "alpha_selection.parquet",
+        "fold_metrics.csv", "cv_summary.csv", "county_metrics.csv",
+        "county_bootstrap.csv", "base_fit_manifest.parquet",
+    )
+    cv_artifacts = {name: _sha256(run_dir / name) for name in cv_artifact_names}
+    cv_hash = hashlib.sha256(json.dumps(cv_artifacts, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    _atomic_json(run_dir / "cv_manifest.json", {
+        "run_id": args.run_id,
+        "protocol": PROTOCOL,
+        "experiment_version": EXPERIMENT_VERSION,
+        "run_manifest_sha256": _sha256(run_dir / "run_manifest.json"),
+        "artifact_hashes": cv_artifacts,
+        "cv_hash": cv_hash,
+    })
+    (run_dir / "CV_COMPLETE").write_text(cv_hash, encoding="utf-8")
+
+
+def _final_graph_records(ctx, stacks):
+    rows = []
+    train_fips = set(ctx.bundle.meta_train["fips_str"])
+    for horizon, stack in stacks.items():
+        for t in range(144):
+            hour = PRED_START + t
+            for node, fips in enumerate(stack.inputs.all_fips):
+                train_row = int(stack.inputs.train_rows[t, node])
+                test_row = int(stack.inputs.test_rows[t, node])
+                if train_row >= 0:
+                    source = stack.inputs.train_source_id[train_row]
+                    fold = int(ctx.row_fold[train_row])
+                    split = "train"
+                    base = stack.inputs.base_grid[t, node]
+                else:
+                    source = stack.inputs.test_source_id
+                    fold = -1
+                    split = "test"
+                    base = stack.inputs.base_grid[t, node]
+                rows.append({
+                    "fipsCode": fips, "hour_idx": hour, "horizon": horizon,
+                    "base_prediction": float(base), "base_source_id": str(source),
+                    "split": split, "county_fold": fold,
+                })
+    return pd.DataFrame(rows)
+
+
+def _run_final(ctx, args, run_dir):
+    cv_marker = run_dir / "CV_COMPLETE"
+    if not cv_marker.exists():
+        raise ValueError("final stage requires an immutable CV_COMPLETE marker")
+    saved_cv = json.loads((run_dir / "cv_manifest.json").read_text(encoding="utf-8"))
+    if saved_cv.get("protocol") != PROTOCOL or saved_cv.get("run_id") != args.run_id:
+        raise ValueError("CV manifest identity mismatch")
+    if saved_cv.get("experiment_version") != EXPERIMENT_VERSION:
+        raise ValueError("CV experiment version mismatch")
+    if (run_dir / "CV_COMPLETE").read_text(encoding="utf-8") != saved_cv.get("cv_hash"):
+        raise ValueError("CV_COMPLETE marker does not match cv_manifest")
+    if saved_cv.get("run_manifest_sha256") != _sha256(run_dir / "run_manifest.json"):
+        raise ValueError("run manifest changed after CV completion")
+    for name, digest in saved_cv.get("artifact_hashes", {}).items():
+        if _sha256(run_dir / name) != digest:
+            raise ValueError(f"frozen CV artifact changed: {name}")
+    test_rows, graph_stacks, alpha_rows = [], {}, []
+    for horizon in HORIZONS:
+        selection = ctx.select_alpha(tuple(range(N_FOLDS)), horizon, args.base_mode)
+        stack = ctx.fit_stack(tuple(range(N_FOLDS)), horizon, args.base_mode)
+        graph_stacks[horizon] = stack
+        alpha_rows.extend({
+            "protocol": PROTOCOL, "base_mode": args.base_mode,
+            "selection_type": "full_train_cv_for_final", "outer_fold": "all",
+            "inner_fold": "pooled", "horizon": horizon,
+            "selection_id": selection.selection_id,
+            **_serialise_alpha_candidate(candidate),
+        } for candidate in selection.candidates)
+        for row_id, row in ctx.bundle.meta_test.iterrows():
+            t = int(row["hour_idx"]) - PRED_START
+            node = stack.inputs.all_fips.index(row["fips_str"])
+            correction = float(stack.correction_grid[t, node])
+            base = float(stack.inputs.base_grid[t, node])
+            scoreable = int(row["hour_idx"]) + HORIZON_HOURS[horizon] <= PRED_END - 1
+            before = base + selection.alpha * correction
+            prediction = float(post_process_osi(before)) if scoreable else np.nan
+            record = {
+                "run_id": args.run_id, "protocol": PROTOCOL, "base_mode": args.base_mode,
+                "fipsCode": str(row["fips_str"]), "timestamp_et": str(row["timestamp_et"]),
+                "hour_idx": int(row["hour_idx"]), "horizon": horizon,
+                "is_scoreable": scoreable, "base_prediction": base,
+                "correction_osi": correction, "alpha": selection.alpha,
+                "prediction_before_postprocess": before if scoreable else np.nan,
+                "prediction": prediction, "base_source_id": stack.inputs.test_source_id,
+                "stack_id": stack.stack_id, "selection_id": selection.selection_id,
+            }
+            if args.base_mode == "component_v158":
+                for component, values in stack.inputs.base_parts["test_parts"].items():
+                    record[f"base_{component}"] = float(values[row_id])
+                    record[f"base_source_{component}"] = str(
+                        stack.inputs.base_parts["test_source_by_component"][component]
+                    )
+            test_rows.append(record)
+    _atomic_dataframe(run_dir / "alpha_selection_final.parquet", pd.DataFrame(alpha_rows + [
+         {"protocol": PROTOCOL, "base_mode": args.base_mode, "selection_type": "final_selected",
+          "experiment_version": EXPERIMENT_VERSION,
+          "horizon": h, "alpha": ctx.alpha_cache[(args.base_mode, h, tuple(range(N_FOLDS)))].alpha}
+        for h in HORIZONS
+    ]))
+    _atomic_dataframe(run_dir / "final_graph_base.parquet", _final_graph_records(ctx, graph_stacks))
+    test_frame = pd.DataFrame(test_rows)
+    _atomic_dataframe(run_dir / "test_predictions.parquet", test_frame)
+    submission = pd.read_csv(SUBMISSION_FILE)
+    required_columns = list(submission.columns)
+    if len(submission) != 9072:
+        raise ValueError("submission template does not have 9072 rows")
+    template_keys = list(zip(submission["fipsCode"].astype(str).str.zfill(5), submission["timestamp_et"].astype(str)))
+    test_keys = list(zip(ctx.bundle.meta_test["fips_str"].astype(str), ctx.bundle.meta_test["timestamp_et"].astype(str)))
+    if template_keys != test_keys:
+        raise ValueError("submission template key order differs from test metadata")
+    for horizon in HORIZONS:
+        values = test_frame.loc[test_frame["horizon"] == horizon, "prediction"].to_numpy(dtype=float)
+        if len(values) != len(ctx.bundle.meta_test):
+            raise ValueError("test prediction coverage is incomplete")
+        submission[horizon] = values
+        expected = OFFICIAL_SCOREABLE_ROWS[horizon]
+        finite = np.isfinite(values)
+        if int(finite.sum()) != expected or not np.isfinite(values[finite]).all() or not ((values[finite] >= 0) & (values[finite] <= 0.65)).all():
+            raise ValueError(f"submission hard validation failed for {horizon}")
+    if list(submission.columns) != required_columns:
+        raise ValueError("submission columns changed")
+    _atomic_dataframe(run_dir / "submission_phase2_dem_gat.csv", submission)
+    _atomic_json(run_dir / "submission_audit.json", {
+        "rows": len(submission),
+        "columns_match_template": list(submission.columns) == required_columns,
+        "finite_counts": {h: int(np.isfinite(submission[h].to_numpy(dtype=float)).sum()) for h in HORIZONS},
+        "expected_counts": OFFICIAL_SCOREABLE_ROWS,
+        "hard_checks_passed": True,
+    })
+    _atomic_json(run_dir / "verification.json", {
+        "protocol": PROTOCOL,
+        "cv_complete": True,
+        "submission_hard_checks": True,
+        "independent_reload": "not_run_in_this_process",
+        "note": "Run verify_artifacts.py in a new process before COMPLETE.",
+    })
+    cv_summary = pd.read_csv(run_dir / "cv_summary.csv")
+    county_bootstrap = pd.read_csv(run_dir / "county_bootstrap.csv")
+    report = [
+        f"# {PROTOCOL}", "", f"- run_id: `{args.run_id}`",
+        f"- base_mode: `{args.base_mode}`", f"- experiment_version: `{EXPERIMENT_VERSION}`",
+        f"- feature_version: `{FEATURE_VERSION}`",
+        "- graph_input_dim: `205`", "- CV evidence: `CV_COMPLETE`", "",
+        "## CV summary", "", "```text", cv_summary.to_string(index=False), "```", "",
+        "## County-clustered paired bootstrap", "", "```text",
+        county_bootstrap.to_string(index=False), "```", "",
+        "County metrics and bootstrap are recomputed from `outer_oof.parquet`; "
+        "the bootstrap preserves all scoreable hours within sampled counties. "
+        "Spatial dependence is therefore an interval limitation, not an independent-row assumption.",
+        "Final alpha selection is stored in `alpha_selection_final.parquet`; its internal CV score is not an independent outer score.",
+        "This report is generated from the run manifest and saved row-level artifacts.",
+    ]
+    (run_dir / "REPORT.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+    (run_dir / "FINAL_READY").write_text("final artifacts written; independent verification pending", encoding="utf-8")
+
+
+def main(argv=None):
+    args = parse_args(argv)
+    if args.stage == "preflight":
+        _preflight(args)
+        print("PREFLIGHT_OK")
+        return 0
+    preflight = _preflight(args)
+    run_dir, _ = _create_or_resume_run(args, preflight)
+    _write_static_artifacts(run_dir, args, preflight)
+    device = _resolve_device(args.device)
+    _seed_process(args.seed, device)
+    ctx = _make_context(args, preflight, run_dir, resume=args.stage == "final")
+    if args.stage in {"cv", "all"}:
+        _run_cv(ctx, args, run_dir)
+    if args.stage in {"final", "all"}:
+        _run_final(ctx, args, run_dir)
+    print(f"RUN_DIR={run_dir}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        raise

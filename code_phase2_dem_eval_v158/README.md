@@ -1,54 +1,31 @@
-# Phase 2-D — LightGBM + spatial GAT + DEM
+# dem_v158_nested_v2
 
-This is an independent DEM-enhanced copy of the existing Phase 2 model. It
-does not overwrite code_phase2 or its outputs.
+This directory contains the isolated `dem_v158_nested_v2` protocol. The v1.5.8
+experiment configuration deliberately pins its feature package to the frozen
+v1.5.6 Phase-1 schema (163 columns); v1.5.8 supplies the component-target and
+experiment route, not a separate feature table. GAT inputs therefore have 205
+ordered columns. Historical 209-dimensional checkpoints, OOF files, and v2.1
+artifacts are never loaded.
 
-The model adds USGS 3DEP/NED 1 arc-second (~30 m) county terrain statistics
-from:
+Run from the project root:
 
-~~~text
-data/geo/county_terrain.csv
-~~~
+```bash
+python code_phase2_dem_eval_v158/main.py --stage preflight --base-mode direct
+python code_phase2_dem_eval_v158/main.py --stage cv \
+  --base-mode component_v158 --run-id dem_v158_nested_v2_component_seed42 \
+  --seed 42 --device auto --epochs 220 --patience 35 --time-stride 1 --k 8
+python code_phase2_dem_eval_v158/main.py --stage final \
+  --base-mode component_v158 --run-id dem_v158_nested_v2_component_seed42 \
+  --resume --seed 42 --device auto --epochs 220 --patience 35 --time-stride 1 --k 8
+```
 
-The seven static fields are elevation mean/std/min/max, slope mean/std, and
-terrain ruggedness. Original DEM tile URLs and source metadata are in:
+Outputs are isolated under `outputs/runs/<run_id>/`. The independent verifier
+must pass before `COMPLETE` is created:
 
-~~~text
-data/geo/dem_3dep_1arcsec/manifest.json
-~~~
+```bash
+python code_phase2_dem_eval_v158/verify_artifacts.py \
+  code_phase2_dem_eval_v158/outputs/runs/<run_id>
+```
 
-The complete Chinese technical explanation is in README_CN.md.
-
-## Build terrain features
-
-~~~bash
-conda activate myenv
-pip install -r code_phase2_dem/requirements.txt
-python code_phase2_dem/build_terrain.py --workers 8
-~~~
-
-## Run the full DEM model
-
-~~~bash
-conda activate myenv
-python code_phase2_dem/main.py \
-  --base-mode direct \
-  --device cuda \
-  --epochs 220 \
-  --patience 35 \
-  --time-stride 1 \
-  --k 8
-~~~
-
-The full-scale run keeps all 144 forecast snapshots, 5 county folds, k=8
-spatial neighbours, and up to 220 GAT epochs. Outputs are written only to:
-
-~~~text
-code_phase2_dem/outputs/
-~~~
-
-The final competition-format file is:
-
-~~~text
-code_phase2_dem/outputs/submission_phase2_dem_gat.csv
-~~~
+See `README_CN.md` for the data contract, scope-isolated nested CV, causal
+feature boundary, artifact schema, and historical-result policy.
