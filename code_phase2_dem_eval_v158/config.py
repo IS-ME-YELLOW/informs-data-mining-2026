@@ -50,6 +50,12 @@ OBSERVED_END = 72
 PRED_START = 72
 PRED_END = 216
 OSI_MAX = 0.65
+# OOF covers all 239 training counties. Submission counts below cover 63 test
+# counties and must never be used to validate the training OOF table.
+TRAIN_SCOREABLE_ROWS = {
+    horizon: 239 * (PRED_END - PRED_START - hours)
+    for horizon, hours in HORIZON_HOURS.items()
+}
 OFFICIAL_SCOREABLE_ROWS = {
     "osi_target_t01h": 9009,
     "osi_target_t06h": 8694,

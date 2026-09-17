@@ -9,7 +9,6 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
-import torch
 
 from base_model import BaseModelStore, canonical_fold_set, scoped_seed
 from config import (
@@ -30,8 +29,28 @@ from config import (
     PROTOCOL,
 )
 from data import add_neighbor_feature_aggregates, make_county_time_view
-from gat_model import ResidualGAT, fit_gat, predict_gat
 from metrics import post_process_osi
+from model_records import file_hash, load_record, publish_model
+
+
+def fit_gat(*args, **kwargs):
+    from gat_model import fit_gat as implementation
+    return implementation(*args, **kwargs)
+
+
+def predict_gat(*args, **kwargs):
+    from gat_model import predict_gat as implementation
+    return implementation(*args, **kwargs)
+
+
+def _read_checkpoint(path):
+    import torch
+    return torch.load(path, map_location="cpu", weights_only=False)
+
+
+def _write_checkpoint(path, payload):
+    import torch
+    torch.save(payload, path)
 
 
 def _scope_node_mask(all_fips, train_fips_to_fold, S):
@@ -162,6 +181,7 @@ class AlphaSelection:
     inner_coverage: np.ndarray
     inner_source_ids: np.ndarray
     selection_id: str
+    inner_base_source_ids: np.ndarray
 
 
 class StackContext:
@@ -186,6 +206,8 @@ class StackContext:
         inference_only: bool = False,
         graph_hash: str | None = None,
         feature_package_hash: str | None = None,
+        feature_side_hash: str | None = None,
+        run_identity: str | None = None,
     ):
         if int(epochs) < 1 or int(patience) < 1 or int(time_stride) < 1:
             raise ValueError("epochs, patience and time_stride must be >= 1")
@@ -212,6 +234,8 @@ class StackContext:
         self.inference_only = bool(inference_only)
         self.graph_hash = graph_hash
         self.feature_package_hash = feature_package_hash
+        self.feature_side_hash = feature_side_hash
+        self.run_identity = run_identity
         self.row_fold = base_store.row_fold
         self.train_fips_to_fold = {}
         for fold, (_, valid) in enumerate(folds):
@@ -253,7 +277,9 @@ class StackContext:
             checkpoint_path = self._checkpoint_path(scope, horizon, mode)
             if not checkpoint_path.exists():
                 raise FileNotFoundError(f"missing checkpointed preprocessing for {scope}/{horizon}/{mode}")
-            payload = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+            if load_record(checkpoint_path, self.run_identity) is None:
+                raise FileNotFoundError("inference requires a completed GAT record")
+            payload = _read_checkpoint(checkpoint_path)
             mean = np.asarray(payload.get("feature_mean"), dtype=np.float64)
             std = np.asarray(payload.get("feature_std"), dtype=np.float64)
             scale = float(payload.get("residual_scale", np.nan))
@@ -304,19 +330,29 @@ class StackContext:
         key = (mode, horizon, scope)
         if key in self.stack_cache:
             return self.stack_cache[key]
-        inputs = self.build_graph_inputs(scope, horizon, mode)
         checkpoint_path = self._checkpoint_path(scope, horizon, mode)
-        if self.resume_only or (self.reuse_existing and checkpoint_path is not None and checkpoint_path.exists()):
-            if checkpoint_path is None or not checkpoint_path.exists():
+        expected_stack_id = f"stack:{mode}:{horizon}:S{','.join(map(str, scope))}"
+        receipt = (load_record(checkpoint_path, self.run_identity, expected_stack_id)
+                   if self.resume_only or self.reuse_existing or self.inference_only else None)
+        if (self.resume_only or self.inference_only) and receipt is None:
+            raise FileNotFoundError(f"missing complete GAT record for {key}")
+        inputs = self.build_graph_inputs(scope, horizon, mode)
+        if receipt is not None:
+            if not checkpoint_path.exists():
                 raise FileNotFoundError(f"missing complete GAT checkpoint for {key}")
             model, payload = load_gat_checkpoint(checkpoint_path, self.device)
-            expected_stack_id = f"stack:{mode}:{horizon}:S{','.join(map(str, scope))}"
+            if payload.get("run_identity") != self.run_identity:
+                raise ValueError("GAT immutable run identity mismatch")
+            if payload.get("base_dependencies") != self._base_dependencies(scope, horizon, mode):
+                raise ValueError("GAT upstream base model hashes mismatch")
             if payload.get("stack_id") != expected_stack_id:
                 raise ValueError("GAT checkpoint scope identity mismatch")
             if self.graph_hash is not None and payload.get("graph_hash") != self.graph_hash:
                 raise ValueError("GAT checkpoint graph identity mismatch")
             if self.feature_package_hash is not None and payload.get("feature_package_hash") != self.feature_package_hash:
                 raise ValueError("GAT checkpoint feature package identity mismatch")
+            if self.feature_side_hash is not None and payload.get("feature_side_hash") != self.feature_side_hash:
+                raise ValueError("GAT checkpoint feature-side identity mismatch")
             if tuple(payload.get("scope", ())) != scope or payload.get("horizon") != horizon or payload.get("mode") != mode:
                 raise ValueError("GAT checkpoint horizon/mode/scope identity mismatch")
             if list(payload.get("all_fips", ())) != list(inputs.all_fips):
@@ -349,6 +385,8 @@ class StackContext:
             }
             if training_config != expected_training:
                 raise ValueError("GAT checkpoint training configuration mismatch")
+            if payload.get("seed") != scoped_seed(self.global_seed, "gat", scope, horizon, mode, "fit"):
+                raise ValueError("GAT checkpoint seed mismatch")
             correction = predict_gat(model, inputs.scaled_features, self.edge_index, self.device, self.edge_attr)
             correction = correction * inputs.residual_scale
             result = StackFit(
@@ -390,9 +428,11 @@ class StackContext:
             checkpoint_path = self.model_dir / f"gat_{mode}_{horizon.replace('osi_target_', '')}_S{'-'.join(map(str, scope))}.pt"
             payload = {
                 "protocol": PROTOCOL,
+                "run_identity": self.run_identity,
                 "stack_id": stack_id,
                 "graph_hash": self.graph_hash,
                 "feature_package_hash": self.feature_package_hash,
+                "feature_side_hash": self.feature_side_hash,
                 "architecture": {
                     "in_dim": int(inputs.features.shape[-1]),
                     "hidden": GAT_HIDDEN,
@@ -428,17 +468,33 @@ class StackContext:
                 "base_source_id": inputs.train_source_id,
                 "base_source_by_component": inputs.base_parts.get("train_source_by_component", {}),
                 "test_base_source_by_component": inputs.base_parts.get("test_source_by_component", {}),
+                "base_dependencies": self._base_dependencies(scope, horizon, mode),
             }
-            temporary = checkpoint_path.with_name(f".{checkpoint_path.name}.tmp")
-            try:
-                torch.save(payload, temporary)
-                os.replace(temporary, checkpoint_path)
-            finally:
-                if temporary.exists():
-                    temporary.unlink()
+            publish_model(checkpoint_path, self.run_identity, stack_id,
+                          {"scope": scope, "horizon": horizon, "mode": mode, "seed": gat_seed,
+                           "base_dependencies": payload["base_dependencies"]},
+                          lambda temporary: _write_checkpoint(temporary, payload),
+                          lambda temporary: load_gat_checkpoint(temporary, "cpu"))
         result = StackFit(scope, horizon, mode, inputs, model, correction, fit_info, stack_id, checkpoint_path)
         self.stack_cache[key] = result
         return result
+
+    def _base_dependencies(self, scope, horizon, mode):
+        from config import COMPONENTS
+        components = ("osi",) if mode == "direct" else COMPONENTS
+        source_scopes = [scope] + [tuple(k for k in scope if k != r) for r in scope]
+        dependencies = {}
+        for S in source_scopes:
+            for component in components:
+                fit = self.base_store.fits[(horizon, component, S)]
+                if self.base_store.model_dir is None:
+                    raise ValueError("persistent GAT checkpoints require persistent base models")
+                path = self.base_store._model_path(S, horizon, component)
+                receipt = load_record(path, self.run_identity, fit.model_id)
+                if receipt is None:
+                    raise ValueError("GAT dependency has no complete base record")
+                dependencies[fit.model_id] = file_hash(path)
+        return dependencies
 
     def _checkpoint_path(self, scope, horizon: str, mode: str) -> Path:
         scope = canonical_fold_set(scope, minimum=3, maximum=5)
@@ -458,6 +514,7 @@ class StackContext:
         inner_correction = np.full(n_rows, np.nan, dtype=float)
         inner_coverage = np.zeros(n_rows, dtype=int)
         inner_source_ids = np.empty(n_rows, dtype=object)
+        inner_base_source_ids = np.empty(n_rows, dtype=object)
         for valid_fold in scope:
             inner_scope = tuple(fold for fold in scope if fold != valid_fold)
             stack = self.fit_stack(inner_scope, horizon, mode)
@@ -469,6 +526,7 @@ class StackContext:
             inner_base[valid_rows] = base_rows[valid_rows]
             inner_correction[valid_rows] = correction_rows[valid_rows]
             inner_source_ids[valid_rows] = stack.stack_id
+            inner_base_source_ids[valid_rows] = stack.inputs.train_source_id[valid_rows]
             inner_coverage[valid_rows] = coverage[valid_rows]
         expected = np.isin(self.row_fold, scope) & (
             self.bundle.meta_train["hour_idx"].to_numpy(dtype=int) + HORIZON_HOURS[horizon] <= PRED_END - 1
@@ -499,6 +557,7 @@ class StackContext:
         result = AlphaSelection(
             scope, horizon, mode, float(selected["alpha"]), candidates,
             inner_base, inner_correction, inner_coverage, inner_source_ids, selection_id,
+            inner_base_source_ids,
         )
         self.alpha_cache[key] = result
         return result
@@ -507,7 +566,8 @@ class StackContext:
 def load_gat_checkpoint(path: str | Path, device="cpu"):
     """Strictly reload a v158 checkpoint; never adapt old dimensions."""
 
-    payload = torch.load(path, map_location=device, weights_only=False)
+    from gat_model import ResidualGAT
+    payload = _read_checkpoint(path)
     if payload.get("protocol") != "dem_v158_nested_v2":
         raise ValueError("checkpoint protocol mismatch")
     arch = payload["architecture"]

@@ -394,7 +394,7 @@ def _legal_nan_values(
     values = np.asarray(values, dtype=float).copy()
     if np.isinf(values).any():
         raise ValueError("GAT input contains Inf")
-    allowed = _expected_feature_nan_mask(pd.DataFrame([meta_row]), names).iloc[0].to_numpy()
+    allowed = _expected_feature_nan_mask(pd.DataFrame([meta_row]), names).iloc[0].to_numpy(copy=True)
     if "hours_since_peak" in names:
         allowed[names.index("hours_since_peak")] = bool(peak_zero)
     if not np.array_equal(np.isnan(values), allowed):
@@ -428,7 +428,11 @@ def make_county_time_view(
         raise ValueError("base prediction length does not match its feature table")
     if not np.isfinite(base_train).all() or not np.isfinite(base_test).all():
         raise ValueError("base predictions must be finite for all 144 rows")
-    all_fips = sorted(set(meta_train["fips_str"]) | set(meta_test["fips_str"]))
+    train_fips = set(meta_train["fips_str"])
+    test_fips = set(meta_test["fips_str"])
+    if train_fips & test_fips:
+        raise ValueError("train/test county sets overlap in graph input")
+    all_fips = sorted(train_fips | test_fips)
     node_of = {fips: i for i, fips in enumerate(all_fips)}
     n_time, n_nodes = PRED_END - PRED_START, len(all_fips)
     terrain_names = list(terrain.columns)
@@ -439,10 +443,14 @@ def make_county_time_view(
     test_rows = np.full((n_time, n_nodes), -1, dtype=np.int64)
 
     def fill(X, meta, bases, rows):
-        if not isinstance(meta.index, pd.RangeIndex):
+        if not isinstance(meta.index, pd.RangeIndex) or not np.array_equal(
+            meta.index.to_numpy(), np.arange(len(meta))
+        ):
             raise ValueError("metadata row positions must be an explicit RangeIndex")
         for row_id, row in meta.iterrows():
             t = int(row["hour_idx"]) - PRED_START
+            if not 0 <= t < n_time:
+                raise ValueError("graph input hour_idx must be in 72..215")
             node = node_of[row["fips_str"]]
             if rows[t, node] != -1:
                 raise ValueError("duplicate county-time row while building graph input")
@@ -460,24 +468,47 @@ def make_county_time_view(
 
     fill(X_train, meta_train, base_train, train_rows)
     fill(X_test, meta_test, base_test, test_rows)
-    if (train_rows < 0).any() or (test_rows < 0).any():
+    # A test node has no train-row id (and vice versa). Each cell must belong
+    # to exactly one split, with every source row represented exactly once.
+    train_present = train_rows >= 0
+    test_present = test_rows >= 0
+    if not np.logical_xor(train_present, test_present).all():
         raise ValueError("county-time graph construction has missing rows")
+    for rows, present, count, split_fips in (
+        (train_rows, train_present, len(meta_train), train_fips),
+        (test_rows, test_present, len(meta_test), test_fips),
+    ):
+        expected_nodes = np.asarray([fips in split_fips for fips in all_fips])
+        if not np.array_equal(present, np.broadcast_to(expected_nodes, rows.shape)):
+            raise ValueError("county-time graph row belongs to the wrong split")
+        if not np.array_equal(np.sort(rows[present]), np.arange(count)):
+            raise ValueError("graph input does not cover each source row exactly once")
     if not np.isfinite(features).all():
         raise ValueError("graph input contains non-finite values")
     base = features[:, :, 0].copy()
     return features, base, train_rows, test_rows, all_fips, names
 
 
-def add_neighbor_feature_aggregates(features, names, edge_index, horizon):
-    """Append 16 approved neighbor means and 16 neighbor-minus-own deltas."""
-
-    templates = [
+def neighbor_source_names(horizon):
+    return [
         "last_osi", "last_P_t", "last_D_t", "last_N_t", "last_R_t",
         "osi_mean_72h", "osi_max_72h", "osi_trend_last6h",
         "gust_t", "wind_speed_t", "tp_t", "rain_t",
         f"gust_max_next_{HORIZON_HOURS[horizon]}h", f"gust_mean_next_{HORIZON_HOURS[horizon]}h",
         f"wind_speed_max_next_{HORIZON_HOURS[horizon]}h", f"total_tp_next_{HORIZON_HOURS[horizon]}h",
     ]
+
+
+def graph_feature_names(phase1_names, terrain_names, horizon):
+    neighbours = neighbor_source_names(horizon)
+    return ["base", *phase1_names, "latitude", "longitude", *terrain_names,
+            *[f"neighbor_mean_{n}" for n in neighbours],
+            *[f"neighbor_delta_{n}" for n in neighbours]]
+
+
+def add_neighbor_feature_aggregates(features, names, edge_index, horizon):
+    """Append 16 approved neighbor means and 16 neighbor-minus-own deltas."""
+    templates = neighbor_source_names(horizon)
     if len(templates) != 16 or any(name not in names for name in templates):
         raise ValueError("approved 16-column neighbor source schema is incomplete")
     indices = [names.index(name) for name in templates]

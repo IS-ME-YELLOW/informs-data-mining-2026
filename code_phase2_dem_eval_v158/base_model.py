@@ -25,6 +25,11 @@ from config import (
 )
 from data import load_component_targets, validate_feature_columns
 from metrics import post_process_osi
+from model_records import completed_paths, file_hash, load_record, publish_model
+
+
+CV_BASE_MANIFEST = "base_fit_manifest.parquet"
+FINAL_BASE_MANIFEST = "base_fit_manifest_final.parquet"
 
 
 def canonical_fold_set(S, *, minimum: int | None = None, maximum: int | None = None) -> tuple[int, ...]:
@@ -123,9 +128,16 @@ class BaseFit:
     probe_records: tuple[dict, ...]
     model_id: str
     seed: int
+    actual_rounds: int | None = None
+
+    def __post_init__(self):
+        if self.actual_rounds is None:
+            self.actual_rounds = int(self.model.current_iteration())
+        if not 1 <= self.actual_rounds <= self.final_rounds:
+            raise ValueError("actual LightGBM rounds must be positive and no greater than requested rounds")
 
     def predict(self, X: pd.DataFrame) -> np.ndarray:
-        values = np.asarray(self.model.predict(X, num_iteration=self.final_rounds), dtype=float)
+        values = np.asarray(self.model.predict(X, num_iteration=self.actual_rounds), dtype=float)
         if not np.isfinite(values).all():
             raise FloatingPointError(f"non-finite base prediction from {self.model_id}")
         if self.component != "osi":
@@ -133,7 +145,7 @@ class BaseFit:
         return values
 
 
-def _fit_probe(X_train, y_train, X_valid, y_valid, seed: int):
+def _fit_probe(X_train, y_train, X_valid, y_valid, seed: int, *, round_limit=None, patience=None):
     if len(X_train) == 0 or len(X_valid) == 0:
         raise ValueError("LightGBM probe received an empty train or validation set")
     params = make_lgbm_params(seed)
@@ -142,9 +154,9 @@ def _fit_probe(X_train, y_train, X_valid, y_valid, seed: int):
     model = lgb.train(
         params,
         train_set,
-        num_boost_round=LGBM_ROUNDS,
+        num_boost_round=LGBM_ROUNDS if round_limit is None else int(round_limit),
         valid_sets=[valid_set],
-        callbacks=[lgb.early_stopping(LGBM_EARLY_STOPPING, verbose=False), lgb.log_evaluation(0)],
+        callbacks=[lgb.early_stopping(LGBM_EARLY_STOPPING if patience is None else int(patience), verbose=False), lgb.log_evaluation(0)],
     )
     best = int(model.best_iteration or 0)
     if best < 1:
@@ -179,6 +191,7 @@ def fit_base(
     component: str = "osi",
     global_seed: int = 42,
     valid_mask: np.ndarray | None = None,
+    fit_options: dict | None = None,
 ) -> BaseFit:
     """Fit one scalar base model using labels from exactly S.
 
@@ -188,6 +201,9 @@ def fit_base(
     """
 
     scope = canonical_fold_set(S, minimum=2, maximum=5)
+    options = {} if fit_options is None else dict(fit_options)
+    if set(options) - {"round_limit", "patience"} or any(int(v) < 1 for v in options.values()):
+        raise ValueError("invalid diagnostic base budget")
     if horizon not in HORIZON_HOURS:
         raise ValueError(f"unknown horizon: {horizon}")
     if component != "osi" and component not in COMPONENTS:
@@ -227,6 +243,7 @@ def fit_base(
         _, best = _fit_probe(
             X.iloc[train_rows], labels.take(train_rows),
             X.iloc[valid_rows], labels.take(valid_rows), probe_seed,
+            **options,
         )
         best_iterations.append(best)
         probe_records.append({
@@ -299,8 +316,9 @@ class BaseModelStore:
         self, X_train, X_test, meta_train, folds, y_train=None,
         global_seed=42, model_dir=None, parquet_engine="pyarrow",
         component_targets=None, supervision_store=None,
-        feature_package_hash=None, feature_schema_hash=None,
+        feature_package_hash=None, feature_schema_hash=None, feature_side_hash=None,
         protocol="dem_v158_nested_v2",
+        run_identity=None, reuse_existing=False, fit_options=None,
     ):
         self.X_train = X_train
         self.X_test = X_test
@@ -315,118 +333,156 @@ class BaseModelStore:
             raise ValueError("parquet_engine must be pyarrow or fastparquet")
         self.parquet_engine = parquet_engine
         self.feature_package_hash = feature_package_hash
+        self.feature_side_hash = feature_side_hash
         self.feature_schema_hash = feature_schema_hash
         self.protocol = str(protocol)
+        self.run_identity = run_identity
+        self.reuse_existing = bool(reuse_existing)
+        self.fit_options = fit_options
         self.supervision = supervision_store or SupervisionStore(
             self.row_fold, y_train=y_train, component_targets=component_targets
         )
         self._fits: dict[tuple[str, str, tuple[int, ...]], BaseFit] = {}
 
+    def _model_path(self, S, horizon, component):
+        return self.model_dir / f"{component}_{horizon.replace('osi_target_', '')}_S{'-'.join(map(str, S))}.txt"
+
+    def fit_record(self, fit, *, include_hash=True):
+        path = self._model_path(fit.scope, fit.horizon, fit.component)
+        valid = np.isin(self.row_fold, fit.scope) & (
+            self.meta_train.hour_idx.to_numpy(dtype=int) + HORIZON_HOURS[fit.horizon] < PRED_END)
+        record = {
+            "protocol": self.protocol, "run_identity": self.run_identity,
+            "horizon": fit.horizon, "component": fit.component,
+            "allowed_folds": json.dumps(fit.scope), "valid_rows": int(valid.sum()),
+            "best_iterations": json.dumps(fit.best_iterations), "probe_records": json.dumps(fit.probe_records),
+            "final_rounds": fit.final_rounds, "actual_rounds": fit.actual_rounds,
+            "seed": fit.seed, "model_id": fit.model_id,
+            "model_path": f"models/base/{path.name}",
+            "feature_package_hash": self.feature_package_hash, "feature_side_hash": self.feature_side_hash,
+            "feature_schema_hash": self.feature_schema_hash or hashlib.sha256(
+                json.dumps(list(self.X_train.columns), separators=(",", ":")).encode()).hexdigest(),
+        }
+        if include_hash:
+            record["model_sha256"] = file_hash(path)
+        return record
+
+    def _restore_fit(self, path, record):
+        scope = canonical_fold_set(json.loads(record["allowed_folds"]), minimum=2, maximum=5)
+        horizon, component = record["horizon"], record["component"]
+        if horizon not in HORIZONS or component not in ("osi", *COMPONENTS):
+            raise ValueError("base model target identity mismatch")
+        if path != self._model_path(scope, horizon, component):
+            raise ValueError("base model filename/scope mismatch")
+        expected_id = f"base:{component}:{horizon}:S{','.join(map(str, scope))}"
+        if record["protocol"] != self.protocol or record["model_id"] != expected_id:
+            raise ValueError("base model protocol/scope mismatch")
+        if record["model_path"].replace(chr(92), "/") != f"models/base/{path.name}":
+            raise ValueError("base model path identity mismatch")
+        for field in ("feature_package_hash", "feature_side_hash", "feature_schema_hash"):
+            expected = getattr(self, field)
+            if expected is not None and record.get(field) != expected:
+                raise ValueError(f"base-fit manifest {field} mismatch")
+        if self.run_identity is not None and record.get("run_identity") != self.run_identity:
+            raise ValueError("base model run identity mismatch")
+        if not path.is_file():
+            raise FileNotFoundError(f"registered base model missing: {path}")
+        if file_hash(path) != record["model_sha256"]:
+            raise ValueError("base model hash mismatch")
+        expected_seed = scoped_seed(self.global_seed, "base_refit", scope, horizon, component, "refit")
+        if record["seed"] != expected_seed:
+            raise ValueError("base model seed mismatch")
+        requested, actual = int(record["final_rounds"]), int(record["actual_rounds"])
+        if not 1 <= actual <= requested:
+            raise ValueError("invalid requested/actual base rounds")
+        model = lgb.Booster(model_file=str(path))
+        if int(model.current_iteration()) != actual:
+            raise ValueError("base model actual round count mismatch")
+        if hasattr(model, "num_model_per_iteration") and model.num_model_per_iteration() != 1:
+            raise ValueError("only scalar one-tree-per-iteration boosters are supported")
+        if hasattr(model, "feature_name") and model.feature_name() != list(self.X_train.columns):
+            raise ValueError("base model feature schema mismatch")
+        return BaseFit(model, scope, horizon, component, requested,
+                       tuple(json.loads(record["best_iterations"])), tuple(json.loads(record["probe_records"])),
+                       expected_id, expected_seed, actual)
+
+    def _load_completed(self, path):
+        receipt = load_record(path, self.run_identity)
+        if receipt is None:
+            return None
+        record = dict(receipt["details"], model_sha256=receipt["sha256"])
+        if receipt["model_id"] != record["model_id"]:
+            raise ValueError("completion record model identity mismatch")
+        return self._restore_fit(path, record)
+
     def get(self, S, horizon: str, component: str = "osi") -> BaseFit:
         scope = canonical_fold_set(S, minimum=2, maximum=5)
         key = (horizon, component, scope)
-        if key not in self._fits:
-            target = self.supervision.scoped(scope, horizon, component)
-            fit = fit_base(
-                self.X_train, target, self.row_fold, self.folds, scope, horizon,
-                component=component, global_seed=self.global_seed,
-                valid_mask=(self.meta_train["hour_idx"].to_numpy(dtype=int)
-                            + HORIZON_HOURS[horizon] <= PRED_END - 1),
-            )
-            self._fits[key] = fit
-            if self.model_dir is not None:
-                self.model_dir.mkdir(parents=True, exist_ok=True)
-                safe = f"{component}_{horizon.replace('osi_target_', '')}_S{'-'.join(map(str, scope))}"
-                path = self.model_dir / f"{safe}.txt"
-                temporary = path.with_name(f".{path.name}.tmp")
-                try:
-                    fit.model.save_model(str(temporary), num_iteration=fit.final_rounds)
-                    os.replace(temporary, path)
-                finally:
-                    if temporary.exists():
-                        temporary.unlink()
-        return self._fits[key]
+        if key in self._fits:
+            return self._fits[key]
+        path = None if self.model_dir is None else self._model_path(scope, horizon, component)
+        if self.reuse_existing and path is not None:
+            completed = self._load_completed(path)
+            if completed is not None:
+                self._fits[key] = completed
+                return completed
+        target = self.supervision.scoped(scope, horizon, component)
+        fit = fit_base(
+            self.X_train, target, self.row_fold, self.folds, scope, horizon,
+            component=component, global_seed=self.global_seed,
+            valid_mask=(self.meta_train.hour_idx.to_numpy(dtype=int) + HORIZON_HOURS[horizon] < PRED_END),
+            fit_options=self.fit_options,
+        )
+        if path is not None:
+            def validate(temporary):
+                reloaded = lgb.Booster(model_file=str(temporary))
+                if reloaded.current_iteration() != fit.actual_rounds:
+                    raise ValueError("saved booster has an unexpected actual round count")
+            publish_model(path, self.run_identity, fit.model_id, self.fit_record(fit, include_hash=False),
+                          lambda temporary: fit.model.save_model(str(temporary), num_iteration=fit.actual_rounds), validate)
+        # Only publish in memory after durable completion succeeds.
+        self._fits[key] = fit
+        return fit
 
     @property
     def fits(self):
         return dict(self._fits)
 
     def load_from_run(self, run_dir: str | Path) -> None:
-        """Load only current-protocol fixed-round base boosters from a run."""
-
         run_root = Path(run_dir)
-        root = run_root / "models" / "base"
-        if not root.is_dir():
-            raise FileNotFoundError(f"missing base model directory: {root}")
-        manifest_path = run_root / "base_fit_manifest.parquet"
+        root = run_root / "models/base"
+        manifest_path = run_root / FINAL_BASE_MANIFEST
         if not manifest_path.exists():
-            raise FileNotFoundError(f"missing base-fit identity manifest: {manifest_path}")
-        manifest = pd.read_parquet(manifest_path, engine=self.parquet_engine)
-        required_manifest = {
-            "model_path", "model_id", "protocol", "feature_package_hash",
-            "feature_schema_hash", "model_sha256", "final_rounds", "seed",
-            "component", "horizon",
-        }
-        if not required_manifest.issubset(manifest.columns):
-            raise ValueError("base-fit manifest is missing cache identity fields")
-        by_name = {}
-        for record in manifest.to_dict("records"):
-            model_path = str(record["model_path"]).replace("\\", "/")
-            by_name[Path(model_path).name] = record
-            if record["protocol"] != self.protocol:
-                raise ValueError("base-fit manifest protocol mismatch")
-            if self.feature_package_hash is not None and record["feature_package_hash"] != self.feature_package_hash:
-                raise ValueError("base-fit manifest feature package mismatch")
-            if self.feature_schema_hash is not None and record["feature_schema_hash"] != self.feature_schema_hash:
-                raise ValueError("base-fit manifest feature schema mismatch")
-        for path in sorted(root.glob("*.txt")):
-            record = by_name.get(path.name)
-            if record is None:
-                raise ValueError(f"base model is absent from the identity manifest: {path.name}")
-            if str(record["model_path"]).replace("\\", "/") != f"models/base/{path.name}":
-                raise ValueError(f"base model path identity mismatch: {path.name}")
-            digest = hashlib.sha256(path.read_bytes()).hexdigest()
-            if str(record.get("model_sha256", "")).lower() != digest.lower():
-                raise ValueError(f"base model hash mismatch: {path.name}")
-            stem = path.stem
-            if "_S" not in stem:
-                raise ValueError(f"unrecognized base model filename: {path.name}")
-            left, scope_text = stem.rsplit("_S", 1)
-            scope = tuple(int(value) for value in scope_text.split("-") if value != "")
-            scope = canonical_fold_set(scope, minimum=2, maximum=5)
-            component = next((value for value in COMPONENTS if left.startswith(value + "_")), None)
-            if component is None:
-                component = "osi" if left.startswith("osi_") else None
-            if component is None:
-                raise ValueError(f"unrecognized base model target: {path.name}")
-            prefix = f"{component}_"
-            horizon_short = left[len(prefix):]
-            horizon = f"osi_target_t{horizon_short}h"
-            if horizon not in HORIZON_HOURS:
-                raise ValueError(f"unrecognized base model horizon: {path.name}")
-            model = lgb.Booster(model_file=str(path))
-            rounds = int(model.current_iteration())
-            if rounds < 1:
-                raise ValueError(f"base model has no positive iteration count: {path.name}")
-            model_id = f"base:{component}:{horizon}:S{','.join(map(str, scope))}"
-            if str(record["model_id"]) != model_id or int(record["final_rounds"]) != rounds:
-                raise ValueError(f"base model training identity mismatch: {path.name}")
-            expected_seed = scoped_seed(
-                self.global_seed, "base_refit", scope, horizon, component, "refit"
-            )
-            if int(record["seed"]) != expected_seed:
-                raise ValueError(f"base model seed identity mismatch: {path.name}")
-            self._fits[(horizon, component, scope)] = BaseFit(
-                model=model,
-                scope=scope,
-                horizon=horizon,
-                component=component,
-                final_rounds=rounds,
-                best_iterations=(),
-                probe_records=(),
-                model_id=model_id,
-                seed=scoped_seed(self.global_seed, "base_refit", scope, horizon, component, "refit"),
-            )
+            manifest_path = run_root / CV_BASE_MANIFEST
+        loaded = {}
+        if self.run_identity is not None:
+            # Partial CV has no aggregate manifest yet; per-model receipts are
+            # sufficient to reuse exactly the completed fits.
+            for path in completed_paths(root):
+                fit = self._load_completed(path)
+                loaded[(fit.horizon, fit.component, fit.scope)] = fit
+            if manifest_path.exists():
+                manifest = pd.read_parquet(manifest_path, engine=self.parquet_engine)
+                for record in manifest.to_dict("records"):
+                    key = (record["horizon"], record["component"], tuple(json.loads(record["allowed_folds"])))
+                    if key not in loaded:
+                        raise ValueError("frozen manifest model has no valid completion record")
+                    actual = self.fit_record(loaded[key])
+                    if any(actual.get(k) != record[k] for k in actual):
+                        raise ValueError("completion record differs from frozen base manifest")
+        else:
+            # Standalone serialization tests can use an explicit manifest;
+            # formal runs always require the immutable run identity and receipts.
+            if not manifest_path.exists():
+                raise FileNotFoundError(f"missing base-fit manifest: {manifest_path}")
+            manifest = pd.read_parquet(manifest_path, engine=self.parquet_engine)
+            if manifest.empty or manifest.duplicated("model_id").any() or manifest.duplicated("model_path").any():
+                raise ValueError("base-fit manifest must contain unique, nonempty model identities")
+            for record in manifest.to_dict("records"):
+                path = root / Path(record["model_path"].replace(chr(92), "/")).name
+                fit = self._restore_fit(path, record)
+                loaded[(fit.horizon, fit.component, fit.scope)] = fit
+        self._fits.update(loaded)
 
     def scope_predictions(self, S, horizon: str, mode: str) -> dict:
         """Create cross-fitted train and S-fit test base predictions."""

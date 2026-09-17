@@ -11,6 +11,7 @@ import os
 import random
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
@@ -42,6 +43,7 @@ from config import (
     PROTOCOL,
     SUBMISSION_FILE,
     TERRAIN_FILE,
+    TRAIN_SCOREABLE_ROWS,
 )
 from data import (
     add_neighbor_feature_aggregates,
@@ -50,8 +52,10 @@ from data import (
     load_supervision,
     load_terrain_features,
     make_county_time_view,
+    graph_feature_names,
 )
 from metrics import pooled_metrics, post_process_osi
+import run_identity as identity
 
 
 def parse_args(argv=None):
@@ -156,6 +160,7 @@ def _load_training_modules():
     """Lazy import so preflight can report missing training dependencies cleanly."""
 
     try:
+        import torch  # validate the real runtime even though StackContext imports lazily
         from base_model import BaseModelStore, load_cv_folds
         from stacking import StackContext
     except ModuleNotFoundError as exc:
@@ -257,6 +262,7 @@ def _preflight(args, *, load_supervision_data=True):
         "graph_feature_names": [
             "base", *names, "latitude", "longitude", *list(terrain.columns), *extra_names,
         ],
+        "graph_feature_schemas": {h: graph_feature_names(names, terrain.columns, h) for h in HORIZONS},
         "component_target_count": 0 if component_targets is None else len(component_targets),
         "supervision": supervision,
         "component_targets": component_targets,
@@ -286,6 +292,9 @@ def _input_manifest(preflight: dict):
         "cv_sha256": _sha256(CV_FILE),
         "terrain_file": str(TERRAIN_FILE),
         "terrain_sha256": _sha256(TERRAIN_FILE),
+        "geo_dbf_sha256": _sha256(GEO_DBF),
+        "geo_shp_sha256": _sha256(GEO_DBF.with_suffix(".shp")),
+        "submission_template_sha256": _sha256(SUBMISSION_FILE),
         "graph_hash": preflight["graph_hash"],
         "all_fips": preflight["all_fips"],
     }
@@ -309,7 +318,12 @@ def _create_or_resume_run(args, preflight: dict):
         },
         "inputs": _input_manifest(preflight),
     }
+    manifest["identity"] = identity.build_identity(args, manifest["inputs"], resolved_device)
+    preflight["run_identity"] = manifest["identity"]["digest"]
+    preflight["runtime_environment"] = manifest["identity"]["definition"]["environment"]
     existing = run_dir.exists()
+    if not existing and (args.resume or args.stage == "final"):
+        raise FileNotFoundError("resume/final requires an existing run")
     if existing and not args.resume:
         raise FileExistsError(f"run already exists; use --resume only after identity validation: {run_dir}")
     if existing:
@@ -317,6 +331,7 @@ def _create_or_resume_run(args, preflight: dict):
         if not manifest_path.exists():
             raise ValueError("cannot resume a run without run_manifest.json")
         old = json.loads(manifest_path.read_text(encoding="utf-8"))
+        identity.assert_identity(old.get("identity"), manifest["identity"])
         if (run_dir / "COMPLETE").exists():
             raise FileExistsError("this run is already COMPLETE and immutable")
         comparable = {
@@ -325,11 +340,14 @@ def _create_or_resume_run(args, preflight: dict):
         }
         if comparable != {key: manifest.get(key) for key in comparable}:
             raise ValueError("resume manifest identity mismatch")
-        if args.stage in {"cv", "all"} and (run_dir / "CV_COMPLETE").exists():
-            raise FileExistsError("CV evidence is already frozen; resume with --stage final")
+        if args.stage == "final" and not (run_dir / "CV_COMPLETE").exists():
+            raise ValueError("final requires completed CV evidence")
     else:
         run_dir.mkdir(parents=True)
         _atomic_json(run_dir / "run_manifest.json", manifest)
+    with (run_dir / "attempts.jsonl").open("a", encoding="utf-8") as log:
+        log.write(json.dumps({"utc": datetime.now(timezone.utc).isoformat(), "stage": args.stage,
+                              "resume": args.resume, "identity": manifest["identity"]["digest"]}) + "\n")
     return run_dir, manifest
 
 
@@ -347,10 +365,13 @@ def _make_context(
         global_seed=args.seed, model_dir=model_dir, parquet_engine=args.parquet_engine,
         component_targets=None if inference_only else preflight["component_targets"],
         feature_package_hash=preflight["feature_package_hash"],
+        feature_side_hash=preflight["feature_side_hash"],
         feature_schema_hash=hashlib.sha256(
             json.dumps(list(bundle.feature_names), separators=(",", ":")).encode()
         ).hexdigest(),
         protocol=PROTOCOL,
+        run_identity=getattr(args, "expected_run_identity", preflight.get("run_identity")),
+        reuse_existing=resume,
     )
     if resume:
         store.load_from_run(run_dir)
@@ -373,11 +394,22 @@ def _make_context(
         reuse_existing=resume,
         inference_only=inference_only,
         graph_hash=preflight["graph_hash"],
-        feature_package_hash=bundle.input_hash,
+        feature_package_hash=preflight["feature_package_hash"],
+        feature_side_hash=preflight["feature_side_hash"],
+        run_identity=getattr(args, "expected_run_identity", preflight.get("run_identity")),
     )
 
 
 def _write_static_artifacts(run_dir: Path, args, preflight: dict):
+    def frozen_json(name, payload):
+        path = run_dir / name
+        if path.exists():
+            old = json.loads(path.read_text(encoding="utf-8"))
+            if identity.differences(old, payload):
+                raise ValueError(f"immutable static artifact mismatch: {name}")
+        else:
+            _atomic_json(path, payload)
+
     bundle = preflight["bundle"]
     folds = preflight["folds"]
     fold_rows = []
@@ -390,29 +422,42 @@ def _write_static_artifacts(run_dir: Path, args, preflight: dict):
                 "stateAbbr": str(bundle.meta_train.iloc[row_id]["stateAbbr"]),
                 "severity_tier": int(bundle.meta_train.iloc[row_id]["severity_tier"]),
             })
-    _atomic_dataframe(run_dir / "folds.csv", pd.DataFrame(fold_rows))
-    _atomic_json(run_dir / "environment.json", {
+    fold_frame = pd.DataFrame(fold_rows)
+    if (run_dir / "folds.csv").exists():
+        pd.testing.assert_frame_equal(pd.read_csv(run_dir / "folds.csv", dtype={"fipsCode": str}),
+                                      fold_frame, check_dtype=False)
+    else:
+        _atomic_dataframe(run_dir / "folds.csv", fold_frame)
+    frozen_json("environment.json", {
         "python": sys.version,
         "versions": preflight["versions"],
         "device": _resolve_device(args.device),
         "torch_threads": 1,
+        "runtime": preflight["runtime_environment"],
     })
-    _atomic_json(run_dir / "inputs_manifest.json", _input_manifest(preflight))
-    _atomic_json(run_dir / "feature_schema.json", {
+    frozen_json("inputs_manifest.json", _input_manifest(preflight))
+    frozen_json("feature_schema.json", {
         "experiment_version": EXPERIMENT_VERSION,
         "feature_version": FEATURE_VERSION,
         "ordered_phase1_features": list(bundle.feature_names),
         "graph_schema": preflight["graph_feature_names"],
+        "graph_schemas": {h: graph_feature_names(bundle.feature_names, preflight["terrain"].columns, h) for h in HORIZONS},
         "graph_input_dim": 205,
     })
-    np.savez_compressed(
-        run_dir / "graph.npz",
-        coords=preflight["coords"], edge_index=preflight["edge_index"], edge_attr=preflight["edge_attr"],
-        all_fips=np.asarray(preflight["all_fips"], dtype=object),
-    )
+    graph = {name: preflight[name] for name in ("coords", "edge_index", "edge_attr", "all_fips")}
+    if (run_dir / "graph.npz").exists():
+        with np.load(run_dir / "graph.npz", allow_pickle=True) as old:
+            if any(not np.array_equal(old[name], value) for name, value in graph.items()):
+                raise ValueError("immutable graph artifact mismatch")
+    else:
+        np.savez_compressed(run_dir / "graph.npz", **graph)
 
 
-def _base_manifest(ctx, run_dir: Path, args):
+def _base_manifest(ctx, run_dir: Path, args, *, final=False):
+    from base_model import CV_BASE_MANIFEST, FINAL_BASE_MANIFEST
+
+    if not final and (run_dir / "CV_COMPLETE").exists():
+        raise FileExistsError("the CV base manifest is frozen")
     rows = []
     for fit in ctx.base_store.fits.values():
         safe = f"{fit.component}_{fit.horizon.replace('osi_target_', '')}_S{'-'.join(map(str, fit.scope))}.txt"
@@ -426,16 +471,37 @@ def _base_manifest(ctx, run_dir: Path, args):
             "allowed_folds": json.dumps(fit.scope),
             "valid_rows": int(valid_mask.sum()),
             "best_iterations": json.dumps(fit.best_iterations),
-            "final_rounds": fit.final_rounds, "seed": fit.seed,
+            "final_rounds": fit.final_rounds, "actual_rounds": fit.actual_rounds, "seed": fit.seed,
+            "run_identity": ctx.base_store.run_identity,
             "model_id": fit.model_id, "model_path": str(Path("models/base") / safe),
             "model_sha256": _sha256(run_dir / "models" / "base" / safe),
-            "feature_package_hash": ctx.bundle.input_hash,
+            "feature_package_hash": ctx.base_store.feature_package_hash,
+            "feature_side_hash": ctx.base_store.feature_side_hash,
             "feature_schema_hash": hashlib.sha256(
                 json.dumps(list(ctx.bundle.feature_names), separators=(",", ":")).encode()
             ).hexdigest(),
             "probe_records": json.dumps(fit.probe_records, default=str),
         })
-    _atomic_dataframe(run_dir / "base_fit_manifest.parquet", pd.DataFrame(rows))
+    frame = pd.DataFrame(rows)
+    if frame.empty or frame.duplicated("model_id").any():
+        raise ValueError("cannot publish an empty or duplicate base-fit manifest")
+    name = FINAL_BASE_MANIFEST if final else CV_BASE_MANIFEST
+    if final:
+        # All CV entries must survive byte-for-byte at the value level; their
+        # probe/round provenance cannot disappear during reload and re-export.
+        cv = pd.read_parquet(run_dir / CV_BASE_MANIFEST, engine="pyarrow")
+        current = frame.set_index("model_id")
+        previous = cv.set_index("model_id")
+        if not previous.index.isin(current.index).all():
+            raise ValueError("final base manifest is missing CV models")
+        pd.testing.assert_frame_equal(
+            current.loc[previous.index, previous.columns], previous,
+            check_dtype=False, check_exact=True,
+        )
+        expected_count = 26 * len(HORIZONS) * (1 if args.base_mode == "direct" else 4)
+        if len(frame) != expected_count:
+            raise ValueError(f"final base manifest has {len(frame)} models, expected {expected_count}")
+    _atomic_dataframe(run_dir / name, frame)
 
 
 def _append_inner_records(rows, selection, outer_fold, horizon, mode, bundle, row_fold, supervision):
@@ -456,7 +522,7 @@ def _append_inner_records(rows, selection, outer_fold, horizon, mode, bundle, ro
                 "y_true": float(labels.take(np.asarray([row_id]))[0]),
                 "base_prediction": float(selection.inner_base[row_id]),
                 "correction_osi": float(selection.inner_correction[row_id]),
-                "base_source_id": str(selection.inner_source_ids[row_id]),
+                "base_source_id": str(selection.inner_base_source_ids[row_id]),
                 "stack_id": str(selection.inner_source_ids[row_id]),
                 "selection_id": selection.selection_id,
             })
@@ -652,8 +718,10 @@ def _run_cv(ctx, args, run_dir):
         raise ValueError("outer OOF county-time-horizon key is not unique")
     for horizon in HORIZONS:
         subset = outer[outer["horizon"] == horizon]
-        expected = subset["is_scoreable"].to_numpy(dtype=bool)
-        if int(expected.sum()) != OFFICIAL_SCOREABLE_ROWS[horizon]:
+        expected = subset["hour_idx"].to_numpy(dtype=int) + HORIZON_HOURS[horizon] <= PRED_END - 1
+        if not np.array_equal(subset["is_scoreable"].to_numpy(dtype=bool), expected):
+            raise ValueError(f"outer OOF scoreable mask mismatch for {horizon}")
+        if int(expected.sum()) != TRAIN_SCOREABLE_ROWS[horizon]:
             raise ValueError(f"outer OOF valid-row count mismatch for {horizon}")
         if not np.isfinite(subset["base_prediction"].to_numpy(dtype=float)).all():
             raise FloatingPointError(f"outer base prediction is non-finite for {horizon}")
@@ -778,6 +846,7 @@ def _run_final(ctx, args, run_dir):
                         stack.inputs.base_parts["test_source_by_component"][component]
                     )
             test_rows.append(record)
+    _base_manifest(ctx, run_dir, args, final=True)
     _atomic_dataframe(run_dir / "alpha_selection_final.parquet", pd.DataFrame(alpha_rows + [
          {"protocol": PROTOCOL, "base_mode": args.base_mode, "selection_type": "final_selected",
           "experiment_version": EXPERIMENT_VERSION,
@@ -806,6 +875,14 @@ def _run_final(ctx, args, run_dir):
             raise ValueError(f"submission hard validation failed for {horizon}")
     if list(submission.columns) != required_columns:
         raise ValueError("submission columns changed")
+    # Counts alone cannot detect shifted NaN positions or row/value swaps.
+    from artifact_checks import References, check_submission, time_rows
+    references = References(
+        time_rows(ctx.bundle.meta_train, "submission train metadata"),
+        time_rows(ctx.bundle.meta_test, "submission test metadata"),
+        pd.DataFrame(), ctx.row_fold,
+    )
+    check_submission(submission, pd.read_csv(SUBMISSION_FILE), test_frame, references)
     _atomic_dataframe(run_dir / "submission_phase2_dem_gat.csv", submission)
     _atomic_json(run_dir / "submission_audit.json", {
         "rows": len(submission),
@@ -841,22 +918,42 @@ def _run_final(ctx, args, run_dir):
     (run_dir / "FINAL_READY").write_text("final artifacts written; independent verification pending", encoding="utf-8")
 
 
+def stages_to_run(stage, cv_complete, final_ready):
+    if final_ready and not cv_complete:
+        raise ValueError("FINAL_READY without CV_COMPLETE is invalid")
+    if stage == "cv":
+        return [] if cv_complete else ["cv"]
+    if stage == "final":
+        if not cv_complete:
+            raise ValueError("final requires CV_COMPLETE")
+        return [] if final_ready else ["final"]
+    if stage == "all":
+        return ([] if cv_complete else ["cv"]) + ([] if final_ready else ["final"])
+    raise ValueError(f"invalid training stage: {stage}")
+
+
 def main(argv=None):
     args = parse_args(argv)
+    identity.configure_determinism()
     if args.stage == "preflight":
         _preflight(args)
         print("PREFLIGHT_OK")
         return 0
     preflight = _preflight(args)
-    run_dir, _ = _create_or_resume_run(args, preflight)
-    _write_static_artifacts(run_dir, args, preflight)
     device = _resolve_device(args.device)
     _seed_process(args.seed, device)
-    ctx = _make_context(args, preflight, run_dir, resume=args.stage == "final")
-    if args.stage in {"cv", "all"}:
-        _run_cv(ctx, args, run_dir)
-    if args.stage in {"final", "all"}:
-        _run_final(ctx, args, run_dir)
+    run_dir, manifest = _create_or_resume_run(args, preflight)
+    _write_static_artifacts(run_dir, args, preflight)
+    if (run_dir / "CV_COMPLETE").exists():
+        from artifact_checks import check_frozen_cv
+        # The stage recorded at creation stays immutable across attempts.
+        saved_manifest = json.loads((run_dir / "run_manifest.json").read_text(encoding="utf-8"))
+        check_frozen_cv(run_dir, saved_manifest)
+    stages = stages_to_run(args.stage, (run_dir / "CV_COMPLETE").exists(), (run_dir / "FINAL_READY").exists())
+    if stages:
+        ctx = _make_context(args, preflight, run_dir, resume=args.resume)
+        for stage in stages:
+            (_run_cv if stage == "cv" else _run_final)(ctx, args, run_dir)
     print(f"RUN_DIR={run_dir}")
     return 0
 
