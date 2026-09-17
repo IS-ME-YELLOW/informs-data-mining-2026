@@ -1,0 +1,17 @@
+{
+  "run_id": "dem_v158_p2_component_seed42_cuda_log",
+  "protocol": "dem_v158_nested_v2",
+  "experiment_version": "v1.5.8",
+  "run_manifest_sha256": "a37b87b9141f1004495c1de08dd08290302752704beffd165ceec6c19f1aff71",
+  "artifact_hashes": {
+    "outer_oof.parquet": "ffe5628ab4587628833a4ead03fa1c6dfbb7ee1fb902d4b3bf590a622947d192",
+    "inner_oof.parquet": "f4132fb5512ed1500dd53fb5534aabf0165a4ae7b1e24777eafacafab6515533",
+    "alpha_selection.parquet": "4402a0811ad2b96b0214f48cfea922e1ce75c66690e7fc317929a652abcb24cb",
+    "fold_metrics.csv": "881d88af1e2e760ca85dd53d2c834fa8d6cc8d16d7532692da0a47ef59dbe144",
+    "cv_summary.csv": "3ebbc802820f73fc7d6ba387de13ea9afe4ad38cdfd353b9544a0fccd78cd9b8",
+    "county_metrics.csv": "84bded8397ee0aa25834f0e2302c3e74f87061fc3a82f9ffd811d06d87af99ed",
+    "county_bootstrap.csv": "0d32c9b30adb17b787962394d795cbbaddcc6a02838402eb8f501e307ba78475",
+    "base_fit_manifest.parquet": "c1b3d3a897183f7ca77ffb159d9a8d457cd3f50a033814fa6e6def46619b2ef2"
+  },
+  "cv_hash": "8c1f1828a93c1887a39d07168053ec7e4a15b17e26c44691d2ea4e02351e1d4d"
+}

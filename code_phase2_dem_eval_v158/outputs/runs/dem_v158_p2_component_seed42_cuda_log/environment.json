@@ -1,0 +1,44 @@
+{
+  "python": "3.10.21 | packaged by Anaconda, Inc. | (main, Aug 27 2026, 14:35:39) [MSC v.1942 64 bit (AMD64)]",
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "pyarrow": "24.0.0",
+    "fastparquet": null,
+    "lightgbm": "4.6.0",
+    "torch": "2.7.1+cu118",
+    "shapely": "2.1.2"
+  },
+  "device": "cuda",
+  "torch_threads": 1,
+  "runtime": {
+    "python": "3.10.21",
+    "implementation": "CPython",
+    "system": "Windows",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+    "versions": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "pyarrow": "24.0.0",
+      "fastparquet": null,
+      "lightgbm": "4.6.0",
+      "torch": "2.7.1+cu118",
+      "shapely": "2.1.2",
+      "scipy": "1.15.2"
+    },
+    "device": "cuda",
+    "threads": 1,
+    "deterministic_algorithms": true,
+    "cublas_workspace": ":4096:8",
+    "torch_cuda_build": "11.8",
+    "cudnn": 90100,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3090",
+      "capability": [
+        8,
+        6
+      ]
+    }
+  }
+}

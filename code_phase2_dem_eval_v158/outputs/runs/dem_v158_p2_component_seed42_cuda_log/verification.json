@@ -1,0 +1,7 @@
+{
+  "protocol": "dem_v158_nested_v2",
+  "cv_complete": true,
+  "submission_hard_checks": true,
+  "independent_reload": "not_run_in_this_process",
+  "note": "Run verify_artifacts.py in a new process before COMPLETE."
+}

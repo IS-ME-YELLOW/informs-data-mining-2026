@@ -1,0 +1,17 @@
+{
+  "rows": 9072,
+  "columns_match_template": true,
+  "finite_counts": {
+    "osi_target_t01h": 9009,
+    "osi_target_t06h": 8694,
+    "osi_target_t24h": 7560,
+    "osi_target_t48h": 6048
+  },
+  "expected_counts": {
+    "osi_target_t01h": 9009,
+    "osi_target_t06h": 8694,
+    "osi_target_t24h": 7560,
+    "osi_target_t48h": 6048
+  },
+  "hard_checks_passed": true
+}
