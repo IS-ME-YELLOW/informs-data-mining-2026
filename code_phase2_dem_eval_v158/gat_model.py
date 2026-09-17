@@ -212,6 +212,13 @@ def fit_gat(
             no_improve = 0
         else:
             no_improve += 1
+        print(
+            f"[GAT] epoch={epoch + 1}/{int(epochs)} "
+            f"train_loss={float(loss.detach().cpu()):.8f} "
+            f"check_loss={value:.8f} best_loss={best_loss:.8f} "
+            f"no_improve={no_improve}/{int(patience)}",
+            flush=True,
+        )
         if no_improve >= int(patience):
             break
 

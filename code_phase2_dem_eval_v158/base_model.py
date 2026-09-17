@@ -32,6 +32,18 @@ CV_BASE_MANIFEST = "base_fit_manifest.parquet"
 FINAL_BASE_MANIFEST = "base_fit_manifest_final.parquet"
 
 
+def _log_lgbm_round(env):
+    """Print one progress line per completed LightGBM boosting round."""
+    iteration = int(env.iteration) + 1
+    total = int(env.end_iteration)
+    metrics = " ".join(
+        f"{dataset}:{metric}={value:.8f}"
+        for dataset, metric, value, _ in (env.evaluation_result_list or ())
+    )
+    suffix = f" {metrics}" if metrics else ""
+    print(f"[LightGBM] round={iteration}/{total}{suffix}", flush=True)
+
+
 def canonical_fold_set(S, *, minimum: int | None = None, maximum: int | None = None) -> tuple[int, ...]:
     """Normalize and validate a supervision scope."""
 
@@ -156,7 +168,7 @@ def _fit_probe(X_train, y_train, X_valid, y_valid, seed: int, *, round_limit=Non
         train_set,
         num_boost_round=LGBM_ROUNDS if round_limit is None else int(round_limit),
         valid_sets=[valid_set],
-        callbacks=[lgb.early_stopping(LGBM_EARLY_STOPPING if patience is None else int(patience), verbose=False), lgb.log_evaluation(0)],
+        callbacks=[lgb.early_stopping(LGBM_EARLY_STOPPING if patience is None else int(patience), verbose=False), _log_lgbm_round],
     )
     best = int(model.best_iteration or 0)
     if best < 1:
@@ -171,7 +183,7 @@ def _fit_fixed(X_train, y_train, rounds: int, seed: int):
         make_lgbm_params(seed),
         lgb.Dataset(X_train, label=y_train, free_raw_data=False),
         num_boost_round=int(rounds),
-        callbacks=[lgb.log_evaluation(0)],
+        callbacks=[_log_lgbm_round],
     )
     return model
 
