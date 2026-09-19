@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "verified_at_utc": "2026-09-17T11:43:57.953419+00:00",
+  "candidate_identity_hash": "84ccd2cf7851d68e8ae19789c2a82fbdcca0ca2a2ce7857eeec6fae8a2a6153b",
+  "manifest_sha256": "650da21ca9db0eb62286658d963c8bafd736beef30a9ac6ce3dd6e4125eef91a",
+  "verifier_sha256": "5b0e9459038672ed1ddf5d7b60d4ad78525e44ef47745409de5e6b50a4282e49",
+  "protected_baseline_files_unchanged": 264,
+  "train_counties": 239,
+  "test_counties": 63,
+  "D_projected_rows": 92,
+  "checks": [
+    "all input/output hashes",
+    "baseline identity and CV_COMPLETE",
+    "independent scalar D bounds for train and test",
+    "independent C0/C1/C2/C3 and fixed primary recomposition",
+    "all aligned component candidates and counts",
+    "all pooled/fold/county/window/component metrics",
+    "all saved county bootstrap intervals",
+    "changed-row details and county influence",
+    "exact unchanged P/N/R, C0, later rows and other horizons",
+    "future P perturbation and deletion invariance",
+    "forecast row-order invariance and invalid-key rejection",
+    "test bounds without future P or labels",
+    "pure projector input immutability"
+  ],
+  "training_performed": false,
+  "test_predictions_created": false
+}

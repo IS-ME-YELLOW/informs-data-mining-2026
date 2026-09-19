@@ -1,0 +1,19 @@
+{
+  "cv": {
+    "status": "passed",
+    "protocol": "v18_tree_nested_v2",
+    "run_id": "v18_tree_nested_v2_split42_model42",
+    "phase": "cv",
+    "diagnostic": false,
+    "models_reloaded": 100,
+    "absolute_tolerance": 1e-12,
+    "all_predictions_metrics_and_lineage_recomputed": true,
+    "scoreable_rows": {
+      "osi_target_t01h": 34177,
+      "osi_target_t06h": 32982,
+      "osi_target_t24h": 28680,
+      "osi_target_t48h": 22944
+    },
+    "training_performed_by_verifier": false
+  }
+}

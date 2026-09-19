@@ -1,0 +1,59 @@
+{
+  "experiment": "D_known_history_projection_v1",
+  "baseline_identity_hash": "144c278fa2029b96f2e844f15f9b5c90719ce290c80fbc9e779c7f2f7e3cfa5c",
+  "input_sha256": {
+    "baseline_oof": "0541278b3d08f01f0df83470673ba21b92700bb97c531258c124b51a30b367b8",
+    "component_oof": "76afdd5d29764dd276ce25546031ad363d59b64c55333c30e86f694df31bccc8",
+    "raw_predictions": "05b4574dde44ee1fc0eb78d0e6c6c9b66db96bf3f5d4cbe297c3f51dbfcc039f",
+    "raw_train": "12235f199ff241819854e1635acbfa7d149438d9c3451c2cfeb9f47c76263178",
+    "raw_test": "517fc0ae2418adc1c90e7db6b12d35ea8742be3bb9f2ec9e87ce644b8ddaad37",
+    "test_meta": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+    "plan": "dd4c9eb8735210bc2bf1946a3f82b8e5824ba1a37507b64b1d5b2d73a0ac5fae",
+    "projector": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466",
+    "evaluation_code": "6e0b6098ae4ff1788d72d195a77b45b3df7b5e37558e5503e14cbd9a2a7507f7",
+    "frozen_controls_code": "3c62ba06f097cda4367c535a72e915b23ab616c06a87df916693e864d9de5a16"
+  },
+  "candidate_identity_hash": "84ccd2cf7851d68e8ae19789c2a82fbdcca0ca2a2ce7857eeec6fae8a2a6153b",
+  "created_at_utc": "2026-09-17T11:36:24.519411+00:00",
+  "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42",
+  "input_paths": {
+    "baseline_oof": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42/oof_predictions.parquet",
+    "component_oof": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42/oof_component_predictions.parquet",
+    "raw_predictions": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42/base_predictions_cv.parquet",
+    "raw_train": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/data/DM_Train.csv",
+    "raw_test": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/data/DM_Test.csv",
+    "test_meta": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.6/meta_test_v1.5.6.parquet",
+    "plan": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_projection/experiment_plan.json",
+    "projector": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_projection/project_d.py",
+    "evaluation_code": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_projection/run_experiment.py",
+    "frozen_controls_code": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/protocol.py"
+  },
+  "training_performed": false,
+  "fitted_coefficients": false,
+  "baseline_replay_max_error": 0.0,
+  "projection_target_hours": [
+    73,
+    74,
+    75,
+    76
+  ],
+  "exact_D_projection_rows": 92,
+  "projected_counties": 52,
+  "test_bounds_only_no_test_predictions": true,
+  "baseline_unchanged": true,
+  "output_sha256": {
+    "candidate_oof_predictions.parquet": "328f2f8351a9ed48ed4d5384ab7a4ad650448368a5a80631fc5aaef1ed2068b8",
+    "projected_component_predictions.parquet": "26375e81067dd488229ec32d1045705862b76b8bda8f01e9d650430a5c700ba4",
+    "known_bounds_train.parquet": "0d95abee70dd1ef024bfc9ebbfeef3d441bcf69101b71ed36c50d3ebc3877d5f",
+    "known_bounds_test.parquet": "204f3a38078af2b640a1b47d7bce2756092fe8dc32e903e7a75a0a00d29beaaa",
+    "candidate_aligned_unique_components.parquet": "4b729f8c759758ffdea6bdeae26a1a5cb12d12d3d527551d1c4cb23c52fbd02d",
+    "metrics_comparison.csv": "f75ee74f9bbb22968d4b7e6441320d453893da458a86e578a3156aa9ada945a9",
+    "fold_metrics.csv": "899661b649dd00f30b1190c3af59495269260b39894919d624289e2f321f6ff9",
+    "county_metrics.csv": "7c6cb51978e2293bc1c7455cc964019f9b3bed4ed4930854e2c84c7909b9efe9",
+    "paired_county_bootstrap.csv": "51895086a5dc2708b5b4821352e7812d5c3a63acb29ea28330ebddde11a2e689",
+    "D_component_metrics.csv": "8cf6b698aa4930c7c76629a7d2c711de79616d64c9a55202c617d7eb69eeedef",
+    "changed_rows.csv": "c7846eeab9b68ea9ae058f8da56d6c8b23052371926d06f9b2e02d1e8a11f2e8",
+    "window_metrics.csv": "f9feecc868fb1e80cc4451efcd5b0b7aff89cb07839b80e18bb50124bb70db22",
+    "primary_county_influence.csv": "47f20a6b62e785edf747037aaa72628726f61003f8bb322cecbcebaa86dff0d4"
+  }
+}

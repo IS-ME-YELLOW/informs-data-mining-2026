@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "source_runs": [
+    {
+      "split_seed": 42,
+      "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/runs/v18_pstate_nested_v1_split42_model42",
+      "identity_hash": "405777f954c6be300ae69e81a19dae41b0a5f4b876792023f6086bb2509474df",
+      "complete_marker_sha256": "7a2cc6bb8c34bba750d56249411befc0a5a9b440ea36f2d7d63dc90cccf1153c",
+      "independent_verification_sha256": "609f7fc57b606e5d882ae956913ccc482cf219808f8c67f4e08ff4723f3426ed",
+      "baseline_identity_hash": "144c278fa2029b96f2e844f15f9b5c90719ce290c80fbc9e779c7f2f7e3cfa5c",
+      "D_G_identity_hash": "89c9a1d3998d0cfa1dbab3bfa7b473c251915f5828e4963fbe8602c778d14587",
+      "formal_fits": 75,
+      "wall_seconds": 437.1012525999977,
+      "new_models": 15,
+      "verification": "PASS"
+    },
+    {
+      "split_seed": 20260917,
+      "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/runs/v18_pstate_nested_v1_split20260917_model42",
+      "identity_hash": "80d6bbf992d01cb3e453037cf72a638d78ee3d1ee8ba593a8cbb32125b6a6632",
+      "complete_marker_sha256": "c5df72ef08734e429df2f151794231d953a1ec89634863e44b32a090beb2e75e",
+      "independent_verification_sha256": "4a873dba8312709bf632da35696d9b4bc47a690c065dcb4f2b4784301f7ef13b",
+      "baseline_identity_hash": "5183d8644fd36b8e48db0da824cab6582ceb8637d7e85ace5be6cd52e301e9bc",
+      "D_G_identity_hash": "2bf269caf05becca632ae7532a00683a5faa7bdaa969068e688d8753e5b85ab0",
+      "formal_fits": 75,
+      "wall_seconds": 461.0165657569887,
+      "new_models": 15,
+      "verification": "PASS"
+    },
+    {
+      "split_seed": 20260918,
+      "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/runs/v18_pstate_nested_v1_split20260918_model42",
+      "identity_hash": "7dd79f8909a8763d55294468bd27939b6d9c4b28596a34238d21701eb0c89e16",
+      "complete_marker_sha256": "97fcb6bf571a3105a325fc8cb5f7456080de042f467929839336dc320e150953",
+      "independent_verification_sha256": "ecc8dec466805a62500e243ef4f7d2a188a6713682fdcecb251c767ff8b0a05f",
+      "baseline_identity_hash": "cf16ff6d5e03de01870e79f63b3a2f9a2e2bbc02e8ff2da34e00a219efe9a7fd",
+      "D_G_identity_hash": "32ee305e40776f081fd8a8c79ad84e5c2d3cf551b25c4d31decfad475bc09946",
+      "formal_fits": 75,
+      "wall_seconds": 509.56145952202496,
+      "new_models": 15,
+      "verification": "PASS"
+    }
+  ],
+  "outputs": {
+    "pooled_all_splits.csv": "859b8109c26525470fa2d10c9274d0759b6140e5f9bcb61ea50da1e2886cf72a",
+    "slices_all_splits.csv": "f142b13e150242342645713ef23eb8297ed16b90d32bb23de350c271c9ecbf1b",
+    "bootstrap_all_splits.csv": "21de4134b746c71404657ff90e1db6a33f3bda71d9f85a30e58ea399e0c210e1",
+    "d_interaction_all_splits.csv": "edb9fdfc099345637f514eddd6934194be7a87378c61167f93241899b989bdee",
+    "branch_diagnostics_all_splits.csv": "ca7c5cd2983fa952df15fce7449ec9a5919c33fc2035b51d2ba7d14fc1a446fb",
+    "branch_loss_decomposition_all_splits.csv": "7dc0da220be1a1f18c280a57e40de12d0c1f168498aaa791a20b226438003682",
+    "error_interactions_all_splits.csv": "4cba999a56788e18acc202439e544c90a52e10b1ab97b2c0f815828118b2a5c1",
+    "rounds_all_splits.csv": "3f2c2ac0b7dbaf8360ee90ee133b2e113fd99dbfbac0fdc9f9592b74a915845b",
+    "primary_scores.csv": "ef359af4ebf66e555dda67eae7d6735fa4ddad190f34704fc07d693fa0a2ff69",
+    "P_component_scores.csv": "9c1e98ec056716fce2bded6427d0663246d94dfe23aa8945e9dcb539e4034acf",
+    "county_effects.csv": "7305cac867e198671724a50d8a9bf97da2503d9abf29755327096b68fffea027",
+    "focus_counties.csv": "6876b428f5f68a609fca1ae940b549e0b427459811b6a50ce50e8763eb1dec04",
+    "improvement_counts.csv": "47a8764af2efb2ea9bc3a4a00382b83a3ed72b37f0a223a5d5c256e1e8d1eb21",
+    "window_effects.csv": "c4d5386cc870d29fd50f1f7be927a6d1d5dbb05716946f3d3b9df8b5a19a9bc7",
+    "initial_state_groups.csv": "ce42227e962de290077b32aa9876d82735ba3063595821cbab47a4c34d9a7570",
+    "exclude_Morrow.csv": "597eddcb83fcb201975047aaae213b571f960c9c3a69499ced6edc48f5131138",
+    "target_hour_curve_data.csv": "84eb4c20f83b6b0b44b1350ce6c321a95ef6ddbf49647354660429a303b990a8",
+    "fold_effects.csv": "a42d50db6f583108e4096a5a0b0a2c32f98ab9003e1ab97136de02037222ca11",
+    "county_consistency.csv": "fc3e4f2625127ec68c0fd5078739b5c38a6ff2e9a8a4d78bca33c2188768519f",
+    "source_runs.csv": "9a31e16dec460d1b9b03f9d7efb96250f0d73b0bed3c9e71c3f850532f84fa9f"
+  },
+  "reports": {
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/confirmation/Results_2026-09-18.md": "02a52edf77fb11db8736c4ddeba85088b3c04aecca68539b58f152799421f60d",
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/confirmation/split20260917/Results_2026-09-18.md": "bd64fcb7dfcd3beea5844bdbc2faf98d1981b4f82c8e949fb558baf6da120781",
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/confirmation/split20260918/Results_2026-09-18.md": "3f321205eb5fbc96f2a3ba61ca381fe2d8b9b0a4cd53b2fc3c48218f02ba38aa"
+  },
+  "summary_script_sha256": "c7e87c26a08f39fc63dc1b13fdc556c5fe867e0e9408a739c2fcb99719a1e005",
+  "same_numerical_settings_across_splits": true,
+  "all_source_markers_and_code_hashes": "PASS",
+  "all_long_horizon_invariants": "PASS"
+}

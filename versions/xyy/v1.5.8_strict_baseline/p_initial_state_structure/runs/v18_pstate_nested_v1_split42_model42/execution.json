@@ -1,0 +1,24 @@
+{
+  "attempts": [
+    {
+      "start_utc": "2026-09-18T12:12:03.920022+00:00",
+      "status": "completed",
+      "fits_this_attempt": 75,
+      "command": [
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/bin/python",
+        "-B",
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/train_p_structure.py",
+        "--stage",
+        "cv",
+        "--split-seed",
+        "42"
+      ],
+      "independent_verification": "PASS",
+      "end_utc": "2026-09-18T12:19:21.021371+00:00",
+      "wall_seconds": 437.1012525999977,
+      "cpu_user_seconds": 401.632959,
+      "cpu_system_seconds": 3.246385,
+      "max_rss_kib": 1436828
+    }
+  ]
+}

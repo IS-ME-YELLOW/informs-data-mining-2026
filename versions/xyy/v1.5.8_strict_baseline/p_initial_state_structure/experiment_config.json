@@ -1,0 +1,47 @@
+{
+  "protocol": "v18_pstate_nested_v1",
+  "authorized_split_seeds": [
+    42
+  ],
+  "project_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "baseline_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline",
+  "experiment_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure",
+  "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42",
+  "baseline_identity_hash": "144c278fa2029b96f2e844f15f9b5c90719ce290c80fbc9e779c7f2f7e3cfa5c",
+  "g_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/k_positive_switch/runs/split42",
+  "g_identity_hash": "89c9a1d3998d0cfa1dbab3bfa7b473c251915f5828e4963fbe8602c778d14587",
+  "settings": {
+    "model_seed": 42,
+    "max_rounds": 2000,
+    "early_stopping_rounds": 100,
+    "diagnostic": false,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260910
+  },
+  "p_definition": "official P at hour71 for every forecast origin",
+  "a_definition": "min(P_target,p)/p on p>0",
+  "b_definition": "max(P_target-p,0)/(1-p) on p<1",
+  "weights": "a:p^2; b:(1-p)^2; normalize mean1 on each actual training support only",
+  "early_stop": "direct native raw RMSE; branches sqrt(sum(raw_weight*(raw_prediction-label)^2)/all_valid_rows_in_inner_validation_fold)",
+  "reconstruction": "p*clip(a,0,1)+(1-p)*clip(b,0,1); inactive branch applied=0 and raw=NaN",
+  "cases": {
+    "E0": "same-split strict P Huber plus fixed D_G",
+    "E1": "direct P L2 plus fixed D_G",
+    "E2": "two bounded weighted branches plus fixed D_G"
+  },
+  "comparisons": [
+    "E2_minus_E1",
+    "E2_minus_E0",
+    "E1_minus_E0"
+  ],
+  "secondary": "replace D_G with fixed D_B in all cases; no refitting",
+  "primary": "fixed v18_rule 1h pooled RMSE; inspect 6h; unchanged 24/48h",
+  "route": {
+    "1h": "C3",
+    "6h": "C3",
+    "24h": "C1",
+    "48h": "C1"
+  },
+  "final_training_authorized": false,
+  "plan_sha256": "06e2ecdaf461388b4a298571ed6a0efdf665436301b7a74439fdd1480838cdf0"
+}

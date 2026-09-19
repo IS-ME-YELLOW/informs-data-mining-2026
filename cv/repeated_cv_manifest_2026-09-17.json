@@ -1,0 +1,89 @@
+{
+  "created_at_utc": "2026-09-17T03:02:47.153478+00:00",
+  "protocol": "v18_repeated_balanced_county_cv_20260917",
+  "experiment_anchor": "xyy v1.8; frozen v1.5.6 163-column features",
+  "n_folds": 5,
+  "new_seeds": [
+    20260917,
+    20260918
+  ],
+  "model_seed": 42,
+  "selection_rule": "Exactly these two seeds, fixed before outcome diagnostics; no seed search, no reassignment of named counties.",
+  "algorithm": "Existing code_phase1/cv.py _build_assignment; RandomState; balance state x severity and total county counts",
+  "algorithm_sha256": "fbcefe372961901086ff9b91d33fd794708b60b33b21e1e8e2c3d187cd69c577",
+  "generator_sha256": "a1b0687020384cddf3a1ec68727b8ad59ab1c9e4061d5b533203ac908266bc88",
+  "source_assignment_sha256": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+  "source_fields": [
+    "fipsCode",
+    "stateAbbr",
+    "severity_tier"
+  ],
+  "outcomes_used_in_generation": false,
+  "severity_note": "Organizer-provided severity is label-derived and is used only for the expressly allowed stratification, not as model input.",
+  "seed42_reproduced_exact_county_assignment": true,
+  "assignments": [
+    {
+      "seed": 42,
+      "file": "cv/cv_assignments_balanced_v1_seed42.csv",
+      "sha256": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+      "county_count": 239,
+      "fold_counties": {
+        "0": 48,
+        "1": 47,
+        "2": 48,
+        "3": 48,
+        "4": 48
+      },
+      "max_stratum_fold_count_difference": 1,
+      "role": "original_development_and_stress_reference"
+    },
+    {
+      "seed": 20260917,
+      "file": "cv/cv_assignments_balanced_v1_seed20260917.csv",
+      "sha256": "841e20daaacce2c43a63eed3ebb296c01b05e7811456f09ee16cc5c32bc98a0e",
+      "county_count": 239,
+      "fold_counties": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 47,
+        "4": 48
+      },
+      "max_stratum_fold_count_difference": 1,
+      "role": "frozen_confirmation_repeat"
+    },
+    {
+      "seed": 20260918,
+      "file": "cv/cv_assignments_balanced_v1_seed20260918.csv",
+      "sha256": "0e16d14b6d6d5342ec34649e167521356d72af24d4a41538b6a124626e1b6a4f",
+      "county_count": 239,
+      "fold_counties": {
+        "0": 48,
+        "1": 47,
+        "2": 48,
+        "3": 48,
+        "4": 48
+      },
+      "max_stratum_fold_count_difference": 1,
+      "role": "frozen_confirmation_repeat"
+    }
+  ],
+  "partition_comparisons": [
+    {
+      "seed_a": 42,
+      "seed_b": 20260917,
+      "adjusted_rand_index": 0.005145941355265511
+    },
+    {
+      "seed_a": 42,
+      "seed_b": 20260918,
+      "adjusted_rand_index": 0.005145941355265511
+    },
+    {
+      "seed_a": 20260917,
+      "seed_b": 20260918,
+      "adjusted_rand_index": 0.0031428794922224207
+    }
+  ],
+  "usage": "Keep seed42; compare identical candidate and baseline pipelines within each split. Run both frozen repeats for selected candidates and report both. Never merge old OOF into a new assignment."
+}

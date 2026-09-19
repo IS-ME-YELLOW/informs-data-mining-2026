@@ -1,0 +1,40 @@
+{
+  "scope": "Completed seed42 CV analysis; no fitting or prediction corrections",
+  "run_identity_hash": "144c278fa2029b96f2e844f15f9b5c90719ce290c80fbc9e779c7f2f7e3cfa5c",
+  "frozen_cv_files_verified": 220,
+  "n_outer_models": 100,
+  "n_inner_probes": 400,
+  "training_valid_counts": {
+    "1": 34177,
+    "6": 32982,
+    "24": 28680,
+    "48": 22944
+  },
+  "county_metric_rows": 956,
+  "known_D_bound_violating_rows": 92,
+  "known_D_bound_violating_counties": 52,
+  "rounds_at_cap": 0,
+  "historical_comparison_caveat": "Early-stopping protocol and deterministic execution settings differ; differences are not an unbiased estimate of leakage optimism or feature gains.",
+  "additional_posthoc_focus": "Muskingum 39119 added after identifying it as the largest positive SSE change under each horizon; its trajectory is diagnostic, not a preselected confirmation test.",
+  "input_sha256": {
+    "versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42/oof_predictions.parquet": "0541278b3d08f01f0df83470673ba21b92700bb97c531258c124b51a30b367b8",
+    "versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42/oof_component_predictions.parquet": "76afdd5d29764dd276ce25546031ad363d59b64c55333c30e86f694df31bccc8",
+    "versions/xyy/v1.5.8_strict_baseline/reference/historical_v18_oof_predictions.parquet": "004979c2f7f688dc6b6bab8592a88d57c02de8bfd7686ee3f42e4bf2da2c906b",
+    "versions/xyy/v1.5.8_strict_baseline/reference/historical_v18_model_manifest.csv": "7124e84142dfdb9be1aeb41f38f7f48e3573ee0d23de00d356be50da117fb628",
+    "data/DM_Train.csv": "12235f199ff241819854e1635acbfa7d149438d9c3451c2cfeb9f47c76263178"
+  },
+  "analysis_source_sha256": "5591444c0f5f227b7758bd28feca85062d5f12995d7b22038cbf0385402f9801",
+  "output_sha256": {
+    "horizon_comparison.csv": "6b6fd4ed9ca3b5720356b3bf6624c53a1a27e8a3714ad94d739ef2083682857f",
+    "within_protocol_comparisons.csv": "70fb7d94033b38eade9765b517c605b0fdce4cc76eb8793c577e79c4a04e57e2",
+    "county_error_summary.csv": "dc85cb43d243a96ab040ef44929e4d90b05d89ea2330a8df8a56d86ca298748f",
+    "fold_error_summary.csv": "80be17398709557e0de10e4ad818fe8adbdccd00e2d808e774e54c8cf49b19ae",
+    "error_concentration.csv": "3e4adcb94771d853c3fcf9499c8f4845636d5331e2039c2ec511722d68b8117f",
+    "focus_trajectories.csv": "cddb177f9fbb7a673ed952cc35cb7d37ecd267790881aefae79f4ad310272969",
+    "focus_period_metrics.csv": "e8f6137ce16bb2b68203761fe306a0b1e87f20ece64b2dfb846061e0591496fa",
+    "focus_peak_components.csv": "2bea2f72319328db57b48892cac73efa353ac58984267f57e01806b5f125301d",
+    "round_selection_comparison.csv": "3364fefbc2c1a484639aaab41038f35520ea9d3454206339154fff5b449c8d69",
+    "early_D_bound_diagnosis.csv": "ebd14544baaf05a482bfc78ec0624164d12e1d1c075e8716967f386f84f2694a",
+    "sse_change_drivers.csv": "89dd83826d85cfbdd6d79d48ed21e1639d23ffb81f61525be8155246a14e06e4"
+  }
+}

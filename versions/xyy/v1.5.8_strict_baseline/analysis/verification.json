@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "horizons": 4,
+  "county_metric_rows": 956,
+  "fold_metric_rows": 20,
+  "paired_comparison_inputs": "within the same strict CV for control comparisons; historical comparisons descriptive only",
+  "rmse_sse_shares_recomputed": true,
+  "D_bound_diagnosis_only_no_projection": true,
+  "protected_original_assets_unchanged": 160,
+  "training_source_snapshot_unchanged": true,
+  "no_final_models_or_submission": true
+}

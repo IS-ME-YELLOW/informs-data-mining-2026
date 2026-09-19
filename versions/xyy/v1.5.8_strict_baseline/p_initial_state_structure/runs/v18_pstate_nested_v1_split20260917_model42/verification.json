@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "identity_hash": "80d6bbf992d01cb3e453037cf72a638d78ee3d1ee8ba593a8cbb32125b6a6632",
+  "split_seed": 20260917,
+  "verified_at_utc": "2026-09-18T12:42:22.625682+00:00",
+  "verifier_sha256": "e9ed390b2c9df1b7ae3a616070720f80ae0286d84ba2ff2ca600578ab00109a7",
+  "process": "independent model reload, no training",
+  "new_outer_models": 15,
+  "inner_probes": 60,
+  "formal_fits": 75,
+  "absolute_tolerance": 1e-12,
+  "source_hashes_and_lineage": "PASS",
+  "scoped_labels_weights_and_rounds": "PASS",
+  "independent_P_reconstruction_and_all_controls": "PASS",
+  "all_metrics_and_bootstrap_recomputed": "PASS",
+  "long_horizon_and_unchanged_component_invariants": "PASS",
+  "valid_rows": 34177,
+  "counties": 239
+}

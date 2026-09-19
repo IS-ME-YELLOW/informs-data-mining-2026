@@ -1,0 +1,4 @@
+split_seed,eligible_rows,eligible_counties,D_changed_vs_B,OSI_changed_vs_B,OSI_changed_counties,training_performed
+42,784,207,754,607,169,False
+20260917,784,207,748,623,173,False
+20260918,784,207,761,618,171,False

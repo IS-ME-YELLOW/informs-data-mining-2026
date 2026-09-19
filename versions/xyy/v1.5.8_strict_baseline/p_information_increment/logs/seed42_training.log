@@ -1,0 +1,144 @@
+[001/100] F1 outer0 a inner1: best=86
+[002/100] F1 outer0 a inner2: best=300
+[003/100] F1 outer0 a inner3: best=119
+[004/100] F1 outer0 a inner4: best=104
+[005/100] F1 outer0 a: refit=152, trees=152
+[006/100] F1 outer0 b inner1: best=344
+[007/100] F1 outer0 b inner2: best=228
+[008/100] F1 outer0 b inner3: best=126
+[009/100] F1 outer0 b inner4: best=101
+[010/100] F1 outer0 b: refit=199, trees=199
+[011/100] F1 outer1 a inner0: best=156
+[012/100] F1 outer1 a inner2: best=80
+[013/100] F1 outer1 a inner3: best=135
+[014/100] F1 outer1 a inner4: best=142
+[015/100] F1 outer1 a: refit=128, trees=128
+[016/100] F1 outer1 b inner0: best=147
+[017/100] F1 outer1 b inner2: best=225
+[018/100] F1 outer1 b inner3: best=9
+[019/100] F1 outer1 b inner4: best=150
+[020/100] F1 outer1 b: refit=132, trees=132
+[021/100] F1 outer2 a inner0: best=240
+[022/100] F1 outer2 a inner1: best=52
+[023/100] F1 outer2 a inner3: best=58
+[024/100] F1 outer2 a inner4: best=34
+[025/100] F1 outer2 a: refit=96, trees=96
+[026/100] F1 outer2 b inner0: best=42
+[027/100] F1 outer2 b inner1: best=80
+[028/100] F1 outer2 b inner3: best=55
+[029/100] F1 outer2 b inner4: best=235
+[030/100] F1 outer2 b: refit=103, trees=103
+[031/100] F1 outer3 a inner0: best=281
+[032/100] F1 outer3 a inner1: best=67
+[033/100] F1 outer3 a inner2: best=979
+[034/100] F1 outer3 a inner4: best=29
+[035/100] F1 outer3 a: refit=339, trees=339
+[036/100] F1 outer3 b inner0: best=257
+[037/100] F1 outer3 b inner1: best=219
+[038/100] F1 outer3 b inner2: best=540
+[039/100] F1 outer3 b inner4: best=311
+[040/100] F1 outer3 b: refit=331, trees=331
+[041/100] F1 outer4 a inner0: best=400
+[042/100] F1 outer4 a inner1: best=107
+[043/100] F1 outer4 a inner2: best=101
+[044/100] F1 outer4 a inner3: best=43
+[045/100] F1 outer4 a: refit=162, trees=162
+[046/100] F1 outer4 b inner0: best=101
+[047/100] F1 outer4 b inner1: best=121
+[048/100] F1 outer4 b inner2: best=290
+[049/100] F1 outer4 b inner3: best=197
+[050/100] F1 outer4 b: refit=177, trees=177
+[051/100] F2 outer0 a inner1: best=181
+[052/100] F2 outer0 a inner2: best=215
+[053/100] F2 outer0 a inner3: best=128
+[054/100] F2 outer0 a inner4: best=97
+[055/100] F2 outer0 a: refit=155, trees=155
+[056/100] F2 outer0 b inner1: best=597
+[057/100] F2 outer0 b inner2: best=175
+[058/100] F2 outer0 b inner3: best=886
+[059/100] F2 outer0 b inner4: best=89
+[060/100] F2 outer0 b: refit=436, trees=436
+[061/100] F2 outer1 a inner0: best=136
+[062/100] F2 outer1 a inner2: best=90
+[063/100] F2 outer1 a inner3: best=60
+[064/100] F2 outer1 a inner4: best=95
+[065/100] F2 outer1 a: refit=95, trees=95
+[066/100] F2 outer1 b inner0: best=150
+[067/100] F2 outer1 b inner2: best=424
+[068/100] F2 outer1 b inner3: best=99
+[069/100] F2 outer1 b inner4: best=183
+[070/100] F2 outer1 b: refit=214, trees=214
+[071/100] F2 outer2 a inner0: best=119
+[072/100] F2 outer2 a inner1: best=135
+[073/100] F2 outer2 a inner3: best=467
+[074/100] F2 outer2 a inner4: best=35
+[075/100] F2 outer2 a: refit=189, trees=189
+[076/100] F2 outer2 b inner0: best=41
+[077/100] F2 outer2 b inner1: best=301
+[078/100] F2 outer2 b inner3: best=465
+[079/100] F2 outer2 b inner4: best=247
+[080/100] F2 outer2 b: refit=263, trees=263
+[081/100] F2 outer3 a inner0: best=200
+[082/100] F2 outer3 a inner1: best=53
+[083/100] F2 outer3 a inner2: best=142
+[084/100] F2 outer3 a inner4: best=29
+[085/100] F2 outer3 a: refit=106, trees=106
+[086/100] F2 outer3 b inner0: best=50
+[087/100] F2 outer3 b inner1: best=306
+[088/100] F2 outer3 b inner2: best=408
+[089/100] F2 outer3 b inner4: best=495
+[090/100] F2 outer3 b: refit=314, trees=314
+[091/100] F2 outer4 a inner0: best=250
+[092/100] F2 outer4 a inner1: best=124
+[093/100] F2 outer4 a inner2: best=119
+[094/100] F2 outer4 a inner3: best=48
+[095/100] F2 outer4 a: refit=135, trees=135
+[096/100] F2 outer4 b inner0: best=104
+[097/100] F2 outer4 b inner1: best=171
+[098/100] F2 outer4 b inner2: best=295
+[099/100] F2 outer4 b inner3: best=380
+[100/100] F2 outer4 b: refit=237, trees=237
+All 100 fits complete; launching independent feature/model verification.
+Traceback (most recent call last):
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/train_information.py", line 111, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/train_information.py", line 90, in main
+    if result.returncode:raise RuntimeError('Independent verification failed: '+result.stderr[-2500:])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Independent verification failed:                         ~~~~^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/verify_information.py", line 224, in main
+    run=HERE/'runs/v18_pinfo_v1_split42_model42';result=verify(run,args.unfrozen)
+                                                        ~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/verify_information.py", line 115, in verify
+    close(frame[f'pred_{k}_raw'],raw[case][k]);exact(frame[f'source_{k}_model_id'],ids[case][k])
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/independent_numerics.py", line 13, in close
+    np.testing.assert_allclose(a, b, rtol=0, atol=1e-12, equal_nan=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/lib/python3.13/site-packages/numpy/testing/_private/utils.py", line 1780, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         verbose=verbose, header=header, equal_nan=equal_nan,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         strict=strict)
+                         ^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/lib/python3.13/site-packages/numpy/testing/_private/utils.py", line 988, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=0, atol=1e-12
+
+Mismatched elements: 12 / 34416 (0.0349%)
+First 5 mismatches are at indices:
+ [1311]: 0.27077347145047415 (ACTUAL), 0.2836089433883003 (DESIRED)
+ [2714]: 0.0034028840176026326 (ACTUAL), 0.0034750672062054547 (DESIRED)
+ [7075]: 0.09002854555739843 (ACTUAL), 0.09099429061367476 (DESIRED)
+ [18027]: 0.17400623426566647 (ACTUAL), 0.17533727744039432 (DESIRED)
+ [20594]: 0.9423131784265545 (ACTUAL), 0.943632590318287 (DESIRED)
+Max absolute difference among violations: 0.02104538
+Max relative difference among violations: 0.06504972
+ ACTUAL: array([0.657033, 0.65546 , 0.651892, ...,      nan,      nan,      nan],
+      shape=(34416,))
+ DESIRED: array([0.657033, 0.65546 , 0.651892, ...,      nan,      nan,      nan],
+      shape=(34416,))
+

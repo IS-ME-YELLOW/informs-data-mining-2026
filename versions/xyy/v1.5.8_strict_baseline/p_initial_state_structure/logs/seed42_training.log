@@ -1,0 +1,95 @@
+[01/75] outer0 direct inner1: best=188
+[02/75] outer0 direct inner2: best=187
+[03/75] outer0 direct inner3: best=130
+[04/75] outer0 direct inner4: best=417
+[05/75] outer0 direct: refit=230, trees=230
+[06/75] outer0 a inner1: best=60
+[07/75] outer0 a inner2: best=247
+[08/75] outer0 a inner3: best=97
+[09/75] outer0 a inner4: best=66
+[10/75] outer0 a: refit=117, trees=117
+[11/75] outer0 b inner1: best=158
+[12/75] outer0 b inner2: best=313
+[13/75] outer0 b inner3: best=195
+[14/75] outer0 b inner4: best=98
+[15/75] outer0 b: refit=191, trees=191
+[16/75] outer1 direct inner0: best=223
+[17/75] outer1 direct inner2: best=244
+[18/75] outer1 direct inner3: best=100
+[19/75] outer1 direct inner4: best=112
+[20/75] outer1 direct: refit=169, trees=169
+[21/75] outer1 a inner0: best=225
+[22/75] outer1 a inner2: best=175
+[23/75] outer1 a inner3: best=69
+[24/75] outer1 a inner4: best=83
+[25/75] outer1 a: refit=138, trees=138
+[26/75] outer1 b inner0: best=58
+[27/75] outer1 b inner2: best=271
+[28/75] outer1 b inner3: best=7
+[29/75] outer1 b inner4: best=124
+[30/75] outer1 b: refit=115, trees=115
+[31/75] outer2 direct inner0: best=83
+[32/75] outer2 direct inner1: best=231
+[33/75] outer2 direct inner3: best=98
+[34/75] outer2 direct inner4: best=145
+[35/75] outer2 direct: refit=139, trees=139
+[36/75] outer2 a inner0: best=171
+[37/75] outer2 a inner1: best=60
+[38/75] outer2 a inner3: best=145
+[39/75] outer2 a inner4: best=36
+[40/75] outer2 a: refit=103, trees=103
+[41/75] outer2 b inner0: best=29
+[42/75] outer2 b inner1: best=216
+[43/75] outer2 b inner3: best=52
+[44/75] outer2 b inner4: best=233
+[45/75] outer2 b: refit=132, trees=132
+[46/75] outer3 direct inner0: best=130
+[47/75] outer3 direct inner1: best=45
+[48/75] outer3 direct inner2: best=600
+[49/75] outer3 direct inner4: best=320
+[50/75] outer3 direct: refit=273, trees=273
+[51/75] outer3 a inner0: best=161
+[52/75] outer3 a inner1: best=56
+[53/75] outer3 a inner2: best=142
+[54/75] outer3 a inner4: best=28
+[55/75] outer3 a: refit=96, trees=96
+[56/75] outer3 b inner0: best=60
+[57/75] outer3 b inner1: best=483
+[58/75] outer3 b inner2: best=708
+[59/75] outer3 b inner4: best=225
+[60/75] outer3 b: refit=369, trees=369
+[61/75] outer4 direct inner0: best=302
+[62/75] outer4 direct inner1: best=47
+[63/75] outer4 direct inner2: best=280
+[64/75] outer4 direct inner3: best=351
+[65/75] outer4 direct: refit=245, trees=245
+[66/75] outer4 a inner0: best=245
+[67/75] outer4 a inner1: best=77
+[68/75] outer4 a inner2: best=98
+[69/75] outer4 a inner3: best=45
+[70/75] outer4 a: refit=116, trees=116
+[71/75] outer4 b inner0: best=119
+[72/75] outer4 b inner1: best=151
+[73/75] outer4 b inner2: best=295
+[74/75] outer4 b inner3: best=523
+[75/75] outer4 b: refit=272, trees=272
+All 75 fits complete; starting independent verification in a new process.
+{
+  "status": "PASS",
+  "identity_hash": "405777f954c6be300ae69e81a19dae41b0a5f4b876792023f6086bb2509474df",
+  "split_seed": 42,
+  "verified_at_utc": "2026-09-18T12:19:20.390096+00:00",
+  "verifier_sha256": "7c3a79f998a356c51b0cd0cbdca8adb4bcd2240bb8a56b8ce3b61a521a4f9142",
+  "process": "independent model reload, no training",
+  "new_outer_models": 15,
+  "inner_probes": 60,
+  "formal_fits": 75,
+  "absolute_tolerance": 1e-12,
+  "source_hashes_and_lineage": "PASS",
+  "scoped_labels_weights_and_rounds": "PASS",
+  "independent_P_reconstruction_and_all_controls": "PASS",
+  "all_metrics_and_bootstrap_recomputed": "PASS",
+  "long_horizon_and_unchanged_component_invariants": "PASS",
+  "valid_rows": 34177,
+  "counties": 239
+}

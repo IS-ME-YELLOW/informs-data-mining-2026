@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "training_performed": false,
+  "authorized_split_seeds": [
+    20260917,
+    20260918
+  ],
+  "source_seed42_identity_hash": "405777f954c6be300ae69e81a19dae41b0a5f4b876792023f6086bb2509474df",
+  "files": {
+    "p_structure_protocol.py": {
+      "source": "bde2977940e54d355b3c0aa29c06fc0e93b29695274a1c3b07c22a7470c42391",
+      "adapted": "506441fe2ae4b584acaaa5c64c37289ea156e772a314c03f0d39978e6b833ab4"
+    },
+    "train_p_structure.py": {
+      "source": "33ba25f3315232a7eb9485dc46903b4b850af491e3092949124049549601ebc4",
+      "adapted": "b0aec10c9f95322bca0dc9d9073658c1a09692dc6489789dcda0e46e6f79ce64"
+    },
+    "verify_p_structure.py": {
+      "source": "7c3a79f998a356c51b0cd0cbdca8adb4bcd2240bb8a56b8ce3b61a521a4f9142",
+      "adapted": "e9ed390b2c9df1b7ae3a616070720f80ae0286d84ba2ff2ca600578ab00109a7"
+    },
+    "weighted_scoped_training.py": {
+      "source": "32936b89de4cda4426b9433e781d284e39833f9fd263e8f1860e0ac6c1a9ae56",
+      "reuse": "same file; not copied or modified"
+    },
+    "evaluate_p_structure.py": {
+      "source": "64828d15f95db040ffea0eab629cb33fab4c5178bfba5d62786f2dd4b219a7c4",
+      "reuse": "same file; not copied or modified"
+    },
+    "preflight_checks.py": {
+      "source": "1f1352a50d436e908f71b36c0f91b1aeb62c2eea330d4b75c9f9021d1f539d3e",
+      "reuse": "same file; not copied or modified"
+    },
+    "metric_helpers.py": {
+      "source": "b7e9664d715745cc2411d1ff27110f64cdd05eb03395ea287ed58033dff162bd",
+      "reuse": "same file; not copied or modified"
+    },
+    "independent_numerics.py": {
+      "source": "d0786a9fb7e07120a7ec7540de7ed517b766f48af633d3109dfe61a0cf269afb",
+      "reuse": "same file; not copied or modified"
+    }
+  },
+  "AST_identical_protocol_functions": [
+    "read_json",
+    "output_path",
+    "array_sha",
+    "require_unit",
+    "p_from_history",
+    "support",
+    "transform",
+    "reconstruct",
+    "verify_sources",
+    "params",
+    "build_candidates"
+  ],
+  "model_seed": 42,
+  "changes": "split selection, source identities, config/code identity paths, preflight destinations and run IDs only"
+}

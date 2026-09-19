@@ -1,0 +1,12 @@
+{
+  "python": "3.13.7",
+  "platform": "Linux-6.17.0-20-generic-x86_64-with-glibc2.39",
+  "libraries": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "lightgbm": "4.7.0",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETE",
+  "new_split_seeds": [
+    20260917,
+    20260918
+  ],
+  "summary_split_seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "new_formal_fits": 150,
+  "new_outer_models": 30,
+  "all_three_formal_fits": 225,
+  "all_three_outer_models": 45,
+  "independent_verification": "PASS",
+  "historical_integrity": "PASS",
+  "recommendation": "三套固定分折中，E2 的 1h/6h 均优于当前 E0 与直接 L2 对照 E1，支持将这版 P 初始状态结构作为当前优先 P 候选保留，并在后续实验中沿用同一固定定义。这里没有自动替换原基线或训练最终提交模型。",
+  "final_training": false,
+  "test_submission": false,
+  "finished_at_utc": "2026-09-18T12:46:30.397480+00:00"
+}

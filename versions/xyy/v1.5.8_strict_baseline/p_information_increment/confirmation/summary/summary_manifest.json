@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "source_runs": [
+    {
+      "split_seed": 42,
+      "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/runs/v18_pinfo_v1_split42_model42",
+      "identity_hash": "e39b76d75f191891abda1939dc47933815cc4fa15796227b0c200eb1b96bfcac",
+      "audit_identity_hash": "65cb8692b989e770ad80de42d40e9f764c380669091a63753b32b6ea5dd1a2a7",
+      "complete_marker_sha256": "ed2a62fa4cf4c07997f42fddd75efbf74bce7391cc6f671e32e06b0c402c3c91",
+      "independent_verification_sha256": "43954ab175a80b02aa6e785194c82ff2317ecd3c97f23f0465d872def0c7fd1a",
+      "reference_E2_identity_hash": "405777f954c6be300ae69e81a19dae41b0a5f4b876792023f6086bb2509474df",
+      "feature_package_identity": "454a424862b206f8ce3b8a336811ba41a2d6b813759a23502d0fb8a3b16232de",
+      "F2_fits": 50,
+      "F2_outer_models": 10,
+      "whole_source_run_fits": 100,
+      "whole_source_run_seconds": 361.6233497550129,
+      "verification": "PASS"
+    },
+    {
+      "split_seed": 20260917,
+      "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/runs/v18_pinfo_v1_split20260917_model42",
+      "identity_hash": "64f8263f5356378124c5e981fcb7c1117ad808c97b46c383b64b7cdbe109484d",
+      "audit_identity_hash": "e1c83d7118fced3cdd1373b6198d4649643f6e3b4a911fec999285cc0d2bfff8",
+      "complete_marker_sha256": "d04f2c0a3b894cd53484f5fe45c8b22958fa8c43d8d0769cd9d6170a4b73bc7c",
+      "independent_verification_sha256": "6c2edbb6e4ec0b22abbcda946bdba5dc6018a9f1e1f5a3211a7664462bf170af",
+      "reference_E2_identity_hash": "80d6bbf992d01cb3e453037cf72a638d78ee3d1ee8ba593a8cbb32125b6a6632",
+      "feature_package_identity": "454a424862b206f8ce3b8a336811ba41a2d6b813759a23502d0fb8a3b16232de",
+      "F2_fits": 50,
+      "F2_outer_models": 10,
+      "whole_source_run_fits": 50,
+      "whole_source_run_seconds": 207.42139785800828,
+      "verification": "PASS"
+    },
+    {
+      "split_seed": 20260918,
+      "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/runs/v18_pinfo_v1_split20260918_model42",
+      "identity_hash": "a3f16d3463442c01b1e1315df498317eed53298a1f89ef087b016ab8bd0c9532",
+      "audit_identity_hash": "5d4f1e464f28c2c6e2deb3efc19d1621da4442256ae60c91c3a6af58226d6945",
+      "complete_marker_sha256": "7d81d3cbba7bb7a27e8ed4c583791eaa9f2621f530f719b9db3cc68dd6f720c1",
+      "independent_verification_sha256": "44898d772f0c900272941523fb58226dc8e14325e975dc50f1e0f0d4c1ad6599",
+      "reference_E2_identity_hash": "7dd79f8909a8763d55294468bd27939b6d9c4b28596a34238d21701eb0c89e16",
+      "feature_package_identity": "454a424862b206f8ce3b8a336811ba41a2d6b813759a23502d0fb8a3b16232de",
+      "F2_fits": 50,
+      "F2_outer_models": 10,
+      "whole_source_run_fits": 50,
+      "whole_source_run_seconds": 231.0004468499974,
+      "verification": "PASS"
+    }
+  ],
+  "outputs": {
+    "pooled_all_splits.csv": "413dee7c1cd9e1a6ff32685a05644e8ba56447018eb8c409d8800516d5a6d713",
+    "slices_all_splits.csv": "0214125c2d99421726e1f90286bd6d77cdc6ebd997a7751780af25d977678bf2",
+    "bootstrap_all_splits.csv": "627a50f4b46cfac3d2ab38dcfa591ec76c6a3e9a01b29dc0ef74644330cb70dd",
+    "branch_diagnostics_all_splits.csv": "61dff38f47bf1e674818b821797cf461bcca4dd2ada4fab1bc3990801548649a",
+    "branch_loss_decomposition_all_splits.csv": "d8ab956b4a092bf38e172bf5dcdf3a2c16b5fed1bc027d1af51a6c530b99e13f",
+    "error_interactions_all_splits.csv": "a9a3eac815bd5a4da23b93078a8622fca8c90d73e9b248b7c6cfc479abf093b7",
+    "rounds_all_splits.csv": "f019489d7e1fa7ab6f212a7f2d23c4e25f038271838c3d89c0292bf92ce972de",
+    "primary_scores.csv": "63865cda50405f6a4f15e0199a454f663e42731b058fadfc6ee20bf3bf85bb7f",
+    "P_component_scores.csv": "9f9af9e40df6bfc0864bb5c23b2f31feda60e2644726d292fa19ecb88d2a6337",
+    "county_effects.csv": "38749893c3826090452bd1f70adb4e33ac6c86d715f8a21b12bcb908d44217c9",
+    "focus_counties.csv": "ab7539036ccfae3691ad3e41619c183582fe272cef6b7fc543382a84ede30884",
+    "fold_effects.csv": "9006b582bdc9d9291b83ccb822905ac5d68d1f4d7da6948be910da19828854af",
+    "window_effects.csv": "e8c195d8318c6b4da43b71cbce0261fb977da38a31009cbc0310649cfe1c4a96",
+    "initial_state_groups.csv": "7eba2449bbca6b463e44066d8cedab3b5b1a44976f3683fec7a8585d2b854af3",
+    "exclude_Morrow.csv": "083c068c6bc4bb20fdb676dccaf048ced96ded31c8047c30b4620bccbc5a2cad",
+    "target_hour_curve_data.csv": "92d8b70a6c209329bc1f1f10f6092b5e5374aa5749a6d6bb976e45a3176ae2fb",
+    "improvement_counts.csv": "d116fb1ac5696a125cff72f4b7498ea7f2b6cd9914abe6fe01dc54ebddf27a5e",
+    "county_consistency.csv": "3f0710a3da5b18b9c61cd665332e040fdc9c5f74748fd1d07d38d1b60ab968ea",
+    "source_runs.csv": "c24870cbcbe6e3e1fd496a7c6cfa22253bf61c36ac5ef279f13df590b80e53c8",
+    "split_decisions.csv": "532b1e906f3a696d628f3a49a210c87395161dace41ddeab09b07f0e6b816dd8"
+  },
+  "reports": {
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/confirmation/Results_2026-09-19.md": "47e8f55083dde081ae8b78597ce616066b22237fb1a383f43fd9492cde3a038b",
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/confirmation/split20260917/Results_2026-09-19.md": "0e16a19d0a4d150cafbafa7a56a19abed651584c47ae58a1ba7b1a3940d5a358",
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/confirmation/split20260918/Results_2026-09-19.md": "fff993438d6fb7970bfb0b3d2f5a01d7ee1d027604f875577543922530486776"
+  },
+  "summary_script_sha256": "a5fc4911e07ca6092a264b4aae99df232dd2f1115f814cf5745ca144b1550201",
+  "same_feature_package_and_training_parameters": true,
+  "all_long_horizon_predictions_unchanged": true
+}

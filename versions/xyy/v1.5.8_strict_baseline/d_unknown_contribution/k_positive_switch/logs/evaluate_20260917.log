@@ -1,0 +1,21 @@
+comparison         horizon    model     n  baseline_rmse  baseline_mae  baseline_sse  baseline_bias  candidate_rmse  candidate_mae  candidate_sse  candidate_bias  rmse_delta  rmse_change_pct  sse_reduction  changed_predictions
+ G_minus_B osi_target_t01h v18_rule 34177       0.012475      0.003579      5.319143      -0.000173        0.012322       0.003561       5.189541       -0.000170   -0.000153        -1.225771       0.129602                  623
+ G_minus_B osi_target_t06h v18_rule 32982       0.010871      0.003348      3.897503      -0.000176        0.010871       0.003348       3.897503       -0.000176    0.000000         0.000000       0.000000                    0
+ G_minus_B osi_target_t24h v18_rule 28680       0.008710      0.002956      2.175988      -0.000095        0.008710       0.002956       2.175988       -0.000095    0.000000         0.000000       0.000000                    0
+ G_minus_B osi_target_t48h v18_rule 22944       0.007896      0.002250      1.430410      -0.000285        0.007896       0.002250       1.430410       -0.000285    0.000000         0.000000       0.000000                    0
+{
+  "status": "PASS",
+  "split_seed": 20260917,
+  "identity_hash": "2bf269caf05becca632ae7532a00683a5faa7bdaa969068e688d8753e5b85ab0",
+  "verified_at_utc": "2026-09-18T06:28:29.596181+00:00",
+  "verifier_sha256": "47912106c12067bd7f2191977d2ba86fe3b9e4a40aeed31db7a212f71b3e03cf",
+  "absolute_tolerance": 1e-12,
+  "independent_K_and_gate_reconstruction": true,
+  "independent_G_controls_and_D_alignment": true,
+  "all_metrics_and_bootstrap_recomputed": true,
+  "all_6_24_48h_controls_exactly_equal_A_B": true,
+  "off_gate_G_exactly_equal_A_B": true,
+  "eligible_gate_uses_no_labels_or_future_P": true,
+  "source_lineage_and_hashes": "PASS",
+  "training_performed": false
+}

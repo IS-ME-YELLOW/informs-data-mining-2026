@@ -1,0 +1,1689 @@
+{
+  "run_id": "v18_tree_nested_v2_split42_model42",
+  "identity": {
+    "protocol": "v18_tree_nested_v2",
+    "feature_version": "v1.5.6",
+    "inputs": {
+      "component_targets": "679ca67cb91a54c169dabb8cb420b5d4e9f076a24b34c35d519f6e7f4958e3b8",
+      "cv": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+      "feature_names": "441fdffaa0fccd80d8ac2e7d84f43d85d1ce7ff78a6dc367122138e90593a0f4",
+      "features_test": "75ce0e77c9caaf4885ef89bc6289d6e42258574b00e81ff6509dbe23b0f01d09",
+      "features_train": "2d4753ed3a4cb4938ea8af5fe54cb80b04d8509ede84766bd786fef5f3dc6dff",
+      "meta_test": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+      "meta_train": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+      "raw_test": "517fc0ae2418adc1c90e7db6b12d35ea8742be3bb9f2ec9e87ce644b8ddaad37",
+      "raw_train": "12235f199ff241819854e1635acbfa7d149438d9c3451c2cfeb9f47c76263178",
+      "submission": "0ea207a67d48550a0c488d8a24953ad36505e2511257df2a1c41920eee4007fd",
+      "targets_train": "86273a1fad914694927ab405e6f9fa52581ec1243c32e800fb4f42aac630c3c9"
+    },
+    "assignment": [
+      {
+        "fipsCode": "18009",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18013",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18023",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18025",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18027",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18029",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18033",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18035",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18037",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18039",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18041",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18043",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18045",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18047",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18051",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18059",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18061",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18065",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18067",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18069",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18071",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18073",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18077",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18083",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18085",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18087",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18089",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18091",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18093",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18095",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18097",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18099",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18101",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18103",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18105",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18107",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18109",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18111",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18113",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18117",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18121",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18123",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18125",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18127",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18129",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18131",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18133",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18135",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18137",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18139",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18141",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18143",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18145",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18147",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18149",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18151",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18153",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18155",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18157",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18159",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18161",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18163",
+        "stateAbbr": "IN",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18165",
+        "stateAbbr": "IN",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18167",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18169",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18171",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18173",
+        "stateAbbr": "IN",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "18175",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "18177",
+        "stateAbbr": "IN",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "18179",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "18181",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "18183",
+        "stateAbbr": "IN",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39017",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39023",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39025",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39027",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39029",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39031",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39033",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39035",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39037",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39039",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39045",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39049",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39051",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39053",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39055",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39059",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39061",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39063",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39065",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39069",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39073",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39075",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39077",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39081",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39085",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39087",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39089",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39091",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39093",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39095",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39097",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39099",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39101",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39103",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39105",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39107",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39109",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39111",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39113",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39115",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39117",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39119",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39121",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39123",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39125",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39127",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39129",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39131",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39133",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39135",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39137",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39139",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39141",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39143",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39145",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39147",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39149",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39151",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39153",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "39155",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39157",
+        "stateAbbr": "OH",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39159",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39161",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39163",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39165",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "39167",
+        "stateAbbr": "OH",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39169",
+        "stateAbbr": "OH",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "39171",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "39173",
+        "stateAbbr": "OH",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "39175",
+        "stateAbbr": "OH",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42005",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42007",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42009",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42013",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42015",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42019",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42021",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42023",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42025",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42027",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42029",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42031",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42033",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42035",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42039",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42041",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42043",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42045",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42047",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42049",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42051",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42053",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42055",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42057",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42059",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42061",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42063",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42065",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42067",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42069",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42075",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42077",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42079",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42081",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42083",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42085",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42089",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42091",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42095",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42097",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42101",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42103",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "42109",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42113",
+        "stateAbbr": "PA",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "42115",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42119",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42121",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "42125",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "42127",
+        "stateAbbr": "PA",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42129",
+        "stateAbbr": "PA",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42131",
+        "stateAbbr": "PA",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "42133",
+        "stateAbbr": "PA",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54007",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54009",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54013",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54015",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54019",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54023",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54025",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54027",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54029",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54031",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54033",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54035",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54037",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54039",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54041",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54043",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54045",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54047",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54053",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54055",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54057",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54059",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54063",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54067",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54069",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54071",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54073",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54075",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54077",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54079",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54081",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54083",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54085",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54087",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 0
+      },
+      {
+        "fipsCode": "54089",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54091",
+        "stateAbbr": "WV",
+        "severity_tier": 4,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54093",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54095",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 4
+      },
+      {
+        "fipsCode": "54097",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54099",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54101",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 1
+      },
+      {
+        "fipsCode": "54103",
+        "stateAbbr": "WV",
+        "severity_tier": 3,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54105",
+        "stateAbbr": "WV",
+        "severity_tier": 2,
+        "fold": 2
+      },
+      {
+        "fipsCode": "54107",
+        "stateAbbr": "WV",
+        "severity_tier": 0,
+        "fold": 3
+      },
+      {
+        "fipsCode": "54109",
+        "stateAbbr": "WV",
+        "severity_tier": 1,
+        "fold": 3
+      }
+    ],
+    "feature_names": [
+      "last_osi",
+      "last_P_t",
+      "last_N_t",
+      "last_D_t",
+      "last_R_t",
+      "last_outage_pct",
+      "osi_mean_72h",
+      "osi_max_72h",
+      "osi_std_72h",
+      "outage_pct_mean_72h",
+      "outage_pct_max_72h",
+      "N_t_mean_72h",
+      "N_t_max_72h",
+      "R_t_mean_72h",
+      "R_t_max_72h",
+      "pre_event_mean_osi",
+      "pre_event_max_outage_pct",
+      "storm_onset_max_osi",
+      "storm_onset_mean_osi",
+      "osi_trend_last6h",
+      "is_worsening",
+      "frac_zero_72h",
+      "hours_since_peak",
+      "gust_mean_obs",
+      "gust_max_obs",
+      "gust_gt30_obs",
+      "gust_gt40_obs",
+      "cumul_gust_obs",
+      "gust_last_obs",
+      "gust_max_last6h_obs",
+      "gust_trend_last6h_obs",
+      "gust_t",
+      "wind_speed_t",
+      "wind_sin_t",
+      "wind_cos_t",
+      "t2m_t",
+      "d2m_t",
+      "tp_t",
+      "rain_t",
+      "csnow_t",
+      "sdwe_t",
+      "r2_t",
+      "vpd_t",
+      "soil_moist_t",
+      "blh_t",
+      "tcc_t",
+      "lcc_t",
+      "mcc_t",
+      "hcc_t",
+      "sp_t",
+      "mslma_t",
+      "sdswrf_t",
+      "direct_rad_t",
+      "diffuse_rad_t",
+      "et0_t",
+      "temp_c_t",
+      "dewpoint_c_t",
+      "icing_risk_t",
+      "gust_exceed_30",
+      "soil_moist_x_gust",
+      "is_snowing",
+      "gust_x_hso",
+      "gust_x_phase",
+      "soil_gust_x_phase",
+      "gust_exceed30_x_hso",
+      "gust_max_next_1h",
+      "gust_mean_next_1h",
+      "wind_speed_max_next_1h",
+      "total_tp_next_1h",
+      "min_t2m_next_1h",
+      "gust_gt30_next_1h",
+      "gust_gt40_next_1h",
+      "gust_peak4h_mean_next_1h",
+      "gust_max_next_6h",
+      "gust_mean_next_6h",
+      "wind_speed_max_next_6h",
+      "total_tp_next_6h",
+      "min_t2m_next_6h",
+      "gust_gt30_next_6h",
+      "gust_gt40_next_6h",
+      "gust_peak4h_mean_next_6h",
+      "gust_max_next_24h",
+      "gust_mean_next_24h",
+      "wind_speed_max_next_24h",
+      "total_tp_next_24h",
+      "min_t2m_next_24h",
+      "gust_gt30_next_24h",
+      "gust_gt40_next_24h",
+      "gust_peak4h_mean_next_24h",
+      "gust_max_next_48h",
+      "gust_mean_next_48h",
+      "wind_speed_max_next_48h",
+      "total_tp_next_48h",
+      "min_t2m_next_48h",
+      "gust_gt30_next_48h",
+      "gust_gt40_next_48h",
+      "gust_peak4h_mean_next_48h",
+      "gust_change_1h",
+      "gust_change_3h",
+      "pressure_change_3h",
+      "pressure_change_6h",
+      "temp_change_6h",
+      "wind_change_1h",
+      "cumul_gust_since_onset",
+      "cumul_tp_since_onset",
+      "gust_gt30_since_onset",
+      "gust_at_t1h",
+      "wind_speed_at_t1h",
+      "t2m_at_t1h",
+      "tp_at_t1h",
+      "gust_at_t6h",
+      "wind_speed_at_t6h",
+      "t2m_at_t6h",
+      "tp_at_t6h",
+      "gust_at_t24h",
+      "wind_speed_at_t24h",
+      "t2m_at_t24h",
+      "tp_at_t24h",
+      "gust_at_t48h",
+      "wind_speed_at_t48h",
+      "t2m_at_t48h",
+      "tp_at_t48h",
+      "hour_of_day",
+      "hour_sin",
+      "hour_cos",
+      "days_since_onset",
+      "hours_since_obs",
+      "storm_phase",
+      "log_customers",
+      "rural_urban_code",
+      "is_metro",
+      "pop_density",
+      "n_utilities",
+      "pct_forest",
+      "pct_developed",
+      "pct_agriculture",
+      "pct_water",
+      "pct_wetland",
+      "pct_unmapped",
+      "pct_forest_classified",
+      "tree_canopy_pct",
+      "tree_canopy_std",
+      "forest_x_customers",
+      "window_len_next_1h",
+      "is_full_next_1h",
+      "tp_rate_next_1h",
+      "gust_gt30_frac_next_1h",
+      "has_weather_at_t1h",
+      "window_len_next_6h",
+      "is_full_next_6h",
+      "tp_rate_next_6h",
+      "gust_gt30_frac_next_6h",
+      "has_weather_at_t6h",
+      "window_len_next_24h",
+      "is_full_next_24h",
+      "tp_rate_next_24h",
+      "gust_gt30_frac_next_24h",
+      "has_weather_at_t24h",
+      "window_len_next_48h",
+      "is_full_next_48h",
+      "tp_rate_next_48h",
+      "gust_gt30_frac_next_48h",
+      "has_weather_at_t48h"
+    ],
+    "settings": {
+      "model_seed": 42,
+      "max_rounds": 2000,
+      "early_stopping_rounds": 100,
+      "diagnostic": false,
+      "bootstrap_replicates": 2000,
+      "bootstrap_seed": 20260910
+    },
+    "code_sha256": {
+      "config.py": "371c5c99aa6a363577b0c7d970eea0a3f820cf2b075ad15a3b12e2ea2696312b",
+      "protocol.py": "3c62ba06f097cda4367c535a72e915b23ab616c06a87df916693e864d9de5a16",
+      "scoped_training.py": "466944c287d14f1a19d3a1be52c509dc60026694326c62c1c0b169cd8c451e0e",
+      "evaluation.py": "9c9d2026f4117ae20dba84eb8bb1442d3e455fcec5173f8c4a9c102a9a6108b8",
+      "run_artifacts.py": "44082287033474e52aa081ea57d3fcd2344a6167bc00d2d8c44061f21c04ea1b",
+      "train_v18.py": "d4826adccd5de8d4d82ff4be7fa3c561707f60a06852ba3583a7942ea9bfef1c",
+      "verify_artifacts.py": "a8e4d0b60a11b0bf7d2905a3e5dca35cd0c530bd4164caa78c8c8068333d80af"
+    },
+    "environment": {
+      "python": "3.13.7",
+      "platform": "Linux-6.17.0-20-generic-x86_64-with-glibc2.39",
+      "libraries": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.5",
+        "pyarrow": "25.0.1",
+        "lightgbm": "4.7.0",
+        "scipy": "1.18.1",
+        "scikit-learn": "1.9.1"
+      }
+    },
+    "modes": [
+      "C0_direct_osi",
+      "C1_component_osi",
+      "C2_equal_blend",
+      "C3_aligned_component",
+      "v18_rule"
+    ],
+    "component_weights": {
+      "P_t": 0.4,
+      "N_t": 0.35,
+      "D_t": 0.25,
+      "R_t": -0.1
+    },
+    "post_process": [
+      0.0,
+      0.65,
+      0.001
+    ],
+    "rule": {
+      "t01h": "C3",
+      "t06h": "C3",
+      "t24h": "C1",
+      "t48h": "C1"
+    },
+    "round_selection": "floor(mean(inner county-fold early-stopping iterations)); refit entire allowed scope"
+  },
+  "identity_hash": "144c278fa2029b96f2e844f15f9b5c90719ce290c80fbc9e779c7f2f7e3cfa5c",
+  "input_paths": {
+    "features_train": "versions/xyy/v1.5.6/features_train_v1.5.6.parquet",
+    "features_test": "versions/xyy/v1.5.6/features_test_v1.5.6.parquet",
+    "targets_train": "versions/xyy/v1.5.6/targets_train_v1.5.6.parquet",
+    "meta_train": "versions/xyy/v1.5.6/meta_train_v1.5.6.parquet",
+    "meta_test": "versions/xyy/v1.5.6/meta_test_v1.5.6.parquet",
+    "feature_names": "versions/xyy/v1.5.6/feature_names_v1.5.6.json",
+    "cv": "cv/cv_assignments_balanced_v1_seed42.csv",
+    "component_targets": "versions/xyy/v1.5.8_strict_baseline/component_targets_v1.8.parquet",
+    "raw_train": "data/DM_Train.csv",
+    "raw_test": "data/DM_Test.csv",
+    "submission": "data/sample_submission.csv"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "run_id": "v18_tree_nested_v2_split42_model42",
+  "attempts": [
+    {
+      "command": [
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/bin/python",
+        "-B",
+        "-u",
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/train_v18.py",
+        "--stage",
+        "cv",
+        "--cv-file",
+        "cv/cv_assignments_balanced_v1_seed42.csv",
+        "--model-seed",
+        "42",
+        "--run-id",
+        "v18_tree_nested_v2_split42_model42"
+      ],
+      "started_at_utc": "2026-09-17T10:19:54.526070+00:00",
+      "status": "completed",
+      "stage": "cv",
+      "pid": 3,
+      "return_code": 0,
+      "ended_at_utc": "2026-09-17T10:57:04.864582+00:00",
+      "wall_seconds": 2230.338322118012,
+      "cpu_user_seconds": 2223.609461,
+      "cpu_system_seconds": 11.204159,
+      "max_rss_kib": 1581328,
+      "cv_complete": true
+    }
+  ]
+}

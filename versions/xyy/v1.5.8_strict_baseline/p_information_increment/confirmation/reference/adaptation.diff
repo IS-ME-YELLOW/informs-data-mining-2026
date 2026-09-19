@@ -1,0 +1,262 @@
+--- frozen/information_preflight.py
++++ confirmation/information_preflight.py
+@@ -7,7 +7,8 @@
+ from information_training import subset,specification,contribution_metric
+ from build_information_features import (KEYS,WHITELIST,HISTORY,NBRCOLS,DEMCOLS,neighbor_table,
+     aggregate_neighbors,validate_view,normalized_fips)
+-from independent_features import verify_features,allowed_from_raw,read_raw
++from independent_features import allowed_from_raw,read_raw
++from verify_information_exact import exact_feature_check as verify_features
+ 
+ 
+ def reject(call):
+@@ -78,7 +79,7 @@
+                 provenance.append(spec)
+         reject(lambda:subset(cc,range(5),'a'))
+         reject(lambda:subset(cc,[0],'direct'))
+-    zeros=np.where(ctx.valid,0.,np.nan);build_candidates(ctx,{'F1':zeros,'F2':zeros})
++    zeros=np.where(ctx.valid,0.,np.nan);build_candidates(ctx,{'F2':zeros})
+     reject(lambda:output_path(HERE.parent/'forbidden'))
+     # The actual training algorithm and weighted metric retain the original AST.
+     old=ast.parse((PBASE/'weighted_scoped_training.py').read_text());new=ast.parse((HERE/'information_training.py').read_text())
+@@ -87,7 +88,7 @@
+     for n in ('subset','describe','contribution_metric','load_model'):assert oldf[n]==newf[n]
+     adaptation=read_json(HERE/'reference/adaptation_manifest.json')
+     assert sha256_file(HERE/'information_training.py')==adaptation['adapted_sha256']
+-    result.update(training_performed=False,case_count=2,fold_label_isolation='PASS',
++    result.update(training_performed=False,case_count=1,fold_label_isolation='PASS',
+         future_outage_perturbation_deletion='PASS',legal_test_history_positive_control='PASS',
+         node_row_permutation_ties_constant_fields='PASS',source_training_math='unchanged',
+         source_F0_replay='exact',empty_duplicate_missing_and_path_rejection='PASS')
+--- frozen/evaluate_information.py
++++ confirmation/evaluate_information.py
+@@ -5,8 +5,8 @@
+     KINDS,KEYS,expected_mask,support,transform,reconstruct,build_candidates,build_controls,digest_object)
+ from metric_helpers import metrics,comparison,bootstrap
+ 
+-PAIRS=(('F1_minus_F0','F0','F1'),('F2_minus_F0','F0','F2'),('F2_minus_F1','F1','F2'))
+-CASES=('F0','F1','F2')
++PAIRS=(('F2_minus_F0','F0','F2'),)
++CASES=('F0','F2')
+ WINDOWS=((73,76),(77,95),(96,143),(144,215))
+ 
+ 
+@@ -86,7 +86,7 @@
+     ids={'F0':{k:ctx.f0_branch[f'source_{k}_model_id'].to_numpy(copy=True) for k in KINDS},**new_ids}
+     reconstruction={case:reconstruct(p,raw[case]['a'],raw[case]['b'],valid) for case in CASES}
+     np.testing.assert_array_equal(reconstruction['F0'][0],ctx.parts[H1]['P_t'])
+-    parts,controls,aux=build_candidates(ctx,{c:reconstruction[c][0] for c in ('F1','F2')})
++    parts,controls,aux=build_candidates(ctx,{c:reconstruction[c][0] for c in ('F2',)})
+     meta=ctx.meta.copy();meta['candidate_identity_hash']=identity
+     meta['reference_E2_identity_hash']=CONFIG['reference_identity_hash']
+     audit=meta.copy();audit['target_timestamp']=meta.timestamp_et+pd.Timedelta(hours=1)
+--- frozen/train_information.py
++++ confirmation/train_information.py
+@@ -1,4 +1,4 @@
+-"""Approved first-round F1/F2 experiment; only seed42, no final/test prediction."""
++"""Authorized F2-only confirmation on fixed splits, no final/test prediction."""
+ from datetime import datetime,timezone
+ from pathlib import Path
+ import argparse
+@@ -18,7 +18,7 @@
+ from evaluate_information import artifact_frames
+ from run_artifacts import run_lock,freeze_stage
+ 
+-RUN_ID='v18_pinfo_v1_split42_model42'
++from confirmation_runtime import CODE_ROOT,META_ROOT,RUN_ID,SEED
+ 
+ 
+ def require_manifest(a,b):
+@@ -28,20 +28,20 @@
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--stage',choices=('preflight','cv'),default='preflight')
+-    parser.add_argument('--split-seed',type=int,choices=(42,),default=42)
++    parser.add_argument('--split-seed',type=int,choices=(20260917,20260918),required=True)
+     parser.add_argument('--resume',action='store_true');args=parser.parse_args()
+     if args.stage=='preflight' and args.resume:parser.error('preflight cannot resume')
+     ctx=load_reference(args.split_seed)
+-    if args.stage=='preflight':build_features(feature_inputs(ctx.data))
++    # Reuse the frozen input package; no regeneration in confirmation.
+     ctx=attach_features(ctx);identity=experiment_identity(ctx);identity_hash=digest_object(identity)
+     manifest={'run_id':RUN_ID,'identity':identity,'identity_hash':identity_hash}
+-    run=output_path(HERE/'runs'/RUN_ID);pre=HERE/'preflight/split42'
++    run=output_path(HERE/'runs'/RUN_ID);pre=META_ROOT
+     if args.stage=='preflight':
+         result,provenance=run_checks(ctx)
+         require_manifest(manifest,manifest);reject(lambda:require_manifest({**manifest,'identity_hash':'bad'},manifest))
+-        result.update(identity_hash=identity_hash,split_seed=42,planned_formal_fits=100,planned_new_outer_models=20,resume_mismatch_rejection='PASS')
++        result.update(identity_hash=identity_hash,split_seed=SEED,planned_formal_fits=50,planned_new_outer_models=10,resume_mismatch_rejection='PASS')
+         write_json(pre/'checks.json',result);write_json(pre/'fit_support_and_weights.json',provenance)
+-        write_json(HERE/'reference/source_manifest.json',{'source_sha256':ctx.sources,'reference_E2_identity_hash':CONFIG['reference_identity_hash']})
++        write_json(META_ROOT/'source_manifest.json',{'source_sha256':ctx.sources,'reference_E2_identity_hash':CONFIG['reference_identity_hash']})
+         print(json.dumps(result,indent=2));return
+     check=read_json(pre/'checks.json')
+     if check['status']!='PASS' or check['identity_hash']!=identity_hash:raise ValueError('Matching successful preflight required')
+@@ -52,7 +52,7 @@
+     else:
+         if args.resume:raise FileNotFoundError('Cannot resume absent run')
+         run.mkdir(parents=True);write_json(run/'run_manifest.json',manifest)
+-        write_json(run/'source_manifest.json',read_json(HERE/'reference/source_manifest.json'))
++        write_json(run/'source_manifest.json',read_json(META_ROOT/'source_manifest.json'))
+         write_json(run/'environment.json',identity['environment']);write_frame(run/'cv_assignments.csv',ctx.data.assignment)
+     with run_lock(run):
+         attempts=read_json(run/'execution.json')['attempts'] if (run/'execution.json').exists() else []
+@@ -61,7 +61,7 @@
+         attempts.append(attempt);start=time.monotonic()
+         def save():write_json(run/'execution.json',{'attempts':attempts})
+         def progress(message,n):
+-            attempt['fits_this_attempt']+=n;save();print(f"[{attempt['fits_this_attempt']:03d}/100] {case} {message}",flush=True)
++            attempt['fits_this_attempt']+=n;save();print(f"[{attempt['fits_this_attempt']:03d}/50] {case} {message}",flush=True)
+         save();raw={c:{k:np.full(len(ctx.meta),np.nan) for k in KINDS} for c in NEW_CASES}
+         ids={c:{k:np.full(len(ctx.meta),'',object) for k in KINDS} for c in NEW_CASES}
+         records=[];rounds=[]
+@@ -83,8 +83,8 @@
+             frames=artifact_frames(ctx,raw,ids,identity_hash);frames['round_selection.csv']=pd.DataFrame(rounds)
+             for name,frame in frames.items():write_frame(output_path(run/name),frame)
+             write_json(run/'new_model_manifest.json',records);write_json(run/'fit_provenance.json',[r['spec'] for r in records])
+-            print('All 100 fits complete; launching independent feature/model verification.',flush=True)
+-            cmd=[sys.executable,'-B',str(HERE/'verify_information.py'),'--split-seed','42','--unfrozen']
++            print('All 50 F2 fits complete; launching independent feature/model verification.',flush=True)
++            cmd=[sys.executable,'-B',str(CODE_ROOT/'verify_information_exact.py'),'--split-seed',str(SEED),'--unfrozen']
+             result=subprocess.run(cmd,cwd=HERE,text=True,capture_output=True)
+             (run/'logs/independent_verification_process.log').write_text(result.stdout+result.stderr)
+             if result.returncode:raise RuntimeError('Independent verification failed: '+result.stderr[-2500:])
+@@ -92,7 +92,7 @@
+             assert verification['status']=='PASS' and verification['identity_hash']==identity_hash
+             write_json(run/'verification.json',verification)
+             # Required old-file integrity is checked before the completion marker.
+-            snapshot=read_json(HERE/'reference/initial_workspace_snapshot.json')
++            snapshot=read_json(CODE_ROOT/'reference/initial_workspace_snapshot.json')
+             changed=[p for p,h in snapshot['sha256'].items() if not Path(p).is_file() or sha256_file(p)!=h]
+             integrity={'status':'PASS' if not changed else 'FAIL','checked_files':len(snapshot['sha256']),'changed_files':changed}
+             write_json(run/'historical_integrity.json',integrity)
+--- frozen/verify_information.py
++++ confirmation/verify_information.py
+@@ -11,7 +11,9 @@
+ from independent_numerics import exact,close,independent_controls,assert_stats
+ from run_artifacts import check_stage
+ 
+-PAIRS={'F1_minus_F0':('F0','F1'),'F2_minus_F0':('F0','F2'),'F2_minus_F1':('F1','F2')}
++from confirmation_runtime import RUN_ID,SEED
++
++PAIRS={'F2_minus_F0':('F0','F2')}
+ 
+ 
+ def csv(path):return pd.read_csv(path,dtype={'fipsCode':str,'slice_value':str},float_precision='round_trip')
+@@ -22,14 +24,14 @@
+ 
+ 
+ def verify(run,unfrozen=False):
+-    run=output_path(run);ctx=attach_features(load_reference(42));m=read_json(run/'run_manifest.json')
++    run=output_path(run);ctx=attach_features(load_reference(SEED));m=read_json(run/'run_manifest.json')
+     assert m['identity']==experiment_identity(ctx);identity=digest_object(m['identity']);assert identity==m['identity_hash']
+     if not unfrozen:check_stage(run,'INFO_CV_COMPLETE',identity)
+     elif (run/'INFO_CV_COMPLETE').exists():raise ValueError('Unfrozen verification forbidden on frozen run')
+     feature_report,rebuilt_features=verify_features(ctx,return_features=True)
+     p=ctx.p;valid=ctx.valid;codes=ctx.meta.fipsCode.to_numpy();folds=ctx.meta.fold.to_numpy();origins=ctx.meta.hour_idx.to_numpy()
+     y=ctx.data.component_targets[PT].to_numpy()
+-    records=read_json(run/'new_model_manifest.json');assert len(records)==20 and len({r['model_id'] for r in records})==20
++    records=read_json(run/'new_model_manifest.json');assert len(records)==10 and len({r['model_id'] for r in records})==10
+     assert read_json(run/'fit_provenance.json')==[r['spec'] for r in records]
+     raw={'F0':{k:ctx.f0_branch[f'pred_{k}_raw'].to_numpy(copy=True) for k in KINDS}}
+     ids={'F0':{k:ctx.f0_branch[f'source_{k}_model_id'].to_numpy(copy=True) for k in KINDS}}
+@@ -68,7 +70,7 @@
+             rounds.append((case,outer,kind,q,best,rec['fit']['requested_rounds'],rec['fit']['actual_trees']))
+         assert rec['fit']['formal_fit_count']==5
+         close(rec['fit']['refit_weight_mean'],spec['refit']['weight_mean'])
+-    assert len(rounds)==80
++    assert len(rounds)==40
+     table=csv(run/'round_selection.csv')
+     assert list(table[['candidate','outer_fold','kind','inner_fold','best_iteration','refit_rounds','actual_trees']].itertuples(index=False,name=None))==rounds
+     # Reject wrong candidate/schema/split identity without writing or fitting.
+@@ -80,7 +82,7 @@
+         else:raise AssertionError('Invalid receipt reuse accepted')
+     branch=pd.read_parquet(run/'branch_oof_predictions.parquet');audit=pd.read_parquet(run/'target_audit.parquet')
+     component=pd.read_parquet(run/'component_predictions.parquet');oof=pd.read_parquet(run/'control_predictions.parquet')
+-    assert len(branch)==3*34416 and not branch.duplicated(['case','fipsCode','timestamp_et']).any()
++    assert len(branch)==2*34416 and not branch.duplicated(['case','fipsCode','timestamp_et']).any()
+     for frame in (audit,component,oof):pd.testing.assert_frame_equal(frame[KEYS],ctx.meta)
+     for frame in (audit,component,oof,branch):
+         assert frame.candidate_identity_hash.eq(identity).all() and frame.reference_E2_identity_hash.eq(CONFIG['reference_identity_hash']).all()
+@@ -142,7 +144,7 @@
+                 if case=='F0' or mode=='C0_direct_osi' or (h!=H1 and mode in ('C1_component_osi','C2_equal_blend')) or (hour>=24 and mode=='v18_rule'):
+                     exact(oof[f'pred_{case}_{mode}_{h}'],ctx.controls[mode][h])
+     unique=pd.read_parquet(run/'aligned_unique_components.parquet')
+-    assert len(unique)==3*4*34177 and not unique.duplicated(['case','component','fipsCode','target_timestamp']).any()
++    assert len(unique)==2*4*34177 and not unique.duplicated(['case','component','fipsCode','target_timestamp']).any()
+     for (case,c),g in unique.groupby(['case','component'],sort=False):
+         buckets,means=mean_data[case];ci=COMPONENTS.index(c)
+         keys=[(f,int((ts-pd.Timestamp('2026-03-11'))/pd.Timedelta(hours=1))) for f,ts in zip(g.fipsCode,g.target_timestamp)]
+@@ -160,7 +162,7 @@
+         if row.mode=='raw':return truth,parts[b][hour]['P_t'],parts[a][hour]['P_t']
+         return truth,aligned[b][hour][:,0],aligned[a][hour][:,0]
+     tables={n:csv(run/f'metrics/{n}.csv') for n in ('pooled','slices','bootstrap','branch_diagnostics','branch_loss_decomposition','error_interactions')}
+-    assert len(tables['pooled'])==84 and len(tables['bootstrap'])==16
++    assert len(tables['pooled'])==28 and len(tables['bootstrap'])==8
+     bins=np.array(['p=0' if v==0 else '0<p<0.01' if v<.01 else '0.01<=p<0.1' if v<.1 else '0.1<=p<0.5' if v<.5 else '0.5<=p<=1' for v in p])
+     for name in ('pooled','slices','bootstrap'):
+         for row in tables[name].itertuples(index=False):
+@@ -185,7 +187,7 @@
+                 for _ in range(2000):
+                     bs,ass,n=grouped[rng.integers(0,len(grouped),len(grouped))].sum(axis=0);deltas.append(np.sqrt(ass/n)-np.sqrt(bs/n))
+                 close([row.ci_low,row.ci_high],np.quantile(deltas,[.025,.975]));close(row.bootstrap_fraction_delta_lt0,np.mean(np.array(deltas)<0));close(row.bootstrap_fraction_delta_eq0,np.mean(np.array(deltas)==0))
+-    assert len(tables['branch_diagnostics'])==36 and len(tables['branch_loss_decomposition'])==18
++    assert len(tables['branch_diagnostics'])==24 and len(tables['branch_loss_decomposition'])==12
+     for row in tables['branch_diagnostics'].itertuples(index=False):
+         take=valid if row.population=='all' else valid&(folds==int(row.population[4:]));mask=take&((p>0) if row.kind=='a' else (p<1))
+         target,w=labels(y[mask],p[mask],row.kind);pr=raw[row.case][row.kind][mask]
+@@ -210,8 +212,8 @@
+         domain,mode,h,pair=key;po=tables['pooled'];r=po.loc[(po.domain==domain)&(po['mode']==mode)&(po.horizon==h)&(po.comparison==pair)].iloc[0]
+         assert len(g)==239 and g.n.sum()==r.n;close(g.baseline_sse.sum(),r.baseline_sse);close(g.candidate_sse.sum(),r.candidate_sse)
+     if not unfrozen:check_stage(run,'INFO_CV_COMPLETE',identity)
+-    return {'status':'PASS','identity_hash':identity,'split_seed':42,'verified_at_utc':datetime.now(timezone.utc).isoformat(),
+-        'verifier_sha256':sha256_file(__file__),'new_outer_models':20,'inner_probes':80,'formal_fits':100,
++    return {'status':'PASS','identity_hash':identity,'split_seed':SEED,'verified_at_utc':datetime.now(timezone.utc).isoformat(),
++        'verifier_sha256':sha256_file(__file__),'new_outer_models':10,'inner_probes':40,'formal_fits':50,
+         'independently_rebuilt_features_used_for_model_predictions':True,'feature_verification':feature_report,
+         'scoped_labels_weights_rounds_and_receipts':'PASS','P_reconstruction_and_all_controls':'PASS',
+         'all_metrics_and_bootstrap_recomputed':'PASS','long_horizon_and_other_component_invariants':'PASS',
+@@ -219,9 +221,9 @@
+ 
+ 
+ def main():
+-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--split-seed',type=int,choices=(42,),default=42)
++    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--split-seed',type=int,choices=(20260917,20260918),required=True)
+     parser.add_argument('--unfrozen',action='store_true');args=parser.parse_args()
+-    run=HERE/'runs/v18_pinfo_v1_split42_model42';result=verify(run,args.unfrozen)
++    run=HERE/'runs'/RUN_ID;result=verify(run,args.unfrozen)
+     if args.unfrozen:write_json(run/'logs/independent_verification.json',result)
+     print(json.dumps(result,indent=2))
+ 
+--- frozen/verify_information_exact.py
++++ confirmation/verify_information_exact.py
+@@ -11,6 +11,7 @@
+ import numpy as np
+ import pandas as pd
+ from information_protocol import HERE,read_json,sha256_file,digest_object,write_json
++from confirmation_runtime import CODE_ROOT,RUN_ID,SEED
+ import independent_features as feature_verifier
+ from build_information_features import WHITELIST,NBRCOLS
+ 
+@@ -61,7 +62,7 @@
+     report=core.verify(run,unfrozen=unfrozen)
+     audit={'training_identity_hash':report['identity_hash'],
+         'adapter_sha256':sha256_file(__file__),
+-        'core_verifier_sha256':sha256_file(HERE/'verify_information.py'),
++        'core_verifier_sha256':sha256_file(CODE_ROOT/'verify_information.py'),
+         'original_feature_verifier_sha256':sha256_file(HERE/'independent_features.py'),
+         'reason':'Only independent summation order corrected; all reconstructed predictors now bitwise exact.',
+         'model_or_saved_prediction_changes':False,'tolerance_relaxed':False,'additional_fits':0}
+@@ -74,9 +75,9 @@
+ 
+ 
+ def main():
+-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--split-seed',type=int,choices=(42,),default=42)
++    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--split-seed',type=int,choices=(20260917,20260918),required=True)
+     p.add_argument('--unfrozen',action='store_true');args=p.parse_args()
+-    run=HERE/'runs/v18_pinfo_v1_split42_model42';report=verify(run,args.unfrozen)
++    run=HERE/'runs'/RUN_ID;report=verify(run,args.unfrozen)
+     if args.unfrozen:write_json(run/'logs/independent_verification.json',report)
+     print(json.dumps(report,indent=2))
+ 

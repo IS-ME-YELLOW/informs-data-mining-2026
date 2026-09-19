@@ -1,0 +1,60 @@
+{
+  "created_at_utc": "2026-09-17T10:18:52.492507+00:00",
+  "source_directory": "versions/xyy/v1.5.8",
+  "destination_directory": "versions/xyy/v1.5.8_strict_baseline",
+  "code_copy_policy": "Byte-identical tested implementation; same directory depth preserves project-relative input paths; copied component targets retain identical bytes.",
+  "files": [
+    {
+      "source": "versions/xyy/v1.5.8/config.py",
+      "snapshot": "config.py",
+      "sha256": "371c5c99aa6a363577b0c7d970eea0a3f820cf2b075ad15a3b12e2ea2696312b"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/protocol.py",
+      "snapshot": "protocol.py",
+      "sha256": "3c62ba06f097cda4367c535a72e915b23ab616c06a87df916693e864d9de5a16"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/scoped_training.py",
+      "snapshot": "scoped_training.py",
+      "sha256": "466944c287d14f1a19d3a1be52c509dc60026694326c62c1c0b169cd8c451e0e"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/evaluation.py",
+      "snapshot": "evaluation.py",
+      "sha256": "9c9d2026f4117ae20dba84eb8bb1442d3e455fcec5173f8c4a9c102a9a6108b8"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/run_artifacts.py",
+      "snapshot": "run_artifacts.py",
+      "sha256": "44082287033474e52aa081ea57d3fcd2344a6167bc00d2d8c44061f21c04ea1b"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/train_v18.py",
+      "snapshot": "train_v18.py",
+      "sha256": "d4826adccd5de8d4d82ff4be7fa3c561707f60a06852ba3583a7942ea9bfef1c"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/verify_artifacts.py",
+      "snapshot": "verify_artifacts.py",
+      "sha256": "a8e4d0b60a11b0bf7d2905a3e5dca35cd0c530bd4164caa78c8c8068333d80af"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/requirements.txt",
+      "snapshot": "requirements.txt",
+      "sha256": "61fa06c1300860b35dd9c742ffae3fda106c31f1b2ee16e38f73a0d228e2d0e2"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/component_targets_v1.8.parquet",
+      "snapshot": "component_targets_v1.8.parquet",
+      "sha256": "679ca67cb91a54c169dabb8cb420b5d4e9f076a24b34c35d519f6e7f4958e3b8"
+    },
+    {
+      "source": "versions/xyy/v1.5.8/component_target_validation.json",
+      "snapshot": "component_target_validation.json",
+      "sha256": "61f890258d0a2d5b25edad73d4223e247e8d826215c3af0dae2f3d9597fed03c"
+    }
+  ],
+  "first_run_id": "v18_tree_nested_v2_split42_model42",
+  "scope": "Original seed42 strict CV only; no final training, D projection, new features, GAT or alternate splits."
+}

@@ -1,0 +1,60 @@
+{
+  "protocol": "v18_ud01_k_positive_switch_v1",
+  "created_at_utc": "2026-09-18T06:16:28.326481+00:00",
+  "project_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "baseline_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline",
+  "experiment_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/k_positive_switch",
+  "splits": [
+    {
+      "split_seed": 42,
+      "u_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/runs/v18_ud01_nested_v1_split42_model42",
+      "u_identity_hash": "687c3a709be696f02dce64485e476c0beb0870367ea479980c7c6790854cc507",
+      "u_marker_sha256": "d5f276531a0cb2fc04a4bf5c88a8140606828cfa0817314b325c51c4f7ac4efc",
+      "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42",
+      "baseline_identity_hash": "144c278fa2029b96f2e844f15f9b5c90719ce290c80fbc9e779c7f2f7e3cfa5c"
+    },
+    {
+      "split_seed": 20260917,
+      "u_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260917/runs/v18_ud01_nested_v1_split20260917_model42",
+      "u_identity_hash": "d2e249194035fec424ed110fe747d785f8d30061f150b77a916c34398ae32f73",
+      "u_marker_sha256": "e8823f2f51d569df51632c855fa28927a956e04545d93ccbafcfb62e75d3024e",
+      "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260917_model42",
+      "baseline_identity_hash": "5183d8644fd36b8e48db0da824cab6582ceb8637d7e85ace5be6cd52e301e9bc"
+    },
+    {
+      "split_seed": 20260918,
+      "u_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260918/runs/v18_ud01_nested_v1_split20260918_model42",
+      "u_identity_hash": "7b65fe5143afd8ae26498509d95c8a46bef86702492924213540a5330924b8b6",
+      "u_marker_sha256": "ed701f1c9447d100c3e40bf394ddd6c7d36c33868ff3c0afcc79a98724ec691a",
+      "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260918_model42",
+      "baseline_identity_hash": "cf16ff6d5e03de01870e79f63b3a2f9a2e2bbc02e8ff2da34e00a219efe9a7fd"
+    }
+  ],
+  "candidate": "G",
+  "comparators": {
+    "A": "strict original tree baseline",
+    "B": "A plus known D lower-bound projection",
+    "C": "U reconstruction at every scoreable 1h row"
+  },
+  "gate": "strict K > 0, no tolerance or learned threshold",
+  "reconstruction": "min(1,K+max(0,pred_U_raw)) when K>0; original clipped A_D1 otherwise",
+  "apply_before": "component composition and C3 target-hour alignment",
+  "primary": "G_minus_B fixed v18_rule 1h pooled RMSE, all counties and all scoreable rows",
+  "other_comparisons": [
+    "G_minus_A",
+    "G_minus_C"
+  ],
+  "model_route": {
+    "1h": "C3",
+    "6h": "C3",
+    "24h": "C1",
+    "48h": "C1"
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20260910,
+    "unit": "whole county trajectory"
+  },
+  "training_performed": false,
+  "design_note": "Gate fixed from preceding OOF diagnoses; all three splits already inspected, so this is a new development replay, not untouched external confirmation. No county exclusions in primary scores."
+}

@@ -1,0 +1,33 @@
+{
+  "created_at_utc": "2026-09-18T05:06:22.847518+00:00",
+  "scope": "Exactly the two previously frozen confirmation splits; no parameter, feature, formula, route or metric changes",
+  "splits": [
+    {
+      "split_seed": 20260917,
+      "directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260917",
+      "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260917_model42",
+      "baseline_identity_hash": "5183d8644fd36b8e48db0da824cab6582ceb8637d7e85ace5be6cd52e301e9bc",
+      "projection_reference": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_confirmation/split20260917/projection",
+      "run_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260917/runs/v18_ud01_nested_v1_split20260917_model42",
+      "expected_formal_fits": 25,
+      "expected_new_models": 5
+    },
+    {
+      "split_seed": 20260918,
+      "directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260918",
+      "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260918_model42",
+      "baseline_identity_hash": "cf16ff6d5e03de01870e79f63b3a2f9a2e2bbc02e8ff2da34e00a219efe9a7fd",
+      "projection_reference": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_confirmation/split20260918/projection",
+      "run_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260918/runs/v18_ud01_nested_v1_split20260918_model42",
+      "expected_formal_fits": 25,
+      "expected_new_models": 5
+    }
+  ],
+  "seed42_reference": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/runs/v18_ud01_nested_v1_split42_model42",
+  "seed42_source_completion_sha256": "f2f480cd6ad0d3b6a09fa5ee192618c68c022ebd82a55afb8667cd3cdfc577a8",
+  "primary": "C_minus_B fixed v18_rule 1h pooled RMSE; inspect 6h and early/later 1h windows",
+  "expected_total_new_fits": 50,
+  "expected_total_new_models": 10,
+  "execution": "Two independent processes, one deterministic LightGBM thread each",
+  "no_final_training_or_submission": true
+}

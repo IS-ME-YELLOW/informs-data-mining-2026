@@ -1,0 +1,7 @@
+{
+  "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/weighted_scoped_training.py",
+  "source_sha256": "32936b89de4cda4426b9433e781d284e39833f9fd263e8f1860e0ac6c1a9ae56",
+  "adapted_sha256": "06b416c5b051022f54cf866a9daab8ec79830e927bd709091829ace5d0546286",
+  "changes": "import, candidate/feature identity, case-qualified model/probe paths, candidate audit column only",
+  "fitting_math_changed": false
+}

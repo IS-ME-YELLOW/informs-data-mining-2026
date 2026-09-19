@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-09-17T15:30:17.189280+00:00",
+  "splits": [
+    {
+      "split_seed": 20260917,
+      "training_status": "completed",
+      "elapsed_minutes": 50.2,
+      "committed_outer_models": 100,
+      "committed_fits": 500,
+      "total_outer_models": 100,
+      "total_fits": 500,
+      "models_by_fold": {
+        "0": 20,
+        "1": 20,
+        "2": 20,
+        "3": 20,
+        "4": 20
+      },
+      "cv_complete": true,
+      "split_complete": true
+    },
+    {
+      "split_seed": 20260918,
+      "training_status": "completed",
+      "elapsed_minutes": 50.2,
+      "committed_outer_models": 100,
+      "committed_fits": 500,
+      "total_outer_models": 100,
+      "total_fits": 500,
+      "models_by_fold": {
+        "0": 20,
+        "1": 20,
+        "2": 20,
+        "3": 20,
+        "4": 20
+      },
+      "cv_complete": true,
+      "split_complete": true
+    }
+  ]
+}

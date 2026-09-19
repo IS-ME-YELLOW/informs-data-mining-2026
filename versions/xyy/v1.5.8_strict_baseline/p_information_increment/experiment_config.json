@@ -1,0 +1,77 @@
+{
+  "protocol": "v18_pinfo_v1",
+  "authorized_split_seeds": [
+    42
+  ],
+  "project_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "baseline_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline",
+  "p_reference_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure",
+  "experiment_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment",
+  "reference_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/runs/v18_pstate_nested_v1_split42_model42",
+  "reference_identity_hash": "405777f954c6be300ae69e81a19dae41b0a5f4b876792023f6086bb2509474df",
+  "source_case": "E2",
+  "cases": {
+    "F0": "frozen E2 including D_G",
+    "F1": "E2 branches retrained with 7 DEM features",
+    "F2": "E2 branches retrained with 20 fixed neighbor summaries"
+  },
+  "feature_counts": {
+    "F0": 163,
+    "F1": 170,
+    "F2": 183
+  },
+  "neighbors": {
+    "k": 8,
+    "radius_km": 6371.0088,
+    "directed": true,
+    "self_edges": false,
+    "weights": "uniform 1/8",
+    "universe_count": 302,
+    "tie_break": "distance then normalized FIPS",
+    "known_history_end": 71,
+    "weather_window": "[t,min(t+6,215)]"
+  },
+  "settings": {
+    "model_seed": 42,
+    "max_rounds": 2000,
+    "early_stopping_rounds": 100,
+    "diagnostic": false,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260910
+  },
+  "reconstruction": "p*clip(a,0,1)+(1-p)*clip(b,0,1); inactive branch applied=0 and raw=NaN",
+  "geo_sources": {
+    "county_terrain.csv": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/county_terrain.csv",
+      "sha256": "3aa69b31384cdbaad46756d999981dd32049a85903b82ced32a2cf193fe92c44",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/county_terrain.csv"
+    },
+    "c_16ap26.dbf": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/c_16ap26.dbf",
+      "sha256": "dd5b045e67bb19b6f6da7f8f79fe30df8e818eb3b2ea9a53732043e5673ef56f",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/c_16ap26.dbf"
+    },
+    "c_16ap26.prj": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/c_16ap26.prj",
+      "sha256": "f92a8f3964b01f8797721b2ad0cb5c28c5ea47c20ac4ed5d19a1c8006bc8443a",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/c_16ap26.prj"
+    },
+    "dem_manifest.json": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/dem_3dep_1arcsec/manifest.json",
+      "sha256": "7390a83a9c86ad4b6f266d6e2395166ae1ff487d12d13b40ee1ec55fcb23268b",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/dem_manifest.json"
+    },
+    "build_terrain_source.py": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/build_terrain.py",
+      "sha256": "63c9d6962f1e62ab3ef74d99b10e95da1c1dfc579167bfb58d12e30ccb7ae928",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/build_terrain_source.py"
+    },
+    "spatial_source.py": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/spatial.py",
+      "sha256": "77f44286321da3b45f06a9492618abf921f6093f853eb4a87efd67480a0447f1",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/spatial_source.py"
+    }
+  },
+  "plan_sha256": "5a82a88c08ab4c82c2ad82ddf5c31babe1e8fc0890dd9a7d99a1f99551fda63c",
+  "scope": "seed42, both F1/F2, no tuning or final/test training"
+}

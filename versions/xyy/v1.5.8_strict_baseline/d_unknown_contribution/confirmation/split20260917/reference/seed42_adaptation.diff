@@ -1,0 +1,151 @@
+--- seed42/unknown_d_protocol.py
++++ split20260917/unknown_d_protocol.py
+@@ -1,4 +1,4 @@
+-"""Seed42-only U target, explicit source identities, and prediction reconstruction."""
++"""Frozen confirmation-split U target, source identities, and reconstruction."""
+ from pathlib import Path
+ from types import SimpleNamespace
+ import hashlib
+@@ -13,7 +13,7 @@
+ CONFIG = json.loads((HERE/"experiment_config.json").read_text())
+ ROOT = Path(CONFIG["project_root"]).resolve()
+ BASE = Path(CONFIG["baseline_root"]).resolve()
+-assert HERE == Path(CONFIG["experiment_root"]).resolve() == BASE/"d_unknown_contribution"
++assert HERE == Path(CONFIG["experiment_root"]).resolve() == BASE/"d_unknown_contribution"/"confirmation"/f"split{CONFIG['split_seed']}"
+ assert BASE.is_relative_to(ROOT) and (ROOT/"data/DM_Train.csv").is_file()
+ sys.path.insert(0, str(BASE))
+ from config import HORIZONS, HORIZON_HOURS, COMPONENTS, make_lgbm_params
+@@ -75,11 +75,12 @@
+     return paths
+ 
+ 
+-def load_context(split_seed=42):
+-    if split_seed != 42 or CONFIG["authorized_split_seeds"] != [42]:
+-        raise ValueError("This execution stage authorizes seed42 only")
++def load_context(split_seed=None):
++    split_seed = CONFIG["split_seed"] if split_seed is None else split_seed
++    if split_seed != CONFIG["split_seed"] or CONFIG["authorized_split_seeds"] != [split_seed] or split_seed not in (20260917,20260918):
++        raise ValueError("Split does not match this frozen confirmation directory")
+     sources = source_files()
+-    data = load_data(ROOT/"versions/xyy/v1.5.6", ROOT/"cv/cv_assignments_balanced_v1_seed42.csv")
++    data = load_data(ROOT/"versions/xyy/v1.5.6", ROOT/f"cv/cv_assignments_balanced_v1_seed{split_seed}.csv")
+     baseline_identity = data_identity(data, CONFIG["settings"])
+     if digest_object(baseline_identity) != CONFIG["baseline_identity_hash"]:
+         raise ValueError("Feature/data/code/settings/environment differ from baseline")
+@@ -165,7 +166,7 @@
+ 
+ 
+ def experiment_identity(ctx):
+-    return {"protocol":CONFIG["protocol"],"split_seed":42,"config_sha256":sha256_file(HERE/"experiment_config.json"),
++    return {"protocol":CONFIG["protocol"],"split_seed":CONFIG["split_seed"],"config_sha256":sha256_file(HERE/"experiment_config.json"),
+             "settings":CONFIG["settings"],"environment":environment(),"baseline_identity_hash":CONFIG["baseline_identity_hash"],
+             "source_sha256":ctx.sources,"code_sha256":{name:sha256_file(HERE/name) for name in CODE_FILES},
+             "target":UT,"definition":CONFIG["definition"],"reconstruction":CONFIG["reconstruction"],
+@@ -227,7 +228,7 @@
+     raw_test = pd.read_csv(ROOT/"data/DM_Test.csv",usecols=["fipsCode","timestamp_et","P_t"],dtype={"fipsCode":str})
+     test_k = known_bounds(ctx.data.meta_test,observed_history(raw_test))
+     for h,value in brute_bounds(raw_test,ctx.data.meta_test).items():close(value,test_k[f"osi_target_t{h:02d}h"])
+-    return {"status":"PASS","split_seed":42,"training_performed":False,"train_counties":239,"test_counties":63,
++    return {"status":"PASS","split_seed":CONFIG["split_seed"],"training_performed":False,"train_counties":239,"test_counties":63,
+             "features":163,"scoreable_rows":{h:int(expected_mask(ctx.meta,h).sum()) for h in HORIZONS},
+             "positive_K_rows":int((ctx.bounds[H1]>0).sum()),"negative_U_rows":int((unknown<0).sum()),
+             "minimum_U":float(unknown.min()),"checks":["source and baseline identities","exact A/B replay",
+--- seed42/train_unknown_d.py
++++ split20260917/train_unknown_d.py
+@@ -1,4 +1,4 @@
+-"""Strict U1h training; this approved execution stage allows only split42."""
++"""Strict U1h training for the split fixed by this confirmation directory."""
+ from datetime import datetime, timezone
+ from pathlib import Path
+ import argparse
+@@ -15,7 +15,7 @@
+ from run_artifacts import run_lock,atomic_write,freeze_stage
+ from unknown_d_evaluation import artifact_frames
+ 
+-RUN_ID = "v18_ud01_nested_v1_split42_model42"
++RUN_ID = f"v18_ud01_nested_v1_split{CONFIG['split_seed']}_model42"
+ 
+ 
+ def require_same_manifest(saved,expected):
+@@ -26,7 +26,7 @@
+ def main(argv=None):
+     parser=argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--stage",choices=("preflight","cv"),default="preflight")
+-    parser.add_argument("--split-seed",type=int,choices=(42,),default=42)
++    parser.add_argument("--split-seed",type=int,choices=(CONFIG["split_seed"],),default=CONFIG["split_seed"])
+     parser.add_argument("--resume",action="store_true")
+     args=parser.parse_args(argv)
+     if args.stage=="preflight" and args.resume:parser.error("preflight cannot resume")
+@@ -46,10 +46,10 @@
+         else:raise AssertionError("Output escaped experiment")
+         result.update(identity_hash=identity_hash,code_and_config_identity=identity["code_sha256"],
+                       resume_identity_rejection="PASS",output_path_rejection="PASS")
+-        write_json(output_path(HERE/"preflight/seed42.json"),result)
++        write_json(output_path(HERE/f"preflight/seed{CONFIG['split_seed']}.json"),result)
+         write_json(output_path(HERE/"reference/source_manifest.json"),make_source_manifest(ctx))
+         print(json.dumps(result,indent=2));return
+-    preflight=json_read(HERE/"preflight/seed42.json")
++    preflight=json_read(HERE/f"preflight/seed{CONFIG['split_seed']}.json")
+     if preflight["status"]!="PASS" or preflight["identity_hash"]!=identity_hash:
+         raise ValueError("Matching preflight required before training")
+     if run.exists():
+--- seed42/verify_unknown_d.py
++++ split20260917/verify_unknown_d.py
+@@ -21,7 +21,7 @@
+ 
+ def verify_run(run,require_marker=True):
+     run=output_path(run)
+-    ctx=load_context(42)
++    ctx=load_context(CONFIG["split_seed"])
+     manifest=json_read(run/"run_manifest.json")
+     assert manifest["identity"]==experiment_identity(ctx)
+     assert manifest["identity_hash"]==digest_object(manifest["identity"])
+@@ -182,7 +182,7 @@
+     required={str(f.relative_to(run)) for f in run.rglob('*') if f.is_file() and
+               f.suffix in (".parquet",".csv",".txt",".json") and f.name not in ("execution.json",) and "logs" not in f.relative_to(run).parts}
+     if marker is not None:assert set(marker["files"])==required
+-    return {"status":"PASS","protocol":CONFIG["protocol"],"identity_hash":identity,"split_seed":42,
++    return {"status":"PASS","protocol":CONFIG["protocol"],"identity_hash":identity,"split_seed":CONFIG["split_seed"],
+         "new_models_reloaded":5,"inner_probes_audited":20,"referenced_baseline_models":95,
+         "target_semantics":UT,"absolute_tolerance":1e-12,"verifier_sha256":sha256_file(__file__),
+         "verified_at_utc":datetime.now(timezone.utc).isoformat(),"source_integrity":"PASS",
+@@ -193,7 +193,8 @@
+ 
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--run-id",default="v18_ud01_nested_v1_split42_model42",choices=("v18_ud01_nested_v1_split42_model42",))
++    run_id=f"v18_ud01_nested_v1_split{CONFIG['split_seed']}_model42"
++    parser.add_argument("--run-id",default=run_id,choices=(run_id,))
+     args=parser.parse_args()
+     print(json.dumps(verify_run(HERE/"runs"/args.run_id),indent=2))
+ 
+--- seed42/analyze_unknown_d.py
++++ split20260917/analyze_unknown_d.py
+@@ -1,4 +1,4 @@
+-"""Seed42 result summaries from verified frozen A/B/C OOF artifacts."""
++"""Confirmation-split summaries from verified frozen A/B/C OOF artifacts."""
+ from pathlib import Path
+ from datetime import datetime,timezone
+ import hashlib
+@@ -7,7 +7,8 @@
+ import pandas as pd
+ 
+ HERE=Path(__file__).resolve().parent
+-RUN=HERE/"runs/v18_ud01_nested_v1_split42_model42"
++CONFIG=json.loads((HERE/"experiment_config.json").read_text())
++RUN=HERE/f"runs/v18_ud01_nested_v1_split{CONFIG['split_seed']}_model42"
+ HORIZONS=[f"osi_target_t{h:02d}h" for h in (1,6,24,48)]
+ 
+ 
+@@ -69,9 +70,9 @@
+         early[f'{case}_osi']=oof.loc[selected,f'pred_{case}_v18_rule_osi_target_t01h'].to_numpy()
+     early['actual_osi']=oof.loc[selected,'actual_osi_target_t01h'].to_numpy()
+     frames['focus_first_four_hours.csv']=early
+-    output=HERE/'summary/seed42';output.mkdir(parents=True,exist_ok=True)
++    output=HERE/f'summary/split{CONFIG["split_seed"]}';output.mkdir(parents=True,exist_ok=True)
+     for name,frame in frames.items():frame.to_csv(output/name,index=False)
+-    saved={'status':'PASS','created_at_utc':datetime.now(timezone.utc).isoformat(),'scope':'seed42 only; no confirmation splits trained',
++    saved={'status':'PASS','created_at_utc':datetime.now(timezone.utc).isoformat(),'scope':f'confirmation split {CONFIG["split_seed"]}', 'split_seed':CONFIG['split_seed'],
+            'source_sha256':sha(__file__),'run_identity_hash':marker['identity_hash'],
+            'input_sha256':{str(RUN/name):sha(RUN/name) for name in marker['files']},
+            'independent_verification_sha256':sha(RUN/'logs/independent_verification.json'),

@@ -1,0 +1,42 @@
+--- seed42/verify_experiment.py
++++ confirmation/verify_projection.py
+@@ -115,18 +115,25 @@
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--output-dir", type=Path, default=HERE/"results_seed42")
++    parser.add_argument("--split-seed", type=int, required=True, choices=(20260917, 20260918))
+     args = parser.parse_args()
+-    out = args.output_dir.resolve()
++    confirmation = json.loads((HERE/"confirmation_plan.json").read_text())
++    split = next(row for row in confirmation["splits"] if row["split_seed"] == args.split_seed)
++    out = Path(split["projection_dir"]).resolve()
+     assert out.is_relative_to(HERE) and out != HERE
+     manifest = json.loads((out/"manifest.json").read_text())
++    assert manifest["split_seed"] == args.split_seed
++    assert sha(HERE/"project_d.py") == confirmation["fixed_projection_source_sha256"]
++    baseline_manifest = json.loads((Path(split["baseline_dir"])/"run_manifest.json").read_text())
++    assert baseline_manifest["identity"]["inputs"]["cv"] == split["cv_sha256"]
++    assert baseline_manifest["identity"]["settings"] == confirmation["settings"]
+     for name, digest in manifest["input_sha256"].items():
+         assert sha(manifest["input_paths"][name]) == digest, name
+     for name, digest in manifest["output_sha256"].items():
+         assert sha(out/name) == digest, name
+     identity = {k: manifest[k] for k in ("experiment", "baseline_identity_hash", "input_sha256")}
+     assert hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest() == manifest["candidate_identity_hash"]
+-    protected = json.loads((HERE/"baseline_snapshot.json").read_text())
++    protected = json.loads((HERE/"numerical_reference_snapshot.json").read_text())
+     for name, digest in protected.items():
+         assert sha(BASE/name) == digest, name
+     run = Path(manifest["baseline_run"])
+@@ -181,8 +188,8 @@
+         assert (np.abs(new[mask]-actual[mask]) <= np.abs(old[mask]-actual[mask])+1e-6).all()
+         d_changed += int(changed.sum())
+         projected_counties.update(meta.loc[changed, "fipsCode"])
+-    assert d_changed == manifest["exact_D_projection_rows"] == 92
+-    assert len(projected_counties) == manifest["projected_counties"] == 52
++    assert d_changed == manifest["exact_D_projection_rows"]
++    assert len(projected_counties) == manifest["projected_counties"]
+     controls, buckets, means = independent_controls(meta, raw_direct, parts)
+     unique = pd.read_parquet(out/"candidate_aligned_unique_components.parquet")
+     assert len(unique) == len(means)*4 and not unique.duplicated(["component", "fipsCode", "target_timestamp"]).any()

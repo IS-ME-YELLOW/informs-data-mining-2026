@@ -1,0 +1,98 @@
+{
+  "protocol": "v18_pinfo_v1",
+  "authorized_split_seeds": [
+    20260917,
+    20260918
+  ],
+  "project_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "baseline_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline",
+  "p_reference_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure",
+  "experiment_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment",
+  "source_case": "E2",
+  "cases": {
+    "F0": "frozen E2 including D_G",
+    "F2": "E2 branches retrained with 20 fixed neighbor summaries"
+  },
+  "feature_counts": {
+    "F0": 163,
+    "F1": 170,
+    "F2": 183
+  },
+  "neighbors": {
+    "k": 8,
+    "radius_km": 6371.0088,
+    "directed": true,
+    "self_edges": false,
+    "weights": "uniform 1/8",
+    "universe_count": 302,
+    "tie_break": "distance then normalized FIPS",
+    "known_history_end": 71,
+    "weather_window": "[t,min(t+6,215)]"
+  },
+  "settings": {
+    "model_seed": 42,
+    "max_rounds": 2000,
+    "early_stopping_rounds": 100,
+    "diagnostic": false,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260910
+  },
+  "reconstruction": "p*clip(a,0,1)+(1-p)*clip(b,0,1); inactive branch applied=0 and raw=NaN",
+  "geo_sources": {
+    "county_terrain.csv": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/county_terrain.csv",
+      "sha256": "3aa69b31384cdbaad46756d999981dd32049a85903b82ced32a2cf193fe92c44",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/county_terrain.csv"
+    },
+    "c_16ap26.dbf": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/c_16ap26.dbf",
+      "sha256": "dd5b045e67bb19b6f6da7f8f79fe30df8e818eb3b2ea9a53732043e5673ef56f",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/c_16ap26.dbf"
+    },
+    "c_16ap26.prj": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/c_16ap26.prj",
+      "sha256": "f92a8f3964b01f8797721b2ad0cb5c28c5ea47c20ac4ed5d19a1c8006bc8443a",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/c_16ap26.prj"
+    },
+    "dem_manifest.json": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/data/geo/dem_3dep_1arcsec/manifest.json",
+      "sha256": "7390a83a9c86ad4b6f266d6e2395166ae1ff487d12d13b40ee1ec55fcb23268b",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/dem_manifest.json"
+    },
+    "build_terrain_source.py": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/build_terrain.py",
+      "sha256": "63c9d6962f1e62ab3ef74d99b10e95da1c1dfc579167bfb58d12e30ccb7ae928",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/build_terrain_source.py"
+    },
+    "spatial_source.py": {
+      "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/spatial.py",
+      "sha256": "77f44286321da3b45f06a9492618abf921f6093f853eb4a87efd67480a0447f1",
+      "snapshot": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/reference/inputs/spatial_source.py"
+    }
+  },
+  "plan_sha256": "5a82a88c08ab4c82c2ad82ddf5c31babe1e8fc0890dd9a7d99a1f99551fda63c",
+  "scope": "F2 only on both frozen confirmation splits; no F1, combination, tuning, final models or test submission",
+  "confirmation_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/confirmation",
+  "trained_cases": [
+    "F2"
+  ],
+  "source_seed42_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/runs/v18_pinfo_v1_split42_model42",
+  "source_seed42_identity_hash": "e39b76d75f191891abda1939dc47933815cc4fa15796227b0c200eb1b96bfcac",
+  "source_seed42_marker_sha256": "ed2a62fa4cf4c07997f42fddd75efbf74bce7391cc6f671e32e06b0c402c3c91",
+  "feature_manifest_sha256": "1d3cbba20592e5b49004255ba7248ffd742274f10c91d70492140fc92a3aeef7",
+  "feature_package_identity": "454a424862b206f8ce3b8a336811ba41a2d6b813759a23502d0fb8a3b16232de",
+  "splits": [
+    {
+      "split_seed": 20260917,
+      "reference_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/runs/v18_pstate_nested_v1_split20260917_model42",
+      "reference_identity_hash": "80d6bbf992d01cb3e453037cf72a638d78ee3d1ee8ba593a8cbb32125b6a6632",
+      "baseline_identity_hash": "5183d8644fd36b8e48db0da824cab6582ceb8637d7e85ace5be6cd52e301e9bc"
+    },
+    {
+      "split_seed": 20260918,
+      "reference_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/runs/v18_pstate_nested_v1_split20260918_model42",
+      "reference_identity_hash": "7dd79f8909a8763d55294468bd27939b6d9c4b28596a34238d21701eb0c89e16",
+      "baseline_identity_hash": "cf16ff6d5e03de01870e79f63b3a2f9a2e2bbc02e8ff2da34e00a219efe9a7fd"
+    }
+  ]
+}

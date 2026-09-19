@@ -1,0 +1,9 @@
+comparison,horizon,improved_counties,worsened_counties,unchanged_counties,improved_rows,worsened_rows,unchanged_rows,sse_reduction,morrow_sse_reduction,morrow_fraction_of_net_sse_reduction
+C_minus_B,osi_target_t01h,136,103,0,8538,8506,17133,0.098859565948351,0.06707068924225623,0.6784440999599086
+C_minus_A,osi_target_t01h,136,103,0,8554,8511,17112,0.12177477574960975,0.08989650911141267,0.7382194593095012
+C_minus_B,osi_target_t06h,130,109,0,8070,8169,16743,0.0010951674254696692,-0.006963645792538289,-6.358521656679012
+C_minus_A,osi_target_t06h,130,109,0,8070,8169,16743,0.0010951674254696692,-0.006963645792538289,-6.358521656679012
+C_minus_B,osi_target_t24h,0,0,239,0,0,28680,0.0,0.0,
+C_minus_A,osi_target_t24h,0,0,239,0,0,28680,0.0,0.0,
+C_minus_B,osi_target_t48h,0,0,239,0,0,22944,0.0,0.0,
+C_minus_A,osi_target_t48h,0,0,239,0,0,22944,0.0,0.0,

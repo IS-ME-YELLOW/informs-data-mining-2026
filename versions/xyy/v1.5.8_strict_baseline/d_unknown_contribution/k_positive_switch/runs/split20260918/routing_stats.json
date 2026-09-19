@@ -1,0 +1,8 @@
+{
+  "eligible_rows": 784,
+  "eligible_counties": 207,
+  "D_changed_vs_B": 761,
+  "OSI_changed_vs_B": 618,
+  "OSI_changed_counties": 171,
+  "training_performed": false
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "protocol": "v18_ud01_nested_v1",
+  "identity_hash": "687c3a709be696f02dce64485e476c0beb0870367ea479980c7c6790854cc507",
+  "split_seed": 42,
+  "new_models_reloaded": 5,
+  "inner_probes_audited": 20,
+  "referenced_baseline_models": 95,
+  "target_semantics": "U_D_t_target_t01h",
+  "absolute_tolerance": 1e-12,
+  "verifier_sha256": "6eb973dc76944fbbbf4e626c82a8d0e29815908a2b29fa1258b919b7f914ab7b",
+  "verified_at_utc": "2026-09-18T04:29:27.264472+00:00",
+  "source_integrity": "PASS",
+  "all_A_B_C_controls_independently_reconstructed": true,
+  "all_metrics_and_bootstrap_recomputed": true,
+  "future_history_and_outer_label_isolation": "PASS",
+  "unchanged_components_and_horizons": "PASS",
+  "training_performed_by_verifier": false
+}

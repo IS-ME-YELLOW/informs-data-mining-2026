@@ -1,0 +1,27 @@
+{
+  "status": "COMPLETE",
+  "trained_cases": [
+    "F2"
+  ],
+  "new_split_seeds": [
+    20260917,
+    20260918
+  ],
+  "summary_split_seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "new_formal_fits": 100,
+  "new_outer_models": 20,
+  "F2_three_split_fits": 150,
+  "F2_three_split_outer_models": 30,
+  "independent_verification": "PASS",
+  "historical_integrity": "PASS",
+  "recommendation": "F2 在三套固定分折的主 1h/6h 均优于各自完整 E2，支持将“E2＋固定近邻摘要”作为当前优先输入方案保留。后续实验可用它作对照，但本轮没有自动替换旧主方案或训练最终提交模型。",
+  "F1_confirmation_performed": false,
+  "combined_model_trained": false,
+  "final_training": false,
+  "test_submission": false,
+  "finished_at_utc": "2026-09-19T02:31:26.653339+00:00"
+}

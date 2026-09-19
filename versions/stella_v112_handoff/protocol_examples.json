@@ -1,0 +1,61 @@
+{
+  "purpose": "Independent hand-checkable arithmetic examples, not model acceptance or training code",
+  "numeric_comparison": {"atol": 1e-12, "rtol": 0},
+  "post_process": {
+    "input": [-0.1, 0, 0.0009, 0.001, 0.7],
+    "expected": [0, 0, 0, 0.001, 0.65]
+  },
+  "component_then_post": {
+    "raw_PNDR": [-0.1, 1.1, 0.2, 0.3],
+    "clipped_PNDR": [0, 1, 0.2, 0.3],
+    "expected_osi": 0.37
+  },
+  "positive_quantile": {
+    "inner_anchor": [0, 0.001, 0.01, 0.02, 0.03, 0.04],
+    "quantile": 0.95,
+    "method": "linear",
+    "positive_count": 5,
+    "expected_theta": 0.038
+  },
+  "gate_equality": {
+    "theta": 0.03,
+    "outer_anchor": [0.029, 0.03, 0.031],
+    "simple_processed": [0.01, 0.02, 0.025],
+    "expected_anchor_used": [false, false, true],
+    "expected": [0.01, 0.02, 0.031]
+  },
+  "post_after_average": {
+    "processed_sources": [0, 0, 0, 0, 0.001, 0.003],
+    "expected": 0
+  },
+  "no_positive_inner": {
+    "inner_anchor": [0, 0, 0],
+    "expected_behavior": "raise an error, do not substitute zero or infinity"
+  },
+  "invalid_inner": {
+    "inner_anchor_on_scoreable_rows": [0.01, null],
+    "expected_behavior": "reject missing prediction before quantile; null represents missing value"
+  },
+  "floor_rounds": {
+    "best_round_counts": [1, 2, 2, 2],
+    "expected_refit_rounds": 1,
+    "xgb_or_cat_best_index": 0,
+    "expected_converted_round_count": 1
+  },
+  "valid_mask": {
+    "origins": [71, 72, 167, 168, 191, 192, 215],
+    "h24_expected": [false, true, true, true, true, false, false],
+    "h48_expected": [false, true, true, false, false, false, false]
+  },
+  "scope_example": {
+    "outer_q": 2,
+    "inner_prediction_r": 0,
+    "allowed_T": [1, 3, 4],
+    "probe_pairs": [
+      {"train_folds": [3, 4], "early_stop_folds": [1]},
+      {"train_folds": [1, 4], "early_stop_folds": [3]},
+      {"train_folds": [1, 3], "early_stop_folds": [4]}
+    ],
+    "refit_folds": [1, 3, 4]
+  }
+}

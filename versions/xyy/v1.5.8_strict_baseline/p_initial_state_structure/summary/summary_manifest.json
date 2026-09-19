@@ -1,0 +1,22 @@
+{
+  "identity_hash": "405777f954c6be300ae69e81a19dae41b0a5f4b876792023f6086bb2509474df",
+  "input_marker_sha256": "7a2cc6bb8c34bba750d56249411befc0a5a9b440ea36f2d7d63dc90cccf1153c",
+  "outputs": {
+    "primary_comparisons.csv": "b053017f4a962736ebce970eb50d10fccb9328dc78ba6ecee9a766f543d1f030",
+    "primary_scores.csv": "c440af5f6095bcea07165d7c4e9e81fa141b2d1a90a005f72f21903bad567f6d",
+    "P_component_comparisons.csv": "ff36116261f78e121de4c62e7c4833261fda7b11cfddf7de90faa0da6afa51af",
+    "primary_bootstrap.csv": "dde8d397824155141f50ab4113e8c2bea6b2a2c099eec268c3e39a87291e41f2",
+    "county_effects.csv": "0a912c908148c9355cba2a3d9f096021497f9985d154e67ca5cabe8d7273df2b",
+    "focus_counties.csv": "19ffc79df935498d90e49dc8ca19bc92163d2d3f805faec175953bd7a274880c",
+    "window_effects.csv": "74a3da63154e91c6e9556ce8e6c6a2f01aba3c90cc7cd911b9ff654db38e7255",
+    "initial_state_groups.csv": "8ee598f3cdc770a20e74eec9a0ba44da0d519e7cb94b36659a0c9ec14a8b0251",
+    "target_hour_curve_data.csv": "cfed883d965a3018211f6988a66c39d019442e4ad3b532015ee656a0721a4001",
+    "fold_effects.csv": "fec1cd529dbe0194ced62c6a9b78166a7c00004a01cea1220e82a5bb40e6241f",
+    "exclude_Morrow.csv": "6d54d5346c8147f79fb95aa8dcd07fd6ce85d874a5adcb958096dfdda139970d",
+    "improvement_counts.csv": "e8c744fca57bade6997f3c2a0fdbdb93ce647a3cd7055f50a23dd84d2882e9f8",
+    "model_rounds.csv": "9a1138bde62c5f04ce3a78fd12b6ee52a7ee784012d9672dece1807a824e97a4",
+    "focus_trajectories.csv": "ffd1f08eab2f39c07039e99af215e299a29f2b840af31475e5516f2096f7f7a1"
+  },
+  "report_sha256": "20f7e7de2a611df39792f6133800d605af7b83ffee4984fe15763355ee71e5fa",
+  "summary_script_sha256": "9c0648ffe4cbb3792d59ec698afaf7ac6909f7c560959968ec88562c9ceda5ea"
+}

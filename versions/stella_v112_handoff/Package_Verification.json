@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "check": "handoff_source_bytes_and_saved_identities_only",
+  "groups": [
+    "confirmation",
+    "inputs",
+    "reference_seed42",
+    "reuse_seed42",
+    "sources"
+  ],
+  "selected_files": 739,
+  "passed_files_by_group": {
+    "confirmation": 458,
+    "inputs": 13,
+    "reference_seed42": 30,
+    "reuse_seed42": 200,
+    "sources": 38
+  },
+  "saved_identity_digests_checked": [
+    "v18_tree_nested_v2_split42_model42",
+    "v18_pinfo_v1_split42_model42",
+    "v18_tree_nested_v2_split20260917_model42",
+    "v18_pinfo_v1_split20260917_model42",
+    "v18_tree_nested_v2_split20260918_model42",
+    "v18_pinfo_v1_split20260918_model42"
+  ],
+  "baseline_completion_file_hashes_checked": [
+    "v18_tree_nested_v2_split42_model42",
+    "v18_tree_nested_v2_split20260917_model42",
+    "v18_tree_nested_v2_split20260918_model42"
+  ],
+  "f2_control_output_completion_entry_checked": [
+    "v18_pinfo_v1_split42_model42",
+    "v18_pinfo_v1_split20260917_model42",
+    "v18_pinfo_v1_split20260918_model42"
+  ],
+  "errors": [],
+  "training_performed": false,
+  "models_reloaded": false,
+  "migrated_experiment_accepted": false,
+  "limitations": [
+    "No model training, inference, leakage test or score recomputation.",
+    "F2 is a pinned previously validated output; its complete upstream model chain is not checked.",
+    "Input/code identity and fresh-run acceptance still require the new experiment verifier."
+  ]
+}

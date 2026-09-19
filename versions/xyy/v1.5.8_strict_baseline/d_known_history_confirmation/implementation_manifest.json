@@ -1,0 +1,16 @@
+{
+  "purpose": "Frozen confirmation implementation before either confirmation score is inspected",
+  "files": {
+    "project_d.py": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466",
+    "status.py": "6f34389f1f61ff9e28d5d1dd7dd5d18b27b7d607ad383882ca0dd425003431bc",
+    "verify_projection.py": "01f9027925dc2c5c65166803fd3e29c9dc47eed74f21fdf78656def69c55796d",
+    "complete_split.py": "a9a68c690c9fc363462dd7ef8c5e2c99f81464929d2da0e700cd7bd0caa71458",
+    "run_projection.py": "211304b96b468b4411796687c0121a08f6742726f788bbf8f0c64402e72dab41",
+    "summarize_confirmation.py": "47dc722fefd4ab4cee7cbe29a1cc62dbea8705ab67ffa9654f61d1439d79dfce",
+    "run_baseline.py": "da4eea35c4487d89479bd4f4b59f583ff9a4e51c5728b3a222c5fa4322c50e07",
+    "verify_implementation.py": "cfc09b9048cf40674b9c3f4a33141cd518de893f859da96ca88d88d285d5e842",
+    "confirmation_plan.json": "feceebd12bee36f52b4f7ba6fcf03a00a4fa68a78d5dc376841e9544327bf4ce",
+    "experiment_plan.json": "338231a539248bef77896bad4024174f097a8d34b88c01119c84a835995f877a",
+    "numerical_reference_snapshot.json": "ab9111d4df19a04deaa3a159f5d55836b5174693035d69466367318143fbf37a"
+  }
+}

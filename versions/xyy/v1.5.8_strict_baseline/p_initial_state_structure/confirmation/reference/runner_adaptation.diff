@@ -1,0 +1,149 @@
+--- seed42/p_structure_protocol.py
++++ confirmation/p_structure_protocol.py
+@@ -1,4 +1,4 @@
+-"""Frozen seed42 P experiment: source verification and label-free reconstruction."""
++"""Frozen repeated-split P experiment: source verification and label-free reconstruction."""
+ from pathlib import Path
+ from types import SimpleNamespace
+ import hashlib
+@@ -9,8 +9,7 @@
+ import numpy as np
+ import pandas as pd
+ 
+-HERE = Path(__file__).resolve().parent
+-CONFIG = json.loads((HERE / 'experiment_config.json').read_text())
++from _runtime import HERE, CODE_ROOT, CONFIG_PATH, META_ROOT, RUN_ID, CONFIG, SEED
+ ROOT, BASE = (Path(CONFIG[k]).resolve() for k in ('project_root', 'baseline_root'))
+ assert HERE == Path(CONFIG['experiment_root']).resolve() == BASE / 'p_initial_state_structure'
+ sys.path.insert(0, str(BASE))
+@@ -124,11 +123,11 @@
+     return sources, bm, gm
+ 
+ 
+-def load_context(seed=42):
+-    if seed != 42 or CONFIG['authorized_split_seeds'] != [42]:
+-        raise ValueError('Only seed42 authorized at this stage')
++def load_context(seed=SEED):
++    if seed != SEED or seed not in CONFIG['authorized_split_seeds']:
++        raise ValueError('Confirmation split does not match the selected source package')
+     sources, bm, gm = verify_sources()
+-    data = load_data(ROOT/'versions/xyy/v1.5.6', ROOT/'cv/cv_assignments_balanced_v1_seed42.csv')
++    data = load_data(ROOT/'versions/xyy/v1.5.6', ROOT/f'cv/cv_assignments_balanced_v1_seed{SEED}.csv')
+     if digest_object(data_identity(data, CONFIG['settings'])) != CONFIG['baseline_identity_hash']:
+         raise ValueError('Frozen baseline data/code/environment changed')
+     grun = Path(CONFIG['g_run'])
+@@ -172,8 +171,8 @@
+ 
+ 
+ def experiment_identity(ctx):
+-    return {'protocol': CONFIG['protocol'], 'split_seed':42, 'config_sha256':sha256_file(HERE/'experiment_config.json'),
+-            'code_sha256':{n:sha256_file(HERE/n) for n in CODE_FILES}, 'source_sha256':ctx.sources,
++    return {'protocol': CONFIG['protocol'], 'split_seed':SEED, 'config_sha256':sha256_file(CONFIG_PATH),
++            'code_sha256':{str(p):sha256_file(p) for p in [*(CODE_ROOT/n if n in ('p_structure_protocol.py','train_p_structure.py','verify_p_structure.py') else HERE/n for n in CODE_FILES), CODE_ROOT/'_runtime.py']}, 'source_sha256':ctx.sources,
+             'environment':environment(), 'settings':CONFIG['settings'],
+             'params':{k:params(k) for k in KINDS}, 'features':list(ctx.data.X_train.columns),
+             'p_sha256':array_sha(ctx.p), 'P_label_sha256':array_sha(ctx.data.component_targets[PT]),
+--- seed42/train_p_structure.py
++++ confirmation/train_p_structure.py
+@@ -1,4 +1,4 @@
+-"""Authorized seed42-only P comparison. Default stage is a no-fit preflight."""
++"""Authorized repeated-split P confirmation. Default stage is a no-fit preflight."""
+ from datetime import datetime,timezone
+ from pathlib import Path
+ import argparse
+@@ -17,7 +17,7 @@
+ from preflight_checks import run_checks,reject
+ from evaluate_p_structure import artifact_frames
+ 
+-RUN_ID='v18_pstate_nested_v1_split42_model42'
++from _runtime import CODE_ROOT, META_ROOT, RUN_ID, SEED
+ 
+ 
+ def require_manifest(saved,expected):
+@@ -28,7 +28,7 @@
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--stage',choices=('preflight','cv'),default='preflight')
+-    parser.add_argument('--split-seed',choices=(42,),type=int,default=42)
++    parser.add_argument('--split-seed',choices=(20260917,20260918),type=int,required=True)
+     parser.add_argument('--resume',action='store_true')
+     args=parser.parse_args()
+     if args.stage=='preflight' and args.resume:parser.error('preflight cannot resume')
+@@ -40,13 +40,13 @@
+         checks,provenance=run_checks(ctx)
+         require_manifest(manifest,manifest)
+         reject(lambda:require_manifest({**manifest,'identity_hash':'wrong'},manifest))
+-        checks.update(identity_hash=identity_hash,resume_identity_rejection='PASS')
+-        write_json(output_path(HERE/'preflight/seed42.json'),checks)
+-        write_json(output_path(HERE/'preflight/fit_support_and_weights.json'),provenance)
+-        write_json(output_path(HERE/'reference/source_manifest.json'),{'source_sha256':ctx.sources,
++        checks.update(identity_hash=identity_hash,split_seed=SEED,resume_identity_rejection='PASS')
++        write_json(output_path(META_ROOT/'preflight.json'),checks)
++        write_json(output_path(META_ROOT/'fit_support_and_weights.json'),provenance)
++        write_json(output_path(META_ROOT/'source_manifest.json'),{'source_sha256':ctx.sources,
+             'baseline_identity_hash':CONFIG['baseline_identity_hash'],'D_G_identity_hash':CONFIG['g_identity_hash']})
+         print(json.dumps(checks,indent=2));return
+-    preflight=read_json(HERE/'preflight/seed42.json')
++    preflight=read_json(META_ROOT/'preflight.json')
+     if preflight['status']!='PASS' or preflight['identity_hash']!=identity_hash:
+         raise ValueError('Matching successful preflight required')
+     if run.exists():
+@@ -58,7 +58,7 @@
+         if args.resume:raise FileNotFoundError('Cannot resume absent run')
+         run.mkdir(parents=True)
+         write_json(run/'run_manifest.json',manifest)
+-        write_json(run/'source_manifest.json',read_json(HERE/'reference/source_manifest.json'))
++        write_json(run/'source_manifest.json',read_json(META_ROOT/'source_manifest.json'))
+         write_json(run/'environment.json',identity['environment'])
+         write_frame(run/'cv_assignments.csv',ctx.data.assignment)
+     with run_lock(run):
+@@ -96,7 +96,7 @@
+             write_json(run/'new_model_manifest.json',records)
+             write_json(run/'fit_provenance.json',[r['spec'] for r in records])
+             print('All 75 fits complete; starting independent verification in a new process.',flush=True)
+-            command=[sys.executable,'-B',str(HERE/'verify_p_structure.py'),'--split-seed','42','--unfrozen']
++            command=[sys.executable,'-B',str(CODE_ROOT/'verify_p_structure.py'),'--split-seed',str(SEED),'--unfrozen']
+             result=subprocess.run(command,cwd=HERE,text=True,capture_output=True)
+             (run/'logs/independent_verification_process.log').write_text(result.stdout+result.stderr)
+             if result.returncode:
+--- seed42/verify_p_structure.py
++++ confirmation/verify_p_structure.py
+@@ -10,6 +10,8 @@
+ from independent_numerics import exact,close,independent_controls,assert_stats
+ from run_artifacts import check_stage
+ 
++from _runtime import SEED, RUN_ID
++
+ CASES=('E0','E1','E2')
+ PAIRS={'E2_minus_E1':('E1','E2'),'E2_minus_E0':('E0','E2'),'E1_minus_E0':('E0','E1')}
+ 
+@@ -25,7 +27,7 @@
+ 
+ 
+ def verify(run,unfrozen=False):
+-    run=output_path(run);ctx=load_context(42);m=read_json(run/'run_manifest.json')
++    run=output_path(run);ctx=load_context(SEED);m=read_json(run/'run_manifest.json')
+     assert m['identity']==experiment_identity(ctx)
+     identity=digest_object(m['identity']);assert identity==m['identity_hash']
+     if not unfrozen:check_stage(run,'P_CV_COMPLETE',identity)
+@@ -250,7 +252,7 @@
+         assert len(group)==239 and group.n.sum()==row.n
+         close(group.baseline_sse.sum(),row.baseline_sse);close(group.candidate_sse.sum(),row.candidate_sse)
+     if not unfrozen:check_stage(run,'P_CV_COMPLETE',identity)
+-    return {'status':'PASS','identity_hash':identity,'split_seed':42,'verified_at_utc':datetime.now(timezone.utc).isoformat(),
++    return {'status':'PASS','identity_hash':identity,'split_seed':SEED,'verified_at_utc':datetime.now(timezone.utc).isoformat(),
+         'verifier_sha256':sha256_file(__file__),'process':'independent model reload, no training',
+         'new_outer_models':15,'inner_probes':60,'formal_fits':75,'absolute_tolerance':1e-12,
+         'source_hashes_and_lineage':'PASS','scoped_labels_weights_and_rounds':'PASS',
+@@ -260,9 +262,9 @@
+ 
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument('--split-seed',type=int,choices=(42,),default=42)
++    parser.add_argument('--split-seed',type=int,choices=(20260917,20260918),required=True)
+     parser.add_argument('--unfrozen',action='store_true')
+-    args=parser.parse_args();run=HERE/'runs/v18_pstate_nested_v1_split42_model42'
++    args=parser.parse_args();run=HERE/'runs'/RUN_ID
+     result=verify(run,args.unfrozen)
+     if args.unfrozen:write_json(run/'logs/independent_verification.json',result)
+     print(json.dumps(result,indent=2))

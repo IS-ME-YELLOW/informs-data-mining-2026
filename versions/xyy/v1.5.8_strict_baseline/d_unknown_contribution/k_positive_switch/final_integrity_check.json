@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-09-18T06:45:12.681006+00:00",
+  "new_fits": 0,
+  "new_models": 0,
+  "splits": [
+    {
+      "split_seed": 42,
+      "identity_hash": "89c9a1d3998d0cfa1dbab3bfa7b473c251915f5828e4963fbe8602c778d14587",
+      "independent_verification": "PASS",
+      "new_fits": 0
+    },
+    {
+      "split_seed": 20260917,
+      "identity_hash": "2bf269caf05becca632ae7532a00683a5faa7bdaa969068e688d8753e5b85ab0",
+      "independent_verification": "PASS",
+      "new_fits": 0
+    },
+    {
+      "split_seed": 20260918,
+      "identity_hash": "32ee305e40776f081fd8a8c79ad84e5c2d3cf551b25c4d31decfad475bc09946",
+      "independent_verification": "PASS",
+      "new_fits": 0
+    }
+  ],
+  "all_6_24_48h_controls_exactly_equal_A_B": true,
+  "source_and_summary_hashes": "PASS",
+  "report_primary_metrics": "PASS",
+  "original_files_checked": 1063,
+  "original_files_unchanged": 1063,
+  "original_file_changes": [],
+  "test_predictions_or_submissions_created": false,
+  "interpretation": "Fixed-gate development replay on previously inspected splits, not independent external confirmation"
+}

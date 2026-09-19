@@ -1,0 +1,35 @@
+{
+  "protocol": "v18_tree_nested_v2",
+  "implementation_date": "2026-09-17",
+  "tests_passed": 6,
+  "last_test_runtime_seconds": 42.543,
+  "production_training_performed": false,
+  "synthetic_training_only": true,
+  "synthetic_max_rounds": 2,
+  "real_input_preflight_seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "all_20_targets_outer_fold0_label_perturbation_passed": true,
+  "synthetic_cv_models_reloaded": 100,
+  "synthetic_final_models_reloaded": 20,
+  "resume_and_tamper_rejection_passed": true,
+  "historical_C1_C3_predictions_preserved": true,
+  "protected_historical_file_count": 163,
+  "protected_historical_files_unchanged": true,
+  "production_runs_directory_exists": false,
+  "source_sha256": {
+    "versions/xyy/v1.5.8/protocol.py": "3c62ba06f097cda4367c535a72e915b23ab616c06a87df916693e864d9de5a16",
+    "versions/xyy/v1.5.8/scoped_training.py": "466944c287d14f1a19d3a1be52c509dc60026694326c62c1c0b169cd8c451e0e",
+    "versions/xyy/v1.5.8/evaluation.py": "9c9d2026f4117ae20dba84eb8bb1442d3e455fcec5173f8c4a9c102a9a6108b8",
+    "versions/xyy/v1.5.8/train_v18.py": "d4826adccd5de8d4d82ff4be7fa3c561707f60a06852ba3583a7942ea9bfef1c",
+    "versions/xyy/v1.5.8/run_artifacts.py": "44082287033474e52aa081ea57d3fcd2344a6167bc00d2d8c44061f21c04ea1b",
+    "versions/xyy/v1.5.8/config.py": "371c5c99aa6a363577b0c7d970eea0a3f820cf2b075ad15a3b12e2ea2696312b",
+    "versions/xyy/v1.5.8/verify_artifacts.py": "a8e4d0b60a11b0bf7d2905a3e5dca35cd0c530bd4164caa78c8c8068333d80af",
+    "versions/xyy/v1.5.8/requirements.txt": "61fa06c1300860b35dd9c742ffae3fda106c31f1b2ee16e38f73a0d228e2d0e2",
+    "versions/xyy/v1.5.8/README.md": "06fbbe985210fc9fd99526af187b692b6d777762b41dce235867e899438de216",
+    "versions/xyy/v1.5.8/tests/test_nested.py": "bf2812947fbabf32758c072d3200fd0060f763820c3c9ea4593ff941826b1637"
+  },
+  "test_boundary": "Full-size real-data training and its performance have not been evaluated; use the separate seed42 CV training plan."
+}

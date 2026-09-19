@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "split_seed": 42,
+  "training_performed": false,
+  "train_counties": 239,
+  "test_counties": 63,
+  "features": 163,
+  "scoreable_rows": {
+    "osi_target_t01h": 34177,
+    "osi_target_t06h": 32982,
+    "osi_target_t24h": 28680,
+    "osi_target_t48h": 22944
+  },
+  "positive_K_rows": 784,
+  "negative_U_rows": 25,
+  "minimum_U": -4.666666666666057e-08,
+  "checks": [
+    "source and baseline identities",
+    "exact A/B replay",
+    "independent scalar K train/test",
+    "future P perturbation/deletion",
+    "outer labels excluded before U transformation",
+    "inner training/early-stop county isolation",
+    "row reorder and invalid key rejection",
+    "C3 propagation boundaries",
+    "fixed label tolerance",
+    "63 test counties need no future labels"
+  ],
+  "identity_hash": "687c3a709be696f02dce64485e476c0beb0870367ea479980c7c6790854cc507",
+  "code_and_config_identity": {
+    "unknown_d_protocol.py": "8039c90f224af9181a1853255c8109bfc439552d2c1d6b80dd320e8e826f4aeb",
+    "known_history.py": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466",
+    "metric_helpers.py": "b7e9664d715745cc2411d1ff27110f64cdd05eb03395ea287ed58033dff162bd",
+    "independent_numerics.py": "d0786a9fb7e07120a7ec7540de7ed517b766f48af633d3109dfe61a0cf269afb",
+    "unknown_d_evaluation.py": "d4480dc3157842e4cad1b3fe9d09c3d16abc9ceac3a6bfd92cf36e836b5175d5",
+    "train_unknown_d.py": "29026c191d31ff70ab21e55f83459871c1da987feb6b350b6ca550519b991226",
+    "verify_unknown_d.py": "6eb973dc76944fbbbf4e626c82a8d0e29815908a2b29fa1258b919b7f914ab7b"
+  },
+  "resume_identity_rejection": "PASS",
+  "output_path_rejection": "PASS"
+}

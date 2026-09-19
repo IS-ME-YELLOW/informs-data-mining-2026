@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "identity_hash": "a3f16d3463442c01b1e1315df498317eed53298a1f89ef087b016ab8bd0c9532",
+  "split_seed": 20260918,
+  "verified_at_utc": "2026-09-19T02:27:48.537350+00:00",
+  "verifier_sha256": "e8fe5432a697a0a7e81a1970beb702aeb2b928bec658168237b8dbf9eb66bc55",
+  "new_outer_models": 10,
+  "inner_probes": 40,
+  "formal_fits": 50,
+  "independently_rebuilt_features_used_for_model_predictions": true,
+  "feature_verification": {
+    "status": "PASS",
+    "independent_scalar_neighbors": true,
+    "independent_neighbor_aggregates": true,
+    "raw_history_and_weather_reconstruction": true,
+    "history_cutoff": 71,
+    "nodes": 302,
+    "edges": 2416,
+    "lineage_rows": 347904,
+    "feature_counts": {
+      "F1": 170,
+      "F2": 183
+    },
+    "feature_tolerance": 1e-10,
+    "augmented_features_bitwise_exact": true,
+    "aggregation_reduction": "float64 addition in fixed neighbor rank order"
+  },
+  "scoped_labels_weights_rounds_and_receipts": "PASS",
+  "P_reconstruction_and_all_controls": "PASS",
+  "all_metrics_and_bootstrap_recomputed": "PASS",
+  "long_horizon_and_other_component_invariants": "PASS",
+  "reference_and_feature_identities": "PASS",
+  "prediction_metric_absolute_tolerance": 1e-12,
+  "training_performed_by_verifier": false,
+  "core_verifier_sha256": "e1075a15763b74f1b8110cc340d2d4f8762d9540449f82aae658c6957f6b1a0a",
+  "audit_identity": {
+    "training_identity_hash": "a3f16d3463442c01b1e1315df498317eed53298a1f89ef087b016ab8bd0c9532",
+    "adapter_sha256": "e8fe5432a697a0a7e81a1970beb702aeb2b928bec658168237b8dbf9eb66bc55",
+    "core_verifier_sha256": "e1075a15763b74f1b8110cc340d2d4f8762d9540449f82aae658c6957f6b1a0a",
+    "original_feature_verifier_sha256": "d8f7ba02f5a1b68d1668bb0ad27665d824a77a9cd2714df9a9401ce4c26bc225",
+    "reason": "Only independent summation order corrected; all reconstructed predictors now bitwise exact.",
+    "model_or_saved_prediction_changes": false,
+    "tolerance_relaxed": false,
+    "additional_fits": 0
+  },
+  "audit_identity_hash": "5d4f1e464f28c2c6e2deb3efc19d1621da4442256ae60c91c3a6af58226d6945"
+}

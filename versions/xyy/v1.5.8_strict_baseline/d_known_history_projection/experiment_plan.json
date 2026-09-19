@@ -1,0 +1,21 @@
+{
+  "experiment": "D_known_history_projection_v1",
+  "baseline_protocol": "v18_tree_nested_v2",
+  "baseline_run": "v18_tree_nested_v2_split42_model42",
+  "design_status": "Fixed from the existing mathematical definition and prior diagnosis, before evaluating this projected candidate; not an independent prospective study",
+  "observed_last_hour": 71,
+  "rolling_window_hours": 6,
+  "bound": "sum of observed P values within [target_hour-5,target_hour], divided by 6; no future P values used",
+  "projection": "max(clipped baseline D prediction, known lower bound), before component composition and C3 alignment",
+  "apply_to": "every county and scoreable horizon row by the same rule; no county-specific exceptions or fitted coefficient",
+  "primary_comparison": "projected fixed v18_rule versus frozen fixed v18_rule",
+  "secondary_comparisons": ["C1", "C2", "C3", "unchanged C0 control"],
+  "post_processing": {"clip": [0.0, 0.65], "zero_threshold": 0.001},
+  "bootstrap": {"unit": "county full trajectory", "replicates": 2000, "seed": 20260910},
+  "diagnostic_tolerance": 0.000001,
+  "projection_uses_diagnostic_tolerance": false,
+  "diagnostics": ["all scoreable rows", "first four scoreable t+1 target hours", "changed predictions", "all counties including deteriorations", "same-bootstrap leave-Morrow-out sensitivity", "unchanged later hours and horizons"],
+  "training_allowed_in_this_experiment": false,
+  "baseline_artifact_overwrite_allowed": false,
+  "new_final_submission": false
+}

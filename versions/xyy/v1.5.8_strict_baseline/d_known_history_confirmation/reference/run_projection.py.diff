@@ -1,0 +1,60 @@
+--- seed42/run_experiment.py
++++ confirmation/run_projection.py
+@@ -1,4 +1,4 @@
+-"""Evaluate the predeclared D projection on frozen strict OOF; no model training."""
++"""Apply the unchanged D projection to one frozen confirmation baseline."""
+ from pathlib import Path
+ from datetime import datetime, timezone
+ import argparse
+@@ -17,8 +17,7 @@
+ from protocol import MODES, COMPONENTS, HORIZONS, HORIZON_HOURS, build_controls, expected_mask
+ from project_d import observed_history, known_bounds, project_components
+ 
+-DEFAULT_RUN = BASE / "runs/v18_tree_nested_v2_split42_model42"
+-DEFAULT_OUT = HERE / "results_seed42"
++
+ 
+ 
+ def sha(path):
+@@ -75,22 +74,27 @@
+ 
+ def main(argv=None):
+     parser=argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--baseline-run",type=Path,default=DEFAULT_RUN)
+-    parser.add_argument("--output-dir",type=Path,default=DEFAULT_OUT)
++    parser.add_argument("--split-seed",type=int,required=True,choices=(20260917,20260918))
+     args=parser.parse_args(argv)
+-    run,out=args.baseline_run.resolve(),args.output_dir.resolve()
++    confirmation=json.loads((HERE/"confirmation_plan.json").read_text())
++    split=next(row for row in confirmation["splits"] if row["split_seed"]==args.split_seed)
++    run,out=Path(split["baseline_dir"]).resolve(),Path(split["projection_dir"]).resolve()
++    assert sha(HERE/"project_d.py")==confirmation["fixed_projection_source_sha256"]
+     if not out.is_relative_to(HERE) or out==HERE:
+         raise ValueError("Candidate output must be a child of the experiment directory")
+     plan=json.loads((HERE/"experiment_plan.json").read_text())
+     manifest=check_baseline(run)
+-    protected=json.loads((HERE/"baseline_snapshot.json").read_text())
++    assert manifest["identity"]["inputs"]["cv"]==split["cv_sha256"]
++    assert manifest["identity"]["settings"]==confirmation["settings"]
++    assert manifest["identity"]["code_sha256"]==confirmation["baseline_code_sha256"]
++    protected=json.loads((HERE/"numerical_reference_snapshot.json").read_text())
+     if any(sha(BASE/name)!=digest for name,digest in protected.items()):
+         raise ValueError("An existing strict-baseline artifact changed")
+     paths={"baseline_oof":run/"oof_predictions.parquet","component_oof":run/"oof_component_predictions.parquet",
+            "raw_predictions":run/"base_predictions_cv.parquet","raw_train":ROOT/"data/DM_Train.csv",
+            "raw_test":ROOT/"data/DM_Test.csv","test_meta":ROOT/"versions/xyy/v1.5.6/meta_test_v1.5.6.parquet",
+            "plan":HERE/"experiment_plan.json","projector":HERE/"project_d.py","evaluation_code":Path(__file__),
+-           "frozen_controls_code":BASE/"protocol.py"}
++           "frozen_controls_code":BASE/"protocol.py","confirmation_plan":HERE/"confirmation_plan.json"}
+     input_hashes={name:sha(path) for name,path in paths.items()}
+     identity={"experiment":plan["experiment"],"baseline_identity_hash":manifest["identity_hash"],"input_sha256":input_hashes}
+     candidate_hash=hashlib.sha256(json.dumps(identity,sort_keys=True).encode()).hexdigest()
+@@ -219,7 +223,7 @@
+     assert all(sha(BASE/name)==digest for name,digest in protected.items())
+     final={**identity,"candidate_identity_hash":candidate_hash,"created_at_utc":datetime.now(timezone.utc).isoformat(),
+            "baseline_run":str(run),"input_paths":{name:str(path) for name,path in paths.items()},
+-           "training_performed":False,"fitted_coefficients":False,"baseline_replay_max_error":baseline_replay_error,
++           "split_seed":args.split_seed,"training_performed":False,"fitted_coefficients":False,"baseline_replay_max_error":baseline_replay_error,
+            "projection_target_hours":[73,74,75,76],"exact_D_projection_rows":len(change_rows),
+            "projected_counties":len(set(row['fipsCode'] for row in change_rows)),
+            "test_bounds_only_no_test_predictions":True,"baseline_unchanged":True,

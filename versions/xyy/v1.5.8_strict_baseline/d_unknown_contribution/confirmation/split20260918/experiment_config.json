@@ -1,0 +1,32 @@
+{
+  "protocol": "v18_ud01_nested_v1",
+  "created_at_utc": "2026-09-18T05:06:22.828378+00:00",
+  "authorized_split_seeds": [
+    20260918
+  ],
+  "planned_but_not_authorized_in_this_stage": [],
+  "project_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "baseline_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline",
+  "experiment_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260918",
+  "target": "U_D_t_target_t01h",
+  "reconstructed_target": "D_t_target_t01h",
+  "definition": "U_raw=official_D_target_t01h-K_target_t01h; retain rounding-scale negative labels",
+  "reconstruction": "min(1,K+max(0,U_hat))",
+  "epsilon": 1e-06,
+  "settings": {
+    "model_seed": 42,
+    "max_rounds": 2000,
+    "early_stopping_rounds": 100,
+    "diagnostic": false,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260910
+  },
+  "baseline_identity_hash": "cf16ff6d5e03de01870e79f63b3a2f9a2e2bbc02e8ff2da34e00a219efe9a7fd",
+  "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260918_model42",
+  "projection_reference": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_confirmation/split20260918/projection",
+  "model_seed": 42,
+  "primary": "C_minus_B fixed v18_rule 1h pooled RMSE; inspect 6h",
+  "source_projector_sha256": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466",
+  "approved_plan_sha256": "f4ed182cdd093138f684e642794c9b35ef4d73e034a31a3c739242fab9bee031",
+  "split_seed": 20260918
+}

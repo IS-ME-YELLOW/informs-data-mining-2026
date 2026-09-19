@@ -1,0 +1,40 @@
+{
+  "numeric_reproduction_passed": true,
+  "training_performed": false,
+  "models_reloaded": 120,
+  "cv_models": 100,
+  "final_models": 20,
+  "historical_model_hashes_matching": 0,
+  "historical_hashes_matching_after_LF_CRLF_conversion": 0,
+  "maximum_prediction_difference": 0.0,
+  "all_submission_identifiers_and_masks_match": true,
+  "submission_valid_counts": {
+    "C0_direct_osi": {
+      "osi_target_t01h": 9009,
+      "osi_target_t06h": 8694,
+      "osi_target_t24h": 7560,
+      "osi_target_t48h": 6048
+    },
+    "C1_component_osi": {
+      "osi_target_t01h": 9009,
+      "osi_target_t06h": 8694,
+      "osi_target_t24h": 7560,
+      "osi_target_t48h": 6048
+    },
+    "C2_equal_blend": {
+      "osi_target_t01h": 9009,
+      "osi_target_t06h": 8694,
+      "osi_target_t24h": 7560,
+      "osi_target_t48h": 6048
+    },
+    "C3_aligned_component": {
+      "osi_target_t01h": 9009,
+      "osi_target_t06h": 8694,
+      "osi_target_t24h": 7560,
+      "osi_target_t48h": 6048
+    }
+  },
+  "path_policy": "Explicit read-only alias versions/v1.8/models -> versions/xyy/v1.5.8/models; no historical files rewritten",
+  "caveat": "Current files reproduce saved numbers, but differing historical hashes remain a provenance issue; original early stopping is not strict nested CV.",
+  "elapsed_seconds": 10.9915749300053
+}

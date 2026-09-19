@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-09-18T05:24:45.435486+00:00",
+  "new_formal_fits": 50,
+  "new_models": 10,
+  "all_three_splits_total_formal_fits": 75,
+  "all_three_splits_total_new_models": 15,
+  "scientific_implementation_unchanged": "PASS",
+  "same_U_target_array_across_splits": "PASS",
+  "summary_inputs_outputs_and_report_metrics": "PASS",
+  "horizon_coverage_identity": "PASS",
+  "original_files_checked": 895,
+  "original_files_unchanged": 895,
+  "original_file_changes": [],
+  "seed42_completion_unchanged": true,
+  "runs": [
+    {
+      "split_seed": 20260917,
+      "identity_hash": "d2e249194035fec424ed110fe747d785f8d30061f150b77a916c34398ae32f73",
+      "models": 5,
+      "formal_fits": 25,
+      "independent_verification": "PASS"
+    },
+    {
+      "split_seed": 20260918,
+      "identity_hash": "7b65fe5143afd8ae26498509d95c8a46bef86702492924213540a5330924b8b6",
+      "models": 5,
+      "formal_fits": 25,
+      "independent_verification": "PASS"
+    }
+  ],
+  "new_mixed_candidate_created": false,
+  "final_models_or_submissions_created": false
+}

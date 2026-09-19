@@ -1,0 +1,21 @@
+{
+  "completed": true,
+  "stage": "seed42 strict CV only",
+  "training_wall_seconds": 2230.338322118012,
+  "saved_outer_models": 100,
+  "inner_probes": 400,
+  "independent_model_reload_passed": true,
+  "analysis_verification_passed": true,
+  "final_models_trained": false,
+  "submission_created": false,
+  "source_and_original_assets_unchanged": true,
+  "deliverable_sha256": {
+    "README.md": "bdbcca87dd7335bac49c9bf90acbd8119afb8fd37ca0d6c7c7a54dbe9782145b",
+    "Results_2026-09-17.md": "e7aa57ab6abf99d86a39440b9023369ea1d04d7db326df219c54bcba3ce532c8",
+    "execution.json": "986278c22a84986bbec628158f630d35df476e7e256939fefd250688e3e9b036",
+    "source_snapshot_manifest.json": "a6f61a7728e4d7cdbccf9114d090e98b4d991cff9881b056b90e97d6aac2b7bb",
+    "logs/independent_verification.json": "c5184da3d41d0da1770f0b070bc6dafe9d8a66eaeb8e17d43be4b3b03237e662",
+    "analysis/analysis_manifest.json": "51c899c9f2171a25f7e6f07cde12910a2fcd9f1460c9dcd9487f1a5ebedd8451",
+    "analysis/verification.json": "08d2f1275d8dbab4de2a031d426347c8baa428be51733c87de80d4b379d5de50"
+  }
+}

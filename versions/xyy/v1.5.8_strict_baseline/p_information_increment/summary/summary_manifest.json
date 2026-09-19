@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "identity_hash": "e39b76d75f191891abda1939dc47933815cc4fa15796227b0c200eb1b96bfcac",
+  "audit_identity_hash": "65cb8692b989e770ad80de42d40e9f764c380669091a63753b32b6ea5dd1a2a7",
+  "input_marker_sha256": "ed2a62fa4cf4c07997f42fddd75efbf74bce7391cc6f671e32e06b0c402c3c91",
+  "outputs": {
+    "primary_comparisons.csv": "af402d23a163106251d10175f97ab62f129ebc7a355bbe28fe0c3834615c5733",
+    "primary_scores.csv": "5575c4f701215a7d277524e09a6ffdc6e481e8f4efe799aa8ec2b8bc65fbe384",
+    "P_component_scores.csv": "de58723cf4682b8e0482a826a9c4835568dba983c5e29b42d49ebaf98eb632eb",
+    "bootstrap.csv": "0bb76ab4ed0a85f92cf058bd5a18370e696aac8173298aa7f3fa70f1bc956123",
+    "county_effects.csv": "3714a1b7406a0fadd1da192faf732a6ed6b978989c2979ea742ce635d872fd6d",
+    "focus_counties.csv": "44e8f69cd74bc3b4be0a269f699280f38bfc555e95e388e44a76355fe11c2b6a",
+    "fold_effects.csv": "4357e37b90784d63dcdd0d16641c10a05ea6bc82c56f04418457cf111113b0cc",
+    "window_effects.csv": "c9ca25896f4b41439460a0dbb406fa55207d3edd665687f0767b9db0f42a8dcf",
+    "initial_state_groups.csv": "9d5686b444fe7ddee9f6ce59405511b4b723ed664c85618dc86a8ccd09157cc3",
+    "exclude_Morrow.csv": "a0a3c6b69e46301e56883745d2d34c2e89613c932adf11547a449bd12a4f5411",
+    "target_hour_curve_data.csv": "3bb8fc97581e4e613a615e43456ff0411730d225148866aec11b5c7670a4fd6f",
+    "improvement_counts.csv": "970ade30169ae426354bbd95f67b269c8fe88f3cecc28178e767efb56ae5ef10",
+    "decisions.csv": "c08699fb9702f7ee3902173c17155d849765a1562483da5afebfa44df556cba0",
+    "feature_importance.csv": "8be0e40a324206a66817cc625dbf3bfd3d0e7ac5abf276728e153cbca264ca59",
+    "feature_group_usage.csv": "096ed6da9a68a5122d1a348fbf6dadfa7341ad028815e999cca4b7dac8930ef1",
+    "feature_group_usage_summary.csv": "59b020da3dee696606c6c5d8157b8f8cfbbc9a5da4c0cd7d649ffe248d55550c",
+    "model_rounds.csv": "e621c1a9ec0a1f8b3ff430df0ecc19656d571f4290f5c7633b5f44c9f36c36f7",
+    "neighbor_role_audit.csv": "d0422bf836127472be25dadecb31caa44578db577b72e33ca815741150dafd46",
+    "neighbor_distances.csv": "daabe98acc9180cd6a26cabf51a7e127367e5eee1d3e3979f0c6fe637eda4c1e",
+    "focus_trajectories.csv": "964bfc671ed9c84c57e4bc81a26a796e86ca571a4713037f08338a8c7ba637a1"
+  },
+  "report_sha256": "afd4760c92966545df3a0a5e3bfd0acf22d7572259306d92b43e69c0f1ca2f3e",
+  "summary_script_sha256": "c102a9ddefae960edacb5380cc160aca65057e0fc50d01cff62e3f802fc500be"
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "split_seed": 20260918,
+  "identity_hash": "32ee305e40776f081fd8a8c79ad84e5c2d3cf551b25c4d31decfad475bc09946",
+  "verified_at_utc": "2026-09-18T06:32:49.167584+00:00",
+  "verifier_sha256": "47912106c12067bd7f2191977d2ba86fe3b9e4a40aeed31db7a212f71b3e03cf",
+  "absolute_tolerance": 1e-12,
+  "independent_K_and_gate_reconstruction": true,
+  "independent_G_controls_and_D_alignment": true,
+  "all_metrics_and_bootstrap_recomputed": true,
+  "all_6_24_48h_controls_exactly_equal_A_B": true,
+  "off_gate_G_exactly_equal_A_B": true,
+  "eligible_gate_uses_no_labels_or_future_P": true,
+  "source_lineage_and_hashes": "PASS",
+  "training_performed": false
+}

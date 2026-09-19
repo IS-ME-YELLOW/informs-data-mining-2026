@@ -1,0 +1,29 @@
+{
+  "preflight": "passed",
+  "protocol": "v18_tree_nested_v2",
+  "training_performed": false,
+  "cv_file": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/cv/cv_assignments_balanced_v1_seed20260917.csv",
+  "cv_sha256": "841e20daaacce2c43a63eed3ebb296c01b05e7811456f09ee16cc5c32bc98a0e",
+  "train_shape": [
+    34416,
+    163
+  ],
+  "test_shape": [
+    9072,
+    163
+  ],
+  "fold_counties": {
+    "0": 48,
+    "1": 48,
+    "2": 48,
+    "3": 47,
+    "4": 48
+  },
+  "scoreable_rows": {
+    "osi_target_t01h": 34177,
+    "osi_target_t06h": 32982,
+    "osi_target_t24h": 28680,
+    "osi_target_t48h": 22944
+  },
+  "identity_hash": "5183d8644fd36b8e48db0da824cab6582ceb8637d7e85ace5be6cd52e301e9bc"
+}

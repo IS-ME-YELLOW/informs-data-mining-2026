@@ -1,0 +1,107 @@
+--- frozen/weighted_scoped_training.py
++++ information_training.py
+@@ -3,7 +3,7 @@
+ import numpy as np
+ import pandas as pd
+ import lightgbm as lgb
+-from p_structure_protocol import (CONFIG, PT, KINDS, TARGETS, support, transform, params, array_sha,
++from information_protocol import (CONFIG, PT, KINDS, TARGETS, support, transform, params, array_sha,
+     digest_object, read_json, sha256_file, safe_artifact, write_json, write_frame)
+ from run_artifacts import atomic_write
+ 
+@@ -48,7 +48,7 @@
+         tr=subset(ctx,[f for f in scope if f!=q],kind)
+         va=subset(ctx,[q],kind)
+         probes.append({'inner_fold':q,'train':describe(tr),'validation':describe(va)})
+-    return {'identity_hash':identity,'outer_fold':outer,'target':TARGETS[kind],'kind':kind,
++    return {'identity_hash':identity,'candidate':ctx.case,'feature_package_identity':ctx.feature_identity,'outer_fold':outer,'target':TARGETS[kind],'kind':kind,
+             'allowed_folds':list(scope),'feature_names':list(ctx.data.X_train.columns),
+             'probes':probes,'refit':describe(subset(ctx,scope,kind)),'params':params(kind)}
+ 
+@@ -82,7 +82,7 @@
+ 
+ def get_or_fit(ctx,run,outer,kind,identity,progress):
+     spec=specification(ctx,outer,kind,identity)
+-    prefix=f'models/outer{outer}/{TARGETS[kind]}'
++    prefix=f'models/{ctx.case}/outer{outer}/{TARGETS[kind]}'
+     receipt_path=run/f'{prefix}.json'
+     if receipt_path.exists():
+         receipt=read_json(receipt_path)
+@@ -107,7 +107,7 @@
+         pred=model.predict(va.X,num_iteration=iteration,num_threads=1)
+         metric_name='rmse' if kind=='direct' else 'raw_P_contribution_rmse'
+         values=curve['validation'][metric_name]
+-        frame=va.meta.copy();frame['outer_fold']=outer;frame['inner_fold']=q;frame['kind']=kind
++        frame=va.meta.copy();frame['outer_fold']=outer;frame['inner_fold']=q;frame['kind']=kind;frame['candidate']=ctx.case
+         frame['official_transformed_label']=va.y
+         frame['metric_label']=va.y.astype(np.float32).astype(float) if kind=='direct' else va.y
+         frame['raw_weight']=va.w;frame['raw_prediction_at_best']=pred
+@@ -122,7 +122,7 @@
+         weight=None if kind=='direct' else refit.w/refit.w.mean()),num_boost_round=rounds,
+         callbacks=[lgb.log_evaluation(0)])
+     atomic_write(run/f'{prefix}.txt',lambda tmp:model.save_model(str(tmp)))
+-    probe_name=f'logs/probes/outer{outer}_{kind}.parquet'
++    probe_name=f'logs/probes/{ctx.case}/outer{outer}_{kind}.parquet'
+     write_frame(run/probe_name,pd.concat(probe_frames,ignore_index=True))
+     receipt={'spec':spec,'model_id':digest_object(spec),'model_path':f'{prefix}.txt',
+         'receipt_path':f'{prefix}.json','model_sha256':sha256_file(run/f'{prefix}.txt'),
+
+--- frozen/evaluate_p_structure.py:metrics
++++ evaluate_information.py:metrics
+@@ -1,12 +1,12 @@
+ """Full OOF artifacts and predeclared P/OSI comparisons; no model fitting."""
+ import numpy as np
+ import pandas as pd
+-from p_structure_protocol import (CONFIG,HERE,H1,PT,HORIZONS,HORIZON_HOURS,COMPONENTS,MODES,
++from information_protocol import (CONFIG,HERE,H1,PT,HORIZONS,HORIZON_HOURS,COMPONENTS,MODES,
+     KINDS,KEYS,expected_mask,support,transform,reconstruct,build_candidates,build_controls,digest_object)
+ from metric_helpers import metrics,comparison,bootstrap
+ 
+-PAIRS=(('E2_minus_E1','E1','E2'),('E2_minus_E0','E0','E2'),('E1_minus_E0','E0','E1'))
+-CASES=('E0','E1','E2')
++PAIRS=(('F1_minus_F0','F0','F1'),('F2_minus_F0','F0','F2'),('F2_minus_F1','F1','F2'))
++CASES=('F0','F1','F2')
+ WINDOWS=((73,76),(77,95),(96,143),(144,215))
+ 
+ 
+@@ -28,7 +28,7 @@
+ 
+ def make_metrics(ctx,parts,controls,aux):
+     arrays=evaluation_arrays(ctx,parts,controls,aux)
+-    rows={n:[] for n in ('pooled','slices','bootstrap','d_interaction','error_interactions')}
++    rows={n:[] for n in ('pooled','slices','bootstrap','error_interactions')}
+     codes=ctx.meta.fipsCode.to_numpy();folds=ctx.meta.fold.to_numpy();origins=ctx.meta.hour_idx.to_numpy()
+     bins=p_bin(ctx.p)
+     for (domain,mode,h),(y,preds) in arrays.items():
+@@ -54,23 +54,10 @@
+                         'countyName':ctx.names.loc[value] if typ=='county' else '',
+                         **comparison(y[take],b[take],a[take])})
+             boot=(domain=='OSI' and mode=='v18_rule' and HORIZON_HOURS[h]<=6) or (domain=='P' and h==H1)
+-            if boot:
++            if boot and pair!='F2_minus_F1':
+                 for pop,take in (('all_counties',valid),('exclude_Morrow',valid&(codes!='39117'))):
+                     rows['bootstrap'].append({**ids,'population':pop,**comparison(y[take],b[take],a[take]),
+                         **bootstrap(y[take],b[take],a[take],codes[take],20260910,2000)})
+-    # Fixed D_B sensitivity; the primary reference remains D_G.
+-    b_controls={}
+-    for case in CASES:
+-        part={h:{c:v.copy() for c,v in q.items()} for h,q in parts[case].items()}
+-        for h in HORIZONS:part[h]['D_t']=ctx.b_d[h]
+-        b_controls[case],_=build_controls(ctx.meta,ctx.direct,part)
+-    for h in HORIZONS:
+-        y=ctx.data.y_train[h].to_numpy();valid=expected_mask(ctx.meta,h)
+-        for mode in MODES:
+-            for pair,before,after in PAIRS:
+-                b,a=b_controls[before][mode][h],b_controls[after][mode][h]
+-                rows['d_interaction'].append({'D_reference':'B','domain':'OSI','mode':mode,'horizon':h,
+-                    'comparison':pair,**comparison(y[valid],b[valid],a[valid])})
+     # Error cross terms before lower/upper/zero OSI processing, plus actual final error.
+     for h in (H1,'osi_target_t06h'):
+         valid=expected_mask(ctx.meta,h);yosi=ctx.data.y_train[h].to_numpy()[valid]
+@@ -90,5 +77,5 @@
+                     'linear_osi_rmse':float(np.sqrt(np.mean(linear**2))),
+                     'postprocessed_osi_rmse':float(np.sqrt(np.mean(final**2))),
+                     'postprocessing_mse_change':float(np.mean(final**2)-np.mean(linear**2))})
+-    return {f'metrics/{name}.csv':pd.DataFrame(table) for name,table in rows.items()},b_controls
++    return {f'metrics/{name}.csv':pd.DataFrame(table) for name,table in rows.items()}
+ 

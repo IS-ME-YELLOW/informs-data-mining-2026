@@ -1,0 +1,30 @@
+{
+  "status": "COMPLETE",
+  "split_seed": 42,
+  "identity_hash": "e39b76d75f191891abda1939dc47933815cc4fa15796227b0c200eb1b96bfcac",
+  "formal_fits": 100,
+  "new_outer_models": 20,
+  "independent_verification": "PASS",
+  "audit_identity_hash": "65cb8692b989e770ad80de42d40e9f764c380669091a63753b32b6ea5dd1a2a7",
+  "extra_fits_for_audit_correction": 0,
+  "historical_integrity": "PASS",
+  "decisions": [
+    {
+      "candidate": "F1",
+      "1h_change_pct": -0.6779121665401511,
+      "6h_change_pct": -0.22235745971354026,
+      "decision": "达到预定晋级条件，建议在另外两套冻结分折确认"
+    },
+    {
+      "candidate": "F2",
+      "1h_change_pct": -0.990846130085643,
+      "6h_change_pct": -0.6610619592997691,
+      "decision": "达到预定晋级条件，建议在另外两套冻结分折确认"
+    }
+  ],
+  "other_splits_trained": false,
+  "combined_features_trained": false,
+  "final_training": false,
+  "test_submission": false,
+  "finished_at_utc": "2026-09-18T15:14:16.610427+00:00"
+}

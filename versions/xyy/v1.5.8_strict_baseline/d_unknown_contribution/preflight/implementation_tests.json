@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "training_performed": false,
+  "synthetic_predictions_saved": false,
+  "evaluation_schema_and_counts": "PASS",
+  "independent_metric_check": "PASS",
+  "raw_rounding_labels_preserved": 25,
+  "resume_and_path_checks": "see seed42.json"
+}

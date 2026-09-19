@@ -1,0 +1,15 @@
+{
+  "status": "COMPLETE",
+  "split_seed": 42,
+  "identity_hash": "405777f954c6be300ae69e81a19dae41b0a5f4b876792023f6086bb2509474df",
+  "independent_verification": "PASS",
+  "formal_fits": 75,
+  "saved_outer_models": 15,
+  "other_splits_trained": false,
+  "final_models_trained": false,
+  "test_submission_created": false,
+  "historical_integrity": "PASS",
+  "recommendation": "E2 达到预定首轮晋级条件：建议在两套固定分折同时确认 E1/E2。当前仍只是 seed42 开发证据，不能直接认定隐藏测试集获益。",
+  "report": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/Results_2026-09-18.md",
+  "finished_at_utc": "2026-09-18T12:22:51.541111+00:00"
+}

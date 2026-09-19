@@ -1,0 +1,24 @@
+{
+  "attempts": [
+    {
+      "started_at_utc": "2026-09-18T05:08:22.976633+00:00",
+      "status": "completed",
+      "command": [
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/bin/python",
+        "-B",
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260918/train_unknown_d.py",
+        "--stage",
+        "cv",
+        "--split-seed",
+        "20260918"
+      ],
+      "fits_this_attempt": 25,
+      "cv_complete": true,
+      "ended_at_utc": "2026-09-18T05:13:04.987884+00:00",
+      "wall_seconds": 282.01088070900005,
+      "cpu_user_seconds": 403.963451,
+      "cpu_system_seconds": 43.53535,
+      "max_rss_kib": 1707620
+    }
+  ]
+}

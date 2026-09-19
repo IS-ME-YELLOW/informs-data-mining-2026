@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "purpose": "Explanatory partition determined by fixed horizon coverage; not a new primary metric or post-hoc routed candidate",
+  "checks": [
+    {
+      "split_seed": 42,
+      "1h_and_6h_predictions_equal_on_common_targets": true,
+      "common_scoreable_rows": 32982,
+      "additive_SSE_identity": "PASS"
+    },
+    {
+      "split_seed": 20260917,
+      "1h_and_6h_predictions_equal_on_common_targets": true,
+      "common_scoreable_rows": 32982,
+      "additive_SSE_identity": "PASS"
+    },
+    {
+      "split_seed": 20260918,
+      "1h_and_6h_predictions_equal_on_common_targets": true,
+      "common_scoreable_rows": 32982,
+      "additive_SSE_identity": "PASS"
+    }
+  ],
+  "source_sha256": "5fec3017ea47f647e83ce1f58748058353b197bedba353a4c8818b064df98540",
+  "input_sha256": {
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/runs/v18_ud01_nested_v1_split42_model42/control_predictions.parquet": "e192420c61bf5c9c9e79db1fa185726ad1d5768ef342bf9db8afd1a50aa4b291",
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260917/runs/v18_ud01_nested_v1_split20260917_model42/control_predictions.parquet": "dd58ac1d93a5c8251d5a2f4d4be12a6130813ff5729a0246d4ef429025553ce2",
+    "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_unknown_contribution/confirmation/split20260918/runs/v18_ud01_nested_v1_split20260918_model42/control_predictions.parquet": "4b95bd607b964360bff2c3c58d60eced653280750e7a4997371a26beaa50e3f1"
+  },
+  "output_sha256": {
+    "horizon_coverage.csv": "4d156bae92f1f7a70f557353e354bfbc6bd16b78607f7c1d782da1f1062d9cf6"
+  }
+}

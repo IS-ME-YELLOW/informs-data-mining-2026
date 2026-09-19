@@ -1,0 +1,33 @@
+{
+  "split_seed": 20260917,
+  "run_id": "v18_tree_nested_v2_split20260917_model42",
+  "attempts": [
+    {
+      "command": [
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/bin/python",
+        "-B",
+        "-u",
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/train_v18.py",
+        "--stage",
+        "cv",
+        "--cv-file",
+        "cv/cv_assignments_balanced_v1_seed20260917.csv",
+        "--model-seed",
+        "42",
+        "--run-id",
+        "v18_tree_nested_v2_split20260917_model42"
+      ],
+      "started_at_utc": "2026-09-17T14:40:03.474592+00:00",
+      "status": "completed",
+      "launcher_pid": 2,
+      "child_pid": 7,
+      "return_code": 0,
+      "ended_at_utc": "2026-09-17T15:19:54.471744+00:00",
+      "wall_seconds": 2390.996969896005,
+      "cpu_user_seconds": 2368.283873,
+      "cpu_system_seconds": 12.435497,
+      "max_rss_kib": 1610376,
+      "cv_complete": true
+    }
+  ]
+}

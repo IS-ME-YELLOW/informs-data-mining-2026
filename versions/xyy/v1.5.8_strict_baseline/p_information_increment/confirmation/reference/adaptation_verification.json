@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "training_performed": false,
+  "trained_cases": [
+    "F2"
+  ],
+  "authorized_splits": [
+    20260917,
+    20260918
+  ],
+  "files": {
+    "information_preflight.py": {
+      "source": "fb0a7de4320acd4ad3ebea6a3fb4d80db99612a1875ae3bf47a6c3c9738d477f",
+      "adapted": "0ad5794824bc43515955536d7847c06bdbff4ed432eb6c8d795077d7d8d5c2aa"
+    },
+    "evaluate_information.py": {
+      "source": "63f000ea13ad38a4fc8fa974ee48a6e39ab4449527ce73afe45f4a44d520375c",
+      "adapted": "4c6dfac6e9e90e767d08defbedf8900935c5e665e6ddc3d4dd5e0c6b564126ca"
+    },
+    "train_information.py": {
+      "source": "88cb26788652901b9dd2ad6bfee29cd47d2e5d23eaaefb3d484425c974a32ff6",
+      "adapted": "6869b3634eebd5a7e4fd50fc7eb88e7aed336caec13784eff527a4f90406873b"
+    },
+    "verify_information.py": {
+      "source": "4115a158859af7518ebf1506ef267ea15103401e641c8ce297fa17d9045c738f",
+      "adapted": "e1075a15763b74f1b8110cc340d2d4f8762d9540449f82aae658c6957f6b1a0a"
+    },
+    "verify_information_exact.py": {
+      "source": "6373f4c46081df01f4fe94ea7aaaa10b52d4594c6ecd62492a59b0292be677bc",
+      "adapted": "e8fe5432a697a0a7e81a1970beb702aeb2b928bec658168237b8dbf9eb66bc55"
+    },
+    "information_training.py": {
+      "source": "06b416c5b051022f54cf866a9daab8ec79830e927bd709091829ace5d0546286",
+      "reuse": "unmodified frozen file"
+    },
+    "build_information_features.py": {
+      "source": "5e0979be28b57aa0ee192c42ae02246e57964acc026dea7d872535625fb8d492",
+      "reuse": "unmodified frozen file"
+    },
+    "independent_features.py": {
+      "source": "d8f7ba02f5a1b68d1668bb0ad27665d824a77a9cd2714df9a9401ce4c26bc225",
+      "reuse": "unmodified frozen file"
+    }
+  },
+  "F0_assembly_and_rank_order_audit_AST": "identical",
+  "new_reference_loader": "explicit same-split frozen E2; no new labels or fitted preprocessing",
+  "fitting_and_feature_math": "unchanged; shared training and immutable input package"
+}

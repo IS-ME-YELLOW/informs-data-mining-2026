@@ -1,0 +1,30 @@
+{
+  "status": "COMPLETE",
+  "split_seed": 20260918,
+  "baseline_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260918_model42",
+  "baseline_identity_hash": "cf16ff6d5e03de01870e79f63b3a2f9a2e2bbc02e8ff2da34e00a219efe9a7fd",
+  "candidate_identity_hash": "5fe64888077a28665225a7683a9dc384386f197e1dde8fbd437a5658007db9ef",
+  "completed_at_utc": "2026-09-17T15:23:46.897806+00:00",
+  "models_reloaded_independently": 100,
+  "projection_independent_verification": "PASS",
+  "files": {
+    "projection/window_metrics.csv": "6c8748c783f6f31bcccdee317ef654a4b7d64956edb463878ccaff91d4cfd4af",
+    "projection/D_component_metrics.csv": "4fde8902810ded941a409a78e69c13f05e817118084a94bb75365b31953c968b",
+    "projection/manifest.json": "320ed4a113d372b9c7b7073a72b40cdf3a45d1827cd7b9c057b099c214a8b8f3",
+    "projection/metrics_comparison.csv": "253b207ec5234aa2be39bf9b2690eb82bc7f4ab458123509916f52ff5aa037be",
+    "projection/verification.json": "e8eb21f9a2edb108e3cd3e67ee3eb5792fc401ebca8fa92e5ac9705432e746d8",
+    "projection/county_metrics.csv": "33e30ed4bbc11583990d677d7e880ebbb682ab395cb395dffb32bbed5416fd24",
+    "projection/candidate_oof_predictions.parquet": "7da21d34217131694ccd32e3306b7ebb3018c0da928d4caba4cb8108fec755e7",
+    "projection/projected_component_predictions.parquet": "f7c08984fe36b0f5c28cd8d3fb5435ad598522706e8f537b0b0ddd69bf20eb5b",
+    "projection/primary_county_influence.csv": "f86da4bbb42cae9200eb8628f722f7fb8c89c7ddda75899b1a3e97676be48373",
+    "projection/known_bounds_train.parquet": "ef78aa2ad9d3c45ffd5d0ff5a549302535300c0aca4b5e67e76b34b01cf45df7",
+    "projection/changed_rows.csv": "32d33ff87a679906e82e73b061f6f0ec3d1fb29e4e977fc42214cbb880386704",
+    "projection/known_bounds_test.parquet": "204f3a38078af2b640a1b47d7bce2756092fe8dc32e903e7a75a0a00d29beaaa",
+    "projection/paired_county_bootstrap.csv": "3515134b7fd858d1c00b877d25824b0722539f218045fe3add49424976a878c6",
+    "projection/fold_metrics.csv": "245cd92187f4622b519081ba10ac112960dfcd4e972cf8fdc2ca18b385b676ca",
+    "projection/candidate_aligned_unique_components.parquet": "d665f94d8863994c466186d00becd4f78fd1f793d7862633272f222003554cb3",
+    "logs/baseline_verification.json": "7d0a5f37ef19e7db9d8adbda93daa15a14bdf07c1f95bfbf2676e61ae74e954b",
+    "logs/projection_evaluation.log": "2d89f5881bf64585908df64c4eb05f33a61d1871eaded4d09e110ec6dca0d932",
+    "logs/projection_verification.log": "e8eb21f9a2edb108e3cd3e67ee3eb5792fc401ebca8fa92e5ac9705432e746d8"
+  }
+}

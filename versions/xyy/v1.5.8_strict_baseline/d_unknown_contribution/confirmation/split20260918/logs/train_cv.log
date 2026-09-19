@@ -1,0 +1,24 @@
+outer0 complete; inner=[141, 277, 219, 167]; refit=201
+outer1 complete; inner=[470, 299, 485, 244]; refit=374
+outer2 complete; inner=[380, 321, 518, 478]; refit=424
+outer3 complete; inner=[223, 202, 293, 310]; refit=257
+outer4 complete; inner=[215, 165, 477, 558]; refit=353
+{
+  "status": "PASS",
+  "protocol": "v18_ud01_nested_v1",
+  "identity_hash": "7b65fe5143afd8ae26498509d95c8a46bef86702492924213540a5330924b8b6",
+  "split_seed": 20260918,
+  "new_models_reloaded": 5,
+  "inner_probes_audited": 20,
+  "referenced_baseline_models": 95,
+  "target_semantics": "U_D_t_target_t01h",
+  "absolute_tolerance": 1e-12,
+  "verifier_sha256": "3f9b54fe53e2862f084c71867d3153bb3fec258c37b25b83b530ed4d2890a741",
+  "verified_at_utc": "2026-09-18T05:13:04.918444+00:00",
+  "source_integrity": "PASS",
+  "all_A_B_C_controls_independently_reconstructed": true,
+  "all_metrics_and_bootstrap_recomputed": true,
+  "future_history_and_outer_label_isolation": "PASS",
+  "unchanged_components_and_horizons": "PASS",
+  "training_performed_by_verifier": false
+}

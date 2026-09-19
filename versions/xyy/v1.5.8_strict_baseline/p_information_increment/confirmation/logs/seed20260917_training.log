@@ -1,0 +1,98 @@
+[001/50] F2 outer0 a inner1: best=97
+[002/50] F2 outer0 a inner2: best=300
+[003/50] F2 outer0 a inner3: best=59
+[004/50] F2 outer0 a inner4: best=32
+[005/50] F2 outer0 a: refit=122, trees=122
+[006/50] F2 outer0 b inner1: best=34
+[007/50] F2 outer0 b inner2: best=40
+[008/50] F2 outer0 b inner3: best=820
+[009/50] F2 outer0 b inner4: best=399
+[010/50] F2 outer0 b: refit=323, trees=323
+[011/50] F2 outer1 a inner0: best=383
+[012/50] F2 outer1 a inner2: best=103
+[013/50] F2 outer1 a inner3: best=57
+[014/50] F2 outer1 a inner4: best=34
+[015/50] F2 outer1 a: refit=144, trees=144
+[016/50] F2 outer1 b inner0: best=442
+[017/50] F2 outer1 b inner2: best=40
+[018/50] F2 outer1 b inner3: best=215
+[019/50] F2 outer1 b inner4: best=168
+[020/50] F2 outer1 b: refit=216, trees=216
+[021/50] F2 outer2 a inner0: best=478
+[022/50] F2 outer2 a inner1: best=354
+[023/50] F2 outer2 a inner3: best=85
+[024/50] F2 outer2 a inner4: best=123
+[025/50] F2 outer2 a: refit=260, trees=260
+[026/50] F2 outer2 b inner0: best=282
+[027/50] F2 outer2 b inner1: best=5
+[028/50] F2 outer2 b inner3: best=635
+[029/50] F2 outer2 b inner4: best=377
+[030/50] F2 outer2 b: refit=324, trees=324
+[031/50] F2 outer3 a inner0: best=401
+[032/50] F2 outer3 a inner1: best=52
+[033/50] F2 outer3 a inner2: best=95
+[034/50] F2 outer3 a inner4: best=40
+[035/50] F2 outer3 a: refit=147, trees=147
+[036/50] F2 outer3 b inner0: best=145
+[037/50] F2 outer3 b inner1: best=50
+[038/50] F2 outer3 b inner2: best=36
+[039/50] F2 outer3 b inner4: best=329
+[040/50] F2 outer3 b: refit=140, trees=140
+[041/50] F2 outer4 a inner0: best=65
+[042/50] F2 outer4 a inner1: best=309
+[043/50] F2 outer4 a inner2: best=120
+[044/50] F2 outer4 a inner3: best=65
+[045/50] F2 outer4 a: refit=139, trees=139
+[046/50] F2 outer4 b inner0: best=195
+[047/50] F2 outer4 b inner1: best=2
+[048/50] F2 outer4 b inner2: best=62
+[049/50] F2 outer4 b inner3: best=203
+[050/50] F2 outer4 b: refit=115, trees=115
+All 50 F2 fits complete; launching independent feature/model verification.
+{
+  "status": "PASS",
+  "identity_hash": "64f8263f5356378124c5e981fcb7c1117ad808c97b46c383b64b7cdbe109484d",
+  "split_seed": 20260917,
+  "verified_at_utc": "2026-09-19T02:27:24.434806+00:00",
+  "verifier_sha256": "e8fe5432a697a0a7e81a1970beb702aeb2b928bec658168237b8dbf9eb66bc55",
+  "new_outer_models": 10,
+  "inner_probes": 40,
+  "formal_fits": 50,
+  "independently_rebuilt_features_used_for_model_predictions": true,
+  "feature_verification": {
+    "status": "PASS",
+    "independent_scalar_neighbors": true,
+    "independent_neighbor_aggregates": true,
+    "raw_history_and_weather_reconstruction": true,
+    "history_cutoff": 71,
+    "nodes": 302,
+    "edges": 2416,
+    "lineage_rows": 347904,
+    "feature_counts": {
+      "F1": 170,
+      "F2": 183
+    },
+    "feature_tolerance": 1e-10,
+    "augmented_features_bitwise_exact": true,
+    "aggregation_reduction": "float64 addition in fixed neighbor rank order"
+  },
+  "scoped_labels_weights_rounds_and_receipts": "PASS",
+  "P_reconstruction_and_all_controls": "PASS",
+  "all_metrics_and_bootstrap_recomputed": "PASS",
+  "long_horizon_and_other_component_invariants": "PASS",
+  "reference_and_feature_identities": "PASS",
+  "prediction_metric_absolute_tolerance": 1e-12,
+  "training_performed_by_verifier": false,
+  "core_verifier_sha256": "e1075a15763b74f1b8110cc340d2d4f8762d9540449f82aae658c6957f6b1a0a",
+  "audit_identity": {
+    "training_identity_hash": "64f8263f5356378124c5e981fcb7c1117ad808c97b46c383b64b7cdbe109484d",
+    "adapter_sha256": "e8fe5432a697a0a7e81a1970beb702aeb2b928bec658168237b8dbf9eb66bc55",
+    "core_verifier_sha256": "e1075a15763b74f1b8110cc340d2d4f8762d9540449f82aae658c6957f6b1a0a",
+    "original_feature_verifier_sha256": "d8f7ba02f5a1b68d1668bb0ad27665d824a77a9cd2714df9a9401ce4c26bc225",
+    "reason": "Only independent summation order corrected; all reconstructed predictors now bitwise exact.",
+    "model_or_saved_prediction_changes": false,
+    "tolerance_relaxed": false,
+    "additional_fits": 0
+  },
+  "audit_identity_hash": "e1c83d7118fced3cdd1373b6198d4649643f6e3b4a911fec999285cc0d2bfff8"
+}

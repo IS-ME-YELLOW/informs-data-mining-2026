@@ -1,0 +1,14 @@
+        horizon     n   A_rmse   B_rmse   C_rmse    A_mae    B_mae    C_mae  C_minus_B_rmse_delta  C_minus_B_rmse_change_pct  C_minus_A_rmse_change_pct  C_minus_B_sse_reduction  changed_predictions_C_vs_B
+osi_target_t01h 34177 0.012504 0.012475 0.012380 0.003581 0.003579 0.003573             -0.000095                  -0.762597                  -0.987287                 0.080818                       16724
+osi_target_t06h 32982 0.010871 0.010871 0.010926 0.003348 0.003348 0.003361              0.000055                   0.507794                   0.507794                -0.039683                       15886
+osi_target_t24h 28680 0.008710 0.008710 0.008710 0.002956 0.002956 0.002956              0.000000                   0.000000                   0.000000                 0.000000                           0
+osi_target_t48h 22944 0.007896 0.007896 0.007896 0.002250 0.002250 0.002250              0.000000                   0.000000                   0.000000                 0.000000                           0
+comparison         horizon  improved_counties  worsened_counties  unchanged_counties  improved_rows  worsened_rows  unchanged_rows  sse_reduction  morrow_sse_reduction  morrow_fraction_of_net_sse_reduction
+ C_minus_B osi_target_t01h                124                115                   0           8132           8592           17453       0.080818              0.074410                              0.920710
+ C_minus_A osi_target_t01h                126                113                   0           8144           8600           17433       0.104987              0.098518                              0.938384
+ C_minus_B osi_target_t06h                111                128                   0           7689           8197           17096      -0.039683             -0.005562                              0.140156
+ C_minus_A osi_target_t06h                111                128                   0           7689           8197           17096      -0.039683             -0.005562                              0.140156
+ C_minus_B osi_target_t24h                  0                  0                 239              0              0           28680       0.000000              0.000000                                   NaN
+ C_minus_A osi_target_t24h                  0                  0                 239              0              0           28680       0.000000              0.000000                                   NaN
+ C_minus_B osi_target_t48h                  0                  0                 239              0              0           22944       0.000000              0.000000                                   NaN
+ C_minus_A osi_target_t48h                  0                  0                 239              0              0           22944       0.000000              0.000000                                   NaN

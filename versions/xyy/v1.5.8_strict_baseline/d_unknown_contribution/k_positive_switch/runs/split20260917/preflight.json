@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "gate_rows": 784,
+  "gate_counties": 207,
+  "strict_positive_including_tiny_values": true,
+  "future_P_and_unused_U_perturbation_invariance": true,
+  "row_order_and_invalid_inputs": "PASS",
+  "all_6_24_48h_controls_exactly_equal_B": true,
+  "training_performed": false
+}

@@ -1,0 +1,91 @@
+{
+  "identity": {
+    "version": "information_features_v1",
+    "config_sha256": "f8163502ba2a68a83ef511915b379086dc9008130ffcd48ea3f5dddaeec0204e",
+    "builder_sha256": "7ec7c3bddb107b6797124d6820060ad67862d28fc6306dd16d1b7422b7e71ff2",
+    "inputs": {
+      "features_train": "2d4753ed3a4cb4938ea8af5fe54cb80b04d8509ede84766bd786fef5f3dc6dff",
+      "features_test": "75ce0e77c9caaf4885ef89bc6289d6e42258574b00e81ff6509dbe23b0f01d09",
+      "meta_train": "c18e97ee2ee78d91e41b50766eda5aecb1e034de96c7704c80e41a80b841a463",
+      "meta_test": "dd74922b79911321f411f63e94c2487cd1e865751e7f92b78e43145c919c908a",
+      "feature_names": "441fdffaa0fccd80d8ac2e7d84f43d85d1ce7ff78a6dc367122138e90593a0f4"
+    },
+    "geo_sha256": {
+      "county_terrain.csv": "3aa69b31384cdbaad46756d999981dd32049a85903b82ced32a2cf193fe92c44",
+      "c_16ap26.dbf": "dd5b045e67bb19b6f6da7f8f79fe30df8e818eb3b2ea9a53732043e5673ef56f",
+      "c_16ap26.prj": "f92a8f3964b01f8797721b2ad0cb5c28c5ea47c20ac4ed5d19a1c8006bc8443a",
+      "dem_manifest.json": "7390a83a9c86ad4b6f266d6e2395166ae1ff487d12d13b40ee1ec55fcb23268b",
+      "build_terrain_source.py": "63c9d6962f1e62ab3ef74d99b10e95da1c1dfc579167bfb58d12e30ccb7ae928",
+      "spatial_source.py": "77f44286321da3b45f06a9492618abf921f6093f853eb4a87efd67480a0447f1"
+    },
+    "whitelist": [
+      "last_P_t",
+      "last_N_t",
+      "last_D_t",
+      "last_R_t",
+      "osi_trend_last6h",
+      "gust_t",
+      "gust_at_t1h",
+      "gust_max_next_6h",
+      "gust_mean_next_6h"
+    ],
+    "F1_added_columns": [
+      "dem_elevation_mean_m",
+      "dem_elevation_std_m",
+      "dem_elevation_min_m",
+      "dem_elevation_max_m",
+      "dem_slope_mean_deg",
+      "dem_slope_std_deg",
+      "dem_terrain_ruggedness"
+    ],
+    "F2_added_columns": [
+      "nbr8_mean_last_P_t",
+      "nbr8_max_last_P_t",
+      "nbr8_mean_last_N_t",
+      "nbr8_max_last_N_t",
+      "nbr8_mean_last_D_t",
+      "nbr8_max_last_D_t",
+      "nbr8_mean_last_R_t",
+      "nbr8_max_last_R_t",
+      "nbr8_mean_osi_trend_last6h",
+      "nbr8_max_osi_trend_last6h",
+      "nbr8_mean_gust_t",
+      "nbr8_max_gust_t",
+      "nbr8_mean_gust_at_t1h",
+      "nbr8_max_gust_at_t1h",
+      "nbr8_mean_gust_max_next_6h",
+      "nbr8_max_gust_max_next_6h",
+      "nbr8_mean_gust_mean_next_6h",
+      "nbr8_max_gust_mean_next_6h",
+      "self_minus_nbr8_mean_last_P_t",
+      "self_minus_nbr8_mean_gust_at_t1h"
+    ],
+    "neighbors": {
+      "k": 8,
+      "radius_km": 6371.0088,
+      "directed": true,
+      "self_edges": false,
+      "weights": "uniform 1/8",
+      "universe_count": 302,
+      "tie_break": "distance then normalized FIPS",
+      "known_history_end": 71,
+      "weather_window": "[t,min(t+6,215)]"
+    }
+  },
+  "identity_hash": "c18041296d8096f459c8513aed8e59cf293c5888f824ff5bc361170f40e1dd22",
+  "files": {
+    "F2_test.parquet": "9388fa95df79fd65f7ad554979dd6dcc5664655fa8f1cb26fadaeb0df05b8058",
+    "F2_feature_names.json": "e20d57a9236d0d5f9faa772cfcfdcf7b86669b0f99f74512f78835c35d799876",
+    "neighbors_k8.csv": "75049989f87f603d3acd5ada80ab66d2316ffb8a639e0e643093003c1cd32425",
+    "terrain_snapshot.parquet": "ede931ebaf61de1256e17a6e02e9b2ee8110a17c952a8d420a902105e5c47feb",
+    "F2_train.parquet": "385e88428ddca84989f1a65f688282f4e4c29380f2a9b93dcc07dce509ed56b1",
+    "F1_test.parquet": "8b683a20cc3af22a19a6da7a2251991f150ffc58ec2e3fbec37a54d23158ae1c",
+    "coordinates.csv": "bdab4e6adfe056c5a6ea43ab8b4fce976acb922c9afba67a3cbaca57f590decf",
+    "allowed_history_weather.parquet": "714f983c79723ad3cf2014e817208a42d49a2218fd660e0ca667fc7bf1d7cd81",
+    "F1_feature_names.json": "fd9a88d1ef7292ff37b91c6853421ae46c3efacb5a642be8ad853a13550a4b73",
+    "neighbor_input_dependencies.parquet": "0594a03e366cd41bce03b91b3b931eb48a09f251d9951032818c2a66b866aa4d",
+    "meta_train.parquet": "a3eee4a8b6224813cdfc6927d064f3eb0e3830a4d5e62139ee6db9838bc6b2e6",
+    "meta_test.parquet": "0a1851a8b57adedd2dec7b7b7377338b439265ca792577eeae3547b21b490f93",
+    "F1_train.parquet": "3274ae265b0c921bfe9c86b3418870253c64663cdb6465ebf38d34fa90b53449"
+  }
+}

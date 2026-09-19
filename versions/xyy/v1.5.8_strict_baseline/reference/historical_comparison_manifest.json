@@ -1,0 +1,17 @@
+[
+  {
+    "source": "versions/xyy/v1.5.8/oof_predictions.parquet",
+    "copy": "reference/historical_v18_oof_predictions.parquet",
+    "sha256": "004979c2f7f688dc6b6bab8592a88d57c02de8bfd7686ee3f42e4bf2da2c906b"
+  },
+  {
+    "source": "versions/xyy/v1.5.8/model_manifest.csv",
+    "copy": "reference/historical_v18_model_manifest.csv",
+    "sha256": "7124e84142dfdb9be1aeb41f38f7f48e3573ee0d23de00d356be50da117fb628"
+  },
+  {
+    "source": "versions/xyy/v1.5.8/summary_metrics.csv",
+    "copy": "reference/historical_v18_summary_metrics.csv",
+    "sha256": "2dd0e41f74d2a7c75727fd1a8846c714b48985820acb9188de3f6231326aa7bf"
+  }
+]

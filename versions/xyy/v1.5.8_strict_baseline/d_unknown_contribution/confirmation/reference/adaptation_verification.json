@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "split_seed": 20260917,
+      "formula_and_scoped_U_target": "AST_IDENTICAL",
+      "training_loop": "AST_IDENTICAL",
+      "evaluation_and_independent_numerics": "BYTE_IDENTICAL",
+      "independent_verifier": "IDENTICAL_EXCEPT_SPLIT_METADATA"
+    },
+    {
+      "split_seed": 20260918,
+      "formula_and_scoped_U_target": "AST_IDENTICAL",
+      "training_loop": "AST_IDENTICAL",
+      "evaluation_and_independent_numerics": "BYTE_IDENTICAL",
+      "independent_verifier": "IDENTICAL_EXCEPT_SPLIT_METADATA"
+    }
+  ],
+  "files": {
+    "split20260917/unknown_d_evaluation.py": "d4480dc3157842e4cad1b3fe9d09c3d16abc9ceac3a6bfd92cf36e836b5175d5",
+    "split20260917/metric_helpers.py": "b7e9664d715745cc2411d1ff27110f64cdd05eb03395ea287ed58033dff162bd",
+    "split20260917/known_history.py": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466",
+    "split20260917/verify_unknown_d.py": "3f9b54fe53e2862f084c71867d3153bb3fec258c37b25b83b530ed4d2890a741",
+    "split20260917/analyze_unknown_d.py": "b4e4b6bf2c3d69ec9feb38b5e02af20a70fda861e8b97ae0a7fa3790ceac187b",
+    "split20260917/independent_numerics.py": "d0786a9fb7e07120a7ec7540de7ed517b766f48af633d3109dfe61a0cf269afb",
+    "split20260917/train_unknown_d.py": "e40ab93f51401bf3a319b4f2f5ae8aa5ace79e78dd49f9fbe044d1b57a4883fc",
+    "split20260917/unknown_d_protocol.py": "c69ff90366e7348e4b209b14cc290873a5a9a8b2ad4fa8917b19c182f54f58cb",
+    "split20260917/experiment_config.json": "701add414b846428895c7577535b607ad4cf864f5867ecf70c74a92c515bc106",
+    "split20260918/unknown_d_evaluation.py": "d4480dc3157842e4cad1b3fe9d09c3d16abc9ceac3a6bfd92cf36e836b5175d5",
+    "split20260918/metric_helpers.py": "b7e9664d715745cc2411d1ff27110f64cdd05eb03395ea287ed58033dff162bd",
+    "split20260918/known_history.py": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466",
+    "split20260918/verify_unknown_d.py": "3f9b54fe53e2862f084c71867d3153bb3fec258c37b25b83b530ed4d2890a741",
+    "split20260918/analyze_unknown_d.py": "b4e4b6bf2c3d69ec9feb38b5e02af20a70fda861e8b97ae0a7fa3790ceac187b",
+    "split20260918/independent_numerics.py": "d0786a9fb7e07120a7ec7540de7ed517b766f48af633d3109dfe61a0cf269afb",
+    "split20260918/train_unknown_d.py": "e40ab93f51401bf3a319b4f2f5ae8aa5ace79e78dd49f9fbe044d1b57a4883fc",
+    "split20260918/unknown_d_protocol.py": "c69ff90366e7348e4b209b14cc290873a5a9a8b2ad4fa8917b19c182f54f58cb",
+    "split20260918/experiment_config.json": "1aecc30e87ee89126c26efa470baa98b4ca23e71560a0e80beb0c98d45d54cbd"
+  },
+  "checker_sha256": "6956d8312d949803e24aee67e573ed7c5b6595f1573034310d07fd2ca5480fb0"
+}

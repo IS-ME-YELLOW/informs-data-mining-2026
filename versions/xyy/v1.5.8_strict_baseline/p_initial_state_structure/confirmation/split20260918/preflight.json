@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "training_performed": false,
+  "features": 163,
+  "train_counties": 239,
+  "test_counties": 63,
+  "scoreable_rows": {
+    "osi_target_t01h": 34177,
+    "osi_target_t06h": 32982,
+    "osi_target_t24h": 28680,
+    "osi_target_t48h": 22944
+  },
+  "p_zero_counties": 53,
+  "a_support_rows": 26598,
+  "b_support_rows": 34177,
+  "target_reconstruction_max_abs": 5.551115123125783e-17,
+  "checks": [
+    "source hashes and E0 replay",
+    "label reconstruction and endpoints",
+    "weight normalization and custom metric",
+    "future-history perturbation/deletion and positive control",
+    "all outer labels excluded before transform",
+    "all inner county sets isolated",
+    "wrong support/key/path rejection",
+    "same-horizon and long-horizon invariants",
+    "test history only, no test forecasts"
+  ],
+  "identity_hash": "7dd79f8909a8763d55294468bd27939b6d9c4b28596a34238d21701eb0c89e16",
+  "split_seed": 20260918,
+  "resume_identity_rejection": "PASS"
+}

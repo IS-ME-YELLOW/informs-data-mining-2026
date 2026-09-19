@@ -1,0 +1,5 @@
+{
+  "training_performed": false,
+  "reason": "Preflight-only revision: narrow feature builder API before fitting; raw Test file lacks osi and its legal observed-history OSI must be reconstructed and rounded to four decimals for independent audit. Feature definitions remain unchanged.",
+  "previous_feature_build": "versions/xyy/v1.5.8_strict_baseline/p_information_increment/preflight/development_feature_build"
+}

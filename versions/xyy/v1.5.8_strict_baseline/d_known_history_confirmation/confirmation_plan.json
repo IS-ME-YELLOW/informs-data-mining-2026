@@ -1,0 +1,54 @@
+{
+  "created_at_utc": "2026-09-17T14:39:28.160540+00:00",
+  "experiment": "D_known_history_projection_frozen_split_confirmation",
+  "protocol": "v18_tree_nested_v2",
+  "splits": [
+    {
+      "split_seed": 20260917,
+      "model_seed": 42,
+      "cv_file": "cv/cv_assignments_balanced_v1_seed20260917.csv",
+      "cv_sha256": "841e20daaacce2c43a63eed3ebb296c01b05e7811456f09ee16cc5c32bc98a0e",
+      "run_id": "v18_tree_nested_v2_split20260917_model42",
+      "baseline_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260917_model42",
+      "projection_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_confirmation/split20260917/projection",
+      "logs_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_confirmation/split20260917/logs"
+    },
+    {
+      "split_seed": 20260918,
+      "model_seed": 42,
+      "cv_file": "cv/cv_assignments_balanced_v1_seed20260918.csv",
+      "cv_sha256": "0e16d14b6d6d5342ec34649e167521356d72af24d4a41538b6a124626e1b6a4f",
+      "run_id": "v18_tree_nested_v2_split20260918_model42",
+      "baseline_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split20260918_model42",
+      "projection_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_confirmation/split20260918/projection",
+      "logs_dir": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_confirmation/split20260918/logs"
+    }
+  ],
+  "anchor_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/runs/v18_tree_nested_v2_split42_model42",
+  "anchor_projection": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/d_known_history_projection/results_seed42",
+  "settings": {
+    "model_seed": 42,
+    "max_rounds": 2000,
+    "early_stopping_rounds": 100,
+    "diagnostic": false,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20260910
+  },
+  "baseline_code_sha256": {
+    "config.py": "371c5c99aa6a363577b0c7d970eea0a3f820cf2b075ad15a3b12e2ea2696312b",
+    "protocol.py": "3c62ba06f097cda4367c535a72e915b23ab616c06a87df916693e864d9de5a16",
+    "scoped_training.py": "466944c287d14f1a19d3a1be52c509dc60026694326c62c1c0b169cd8c451e0e",
+    "evaluation.py": "9c9d2026f4117ae20dba84eb8bb1442d3e455fcec5173f8c4a9c102a9a6108b8",
+    "run_artifacts.py": "44082287033474e52aa081ea57d3fcd2344a6167bc00d2d8c44061f21c04ea1b",
+    "train_v18.py": "d4826adccd5de8d4d82ff4be7fa3c561707f60a06852ba3583a7942ea9bfef1c",
+    "verify_artifacts.py": "a8e4d0b60a11b0bf7d2905a3e5dca35cd0c530bd4164caa78c8c8068333d80af"
+  },
+  "fixed_projection_source_sha256": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466",
+  "fixed_projection_plan_sha256": "dd4c9eb8735210bc2bf1946a3f82b8e5824ba1a37507b64b1d5b2d73a0ac5fae",
+  "expected_fits_per_split": 500,
+  "expected_saved_models_per_split": 100,
+  "primary": "fixed v18_rule; compare projected and unprojected within each split",
+  "confirmation_rule": "Report both frozen confirmation splits and the seed42 development reference; no seed selection, no model-seed change, no post-hoc county-specific rules. Do not pool OOF as independent observations or select a horizon router.",
+  "no_final_training_or_submission": true,
+  "execution_policy": "Two independent baseline processes, each using unchanged deterministic single-thread LightGBM; separate run and log directories."
+}

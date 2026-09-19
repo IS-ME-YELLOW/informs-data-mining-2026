@@ -1,0 +1,7 @@
+horizon,comparison,better_counties,worse_counties,unchanged_counties,better_folds,net_sse_reduction
+osi_target_t01h,F1_minus_F0,110,129,0,4,0.05691482361031541
+osi_target_t01h,F2_minus_F0,136,103,0,4,0.08305691749688415
+osi_target_t01h,F2_minus_F1,142,97,0,3,0.026142093886568716
+osi_target_t06h,F1_minus_F0,111,128,0,3,0.015084649986408852
+osi_target_t06h,F2_minus_F0,132,107,0,5,0.044747724592154876
+osi_target_t06h,F2_minus_F1,142,97,0,4,0.029663074605746017

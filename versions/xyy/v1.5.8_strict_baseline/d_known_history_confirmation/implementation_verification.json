@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "projection_byte_identical_to_seed42": true,
+  "all_evaluation_and_verifier_helper_functions_AST_identical": true,
+  "formula_routing_diagnostics_and_bootstrap_unchanged": true,
+  "seed42_all_controls_replayed_exactly": true,
+  "training_performed": false,
+  "path_layout_checked": true,
+  "projector_sha256": "ac191c8ab8c27cd5a6f72e9e127fdfa33a7295579f2f3f7e6a858f1f29c21466"
+}

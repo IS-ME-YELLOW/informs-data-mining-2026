@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-09-17T15:30:18.458701+00:00",
+  "frozen_implementation": "PASS",
+  "summary_all_sources_and_outputs": "PASS",
+  "report_primary_metrics": "PASS",
+  "previous_files_checked": 287,
+  "previous_files_unchanged": 287,
+  "previous_file_changes": [],
+  "new_models": 200,
+  "new_fits": 1000,
+  "splits": [
+    {
+      "split_seed": 20260917,
+      "outer_models": 100,
+      "inner_probes": 400,
+      "total_fits": 500,
+      "model_reload": "PASS",
+      "projection_verification": "PASS",
+      "independent_county_isolation_audit": "PASS",
+      "baseline_identity_hash": "5183d8644fd36b8e48db0da824cab6582ceb8637d7e85ace5be6cd52e301e9bc",
+      "candidate_identity_hash": "b0f7b4038c71b2f6baac053fff776f1e6d1cd7b644b755ebb6efe0bb966d66ed"
+    },
+    {
+      "split_seed": 20260918,
+      "outer_models": 100,
+      "inner_probes": 400,
+      "total_fits": 500,
+      "model_reload": "PASS",
+      "projection_verification": "PASS",
+      "independent_county_isolation_audit": "PASS",
+      "baseline_identity_hash": "cf16ff6d5e03de01870e79f63b3a2f9a2e2bbc02e8ff2da34e00a219efe9a7fd",
+      "candidate_identity_hash": "5fe64888077a28665225a7683a9dc384386f197e1dde8fbd437a5658007db9ef"
+    }
+  ],
+  "final_training_performed": false,
+  "test_predictions_or_submissions_created": false
+}

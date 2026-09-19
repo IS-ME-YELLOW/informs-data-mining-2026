@@ -1,0 +1,52 @@
+{
+  "deliverables_verified": true,
+  "training_performed": false,
+  "existing_audited_asset_count": 174,
+  "existing_audited_code_data_models_predictions_and_seed42_unchanged": true,
+  "all_three_assignments_reproduced_and_balanced": true,
+  "new_split_seeds": [
+    20260917,
+    20260918
+  ],
+  "feature_causality_counties": 302,
+  "feature_causality_columns": 163,
+  "future_outage_nan_and_large_constant_invariance": true,
+  "historical_numeric_model_reproduction_passed": true,
+  "all_120_model_feature_name_orders_match": true,
+  "historical_model_hash_mismatch_count": 120,
+  "formal_training_ready": false,
+  "formal_training_blockers": [
+    "relocated paths",
+    "outer early stopping",
+    "CV/run/resume identity",
+    "strict missing-prediction validation and read-only preflight"
+  ],
+  "new_review_file_sha256": {
+    "V18_Precondition_Audit_2026-09-17.md": "67fc6401046d99517844440d02921c6042a21c50e8a99b69b0104bd093e10e05",
+    "V18_Precondition_Modification_Plan_2026-09-17.md": "7c3ed18422a87130279e18349e0d105d947ca0e0a8ec057285bc112570febfd8",
+    "audit_v18_prerequisites.py": "fc685889b5f55a0cb887e175ebe869cde5b7c82217bc87ae7ff1acf47f184a9f",
+    "check_feature_causality.py": "5545e0b43d40cbb959779964fc1766192a94b1c6610e62611b3c28dfac2df818",
+    "cv_partition_comparisons.csv": "31a6688be1c92e8e85652301d437b308fe9e9bb3631739742d98f237ffea582a",
+    "cv_stratum_counts.csv": "e8654ec5882706dcc1c67d1390dd57eb66f50d7944a20988301f3f2aa4cac43d",
+    "cv_tail_coverage_diagnostics.csv": "b11c052580915fb06b49eed0b785a99ed5f29d5ae5e96ca8571e8580a6a6a805",
+    "feature_causality_all_counties.csv": "c3ff08c6b30c95506297b62302e7dc019eefa6022751e8cdba799b78a8ff1ed5",
+    "feature_causality_shard0.csv": "1ca743b4e6818f038b12746047ab997866c47822fa9b7d9fb6a1f01257482874",
+    "feature_causality_shard0.json": "6c302ac2a7442f7fc6fd10a50d54608da617635415382c649a9753aeadf63c0f",
+    "feature_causality_shard1.csv": "1f40e3b43d60ee2cbd8e3fb55aa5723396d89a40ad708ee6720e9f45cb184e1d",
+    "feature_causality_shard1.json": "3c72bd75df8d3afe3e9d2de3f3936d6b4489ab833a3fa6ae9766d39c2de57bd0",
+    "feature_causality_shard2.csv": "26c4f5ff0e99a2a7baf82d1f8787038085a00032bdefa70a2026c3e3c8088895",
+    "feature_causality_shard2.json": "676ace658fe32fd8e02d391202c3986ab6b1dfae24e9cbe1382ab7db7ea1e591",
+    "feature_causality_shard3.csv": "6db4db54cb0b6f26c7e2f11b951f2879058db07924daff7466c4511477e109ac",
+    "feature_causality_shard3.json": "1748b2e5e8728fe72dd4a06977930e2ad79602f988aaeeea247e0576684c126b",
+    "feature_causality_verification.json": "b25241fe860e20adaef0a082c4fffeb4c4aae8237a026adfcee2565b566766fc",
+    "focus_county_fold_assignments.csv": "e4204f14a59ef76e9c015d3d953c0af8f6267060d36e9db48c2a395e1cd01d35",
+    "generate_cv_assignments.py": "a1b0687020384cddf3a1ec68727b8ad59ab1c9e4061d5b533203ac908266bc88",
+    "historical_input_hash_audit.csv": "246a518879a19270dc1eac29f1f16bcfdbb29800cedad37eac97f1654623c3dd",
+    "prerequisite_audit.json": "b9b60d002767a46a773fc4fe4e0ee1d1ca8d9835f988936f6a6d91ce55dcd05f",
+    "recomputed_v18_metrics.csv": "1341c93326ee2e3608f13038ff34448e2534cb9890348648eadeb92496d52b9f",
+    "saved_model_reload_audit.csv": "f9a75c68330d8497123e817da058a2adaabe9ef73e853511b7f4d337a226da13",
+    "saved_model_verification.json": "7a9d08cc49cd4d0e18dc0012c96e6d4013cdb8d985c7fa235266c375b53fd588",
+    "verify_precondition_deliverables.py": "1083f5821f55dce63cd9d853f902e6b826463d8ba7fb0806f5d83b4822e9469d",
+    "verify_saved_v18.py": "4cc8a1196e5f32e33a69518540aeae539978c7a42e2a3bcdec73a74c1d93bdcf"
+  }
+}

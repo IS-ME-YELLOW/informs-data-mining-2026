@@ -1,0 +1,35 @@
+{
+  "attempts": [
+    {
+      "start_utc": "2026-09-18T15:00:32.738308+00:00",
+      "status": "failed",
+      "fits_this_attempt": 100,
+      "command": [
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/bin/python",
+        "-B",
+        "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/train_information.py",
+        "--stage",
+        "cv",
+        "--split-seed",
+        "42"
+      ],
+      "error": "RuntimeError('Independent verification failed:                         ~~~~^^\\n  File \"/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/verify_information.py\", line 224, in main\\n    run=HERE/\\'runs/v18_pinfo_v1_split42_model42\\';result=verify(run,args.unfrozen)\\n                                                        ~~~~~~^^^^^^^^^^^^^^^^^^^\\n  File \"/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/verify_information.py\", line 115, in verify\\n    close(frame[f\\'pred_{k}_raw\\'],raw[case][k]);exact(frame[f\\'source_{k}_model_id\\'],ids[case][k])\\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/independent_numerics.py\", line 13, in close\\n    np.testing.assert_allclose(a, b, rtol=0, atol=1e-12, equal_nan=True)\\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/lib/python3.13/site-packages/numpy/testing/_private/utils.py\", line 1780, in assert_allclose\\n    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),\\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n                         verbose=verbose, header=header, equal_nan=equal_nan,\\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n                         strict=strict)\\n                         ^^^^^^^^^^^^^^\\n  File \"/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/lib/python3.13/site-packages/numpy/testing/_private/utils.py\", line 988, in assert_array_compare\\n    raise AssertionError(msg)\\nAssertionError: \\nNot equal to tolerance rtol=0, atol=1e-12\\n\\nMismatched elements: 12 / 34416 (0.0349%)\\nFirst 5 mismatches are at indices:\\n [1311]: 0.27077347145047415 (ACTUAL), 0.2836089433883003 (DESIRED)\\n [2714]: 0.0034028840176026326 (ACTUAL), 0.0034750672062054547 (DESIRED)\\n [7075]: 0.09002854555739843 (ACTUAL), 0.09099429061367476 (DESIRED)\\n [18027]: 0.17400623426566647 (ACTUAL), 0.17533727744039432 (DESIRED)\\n [20594]: 0.9423131784265545 (ACTUAL), 0.943632590318287 (DESIRED)\\nMax absolute difference among violations: 0.02104538\\nMax relative difference among violations: 0.06504972\\n ACTUAL: array([0.657033, 0.65546 , 0.651892, ...,      nan,      nan,      nan],\\n      shape=(34416,))\\n DESIRED: array([0.657033, 0.65546 , 0.651892, ...,      nan,      nan,      nan],\\n      shape=(34416,))\\n')",
+      "end_utc": "2026-09-18T15:06:06.607896+00:00",
+      "wall_seconds": 334.3544666710077,
+      "cpu_user_seconds": 323.883618,
+      "cpu_system_seconds": 2.652218,
+      "max_rss_kib": 1789348
+    },
+    {
+      "phase": "independent_audit_finalization",
+      "start_utc": "2026-09-18T15:11:40.475063+00:00",
+      "status": "completed",
+      "fits_this_attempt": 0,
+      "reason": "Correct independent float64 summation order; preserve all trained artifacts",
+      "independent_verification": "PASS",
+      "audit_identity_hash": "65cb8692b989e770ad80de42d40e9f764c380669091a63753b32b6ea5dd1a2a7",
+      "end_utc": "2026-09-18T15:12:07.744399+00:00",
+      "wall_seconds": 27.26888308400521
+    }
+  ]
+}

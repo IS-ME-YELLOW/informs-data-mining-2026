@@ -1,0 +1,5 @@
+horizon,confirmation_splits,mean_within_split_rmse_delta_C_vs_B,mean_within_split_rmse_change_pct_C_vs_B,min_within_split_rmse_change_pct_C_vs_B,max_within_split_rmse_change_pct_C_vs_B
+osi_target_t01h,2,-9.681778010525461e-05,-0.8123172964148551,-0.8620378588080846,-0.7625967340216255
+osi_target_t06h,2,3.707283452169651e-05,0.3485239685213637,0.18925351097878185,0.5077944260639455
+osi_target_t24h,2,0.0,0.0,0.0,0.0
+osi_target_t48h,2,0.0,0.0,0.0,0.0

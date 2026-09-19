@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/verify_information.py", line 229, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/verify_information.py", line 224, in main
+    run=HERE/'runs/v18_pinfo_v1_split42_model42';result=verify(run,args.unfrozen)
+                                                        ~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/verify_information.py", line 115, in verify
+    close(frame[f'pred_{k}_raw'],raw[case][k]);exact(frame[f'source_{k}_model_id'],ids[case][k])
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_initial_state_structure/independent_numerics.py", line 13, in close
+    np.testing.assert_allclose(a, b, rtol=0, atol=1e-12, equal_nan=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/lib/python3.13/site-packages/numpy/testing/_private/utils.py", line 1780, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         verbose=verbose, header=header, equal_nan=equal_nan,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         strict=strict)
+                         ^^^^^^^^^^^^^^
+  File "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/.venv/lib/python3.13/site-packages/numpy/testing/_private/utils.py", line 988, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=0, atol=1e-12
+
+Mismatched elements: 12 / 34416 (0.0349%)
+First 5 mismatches are at indices:
+ [1311]: 0.27077347145047415 (ACTUAL), 0.2836089433883003 (DESIRED)
+ [2714]: 0.0034028840176026326 (ACTUAL), 0.0034750672062054547 (DESIRED)
+ [7075]: 0.09002854555739843 (ACTUAL), 0.09099429061367476 (DESIRED)
+ [18027]: 0.17400623426566647 (ACTUAL), 0.17533727744039432 (DESIRED)
+ [20594]: 0.9423131784265545 (ACTUAL), 0.943632590318287 (DESIRED)
+Max absolute difference among violations: 0.02104538
+Max relative difference among violations: 0.06504972
+ ACTUAL: array([0.657033, 0.65546 , 0.651892, ...,      nan,      nan,      nan],
+      shape=(34416,))
+ DESIRED: array([0.657033, 0.65546 , 0.651892, ...,      nan,      nan,      nan],
+      shape=(34416,))
