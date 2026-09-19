@@ -1,0 +1,18 @@
+{
+  "identity_hash": "0a019474a437758214bb2eb3de8e13fb0a112320f6c69df0fe76b41166788be4",
+  "artifacts": {
+    "candidate_predictions.parquet": "14de0ef2852096837b77a3ffec4240de2eb0b0139a7eedb7a1eb4624f9e82d46",
+    "outer_raw_predictions.parquet": "efcc5da3cfc7db889224b23e0127abcd8f9347f00f6649bbbc6ff089df6b9f22",
+    "inner_anchor_predictions.parquet": "23e3d931bbe1147f07787c800a5660bfc7b5816a4eb12e68a75e01e66184a101",
+    "thresholds.parquet": "f6f5fbce0010e5ec20c6ddff4940948ba12897fd4f867cb9d924a06b15987012",
+    "summary_metrics.csv": "fb695e36a258f1f955e423208e706bcadea5075a44562f3482cbac3032153121",
+    "candidate_deltas.csv": "7d1e8e2383abe486adaaa9f5789e85313414263073b605ad8971d74e560f4d89",
+    "fold_metrics.csv": "f4c20f6ffea7384f780e38edc0f965426fd90cdb5fbcf09ed70e345d654ffc7d",
+    "county_metrics.csv": "8918a8ac49527f765a58af158e5fb77d731434e2d411f32906b3597f64d5192b",
+    "target_day_metrics.csv": "4429052f99cc6369ce58f15a09fb789dc039489ef7bf8f367a00a3512b7699e5",
+    "gate_diagnostics.csv": "3c4e0339091a8881531df13e171453f5fdb8763b25a48fe7448ece5c0ac51bea",
+    "source_error_correlations.csv": "6d94cca45c7448bb478a3de653f2fae1750925ded568a12d8725b711b9171648",
+    "paired_county_bootstrap.csv": "31089be0d735dcb4ae22a371b744c434c87a9511da2b9161b3d67335c51b4768",
+    "Results.md": "98e9c3dd3ad06ed564e39147583607539bf3b1f254537c3e30f31775674b97e2"
+  }
+}

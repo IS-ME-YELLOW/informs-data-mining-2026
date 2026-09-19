@@ -1,0 +1,39 @@
+{
+  "python": "3.11.13 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:03:15) [MSC v.1929 64 bit (AMD64)]",
+  "executable": "C:\\Users\\Stella\\.conda\\envs\\best-route\\python.exe",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "modules": {
+    "numpy": {
+      "version": "2.3.3",
+      "path": "C:\\Users\\Stella\\.conda\\envs\\best-route\\Lib\\site-packages\\numpy\\__init__.py"
+    },
+    "pandas": {
+      "version": "2.3.3",
+      "path": "C:\\Users\\Stella\\.conda\\envs\\best-route\\Lib\\site-packages\\pandas\\__init__.py"
+    },
+    "pyarrow": {
+      "version": "21.0.0",
+      "path": "C:\\Users\\Stella\\.conda\\envs\\best-route\\Lib\\site-packages\\pyarrow\\__init__.py"
+    },
+    "scipy": {
+      "version": "1.16.2",
+      "path": "C:\\Users\\Stella\\.conda\\envs\\best-route\\Lib\\site-packages\\scipy\\__init__.py"
+    },
+    "sklearn": {
+      "version": "1.7.2",
+      "path": "C:\\Users\\Stella\\.conda\\envs\\best-route\\Lib\\site-packages\\sklearn\\__init__.py"
+    },
+    "lightgbm": {
+      "version": "4.7.0",
+      "path": "D:\\Stella\\Git\\informs-data-mining-2026\\.python_packages\\lightgbm\\__init__.py"
+    },
+    "xgboost": {
+      "version": "3.2.0",
+      "path": "D:\\Stella\\Git\\informs-data-mining-2026\\.python_packages\\xgboost\\__init__.py"
+    },
+    "catboost": {
+      "version": "1.2.10",
+      "path": "D:\\Stella\\Git\\informs-data-mining-2026\\.python_packages\\catboost\\__init__.py"
+    }
+  }
+}

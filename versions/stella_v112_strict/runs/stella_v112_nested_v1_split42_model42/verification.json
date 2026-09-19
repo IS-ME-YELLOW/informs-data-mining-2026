@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "protocol": "stella_v112_nested_v1",
+  "run_id": "stella_v112_nested_v1_split42_model42",
+  "identity_hash": "0a019474a437758214bb2eb3de8e13fb0a112320f6c69df0fe76b41166788be4",
+  "new_models_reloaded": 180,
+  "referenced_models_reloaded": 50,
+  "new_prediction_max_abs_difference": 0.0,
+  "reference_prediction_max_abs_difference": 0.0,
+  "comparison": {
+    "atol": 1e-12,
+    "rtol": 0
+  },
+  "short_predictions_exactly_unchanged": {
+    "osi_target_t01h": true,
+    "osi_target_t06h": true
+  },
+  "artifacts_recomputed_from_models": [
+    "candidate_deltas.csv",
+    "candidate_predictions.parquet",
+    "county_metrics.csv",
+    "fold_metrics.csv",
+    "gate_diagnostics.csv",
+    "inner_anchor_predictions.parquet",
+    "outer_raw_predictions.parquet",
+    "paired_county_bootstrap.csv",
+    "source_error_correlations.csv",
+    "summary_metrics.csv",
+    "target_day_metrics.csv",
+    "thresholds.parquet"
+  ],
+  "training_performed_by_verifier": false,
+  "test_inference_performed": false
+}

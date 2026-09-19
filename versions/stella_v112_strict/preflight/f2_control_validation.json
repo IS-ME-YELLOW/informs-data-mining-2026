@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "path": "versions\\xyy\\v1.5.8_strict_baseline\\p_information_increment\\runs\\v18_pinfo_v1_split42_model42\\control_predictions.parquet",
+  "sha256": "ab16ae881dbc75726af5204bffb0fe228ffd804770075782a3dbaed3e57caa07",
+  "columns": {
+    "osi_target_t01h": {
+      "column": "pred_F2_v18_rule_osi_target_t01h",
+      "scoreable_rows": 34177
+    },
+    "osi_target_t06h": {
+      "column": "pred_F2_v18_rule_osi_target_t06h",
+      "scoreable_rows": 32982
+    }
+  }
+}
