@@ -1,0 +1,23 @@
+{
+  "status": "saved_numeric_artifacts_and_source_code_hashes_PASS",
+  "run_identity": "376c7cb9031758e02f840280de0b5e72ff9f256ee2bd23c22a321a9cfaa7d2b0",
+  "cv_hash": "8c1f1828a93c1887a39d07168053ec7e4a15b17e26c44691d2ea4e02351e1d4d",
+  "CV_COMPLETE_present": true,
+  "COMPLETE_present": false,
+  "FINAL_READY_text": "final artifacts written; independent verification pending",
+  "saved_verification": {
+    "protocol": "dem_v158_nested_v2",
+    "cv_complete": true,
+    "submission_hard_checks": true,
+    "independent_reload": "not_run_in_this_process",
+    "note": "Run verify_artifacts.py in a new process before COMPLETE."
+  },
+  "local_torch_available": false,
+  "local_gat_checkpoints": 0,
+  "local_model_receipts": 0,
+  "expected_base_models": 416,
+  "expected_gat_checkpoints": 64,
+  "model_reload_performed": false,
+  "full_remote_acceptance": "not established by this copied package",
+  "line_ending_difference": "run JSON, CV CSVs and terrain match recorded hashes after in-memory LF to CRLF conversion; no source file modified"
+}

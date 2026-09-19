@@ -1,0 +1,13 @@
+{
+  "status": "NUMERIC_DIAGNOSIS_COMPLETE",
+  "source_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/outputs/runs/dem_v158_p2_component_seed42_cuda_log",
+  "source_run_identity": "376c7cb9031758e02f840280de0b5e72ff9f256ee2bd23c22a321a9cfaa7d2b0",
+  "all_outer_predictions_and_labels_replayed": true,
+  "all_160_inner_alpha_candidates_recomputed": true,
+  "all_32_final_alpha_candidates_recomputed": true,
+  "declared_scope_and_round_lineage_checked": true,
+  "model_training_performed": false,
+  "checkpoint_reload_performed": false,
+  "all_writes_restricted_to": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/diagnostics",
+  "created_at_utc": "2026-09-19T04:45:10.084152+00:00"
+}

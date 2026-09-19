@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "saved_prediction_metric_replay": true,
+  "inner_alpha_selection_recomputed": true,
+  "Newton_loss_and_history_support_independently_checked": true,
+  "saved_final_test_1h_exactly_base": true,
+  "source_files_unchanged": 84,
+  "git_changes_outside_diagnostics": false,
+  "model_reload_performed": false,
+  "model_training_performed": false,
+  "scope": "independent diagnosis verification; not full model acceptance"
+}

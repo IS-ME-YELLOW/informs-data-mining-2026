@@ -1,0 +1,11 @@
+{
+  "status": "source-backed_nonbase_input_reconstruction",
+  "source_code_hash_matches_run": true,
+  "nonbase_dimensions": 204,
+  "base_channel_excluded_from_zscore_table": true,
+  "test_base_predictions_for_outer_stack_available": false,
+  "checkpoint_scalers_available": false,
+  "statistics": "recomputed from float32 raw graph features using source train-node/time masks",
+  "model_inference_or_feature_ablation_performed": false,
+  "attribution_limit": "large z scores support an extrapolation hypothesis; do not prove specific learned weights or skip/message-path causality"
+}
