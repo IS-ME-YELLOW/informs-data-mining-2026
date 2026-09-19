@@ -11,3 +11,4 @@ articles/
 archive/
 data\external\tl_2025_us_county\tl_2025_us_county.shp
 code_phase2_dem_eval_v158/outputs/runs/dem_v158_p2_component_seed42_cuda_log/models/
+code_phase2_dem_eval_v158/outputs/ounty_top10_plots/
