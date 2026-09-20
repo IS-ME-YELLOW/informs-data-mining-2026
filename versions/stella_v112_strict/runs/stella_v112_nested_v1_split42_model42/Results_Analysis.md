@@ -1,60 +1,72 @@
-# Stella v1.12 strict seed42 experiment report
+# Stella v1.12 严格实验详细分析：seed42
 
-Run ID: `stella_v112_nested_v1_split42_model42`  
-Protocol: `stella_v112_nested_v1`  
-Run identity: `0a019474a437758214bb2eb3de8e13fb0a112320f6c69df0fe76b41166788be4`
+运行编号：stella_v112_nested_v1_split42_model42  
+协议：stella_v112_nested_v1  
+运行身份：0a019474a437758214bb2eb3de8e13fb0a112320f6c69df0fe76b41166788be4
 
-## Outcome
+## 1. 核心结论
 
-L2 improved pooled RMSE relative to L0 at both long horizons:
-
-| Horizon | L0 RMSE | L1 RMSE | L2 RMSE | L2 - L0 | Change | County bootstrap 95% CI | P(delta < 0) |
+| 时距 | L0 RMSE | L1 RMSE | L2 RMSE | L2−L0 | 相对变化 | 县级 bootstrap 95% 区间 | 改善概率 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| 24h | 0.00849260 | 0.00852948 | 0.00844538 | -0.00004722 | -0.556% | [-0.000145, 0.000037] | 0.8560 |
-| 48h | 0.00769135 | 0.00782487 | 0.00766168 | -0.00002967 | -0.386% | [-0.000104, 0.000025] | 0.8505 |
+| 24h | 0.00849270 | 0.00852958 | 0.00844548 | -0.00004722 | -0.556% | [-0.000145, 0.000037] | 0.8560 |
+| 48h | 0.00769120 | 0.00782471 | 0.00766153 | -0.00002967 | -0.386% | [-0.000104, 0.000025] | 0.8505 |
 
-Both point estimates satisfy the handoff's condition for considering confirmation splits. Both confidence intervals cross zero, so seed42 alone is limited evidence rather than a statistically secure improvement.
+L2 在 24h 和 48h 都取得负的 RMSE 差，满足交接协议中“可继续确认分折”的点估计条件。两条 95% 区间均跨 0，因此这一分折不能单独证明稳定改善。
 
-L1 alone worsened RMSE by 0.434% at 24h and 1.736% at 48h, despite lowering MAE. The q95 gate recovered the high-error tail: L2 beat L1 by 0.986% RMSE at 24h and 2.086% at 48h while changing MAE by only about one millionth.
+L1 虽然降低 MAE，但相对 L0 的 RMSE 分别恶化 0.434% 和 1.736%。加入 q95 尾部保护后，L2 相对 L1 的 RMSE 分别改善 0.986% 和 2.086%，说明门控确实修复了无条件平均在高值尾部的损失。
 
-The fixed short-horizon control was preserved exactly:
+1h/6h 是固定对照：三个候选逐行完全相同，包括缺失位置，因此长期实验没有回写或改变短期链。
 
-| Horizon | L0 RMSE | L1 RMSE | L2 RMSE | Row equality |
-|---|---:|---:|---:|---|
-| 1h | 0.010991 | 0.010991 | 0.010991 | exact, including NaN positions |
-| 6h | 0.010080 | 0.010080 | 0.010080 | exact, including NaN positions |
+## 2. 门控与阈值
 
-## Gate and threshold behavior
+| 时距 | 门控行数 | 门控覆盖率 | 命中真实 top 5% 行数 | 近似精确率 | 近似召回率 | 五折 q95 范围 |
+|---|---:|---:|---:|---:|---:|---:|
+| 24h | 625 | 2.179% | 428 | 68.5% | 29.9% | 0.019945–0.024143 |
+| 48h | 457 | 1.992% | 255 | 55.8% | 22.3% | 0.015771–0.017115 |
 
-| Horizon | Gate rows | Gate coverage | Actual top-5% overlap | Approx. precision | Approx. recall |
-|---|---:|---:|---:|---:|---:|
-| 24h | 625 | 2.179% | 428 | 68.5% | 29.9% |
-| 48h | 457 | 1.992% | 255 | 55.8% | 22.3% |
+这里的“真实 top 5%”只用于事后诊断，没有参与门控。每个外折阈值只由另外四个内层预测折构成，并且每个内层模型同时排除了当前外折和被预测内折的标签。门控依据是 L0 预测值，不是真实标签。
 
-The five outer-fold q95 thresholds ranged from 0.019945 to 0.024143 at 24h and from 0.015771 to 0.017115 at 48h. They were computed only from the four inner predicted folds for each outer context, with the outer fold and the currently predicted inner fold excluded from every contributing fit.
+## 3. 折、县和目标日稳定性
 
-## Stability by fold and county
+### 逐折
 
-At 24h, L2 improved folds 0, 2 and 4 but worsened folds 1 and 3. The per-fold RMSE changes versus L0 were -0.000149, +0.000062, -0.000207, +0.000145 and -0.000015.
+- 24h：折 0/2/4 改善，折 1/3 恶化，共 3/5 折改善。五折 RMSE 差依次为 -0.000149、+0.000062、-0.000207、+0.000145、-0.000015。
+- 48h：折 0/1/2/4 改善，折 3 恶化，共 4/5 折改善。五折 RMSE 差依次为 -0.000058、-0.000010、-0.000051、+0.000035、-0.000056。
 
-At 48h, L2 improved folds 0, 1, 2 and 4 and worsened fold 3. The per-fold changes were -0.000058, -0.000010, -0.000051, +0.000035 and -0.000056.
+### 逐县
 
-L2 improved county-level squared error for 153 of 239 counties at 24h and 159 of 239 at 48h. County `39157` produced the largest gain at both horizons. The five largest positive county contributions accounted for 32.4% of gross positive improvement at 24h and 36.5% at 48h; therefore the benefit is meaningfully concentrated, although not solely produced by one county. Negative county contributions partially offset those gains, which is why the net point estimate is sensitive to county composition and the bootstrap intervals cross zero.
+- 24h：239 个县中 153 个改善。最大改善县为 39157（RMSE 差 -0.002575），最大恶化县为 54029（+0.002017）。
+- 48h：239 个县中 159 个改善。最大改善县为 54033（-0.002569），最大恶化县为 39091（+0.002304）。
 
-Six-source error correlations were high: 0.942–0.993 at 24h and 0.964–0.995 at 48h. This confirms limited source diversity and helps explain why unconditional equal averaging (L1) did not improve RMSE.
+改善覆盖大多数县，但最强收益和损失都集中在少数县，且 24h 有两个折恶化。这与 bootstrap 区间跨 0 的结果一致：方向有利，但对县组成和分折仍敏感。
 
-## Execution and acceptance evidence
+### 逐目标日
 
-- Frozen seed42 data: 34,416 training rows, 239 counties, 163 features.
-- Scoreable rows: 34,177 / 32,982 / 28,680 / 22,944 for 1h / 6h / 24h / 48h.
-- New fit calls: 820 exactly.
-- New saved models: 180 exactly — 50 XGBoost outer, 50 CatBoost outer and 80 deduplicated three-fold LightGBM inner-anchor models.
-- Referenced models: 50 strict LightGBM outer models; all were canonicalized from Git CRLF checkout bytes to their frozen LF receipt hashes without modifying the source files.
-- Source preflight: PASS. Protocol examples: PASS. Production scope checks: 820. Poisoned-label checks: 640.
-- Fresh-process verification: 180 new models and 50 referenced models reloaded from disk. Maximum prediction difference was 0 for both groups under `atol=1e-12, rtol=0`.
-- All row-level predictions, thresholds, metrics and bootstrap results were recomputed by the verifier before `CV_COMPLETE` was written.
-- No test-set inference, final all-data fit, submission generation or confirmation-split training was performed.
+- 24h：5 个目标日中 4 个改善，仅 2026-03-15 恶化。
+- 48h：4 个目标日全部改善。
 
-## Decision
+## 4. 六路来源多样性
 
-The seed42 point estimates support proceeding to the two pre-registered confirmation splits without changing candidates, q, weights, folds, features, losses or early-stopping rules. Because both bootstrap confidence intervals include zero and the benefit is partly concentrated by county/fold, confirmation should be described as testing reproducibility, not as validating an already established gain.
+六路误差相关系数较高：
+
+- 24h：0.942–0.993，中位数 0.956。
+- 48h：0.964–0.995，中位数 0.971。
+
+来源误差高度相关，解释了为什么无条件等权平均 L1 没有提升 RMSE；L2 的价值主要来自“多数区域使用平均、预测尾部回退 L0”的保护机制，而不是强互补来源带来的普遍平均收益。
+
+## 5. 执行与验收证据
+
+- 冻结训练数据：34,416 行、239 个县、163 个特征。
+- 可评分行数：1h/6h/24h/48h 分别为 34,177 / 32,982 / 28,680 / 22,944。
+- 正式新拟合调用：820 次。
+- 新保存模型：180 个，其中外层 XGBoost 50 个、外层 CatBoost 50 个、去重后的三折内层 LightGBM 80 个。
+- 引用模型：同分折严格基线的 50 个长期 LightGBM 外层模型。
+- 生产依赖范围检查 820 项，毒化标签检查 640 项，均通过。
+- 独立验证重新加载 180 个新模型和 50 个引用模型；两组最大预测差均为 0，比较标准为 atol=1e-12、rtol=0。
+- 验证器重新计算逐行预测、阈值、指标和 bootstrap 后才写入 CV_COMPLETE。
+- 未执行测试集推理、最终全量拟合或提交生成。
+
+## 6. 本分折判断
+
+seed42 支持继续运行预注册的两个确认分折，但不能单独宣称统计上确定的提升。最需要确认的是：两个长期时距的负 RMSE 差能否跨分折保持，以及收益是否继续覆盖多数折、县和目标日。
+

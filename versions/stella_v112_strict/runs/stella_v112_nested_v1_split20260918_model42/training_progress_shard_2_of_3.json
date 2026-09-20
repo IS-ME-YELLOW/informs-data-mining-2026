@@ -1,0 +1,13 @@
+{
+  "status": "SHARD_COMPLETE",
+  "split_seed": 20260918,
+  "shard_index": 1,
+  "shard_count": 3,
+  "completed_in_shard": 60,
+  "expected_in_shard": 60,
+  "trained_in_this_process": 60,
+  "restored_in_this_process": 0,
+  "completed_models_visible": 148,
+  "expected_models": 180,
+  "elapsed_seconds": 19072.291127443314
+}

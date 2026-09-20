@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "split_seed": 20260917,
+  "identity_hash": "a859aa7b9cbd9edc5121c6755f0a8eb0c32850bda08f31457187988fb7564b1b",
+  "new_models_reloaded": 180,
+  "referenced_models_reloaded": 50,
+  "new_prediction_max_abs_difference": 0.0,
+  "reference_prediction_max_abs_difference": 0.0,
+  "comparison": {
+    "atol": 1e-12,
+    "rtol": 0
+  },
+  "training_performed_by_verifier": false,
+  "test_inference_performed": false
+}

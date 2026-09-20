@@ -1,0 +1,11 @@
+{
+  "status": "TRAINING",
+  "split_seed": 20260918,
+  "shard_index": 0,
+  "shard_count": 2,
+  "completed_in_shard": 1,
+  "expected_in_shard": 90,
+  "trained_in_this_process": 1,
+  "restored_in_this_process": 0,
+  "elapsed_seconds": 415.63889718055725
+}
