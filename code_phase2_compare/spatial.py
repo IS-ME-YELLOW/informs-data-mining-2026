@@ -123,6 +123,10 @@ def read_shp_polygons(path: Path):
 def build_spatial_graph(fips_codes, dbf_path, shp_path, k=8):
     """Build a symmetric graph from kNN plus exact shared county borders."""
     fips_codes = [str(x).zfill(5) for x in fips_codes]
+    if len(fips_codes) != len(set(fips_codes)):
+        raise ValueError("graph fips_codes must be unique")
+    if int(k) < 1 or int(k) >= len(fips_codes):
+        raise ValueError("graph k must satisfy 1 <= k < number of nodes")
     points = read_dbf_points(dbf_path)
     missing = [f for f in fips_codes if f not in points]
     if missing:
