@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "paired_models": 20,
+  "tree_structures_identical": true,
+  "best_iterations_identical": true,
+  "raw_OOF_exactly_identical": true,
+  "Huber_alpha": 0.9,
+  "maximum_saved_prefix_residual_bound": 0.26397426093095466,
+  "bound_covers": "all inputs and label values in observed N range, for saved outer-refit tree prefixes",
+  "limitation": "discarded inner-probe trees after best_iteration were not saved; their equality is not inferred from this bound",
+  "interpretation": "Huber stays in its quadratic region on bounded saved trajectories; changing only objective to L2 yields identical trees",
+  "audit_code_sha256": "e58134346e3395adfdce70f75c737364968f96d5dcdadadd23d4ba89a5ed3c70",
+  "training_performed": false
+}

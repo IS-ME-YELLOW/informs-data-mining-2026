@@ -1,0 +1,40 @@
+{
+  "status": "ANALYSIS_COMPLETE_PENDING_VERIFICATION",
+  "split_seed": 20260918,
+  "reference_identity": "a3f16d3463442c01b1e1315df498317eed53298a1f89ef087b016ab8bd0c9532",
+  "files": {
+    "rows/alignment_sources.parquet": "0767af91b5c236c4fa5a04c4f603b5a93f25fae8f305c95e1fccf08d60aa20ed",
+    "rows/anchor_predictions.parquet": "1d04aa6330a11f0df069eb8ef687bb45b965855ef4d9884f0236ae08cc82207b",
+    "rows/component_diagnostics.parquet": "aba7911624d99ab0e3dd1ff44c554fe054703ffa45d7212d8165630f554a1807",
+    "rows/oracle_predictions.parquet": "27548d4f84b44f6f7bc75a57f65270ccc974d60b2398c3214ec72f6a9eacdbc1",
+    "rows/osi_error_decomposition.parquet": "9ad5fb44453465cf9990e189d1fcaa12a9154ba1cbeb1430012ca465e299c038",
+    "tables/alignment_effects.csv": "27c8689df2be1eccc8f1a34a17a65706d621e809f12840ec811d82abe0766d15",
+    "tables/bootstrap_intervals.csv": "f37798382c4187ea3da8ab92938d4153bb44368a4b15e68f3cab86a72d5c644a",
+    "tables/case_trajectories.csv": "ea5620483b002c7ca553be21b5bf824075682512aab67c3995267ab9d9eab16f",
+    "tables/component_metrics.csv": "b4570fcd7ff59bd84e39e50a595d233af4634b66b02abe1972adc24a72a429f6",
+    "tables/county_N_metrics.csv": "2de2fcd2ca5da38413dac9a30315cfc78449d08a33eba7bc7b9e7d2ffa9ef03c",
+    "tables/county_and_window_metrics.csv": "2e36bbf8551cd2731ab4165e771ecbae1f8452eb84aed7543c79dea0f0141291",
+    "tables/county_priority.csv": "845ff40f9a3982e0f2d5a499d802df46ac9c164c5743388857a60b95626b6e05",
+    "tables/distribution_and_bins.csv": "19f5e443bea3055d61e3410b6a0281fcf4ceb9e2685728f26ebbc530d4d49407",
+    "tables/integrity_checks.json": "16e8f8ed7421603c4dbb118db210e4fab338996aab48bc61af0f8e9bfcfdf175",
+    "tables/label_formula_audit.csv": "8f346a30940ad276d982c0f9540ab4a7e13169ddfd8046085b83a805a85bd587",
+    "tables/matched_support.csv": "5088f76feac0e1b0d1dcdb5dd4340b6ec44f0780c393cd4e9f03159ad1fb39b8",
+    "tables/matching_ranking_identity.json": "8e53b46a8c54f10ce7615cd1b10b51312212a4717100d783d6bbcfd24d87d926",
+    "tables/matching_rankings_without_outcomes.parquet": "154d7f74d0bd5b218bbc91fbdd953e8fc29f02087b2bf22e7b9cea2001af64b8",
+    "tables/oracle_metrics.csv": "1e0e9e97057996017c4c9625c13803b7983401af4fb336f2087c3356376343b1",
+    "tables/osi_decomposition.csv": "01faddda46571d41c4be04cc9f8a357d1e9c904d3178a950390533d3942c8ac7",
+    "tables/peak_and_lag_diagnostics.csv": "5611d9540c941d003429da3902516587ab6edaffcaa78c90d30d06d84aff2dd0",
+    "tables/query_feature_support.csv": "f045bbc63a692c6f384c546a87015217924a82afea6618fdfec6a9488bc7271b",
+    "tables/query_training_support.csv": "a82192b8fa7d22889f5934217f85faf131953d9191b9876d818e999ce833711e",
+    "tables/source_error_cross_products.csv": "c9f9852ddf639977cfe4c5e447fb6cb408a3af1d4f2cd778a7f6b18b39fbcf70",
+    "tables/source_to_output_effects.csv": "b7f8629332e4ae8f0d82edbf552d1a8fcf4988ec84612744ef05bf0c700b4cba"
+  },
+  "code_sha256": {
+    "diagnostic_analysis.py": "0244cd239cb130591d84b96936bcd15a93e37a863f1d0ef59cb7aa5f90373fc6",
+    "diagnostic_core.py": "316f7261ed7eae65ca274587ff8f20195848de267680dfa1a01d27afb65ba35e",
+    "run_diagnostics.py": "6a7117c7b423e6c6302bfa9ff9e605b419b5f4b41e4ba416d8a7854512a60075"
+  },
+  "config_sha256": "25f9486b373e57af16a98df8887502c0a6cc140aab2034984e783151e2644725",
+  "input_manifest_sha256": "b104fee9d450659ad31e32d8f94f66182625f1d86580ae92463cdb88469e2009",
+  "training_performed": false
+}

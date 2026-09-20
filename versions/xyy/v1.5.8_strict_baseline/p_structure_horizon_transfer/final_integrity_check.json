@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "frozen_input_files_unchanged": 503,
+  "prior_experiment_artifacts_unchanged": {
+    "n_four_horizon_diagnosis": 123,
+    "n_loss_l2_huber": 107
+  },
+  "old_files_modified": false,
+  "write_scope": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer",
+  "formal_fits": 150,
+  "new_outer_models": 30,
+  "joint_candidate_evaluated": false,
+  "new_features_added": false,
+  "other_CVs_trained": false,
+  "independent_verification": "PASS"
+}

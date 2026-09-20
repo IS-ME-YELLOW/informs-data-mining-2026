@@ -1,0 +1,151 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "outer_fold": 0,
+      "horizon": "osi_target_t01h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "512833b02690a7a26adebd7665167d30736143026a2e7d6715c955c27825ea49"
+    },
+    {
+      "outer_fold": 0,
+      "horizon": "osi_target_t06h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "57cfb1bede05f8a558496f9af99fce60ce4fcb57508b99b9c81bd95c563a0c88"
+    },
+    {
+      "outer_fold": 0,
+      "horizon": "osi_target_t24h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "6295f4256e6cf8bd4132720c68f54febb2c0840761eb052ad983d167e45daac8"
+    },
+    {
+      "outer_fold": 0,
+      "horizon": "osi_target_t48h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "9a221ee51665321fbf54e6a57b352b106534bfe0e770641ce34cdc889eebec55"
+    },
+    {
+      "outer_fold": 1,
+      "horizon": "osi_target_t01h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 192,
+      "reference_model_id": "d0d965acf32088814152f388325afe3aada02061a6710980baafbca320932e73"
+    },
+    {
+      "outer_fold": 1,
+      "horizon": "osi_target_t06h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 192,
+      "reference_model_id": "37080bd3d86d0632f27ce1f4b68551b71d19299d543830e6b9702cf4216b6585"
+    },
+    {
+      "outer_fold": 1,
+      "horizon": "osi_target_t24h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 192,
+      "reference_model_id": "817c9bf289d4de008409c202e8d666728fa1ab5ba7b36d4c3175c3e6abeb5b74"
+    },
+    {
+      "outer_fold": 1,
+      "horizon": "osi_target_t48h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 192,
+      "reference_model_id": "97f24d8da88a6416bc93fe0de8d5e7a322e290d743e95d7f7d12d1548f93661c"
+    },
+    {
+      "outer_fold": 2,
+      "horizon": "osi_target_t01h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "09f4c24addea4c156c0feefe72913e8d0496ecb2649d467ce0f54b86247f276e"
+    },
+    {
+      "outer_fold": 2,
+      "horizon": "osi_target_t06h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "0d661798a43ab42cde36dea1ebff88bc42aee7d30ada5a6a6b6ed29d781a6de5"
+    },
+    {
+      "outer_fold": 2,
+      "horizon": "osi_target_t24h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "5a6c1827fa898717077d94dca7f4d5c6b06e927b7efd84b35ee28284c705048f"
+    },
+    {
+      "outer_fold": 2,
+      "horizon": "osi_target_t48h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "3b1532e8712cb9c518ab0dd3f0fa9e96792d6914608d884ca1d5e6696232d760"
+    },
+    {
+      "outer_fold": 3,
+      "horizon": "osi_target_t01h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "73b2767b87f487bb33ad32aaed6b5642380d961a9e49e67eb520b6dbbf5b012b"
+    },
+    {
+      "outer_fold": 3,
+      "horizon": "osi_target_t06h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "5864374102e0db8a34f5e37da5467f7c3d46a5f57e43e2e3cccc50423d6e69d7"
+    },
+    {
+      "outer_fold": 3,
+      "horizon": "osi_target_t24h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "4a51787d821685cef4e42aa0fa4644985a5762a6d1ce3f33d9ff62123ca0de29"
+    },
+    {
+      "outer_fold": 3,
+      "horizon": "osi_target_t48h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "e9150d73425ad14db475f83cf7ba9019f05bad75655e7cb3114b23fcac74c19b"
+    },
+    {
+      "outer_fold": 4,
+      "horizon": "osi_target_t01h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "8648326c7a889c3dbe84522615dfc93c6011960e35a600c72da2033cbf48346f"
+    },
+    {
+      "outer_fold": 4,
+      "horizon": "osi_target_t06h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "707300cc518aa3f74be8ee0fea81bd50e4c5b72a41ae627bfbd8ec29318cf762"
+    },
+    {
+      "outer_fold": 4,
+      "horizon": "osi_target_t24h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "ab642d020a4f9f528b018f8cad29466d8c545efc0628d5d900db8c938fb22389"
+    },
+    {
+      "outer_fold": 4,
+      "horizon": "osi_target_t48h",
+      "heldout_label_poison_invariant": true,
+      "allowed_counties": 191,
+      "reference_model_id": "5a1a63b9a8b95c3987430d46d47a4bbf7b60805e4895ed42ca9811cd77ef2e63"
+    }
+  ],
+  "N_models": 20,
+  "feature_count": 163,
+  "reference_reconstruction_passed": true,
+  "only_parameter_changed": "objective",
+  "inputs": 504,
+  "training_performed": false
+}

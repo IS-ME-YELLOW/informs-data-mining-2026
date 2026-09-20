@@ -1,0 +1,156 @@
+{
+  "status": "PASS",
+  "identity_hash": "a51bea042fd2424b99456f0fc4610bbed2adb3185fcba786595ac0ad6d04cd3f",
+  "L2_models_reloaded": 20,
+  "Huber_models_reloaded": 20,
+  "inner_probes_checked": 80,
+  "all_control_metrics_checked": 120,
+  "bootstrap_intervals_checked": 32,
+  "independent_pandas_alignment": true,
+  "full_horizon_masks_checked": true,
+  "all_component_sources_checked": true,
+  "training_performed_by_verifier": false,
+  "verifier_sha256": "e9440cee24c952a450cba3db6bae23f4a1856edee71903cdf5964e20fa2eabf9",
+  "model_checks": [
+    {
+      "horizon": "osi_target_t01h",
+      "outer_fold": 0,
+      "requested_rounds": 212,
+      "trees_saved": 212,
+      "model_id": "7acecbe9136bc11f50b1d8c0ae6c61c878f00aac95451b1df0c4c62791e5ebf6"
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "outer_fold": 1,
+      "requested_rounds": 130,
+      "trees_saved": 130,
+      "model_id": "bb3b5cb434ac3396e5ff84c03833d377696b4ad08f996e890add96367a854818"
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "outer_fold": 2,
+      "requested_rounds": 280,
+      "trees_saved": 280,
+      "model_id": "4c9134c50c2a2dd60fdf9b88c64965bb7e7b4933e478298225f93fa7e689db4b"
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "outer_fold": 3,
+      "requested_rounds": 210,
+      "trees_saved": 210,
+      "model_id": "ad200ce2045c115d1f76b7ebd8a076f03d2b5520bc421b79d2eff2c3ea35fc63"
+    },
+    {
+      "horizon": "osi_target_t01h",
+      "outer_fold": 4,
+      "requested_rounds": 75,
+      "trees_saved": 75,
+      "model_id": "7781df07f7ad1832b24a88f3480d8707b8354446f27be3b7a93302040476ad3e"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 0,
+      "requested_rounds": 95,
+      "trees_saved": 95,
+      "model_id": "4ce2faf480d447d634173978b2eb39ed7b174958d7d623c14589ce974301d836"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 1,
+      "requested_rounds": 119,
+      "trees_saved": 119,
+      "model_id": "66275fc6c701d0f8f30f6ddd57221b820f465044b3895e80e9a5eae10aaab434"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 2,
+      "requested_rounds": 149,
+      "trees_saved": 149,
+      "model_id": "d37e6382320df14efb30e8ac50b9c5e78289b5a830a003f6d28099e337a7f8b7"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 3,
+      "requested_rounds": 174,
+      "trees_saved": 174,
+      "model_id": "dfad0253ba97d886567b8cc813389ddb90205369525d954b7b1a64e008aa3211"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 4,
+      "requested_rounds": 121,
+      "trees_saved": 121,
+      "model_id": "3685d878e346075d8646bfc813d95ffe53cb63f338ca1b5926aa09ad6eecea66"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 0,
+      "requested_rounds": 112,
+      "trees_saved": 112,
+      "model_id": "c756c2a497860f9822dfb7e5950fa28209810031897e88b5aae90f1c466cfadf"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 1,
+      "requested_rounds": 148,
+      "trees_saved": 148,
+      "model_id": "296dca36fb9b771132064f38c7613a220452a50f34b30ab87e676543b2378b0b"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 2,
+      "requested_rounds": 165,
+      "trees_saved": 165,
+      "model_id": "303ae0aa53c97c9c4a3d1a32d0c52c0c75e52adce5d70f6a2e8b90b5c4727fde"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 3,
+      "requested_rounds": 296,
+      "trees_saved": 296,
+      "model_id": "38d70f2c8c56b5d9028a2c5edfe7fa2ae870c36d5a82b08525d9b9880e19ec33"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 4,
+      "requested_rounds": 110,
+      "trees_saved": 110,
+      "model_id": "93fbb5e80adf045c615d9a8ee8fbeb78728b20b15bf488c8b71030cd4415b3c4"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 0,
+      "requested_rounds": 77,
+      "trees_saved": 77,
+      "model_id": "57bfff5e4b85ae1fe2679997d7566ed5bdfcfc3f18421f398788bc935498142a"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 1,
+      "requested_rounds": 106,
+      "trees_saved": 106,
+      "model_id": "498c0035785b362e0c211f502e2135392dc7db1d06b8491a9999ed78026150fc"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 2,
+      "requested_rounds": 102,
+      "trees_saved": 102,
+      "model_id": "27bfb6f4c706644819c2e80aad9fa49c25ad93b4976f5b269e334a616931ca1d"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 3,
+      "requested_rounds": 133,
+      "trees_saved": 133,
+      "model_id": "b5b8afec572d8d028b0f7b4902605d173081c15c8465ba78f6d43b270710f2e1"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 4,
+      "requested_rounds": 118,
+      "trees_saved": 118,
+      "model_id": "cba72a6cb4bfa28711788e8647cce0a418a1955e00fa91a8b33c23aeff31ccd1"
+    }
+  ]
+}

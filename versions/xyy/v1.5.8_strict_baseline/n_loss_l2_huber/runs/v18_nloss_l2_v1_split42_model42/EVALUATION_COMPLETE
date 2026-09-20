@@ -1,0 +1,21 @@
+{
+  "identity_hash": "a51bea042fd2424b99456f0fc4610bbed2adb3185fcba786595ac0ad6d04cd3f",
+  "files": {
+    "aligned_unique_components.parquet": "add1164016de1a112feaa3329d18822fcb7bafa520775b7de4603597ce0cc3e6",
+    "component_predictions.parquet": "818f2b4f20b662f4b5cf69a9d55c216e22ff0fc3a652a09eb75e49e1d7cb791a",
+    "control_predictions.parquet": "fd37aff655f3e74b17d1149f1402a5f077f172510fb00a2f26360d27c213babd",
+    "invariants.json": "3dacffe69530783638a3eaea4638187cc1a8fab581bbd5b74f313c7fe2cd5814",
+    "metrics/N_bins.csv": "a91ef463a6319b69e3e5a6d0942f859452c770ea5f681eaaf787d75e95f05f68",
+    "metrics/N_component_metrics.csv": "e03b19abddc64078c03cab9a73734e85a8600bc4e622fd746012ef4dc1e790e9",
+    "metrics/all_control_metrics.csv": "c060f385ce1272a712e4c0b3e41c03104a2fe1087e01c1ce7dbe99eb2f9b87cf",
+    "metrics/bootstrap_intervals.csv": "152608e84c01a739a87e0f6f4a83fac027dbec3ce8cac2717d0a2b94c73f9724",
+    "metrics/county_metrics.csv": "9de3f1fc03898caedb26ae2f190cd8b4d56a7745bbdc9d5cb781202e4a112d1c",
+    "metrics/fold_metrics.csv": "7fb84e312b8a5c05a3a3d3477d9f9a472adf33ff7b0a6a16d6b451e6f5e6533c",
+    "metrics/primary_scores.csv": "ddaf355b2efebdd0c96ba0126b9a06d6cd415f883d7b47bdc479bacb1b1aa547",
+    "metrics/window_metrics.csv": "8f42dd65dddaf6e2afa5de2075c93a24e72477819934053bda499a2742dba8ce",
+    "n_component_diagnostics.parquet": "f7be4e8d62386832b6f6c507b68678b4ead3e3606a51e27fc38c18075d0b52dc"
+  },
+  "evaluation_code_sha256": "3671f55fea6cc2fbce78c7da40af292340c3b75bbaa081c2207d4616ace7a98f",
+  "primary_case": "L2_all",
+  "case_count": 6
+}

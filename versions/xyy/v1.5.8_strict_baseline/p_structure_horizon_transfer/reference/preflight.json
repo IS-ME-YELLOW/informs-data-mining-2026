@@ -1,0 +1,251 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 0,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 20286,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 0,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 26358,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 1,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 20148,
+      "all_valid_refit_rows": 26496
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 1,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 26496,
+      "all_valid_refit_rows": 26496
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 2,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 20562,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 2,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 26358,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 3,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 20700,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 3,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 26358,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 4,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 20976,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 4,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 26358,
+      "all_valid_refit_rows": 26358
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 0,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 17640,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 0,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 22920,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 1,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 17520,
+      "all_valid_refit_rows": 23040
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 1,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 23040,
+      "all_valid_refit_rows": 23040
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 2,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 17880,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 2,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 22920,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 3,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 18000,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 3,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 22920,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 4,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 18240,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 4,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 22920,
+      "all_valid_refit_rows": 22920
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 0,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 14112,
+      "all_valid_refit_rows": 18336
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 0,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 18336,
+      "all_valid_refit_rows": 18336
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 1,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 14016,
+      "all_valid_refit_rows": 18432
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 1,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 18432,
+      "all_valid_refit_rows": 18432
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 2,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 14304,
+      "all_valid_refit_rows": 18336
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 2,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 18336,
+      "all_valid_refit_rows": 18336
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 3,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 14400,
+      "all_valid_refit_rows": 18336
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 3,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 18336,
+      "all_valid_refit_rows": 18336
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 4,
+      "kind": "a",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 14592,
+      "all_valid_refit_rows": 18336
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 4,
+      "kind": "b",
+      "scope_and_label_poison": "PASS",
+      "refit_rows": 18336,
+      "all_valid_refit_rows": 18336
+    }
+  ],
+  "P71_matches_history": true,
+  "original_E2_transform_params_and_metric_match": true,
+  "feature_count": 163,
+  "label_reconstruction": "PASS",
+  "reference_F2_reconstruction": "PASS",
+  "training_performed": false
+}

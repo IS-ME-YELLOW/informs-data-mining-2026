@@ -1,0 +1,19 @@
+{
+  "all_short_horizon_point_estimates_improve": true,
+  "all_short_horizon_intervals_below_zero": false,
+  "long_horizon_predictions_unchanged": true,
+  "recommendation": "支持将P6 a/b纳入后续实验的优先组合",
+  "model_recipe": {
+    "P1": "a/b + F2 neighbors",
+    "P6": "a/b; original 163 features",
+    "D1": "existing K>0 U reconstruction",
+    "P24_P48_N_R": "existing same-CV strict sources"
+  },
+  "underlying_events": 1,
+  "independent_heldout_test_evaluations": 0,
+  "additional_confirmation_fits": 100,
+  "additional_outer_models": 20,
+  "P6_three_CV_total_fits": 150,
+  "P6_three_CV_total_outer_models": 30,
+  "full_data_submission_models_trained": false
+}

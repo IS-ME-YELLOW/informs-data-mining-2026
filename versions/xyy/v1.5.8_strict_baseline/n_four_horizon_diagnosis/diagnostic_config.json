@@ -1,0 +1,115 @@
+{
+  "protocol": "n_four_horizon_diagnosis_v1",
+  "authorized": "user approved full diagnosis; no fitting",
+  "root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "base": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline",
+  "output": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/n_four_horizon_diagnosis",
+  "seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "horizons": [
+    1,
+    6,
+    24,
+    48
+  ],
+  "reference_F2_identities": {
+    "42": "e39b76d75f191891abda1939dc47933815cc4fa15796227b0c200eb1b96bfcac",
+    "20260917": "64f8263f5356378124c5e981fcb7c1117ad808c97b46c383b64b7cdbe109484d",
+    "20260918": "a3f16d3463442c01b1e1315df498317eed53298a1f89ef087b016ab8bd0c9532"
+  },
+  "model_seed": 42,
+  "known_history_end": 71,
+  "weights": [
+    0.4,
+    0.35,
+    0.25,
+    -0.1
+  ],
+  "common_target_hours": [
+    120,
+    215
+  ],
+  "windows": [
+    [
+      73,
+      76
+    ],
+    [
+      77,
+      95
+    ],
+    [
+      96,
+      143
+    ],
+    [
+      144,
+      215
+    ]
+  ],
+  "N_bins": [
+    0,
+    0.0001,
+    0.001,
+    0.01
+  ],
+  "event_threshold": 0.001,
+  "lags": [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3
+  ],
+  "partial_alphas": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20260910,
+  "matching_columns": [
+    "last_P_t",
+    "last_N_t",
+    "last_R_t",
+    "N_t_mean_72h",
+    "N_t_max_72h",
+    "gust_at_t{h}h",
+    "log_customers",
+    "pct_forest"
+  ],
+  "matching_top_k": 5,
+  "matching_excludes_full_outer_fold": true,
+  "historical_focus": {
+    "42053": [
+      "Forest County",
+      "PA"
+    ],
+    "39117": [
+      "Morrow County",
+      "OH"
+    ],
+    "18013": [
+      "Brown County",
+      "IN"
+    ],
+    "54013": [
+      "Calhoun County",
+      "WV"
+    ],
+    "54015": [
+      "Clay County",
+      "WV"
+    ],
+    "39115": [
+      "Morgan County",
+      "OH"
+    ]
+  },
+  "approved_plan_sha256": "10f7a2dc54b6873fd8b9358dbcebe87d3da979b3722dc97065727e2d7acd535a"
+}

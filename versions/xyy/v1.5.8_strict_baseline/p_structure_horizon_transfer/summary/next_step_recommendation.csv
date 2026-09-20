@@ -1,0 +1,4 @@
+case,source_horizon,decision,evidence,joint_evaluated,other_CVs_trained
+AB_P06,6,confirm on two frozen CVs,seed42 single-source result only,False,False
+AB_P24,24,do not adopt at present,seed42 single-source result only,False,False
+AB_P48,48,do not adopt at present,seed42 single-source result only,False,False

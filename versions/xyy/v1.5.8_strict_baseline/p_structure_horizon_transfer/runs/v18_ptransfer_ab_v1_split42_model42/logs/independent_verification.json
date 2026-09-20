@@ -1,0 +1,227 @@
+{
+  "status": "PASS",
+  "identity_hash": "7c971d4269ff6d23fb520c28cfe0e4d365f8cea7237ced5369f0b1f226d3b6a0",
+  "new_models_reloaded": 30,
+  "inner_probes_checked": 120,
+  "full_control_metrics_checked": 80,
+  "bootstrap_intervals_checked": 18,
+  "scoped_weights_and_labels_verified": true,
+  "independent_P_reconstruction": true,
+  "independent_pandas_C3": true,
+  "unchanged_sources_and_output_propagation_verified": true,
+  "all_county_fold_window_metrics_checked": true,
+  "training_performed_by_verifier": false,
+  "verifier_sha256": "987421fffdd6c8011abe5767ee3c97144b022d443e56f77c091f5cf8cbe559f5",
+  "model_checks": [
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 0,
+      "kind": "a",
+      "trees_saved": 83,
+      "model_id": "705bc62425ae0faa3e7651ab49a14098ee40f240ef2667fb10f7e90ec7abea0d"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 0,
+      "kind": "b",
+      "trees_saved": 286,
+      "model_id": "ffcbd50d858730d7d70e861fc2846dc752148daaf2d5393c0b495cfec7a9bc72"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 1,
+      "kind": "a",
+      "trees_saved": 85,
+      "model_id": "868e64d5ec5051d32025a8d8c5205a2267e6d6c8d3dd3a246186b31ce618a54f"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 1,
+      "kind": "b",
+      "trees_saved": 192,
+      "model_id": "64ac24d6c55c55d2aacc980523a380b61f30778c0a2f85d69b60c48fe3daa7f7"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 2,
+      "kind": "a",
+      "trees_saved": 98,
+      "model_id": "7f4ab36527683878fb78530f9ca4650c72dfa096032f826d37d71a8ef90b2920"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 2,
+      "kind": "b",
+      "trees_saved": 138,
+      "model_id": "3b89446f24d4856931c28f8c3680cf9e3536d0f206381c5f5346a7a29d3d7608"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 3,
+      "kind": "a",
+      "trees_saved": 117,
+      "model_id": "22ea4d70bc344afa8112370f0731e330d91a0621d7c58b8bbe170cec0235ede3"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 3,
+      "kind": "b",
+      "trees_saved": 375,
+      "model_id": "3e1af03edf0d21c6d83354e307da2ee83d587967ee4d25c1f3696030dae500e1"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 4,
+      "kind": "a",
+      "trees_saved": 94,
+      "model_id": "a9c092336af6f8583250a26cbc8a0867ef73f12e5c3404ac145017b2b11d8c97"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 4,
+      "kind": "b",
+      "trees_saved": 260,
+      "model_id": "94b979ff93273f35b51662dc301df405a9285c2784633ea4eaa1c1c72d36c72e"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 0,
+      "kind": "a",
+      "trees_saved": 145,
+      "model_id": "a3d574f32839d471b7827cf886decc28fe767dfb1facf51c2d440c1a28fc3801"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 0,
+      "kind": "b",
+      "trees_saved": 301,
+      "model_id": "167c39642d82752357162ab647c5ac8c7ccc45570fc28ca3f50b08f4a8e63ed8"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 1,
+      "kind": "a",
+      "trees_saved": 99,
+      "model_id": "a982869ebedfacdc655d7d46bcd909f7fc00d2f4fb058da3521a629771dff983"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 1,
+      "kind": "b",
+      "trees_saved": 240,
+      "model_id": "e596061c2e93bde02a48c79cb641ebe682f4a47219615415057e8fe5f3dcd310"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 2,
+      "kind": "a",
+      "trees_saved": 240,
+      "model_id": "1e3144fafa562b4a11fa9ced7247ce71d59f414f4cf8bf3e5344bfb8244f78da"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 2,
+      "kind": "b",
+      "trees_saved": 187,
+      "model_id": "df9647b68bebda80d2f021319d11ba1aab321bb15b35bdbc0009e6fad0ed4b56"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 3,
+      "kind": "a",
+      "trees_saved": 94,
+      "model_id": "2f3e54081d5f9ee3c14cdb037a3cf7993a169876076265087faf5e42187223ae"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 3,
+      "kind": "b",
+      "trees_saved": 281,
+      "model_id": "37c04b70ef441261fcec74fdf032c899ca760108fded78c9f40241ee9d1e8342"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 4,
+      "kind": "a",
+      "trees_saved": 87,
+      "model_id": "0381e7e9f35179b1471e6e3fdd78973e23ce7e392ba6642d89491b67fde82166"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "outer_fold": 4,
+      "kind": "b",
+      "trees_saved": 332,
+      "model_id": "97864152523c6fa73efa90ef004708382271cc052080228fac981a86d34db5c3"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 0,
+      "kind": "a",
+      "trees_saved": 24,
+      "model_id": "afc17f4d540254a588724fed53553c2d98b7f91770009c83ef85497bc920f5c1"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 0,
+      "kind": "b",
+      "trees_saved": 192,
+      "model_id": "821c3ceef8e6a8a6f5c359d5cab28e28373496c96c2ec4b95c78a98656ce5f4e"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 1,
+      "kind": "a",
+      "trees_saved": 326,
+      "model_id": "0bd5ef8daffa609190157e9f4bb4874a537dbbd6bd4f43dccf4e879d96da4cdd"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 1,
+      "kind": "b",
+      "trees_saved": 255,
+      "model_id": "97e2165daf6f32588dde630b5a956fcbd7ea289932d8166e52e8222875bade08"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 2,
+      "kind": "a",
+      "trees_saved": 126,
+      "model_id": "b9d3fc18e95acdd41449f611ff8826ade7730865461ba5bc9c5f636980ed2e33"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 2,
+      "kind": "b",
+      "trees_saved": 127,
+      "model_id": "c6df5482b41dc0b9d3e8dc5ecec38bf516c63f6df522861cc1466c03aae73f10"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 3,
+      "kind": "a",
+      "trees_saved": 173,
+      "model_id": "f42bbd3a455baa237f1feb01acbe9b4181aac915a0a4a15dd007dd01152905d4"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 3,
+      "kind": "b",
+      "trees_saved": 219,
+      "model_id": "967c387ad29b43c6040c6a59a01f049d0c62380dbe1d4d7b8b0eba1134fc6628"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 4,
+      "kind": "a",
+      "trees_saved": 37,
+      "model_id": "cf2214702e4fdf56938285493f279b806c13067fb592737e8a3b5abee90afb4e"
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "outer_fold": 4,
+      "kind": "b",
+      "trees_saved": 176,
+      "model_id": "759af3815018bbdc329938b20c6a39573d64cc68c6b2c1caff570af53c20d204"
+    }
+  ]
+}

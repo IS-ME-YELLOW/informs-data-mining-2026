@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "split_seed": 20260917,
+  "method": "independent keyed pandas reconstruction; no production numerical helpers",
+  "metrics_checked": 336,
+  "bootstrap_intervals_checked": 40,
+  "oracle_and_anchor_rows_checked": 1544179,
+  "matched_queries_checked": 3479,
+  "current_reconstruction": true,
+  "decomposition_verified": true,
+  "N_R_formula_verified": true,
+  "floating_tolerances": {
+    "atol": 1e-12,
+    "rtol": 1e-10,
+    "formula_atol": 1e-06
+  },
+  "training_performed": false,
+  "verifier_sha256": "7788a5f8c1200bfd033b6db327fce2b9c6224cab0d8a7605ea7a04ebe8920798"
+}

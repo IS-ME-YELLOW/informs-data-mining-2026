@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "split_seed": 20260918,
+  "decomposition_closes": true,
+  "source_inputs_unchanged": 485,
+  "training_performed": false,
+  "code_sha256": "ea812d1c17f5cea54f4d5a43f790a06a84e9625a4fb23e2b9c40f4fc35716e11"
+}

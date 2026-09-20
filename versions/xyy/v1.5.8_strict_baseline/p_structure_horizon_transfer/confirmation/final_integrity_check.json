@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "splits": {
+    "20260917": {
+      "inputs_unchanged": 485,
+      "new_models": 10,
+      "formal_fits": 50,
+      "independent_verification": "PASS"
+    },
+    "20260918": {
+      "inputs_unchanged": 485,
+      "new_models": 10,
+      "formal_fits": 50,
+      "independent_verification": "PASS"
+    }
+  },
+  "parent_frozen_files_unchanged": 144,
+  "adaptation_audit": "PASS",
+  "write_scope": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation",
+  "seed42_retrained": false,
+  "P24_P48_retrained": false,
+  "joint_candidate_created": false,
+  "cross_split_predictions_averaged": false,
+  "total_new_fits": 100,
+  "total_new_outer_models": 20
+}

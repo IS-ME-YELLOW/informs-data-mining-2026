@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "frozen_input_files_unchanged": 504,
+  "prior_N_diagnostic_artifacts_unchanged": 123,
+  "new_files_confined_to": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/n_loss_l2_huber",
+  "old_files_modified": false,
+  "real_L2_fits": 100,
+  "real_L2_outer_models": 20,
+  "independent_reload": "20 L2 plus 20 Huber models",
+  "exact_prediction_equality": true
+}

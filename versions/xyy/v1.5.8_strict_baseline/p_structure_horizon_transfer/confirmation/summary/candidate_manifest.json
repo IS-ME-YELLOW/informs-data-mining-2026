@@ -1,0 +1,123 @@
+{
+  "status": "recommended_CV_recipe_not_deployed",
+  "candidate": "P1_ab_F2_plus_D_G_plus_P6_ab_163",
+  "source_P24_P48": "original_strict",
+  "no_cross_split_prediction_averaging": true,
+  "full_data_models_exist": false,
+  "splits": [
+    {
+      "split_seed": 42,
+      "model_seed": 42,
+      "case": "AB_P06",
+      "reference_case": "B0",
+      "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42",
+      "run_identity_hash": "7c971d4269ff6d23fb520c28cfe0e4d365f8cea7237ced5369f0b1f226d3b6a0",
+      "files": {
+        "run_manifest.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42/run_manifest.json",
+          "sha256": "efc809b48c193872ecf2b5012d2c92bc1371860fc308aabcb61c20cf964fe514"
+        },
+        "component_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42/component_predictions.parquet",
+          "sha256": "9e465a80f2d997a3d26b1fe7fa8fbc7151fbe7e0eac0aa4c7c80e08587ff9663"
+        },
+        "control_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42/control_predictions.parquet",
+          "sha256": "6fcefb60758361966c1286bb5484cb36d33591ccbe7480953e381fb11c26ce45"
+        },
+        "aligned_unique_components.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42/aligned_unique_components.parquet",
+          "sha256": "9cc4885a87b6cba17943f51aa93e19c8ca87239e4377b207c4a36d61b225e40d"
+        },
+        "MODEL_CV_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42/MODEL_CV_COMPLETE",
+          "sha256": "b0c2536d15727c24a5e9cebdb3bc6cbdab0e2dc1042eeeffc5fcd8fc64bb1152"
+        },
+        "EVALUATION_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42/EVALUATION_COMPLETE",
+          "sha256": "e7db26db3619e0a14e57aa9fc77bb9ac706e0c8740ecd04684f02f158adf225e"
+        },
+        "VERIFIED_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42/VERIFIED_COMPLETE",
+          "sha256": "e410aba16b7ac0564c02c5ec9b9dcdf80c800ed1c23d939f0fc0db6204ed766d"
+        }
+      }
+    },
+    {
+      "split_seed": 20260917,
+      "model_seed": 42,
+      "case": "AB_P06",
+      "reference_case": "B0",
+      "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42",
+      "run_identity_hash": "2effe8d5a50b0f6c902d038615336cc2a51e8472412c1faf929dfd79eb15c798",
+      "files": {
+        "run_manifest.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42/run_manifest.json",
+          "sha256": "8f6e1e74ef5d5b614d7d30c9f35003532cd17f32bfa9046627ca972f38233c5d"
+        },
+        "component_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42/component_predictions.parquet",
+          "sha256": "af72d482bded5adb2503f72574ca88c9400b4a0147a2cff345781c3e3edcbb43"
+        },
+        "control_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42/control_predictions.parquet",
+          "sha256": "f010d6426eee1e17c52363e2acdcb592eba96c67019fe380593c044422e8e8d2"
+        },
+        "aligned_unique_components.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42/aligned_unique_components.parquet",
+          "sha256": "c3dc639402f4fdcafbb851a8d4ca9be58f39331e3541640ff7c243797bc47606"
+        },
+        "MODEL_CV_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42/MODEL_CV_COMPLETE",
+          "sha256": "8f8d2ef4689b5a6b372f5e9c9b9dbf86912b8b796ea98de68d9f38cda823e590"
+        },
+        "EVALUATION_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42/EVALUATION_COMPLETE",
+          "sha256": "751890aec317a4f35d8263e9c37ba4b7e36995a313fefd7932bf34143f8e3a84"
+        },
+        "VERIFIED_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260917/runs/v18_ptransfer_ab_v1_split20260917_model42/VERIFIED_COMPLETE",
+          "sha256": "f075ae0e66ae4be0cacf0080790c3e2517475b504457a71b4244b9040a2d5feb"
+        }
+      }
+    },
+    {
+      "split_seed": 20260918,
+      "model_seed": 42,
+      "case": "AB_P06",
+      "reference_case": "B0",
+      "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42",
+      "run_identity_hash": "399da73952d32a3e333a9933a0ed1a57a1ed39eada5477cdc3fa80c9eb56f3d4",
+      "files": {
+        "run_manifest.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42/run_manifest.json",
+          "sha256": "383b4009dfc98df8d2759d65738f11dbac65509fc345cd2d12f69aa5975da87b"
+        },
+        "component_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42/component_predictions.parquet",
+          "sha256": "fc32984d22484df65fc465de7e221bce5a18f70dbe009c9a7898ea0fefc5152a"
+        },
+        "control_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42/control_predictions.parquet",
+          "sha256": "7f9bc51e00ddf27969d694f3b0fb4afcb8a4f404866c7023b2d142eaceaf6488"
+        },
+        "aligned_unique_components.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42/aligned_unique_components.parquet",
+          "sha256": "fdc9511dc913851e517e85d5d476f24032b07201bbe5553d3d122b949a2c6e0c"
+        },
+        "MODEL_CV_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42/MODEL_CV_COMPLETE",
+          "sha256": "e18a35af799864c4f9af317ad731448e5ef5822af7271b6136c4c3c588e87856"
+        },
+        "EVALUATION_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42/EVALUATION_COMPLETE",
+          "sha256": "b5e9bc1fab92595a134adc9ad5dc3be64990540a7b6bb98a09ce254b9a20d0bf"
+        },
+        "VERIFIED_COMPLETE": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/confirmation/split20260918/runs/v18_ptransfer_ab_v1_split20260918_model42/VERIFIED_COMPLETE",
+          "sha256": "8d384371f2170a40b963dd3ab968c937c0733f974747ae7bc3af8fac69a450bd"
+        }
+      }
+    }
+  ]
+}

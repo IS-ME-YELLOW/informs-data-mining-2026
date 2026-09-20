@@ -1,0 +1,53 @@
+{
+  "protocol": "v18_ptransfer_ab_v1",
+  "split_seed": 42,
+  "model_seed": 42,
+  "reference_F2_identity": "e39b76d75f191891abda1939dc47933815cc4fa15796227b0c200eb1b96bfcac",
+  "transfer_horizons": [
+    "osi_target_t06h",
+    "osi_target_t24h",
+    "osi_target_t48h"
+  ],
+  "cases": {
+    "B0": null,
+    "AB_P06": "osi_target_t06h",
+    "AB_P24": "osi_target_t24h",
+    "AB_P48": "osi_target_t48h"
+  },
+  "feature_count": 163,
+  "params": {
+    "objective": "regression",
+    "metric": "None",
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "max_depth": -1,
+    "min_child_samples": 50,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 5,
+    "lambda_l1": 0.1,
+    "lambda_l2": 1.0,
+    "verbose": -1,
+    "seed": 42,
+    "feature_fraction_seed": 42,
+    "bagging_seed": 42,
+    "drop_seed": 42,
+    "data_random_seed": 42,
+    "num_threads": 1,
+    "force_col_wise": true,
+    "deterministic": true
+  },
+  "max_rounds": 2000,
+  "early_stopping_rounds": 100,
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20260910,
+  "formal_fits": 150,
+  "new_outer_models": 30,
+  "root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "output": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer",
+  "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/runs/v18_ptransfer_ab_v1_split42_model42",
+  "weighting": "raw p^2 or (1-p)^2; normalize by fit-training support mean only",
+  "early_stop_metric": "sqrt(sum(raw_validation_weight * branch_error^2)/all_valid_validation_rows)",
+  "authorized_scope": "seed42; three single-source AB migrations only; no joint or feature increment",
+  "protocol_sha256": "2ddfffc81d9c0b59e18f0730173ba0351f004edac37f07a132a46a18b43925ca"
+}

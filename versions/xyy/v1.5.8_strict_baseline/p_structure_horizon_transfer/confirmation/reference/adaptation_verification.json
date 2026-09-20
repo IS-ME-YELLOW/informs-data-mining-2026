@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "adaptation_scope": "CV, F2 identity, output paths, P6 candidate restriction, counts",
+  "numeric_training_and_evaluation_functions_identical": true,
+  "files": {
+    "transfer_protocol.py": {
+      "parent_sha256": "afc5839ae1eef3800c0e9ec3e5c5c60a917aee52b5f8c9e3291d986ad86d0340",
+      "adapted_sha256": "d8804f0336ab006e94f944e6cf1508842254bf33b475159c6ebc10ac14f470ac",
+      "unchanged_function_AST": [
+        "safe",
+        "clean",
+        "read_json",
+        "write_json",
+        "write_frame",
+        "array_sha",
+        "normalize",
+        "params",
+        "model_target",
+        "support",
+        "transform",
+        "reconstruct",
+        "load_context",
+        "subset",
+        "describe",
+        "specification",
+        "contribution_metric",
+        "build_cases"
+      ],
+      "allowed_adapted_functions": [
+        "assert_inputs",
+        "initialize",
+        "load_data",
+        "sources"
+      ]
+    },
+    "train_transfer.py": {
+      "parent_sha256": "5ac7f1840f827f22b62d384e89150ed1b67dac7f5900a7267c6b9d60f6e10f32",
+      "adapted_sha256": "faefea5cdee8abbc30547436c4611c4352b36a3af0d1568bf1605be234857cef",
+      "unchanged_function_AST": [
+        "progress",
+        "restore",
+        "fit_one"
+      ],
+      "allowed_adapted_functions": [
+        "main",
+        "preflight",
+        "train"
+      ]
+    },
+    "evaluate_transfer.py": {
+      "parent_sha256": "7776af2b86e75e72cacff4c0d184b40879e614ad02e0425b879aa264e8335a8d",
+      "adapted_sha256": "d312abc1537d9f38c660f05d4f261ed777d83f21c1d3f287535897bf76880c70",
+      "unchanged_function_AST": [
+        "metric",
+        "comparison",
+        "bootstrap",
+        "evaluate"
+      ],
+      "allowed_adapted_functions": []
+    },
+    "verify_transfer.py": {
+      "parent_sha256": "987421fffdd6c8011abe5767ee3c97144b022d443e56f77c091f5cf8cbe559f5",
+      "adapted_sha256": "f16ab01c7609cfee8c0672379fadc636ceede813997692cde41aeaaec24dcf09",
+      "unchanged_function_AST": [
+        "close",
+        "independent_scope",
+        "score",
+        "comparison",
+        "finish",
+        "independent_controls",
+        "independent_interval"
+      ],
+      "allowed_adapted_functions": [
+        "verify"
+      ]
+    }
+  },
+  "runtime_sha256": "dc6975f988dab5caae6c7e22b79401fb66a11563353af85ec3cb0ec55eb83977",
+  "preparation_sha256": "b82dd8dca22092ac5a2c62a8ceb661c519c338eec4a6b60cbdfac3151354aeba",
+  "explicit_cv_loader": true,
+  "model_seed_unchanged": 42,
+  "parent_frozen_files": 144
+}

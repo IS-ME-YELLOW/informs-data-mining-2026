@@ -1,0 +1,5 @@
+horizon,recommendation,method,rationale,oracle_change_pct_min,oracle_change_pct_max,training_authorized
+1,优先做受控对照,frozen features; direct N L2 versus current Huber,tail amplitude compression; positive oracle sensitivity; no global time-shift evidence,-6.074185164150947,-5.880616013693107,False
+6,同一方法一并测试,frozen features; direct N L2 versus current Huber,tail amplitude compression; positive oracle sensitivity; no global time-shift evidence,-5.030262752088777,-4.864298214427487,False
+24,同一方法一并测试,frozen features; direct N L2 versus current Huber,tail amplitude compression; positive oracle sensitivity; no global time-shift evidence,-7.423667262064559,-7.2256634555738835,False
+48,同一方法一并测试,frozen features; direct N L2 versus current Huber,tail amplitude compression; positive oracle sensitivity; no global time-shift evidence,-7.741616134233443,-7.477350238924119,False

@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "split_seed": 20260917,
+  "reference_identity": "64f8263f5356378124c5e981fcb7c1117ad808c97b46c383b64b7cdbe109484d",
+  "counties": 239,
+  "origin_rows": 34416,
+  "valid_counts": {
+    "1": 34177,
+    "6": 32982,
+    "24": 28680,
+    "48": 22944
+  },
+  "N_models_scope_checked": 20,
+  "N_matches_original": true,
+  "official_targets_match": true,
+  "max_current_prediction_difference": 2.7755575615628914e-17,
+  "max_official_formula_difference": 5.0010749999999894e-05,
+  "N_formula_max": 4.996534996419701e-08,
+  "R_formula_max": 4.996534996534898e-08,
+  "oracle_alpha_zero_exact": true,
+  "training_performed": false
+}

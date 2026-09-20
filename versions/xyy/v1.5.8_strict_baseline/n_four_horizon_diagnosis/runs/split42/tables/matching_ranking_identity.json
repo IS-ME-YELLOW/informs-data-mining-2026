@@ -1,0 +1,26 @@
+{
+  "sha256": "385096e74c340f17f31938f972cc6b6ab2cc8162777e78fc398e6f7e220196bc",
+  "ranked_before_outcome_join": true,
+  "full_fold_exclusion": true,
+  "selected_cases": [
+    "18013",
+    "39115",
+    "39117",
+    "42053",
+    "42131",
+    "54013",
+    "54015"
+  ],
+  "features": [
+    "last_P_t",
+    "last_N_t",
+    "last_R_t",
+    "N_t_mean_72h",
+    "N_t_max_72h",
+    "gust_at_t{h}h",
+    "log_customers",
+    "pct_forest"
+  ],
+  "k": 5,
+  "rows": 17395
+}

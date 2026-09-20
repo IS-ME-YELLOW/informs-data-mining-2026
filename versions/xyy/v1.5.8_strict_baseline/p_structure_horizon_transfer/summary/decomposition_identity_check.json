@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "rowwise_additive_identity": true,
+  "total_matches_verified_OSI_SSE": true,
+  "absolute_tolerance": 1e-12,
+  "method": "explicit squared-error expansion with postprocessing remainder"
+}

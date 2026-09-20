@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "identity_hash": "399da73952d32a3e333a9933a0ed1a57a1ed39eada5477cdc3fa80c9eb56f3d4",
+  "new_models_reloaded": 10,
+  "inner_probes_checked": 40,
+  "full_control_metrics_checked": 40,
+  "bootstrap_intervals_checked": 6,
+  "scoped_weights_and_labels_verified": true,
+  "independent_P_reconstruction": true,
+  "independent_pandas_C3": true,
+  "unchanged_sources_and_output_propagation_verified": true,
+  "all_county_fold_window_metrics_checked": true,
+  "training_performed_by_verifier": false,
+  "verifier_sha256": "f16ab01c7609cfee8c0672379fadc636ceede813997692cde41aeaaec24dcf09",
+  "model_checks": [
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 0,
+      "kind": "a",
+      "trees_saved": 103,
+      "model_id": "1d0b91f29828e2da00084adef2d03b6f8dc779e17d554e8b62c8621dc28f06e5"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 0,
+      "kind": "b",
+      "trees_saved": 134,
+      "model_id": "b2c1218e4aa60b530e6440e4bc568e7626c9cdd728f799c2ba81f082fc1626b2"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 1,
+      "kind": "a",
+      "trees_saved": 94,
+      "model_id": "b242e017a503e83cbdba2153d488a30f14879575cdaccba211e53b29c4891db1"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 1,
+      "kind": "b",
+      "trees_saved": 213,
+      "model_id": "86bc0f327c66752acb6d4c86b04b905e8c5153ffed4e5ce625c470fa3d17b93a"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 2,
+      "kind": "a",
+      "trees_saved": 66,
+      "model_id": "3f017c4ef586712ff12128f7878b9b7b3b26653066a9a27427f35b35bd755ac9"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 2,
+      "kind": "b",
+      "trees_saved": 171,
+      "model_id": "65dad30139b5c8a145c7025a8d3987de0d5fc7133e0ef32f3f41af700d208f98"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 3,
+      "kind": "a",
+      "trees_saved": 134,
+      "model_id": "7d2b026a12ca0ef62d12e535871b86beff86fe9b0581c72d295411b02bbf4c3d"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 3,
+      "kind": "b",
+      "trees_saved": 315,
+      "model_id": "f65c75a81a8cfbb4536543b38063495fd4b67b1bf922f292055228561d58e0bd"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 4,
+      "kind": "a",
+      "trees_saved": 106,
+      "model_id": "b4882d864e9e495955a3153a3e6b3fc2e181ba550d25842e23aba842d75bf854"
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "outer_fold": 4,
+      "kind": "b",
+      "trees_saved": 284,
+      "model_id": "29b7bb3b87ee72ab16d1b89e9d383cb80d60e142011095e58c68747f8bcfb8f1"
+    }
+  ]
+}
