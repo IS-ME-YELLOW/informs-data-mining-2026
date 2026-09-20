@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "kind": "inference_replay_and_fixed_weight_sensitivity",
+  "checked_at_utc": "2026-09-19T15:32:19.448855+00:00",
+  "source_run_identity": "376c7cb9031758e02f840280de0b5e72ff9f256ee2bd23c22a321a9cfaa7d2b0",
+  "replay_contexts": 64,
+  "base_models_used_by_replay": 416,
+  "compared_rows_by_context": {
+    "inner": 475132,
+    "outer": 137664,
+    "test": 36288
+  },
+  "max_saved_training_loss_vs_CPU_difference": 1.7445484182254667e-08,
+  "Newton_reloaded_SSE_increase": 6.204522452998012,
+  "total_1h_reloaded_SSE_increase": 6.022513094622033,
+  "Newton_fraction_of_net_SSE_increase": 1.0302214964942973,
+  "intervention_variants_verified": 10,
+  "two_player_decompositions_verified": true,
+  "protected_existing_files_unchanged": 1055,
+  "prior_diagnostic_artifacts_unchanged": 34,
+  "preexisting_environment_packages_unchanged": 23,
+  "training_performed": false,
+  "original_COMPLETE_written": false,
+  "formal_original_CUDA_acceptance_claimed": false
+}

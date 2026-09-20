@@ -1,0 +1,21 @@
+{
+  "status": "CPU_REPLAY_PASS_WITH_DECLARED_TOLERANCE",
+  "stage": "all",
+  "checkpoints_replayed": 64,
+  "all_checkpoint_metadata_verified": 64,
+  "base_models_predicted": 416,
+  "max_correction_absolute_error": 3.5762786865234375e-07,
+  "max_base_absolute_error": 0.0,
+  "max_postprediction_absolute_error": 7.15255737138154e-08,
+  "zero_threshold_flips": 0,
+  "Newton_CPU_repeat_bitwise_equal": true,
+  "correction_tolerance": 1e-05,
+  "wall_seconds": 209.3906922620081,
+  "torch": "2.7.1+cpu",
+  "original_device": "Windows/CUDA",
+  "current_device": "Linux/CPU",
+  "original_run_identity": "376c7cb9031758e02f840280de0b5e72ff9f256ee2bd23c22a321a9cfaa7d2b0",
+  "formal_original_CUDA_acceptance_claimed": false,
+  "training_performed": false,
+  "completed_at_utc": "2026-09-19T15:22:14.557404+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "source_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/model/批量下载-dem_v158_p2_component_seed42_cuda_log等986个文件/dem_v158_p2_component_seed42_cuda_log",
+  "original_report_run": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/outputs/runs/dem_v158_p2_component_seed42_cuda_log",
+  "source_identity": "376c7cb9031758e02f840280de0b5e72ff9f256ee2bd23c22a321a9cfaa7d2b0",
+  "execution": "CPU inference only, no fitting, no original COMPLETE modification",
+  "scope": "all checkpoint metadata; saved base/GAT prediction replay; Newton fixed-weight sensitivities",
+  "tolerances": {
+    "base_component_absolute": 1e-12,
+    "checkpoint_stats_absolute": 1e-10,
+    "CPU_vs_CUDA_raw_correction_absolute": 1e-05,
+    "CPU_repeat_absolute": 0.0,
+    "postprocess_boundary_policy": "report threshold flips separately; do not hide or relabel as exact"
+  },
+  "diagnostic_only_interventions": [
+    "Newton pre_event_mean_osi to training maximum",
+    "Newton pre_event_mean_osi to training mean",
+    "Newton four extreme history features to training bounds and recompute neighbor summaries",
+    "all standardized inputs clipped to +/-5 (inference-only sensitivity)",
+    "skip/message path zero interventions and single-feature path decomposition"
+  ],
+  "declared_before_reading_weights": true
+}

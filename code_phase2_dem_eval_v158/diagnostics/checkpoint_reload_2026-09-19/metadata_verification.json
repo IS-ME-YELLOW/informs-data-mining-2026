@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "base_models_hashed": 416,
+  "GAT_checkpoints_loaded": 64,
+  "scope_dependencies_schemas_weights_verified": true,
+  "torch_version": "2.7.1+cpu",
+  "device": "cpu",
+  "training_performed": false
+}

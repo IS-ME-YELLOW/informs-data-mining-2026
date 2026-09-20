@@ -1,0 +1,27 @@
+{
+  "status": "FIXED_WEIGHT_DIAGNOSTICS_COMPLETE",
+  "source_checkpoint": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/model/批量下载-dem_v158_p2_component_seed42_cuda_log等986个文件/dem_v158_p2_component_seed42_cuda_log/models/gat/gat_component_v158_t01h_S0-1-3-4.pt",
+  "scope": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "horizon": "osi_target_t01h",
+  "saved_residual_scale": 0.012568478530908384,
+  "saved_best_epoch": 219,
+  "saved_epochs": 220,
+  "Newton_pre_event_standardized_value": 153.43716430664062,
+  "original_mean_correction": 1.0317256050510006,
+  "head_zero_mean_correction": -0.0010952068259939551,
+  "skip_path_mean_contribution": 1.1903042191588866,
+  "message_path_mean_contribution": -0.15748340728189195,
+  "pre_event_feature_total_mean_effect": 1.2079894676075116,
+  "pre_event_via_skip_mean_contribution": 1.2208299344548812,
+  "pre_event_via_message_mean_contribution": -0.012840466847369721,
+  "training_performed": false,
+  "weights_modified": false,
+  "original_predictions_modified": false,
+  "interpretation": "Exact interventions in this frozen computational graph; not physical causality, not retrained ablations, not new unbiased CV scores.",
+  "wall_seconds": 6.096659589995397
+}

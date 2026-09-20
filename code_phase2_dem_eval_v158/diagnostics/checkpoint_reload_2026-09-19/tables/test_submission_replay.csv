@@ -1,0 +1,5 @@
+horizon,scoreable_rows,alpha,CPU_submission_max_absolute_error,CPU_different_from_base_rows
+osi_target_t01h,9009,0.0,0.0,0
+osi_target_t06h,8694,0.35,2.60770320892334e-08,3929
+osi_target_t24h,7560,0.2,1.3411045080014006e-08,3063
+osi_target_t48h,6048,0.1,8.940696738513054e-09,2046

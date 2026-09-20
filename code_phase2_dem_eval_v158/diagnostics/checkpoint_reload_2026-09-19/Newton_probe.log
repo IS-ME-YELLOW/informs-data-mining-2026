@@ -1,0 +1,37 @@
+original mean correction 1.0317256050510006
+zero_skip_path mean correction -0.00566837534294594
+zero_message_path mean correction 1.3421192510978326
+head_at_zero_hidden mean correction -0.0010952068259939551
+Newton_pre_event_to_train_mean_both_paths mean correction -0.17626386255651086
+Newton_pre_event_removed_only_from_skip mean correction -0.17205932121593637
+Newton_pre_event_removed_only_from_message mean correction 1.0616110800863146
+Newton_pre_event_to_training_max mean correction -0.13194943089168387
+Newton_four_extreme_history_to_training_bounds mean correction -0.029657235722402697
+all_nodes_all_inputs_z_clipped_5 mean correction -0.012842058796189128
+{
+  "status": "FIXED_WEIGHT_DIAGNOSTICS_COMPLETE",
+  "source_checkpoint": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/model/\u6279\u91cf\u4e0b\u8f7d-dem_v158_p2_component_seed42_cuda_log\u7b49986\u4e2a\u6587\u4ef6/dem_v158_p2_component_seed42_cuda_log/models/gat/gat_component_v158_t01h_S0-1-3-4.pt",
+  "scope": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "horizon": "osi_target_t01h",
+  "saved_residual_scale": 0.012568478530908384,
+  "saved_best_epoch": 219,
+  "saved_epochs": 220,
+  "Newton_pre_event_standardized_value": 153.43716430664062,
+  "original_mean_correction": 1.0317256050510006,
+  "head_zero_mean_correction": -0.0010952068259939551,
+  "skip_path_mean_contribution": 1.1903042191588866,
+  "message_path_mean_contribution": -0.15748340728189195,
+  "pre_event_feature_total_mean_effect": 1.2079894676075116,
+  "pre_event_via_skip_mean_contribution": 1.2208299344548812,
+  "pre_event_via_message_mean_contribution": -0.012840466847369721,
+  "training_performed": false,
+  "weights_modified": false,
+  "original_predictions_modified": false,
+  "interpretation": "Exact interventions in this frozen computational graph; not physical causality, not retrained ablations, not new unbiased CV scores.",
+  "wall_seconds": 6.096659589995397
+}
