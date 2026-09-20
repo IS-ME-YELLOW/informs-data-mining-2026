@@ -1,0 +1,3 @@
+horizon,gate_rows,gate_pct,actual_top5_threshold,actual_top5_rows,gate_and_actual_top5
+osi_target_t24h,625,2.179218967921897,0.0154,1430,428
+osi_target_t48h,457,1.9918061366806137,0.0099,1146,255

@@ -1,0 +1,115 @@
+{
+  "protocol": "stella_v112_nested_v1",
+  "split_seed": 42,
+  "model_seed": 42,
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "features": {
+    "count": 163,
+    "source": "versions/xyy/v1.5.6"
+  },
+  "horizons": [
+    "osi_target_t01h",
+    "osi_target_t06h",
+    "osi_target_t24h",
+    "osi_target_t48h"
+  ],
+  "long_horizons": [
+    "osi_target_t24h",
+    "osi_target_t48h"
+  ],
+  "components": [
+    "P_t",
+    "N_t",
+    "D_t",
+    "R_t"
+  ],
+  "component_weights": {
+    "P_t": 0.4,
+    "N_t": 0.35,
+    "D_t": 0.25,
+    "R_t": -0.1
+  },
+  "source_order": [
+    "lgbm_direct",
+    "lgbm_component",
+    "xgboost_direct",
+    "catboost_direct",
+    "xgboost_component",
+    "catboost_component"
+  ],
+  "gate": {
+    "quantile_probability": 0.95,
+    "method": "linear",
+    "comparison": "L0 > theta uses L0; equality uses L1"
+  },
+  "post_process": {
+    "clip": [
+      0.0,
+      0.65
+    ],
+    "strictly_below_zero_threshold": 0.001
+  },
+  "families": {
+    "lightgbm": {
+      "max_rounds": 2000,
+      "patience": 100,
+      "params": {
+        "objective": "huber",
+        "metric": "rmse",
+        "learning_rate": 0.05,
+        "num_leaves": 31,
+        "max_depth": -1,
+        "min_child_samples": 50,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 5,
+        "lambda_l1": 0.1,
+        "lambda_l2": 1.0,
+        "verbose": -1,
+        "seed": 42,
+        "feature_fraction_seed": 42,
+        "bagging_seed": 42,
+        "drop_seed": 42,
+        "data_random_seed": 42,
+        "num_threads": 1,
+        "force_col_wise": true,
+        "deterministic": true
+      }
+    },
+    "xgboost_direct": {
+      "max_rounds": 4000,
+      "patience": 100
+    },
+    "xgboost_component": {
+      "max_rounds": 8000,
+      "patience": 100
+    },
+    "catboost": {
+      "max_rounds": 4000,
+      "patience": 100
+    }
+  },
+  "round_rule": "max(1, floor(mean(scope-internal probe best round counts)))",
+  "short_horizons": "exact pinned F2 main prediction, identical for L0/L1/L2",
+  "bootstrap": {
+    "unit": "county_full_trajectory",
+    "replicates": 2000,
+    "seed": 20260910
+  },
+  "numeric_comparison": {
+    "atol": 1e-12,
+    "rtol": 0
+  },
+  "expected_scoreable_rows": {
+    "osi_target_t01h": 34177,
+    "osi_target_t06h": 32982,
+    "osi_target_t24h": 28680,
+    "osi_target_t48h": 22944
+  }
+}
