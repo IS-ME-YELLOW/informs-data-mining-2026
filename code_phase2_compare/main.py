@@ -514,14 +514,14 @@ def _base_manifest(ctx, run_dir: Path, args, *, final=False):
     _atomic_dataframe(run_dir / name, frame)
 
 
-def _append_inner_records(rows, selection, outer_fold, horizon, mode, bundle, row_fold, supervision):
+def _append_inner_records(rows, selection, outer_fold, horizon, mode, variant, bundle, row_fold, supervision):
     labels = supervision.scoped(selection.scope, horizon, "osi")
     for inner_fold in selection.scope:
         allowed = tuple(fold for fold in selection.scope if fold != inner_fold)
         mask = (row_fold == inner_fold) & (bundle.meta_train["hour_idx"].to_numpy(dtype=int) + HORIZON_HOURS[horizon] <= PRED_END - 1)
         for row_id in np.flatnonzero(mask):
             rows.append({
-                "protocol": PROTOCOL, "base_mode": mode, "variant": ctx.variant,
+                "protocol": PROTOCOL, "base_mode": mode, "variant": variant,
                 "outer_fold": outer_fold, "inner_fold": inner_fold,
                 "allowed_folds": json.dumps(allowed),
                 "fipsCode": str(bundle.meta_train.iloc[row_id]["fips_str"]),
@@ -705,7 +705,7 @@ def _run_cv(ctx, args, run_dir):
             selection = evaluated["selection"]
             stack = evaluated["stack"]
             _append_inner_records(
-                inner_rows, selection, outer_fold, horizon, args.base_mode,
+                inner_rows, selection, outer_fold, horizon, args.base_mode, args.variant,
                 ctx.bundle, row_fold, ctx.base_store.supervision,
             )
             _append_outer_records(outer_rows, stack, selection, outer_fold, horizon, args.base_mode, ctx)
