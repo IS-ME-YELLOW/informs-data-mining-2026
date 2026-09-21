@@ -1,0 +1,5 @@
+{
+  "protocol": "direct_component_gat_v1",
+  "run_id": "direct_component_gat_v1_seed42_cuda_v2",
+  "test_predictions_sha256": "fc7edd44afe6d4ac59295518f00599dc467bbc0c5d30c4faff708abfb6fa2b03"
+}

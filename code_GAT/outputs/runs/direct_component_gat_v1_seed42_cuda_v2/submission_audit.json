@@ -1,0 +1,11 @@
+{
+  "rows": 9072,
+  "protocol": "direct_component_gat_v1",
+  "finite_counts": {
+    "osi_target_t01h": 9009,
+    "osi_target_t06h": 8694,
+    "osi_target_t24h": 7560,
+    "osi_target_t48h": 6048
+  },
+  "passed": true
+}

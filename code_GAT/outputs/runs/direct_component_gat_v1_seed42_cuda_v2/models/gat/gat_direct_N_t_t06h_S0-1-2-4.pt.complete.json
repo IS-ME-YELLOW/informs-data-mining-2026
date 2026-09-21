@@ -1,0 +1,18 @@
+{
+  "details": {
+    "component": "N_t",
+    "horizon": "osi_target_t06h",
+    "scope": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "seed": 2664253829
+  },
+  "model_file": "gat_direct_N_t_t06h_S0-1-2-4.pt",
+  "model_id": "direct_gat:N_t:osi_target_t06h:S0,1,2,4",
+  "record_version": 2,
+  "run_identity": "b5f951afd341c334d3b7937951a047cc0b752cd6c2ff465f9034f69c658b336b",
+  "sha256": "b547973bb2f9785821824a9557df18e558b95a33c6a7ea3fe648c5efa3784eff"
+}
