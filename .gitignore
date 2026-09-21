@@ -14,3 +14,4 @@ code_phase2_dem_eval_v158/outputs/runs/dem_v158_p2_component_seed42_cuda_log/mod
 code_phase2_dem_eval_v158/model
 code_phase2_dem_eval_v158/outputs/county_top10_plots/
 code_phase2_compare/outputs/runs
+code_phase2_compare/outputs
