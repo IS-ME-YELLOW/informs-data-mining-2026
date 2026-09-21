@@ -185,13 +185,24 @@ def _preflight(args, load_supervision_data=True):
         raise ValueError(f"unexpected fixed graph shape: {edge_index.shape}/{edge_attr.shape}")
     zero_train = np.zeros(len(bundle.X_train), dtype=float)
     zero_test = np.zeros(len(bundle.X_test), dtype=float)
-    raw, _, _, _, _, names = make_county_time_view(
-        bundle.X_train, bundle.X_test, bundle.meta_train, bundle.meta_test,
-        zero_train, zero_test, HORIZONS[0], coords, terrain, bundle.feature_names,
-    )
-    graph, extra_names = add_neighbor_feature_aggregates(raw, names, edge_index, HORIZONS[0])
-    if graph.shape != (144, 302, 205) or not np.isfinite(graph).all():
-        raise ValueError("direct GAT 205-dimensional input preflight failed")
+    graph_feature_names_by_horizon = {}
+    for horizon in HORIZONS:
+        raw, _, _, _, _, names = make_county_time_view(
+            bundle.X_train, bundle.X_test, bundle.meta_train, bundle.meta_test,
+            zero_train, zero_test, horizon, coords, terrain, bundle.feature_names,
+        )
+        graph, extra_names = add_neighbor_feature_aggregates(raw, names, edge_index, horizon)
+        actual_names = [
+            "base", *names, "latitude", "longitude", *list(terrain.columns), *extra_names,
+        ]
+        expected_names = graph_feature_names(names, list(terrain.columns), horizon)
+        if (
+            graph.shape != (144, 302, 205)
+            or not np.isfinite(graph).all()
+            or actual_names != expected_names
+        ):
+            raise ValueError(f"direct GAT {horizon} graph schema preflight failed")
+        graph_feature_names_by_horizon[horizon] = expected_names
     recomposition = validate_component_recomposition(component_targets, supervision.y_train) if load_supervision_data else None
     input_manifest = {
         "feature_version": FEATURE_VERSION, "experiment_version": EXPERIMENT_VERSION,
@@ -210,9 +221,9 @@ def _preflight(args, load_supervision_data=True):
         "bundle": bundle, "supervision": supervision, "component_targets": component_targets,
         "row_fold": row_fold, "folds": folds, "terrain": terrain, "coords": coords,
         "edge_index": edge_index, "edge_attr": edge_attr, "all_fips": all_fips,
-        "graph_hash": input_manifest["graph_hash"], "graph_feature_names": [
-            "base", *names, "latitude", "longitude", *list(terrain.columns), *extra_names,
-        ], "input_manifest": input_manifest, "versions": versions, "recomposition": recomposition,
+        "graph_hash": input_manifest["graph_hash"],
+        "graph_feature_names": graph_feature_names_by_horizon,
+        "input_manifest": input_manifest, "versions": versions, "recomposition": recomposition,
     }
 
 
@@ -229,7 +240,10 @@ class DirectGATContext:
         self.edge_attr = preflight["edge_attr"]
         self.all_fips = preflight["all_fips"]
         self.graph_hash = preflight["graph_hash"]
-        self.graph_feature_names = tuple(preflight["graph_feature_names"])
+        self.graph_feature_names = {
+            horizon: tuple(names)
+            for horizon, names in preflight["graph_feature_names"].items()
+        }
         self.run_dir = Path(run_dir)
         self.device = _resolve_device(args.device)
         self.inference_only = inference_only
@@ -249,7 +263,7 @@ class DirectGATContext:
         )
         graph, extra_names = add_neighbor_feature_aggregates(raw, names, self.edge_index, horizon)
         names = tuple(["base", *names, "latitude", "longitude", *list(self.terrain.columns), *extra_names])
-        if names != self.graph_feature_names or graph.shape[-1] != 205:
+        if names != self.graph_feature_names[horizon] or graph.shape[-1] != 205:
             raise ValueError("direct GAT graph schema mismatch")
         if not np.allclose(graph[:, :, 0], 0.0) or not np.isfinite(graph).all():
             raise FloatingPointError("direct GAT graph contains invalid placeholder/input")
