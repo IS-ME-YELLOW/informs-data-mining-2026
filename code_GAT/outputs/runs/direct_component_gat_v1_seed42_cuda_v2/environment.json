@@ -1,0 +1,12 @@
+{
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "pyarrow": "24.0.0",
+    "fastparquet": null,
+    "shapely": "2.1.2",
+    "torch": "2.7.1+cu118"
+  },
+  "device": "cuda",
+  "threads": 1
+}

@@ -1,0 +1,18 @@
+{
+  "details": {
+    "component": "R_t",
+    "horizon": "osi_target_t48h",
+    "scope": [
+      0,
+      1,
+      3,
+      4
+    ],
+    "seed": 1403903859
+  },
+  "model_file": "gat_direct_R_t_t48h_S0-1-3-4.pt",
+  "model_id": "direct_gat:R_t:osi_target_t48h:S0,1,3,4",
+  "record_version": 2,
+  "run_identity": "b5f951afd341c334d3b7937951a047cc0b752cd6c2ff465f9034f69c658b336b",
+  "sha256": "8068bf29e1485a4a5fc97f51a012a562ff8d906a7ecaac46dd38a09c8996e2cf"
+}

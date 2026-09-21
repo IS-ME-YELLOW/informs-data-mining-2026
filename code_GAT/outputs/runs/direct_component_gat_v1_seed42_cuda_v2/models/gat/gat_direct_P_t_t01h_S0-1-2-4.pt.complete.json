@@ -1,0 +1,18 @@
+{
+  "details": {
+    "component": "P_t",
+    "horizon": "osi_target_t01h",
+    "scope": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "seed": 2656434271
+  },
+  "model_file": "gat_direct_P_t_t01h_S0-1-2-4.pt",
+  "model_id": "direct_gat:P_t:osi_target_t01h:S0,1,2,4",
+  "record_version": 2,
+  "run_identity": "b5f951afd341c334d3b7937951a047cc0b752cd6c2ff465f9034f69c658b336b",
+  "sha256": "a235975004961286d5c14b458582f5c99f9d7991ac8b54bb3ed99e1fce0a4949"
+}
