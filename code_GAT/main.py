@@ -19,6 +19,11 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# PyTorch imports CUDA support through direct_gat below.  Set the cuBLAS
+# reproducibility contract before that import so both training and the
+# independent artifact verifier can use deterministic CUDA operations.
+os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+
 import numpy as np
 import pandas as pd
 
@@ -597,7 +602,6 @@ def _run_final(ctx, args, run_dir):
 
 def main(argv=None):
     args = parse_args(argv)
-    os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     if args.stage == "preflight":
         _preflight(args)
         print("PREFLIGHT_OK")
