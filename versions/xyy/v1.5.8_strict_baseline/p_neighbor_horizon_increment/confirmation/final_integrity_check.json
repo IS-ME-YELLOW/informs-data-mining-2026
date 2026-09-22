@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "splits": {
+    "20260917": {
+      "inputs_unchanged": 581,
+      "new_models": 5,
+      "formal_fits": 25,
+      "independent_verification": "PASS"
+    },
+    "20260918": {
+      "inputs_unchanged": 581,
+      "new_models": 5,
+      "formal_fits": 25,
+      "independent_verification": "PASS"
+    }
+  },
+  "parent_frozen_files_unchanged": 138,
+  "feature_package_readonly": true,
+  "old_files_modified": false,
+  "output_scope": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_neighbor_horizon_increment/confirmation",
+  "new_fits": 50,
+  "new_outer_models": 10,
+  "seed42_retrained": false,
+  "P6_P48_retrained": false,
+  "joint_candidate_evaluated": false,
+  "test_predictions_generated": false
+}

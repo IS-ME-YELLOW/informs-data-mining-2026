@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "new_model_fits": 0,
+  "figures_created": 0,
+  "source_files_unchanged": 19,
+  "input_windows_rebuilt": 6342,
+  "distance_rows_checked": 117033,
+  "nearest_pairs_checked": 414750,
+  "preprocessing_training_only": true,
+  "self_and_outer_fold_exclusion": true,
+  "fixed_threshold_before_after": true,
+  "addition_monotonicity": true,
+  "verifier_sha256": "15b8459d5f35013094b5b2fc42def3e49a5a519a47a410707d7ecdb90f3bda56",
+  "absolute_tolerance": 1e-12
+}

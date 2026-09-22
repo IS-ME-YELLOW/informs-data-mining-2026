@@ -1,0 +1,99 @@
+{
+  "protocol": "tree_stella_final_osi_v1",
+  "split_seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "model_seed": 42,
+  "cases": [
+    "B0",
+    "I1",
+    "I2",
+    "I3"
+  ],
+  "pairs": [
+    [
+      "I3",
+      "I1"
+    ],
+    [
+      "I3",
+      "I2"
+    ],
+    [
+      "I2",
+      "I1"
+    ],
+    [
+      "I1",
+      "B0"
+    ],
+    [
+      "I3",
+      "B0"
+    ]
+  ],
+  "tree_identities": {
+    "42": "bd4468e5c37fba7e93832153bc9847f807b8ae0054e45586f3c3853e96835bbd",
+    "20260917": "847bc47ba2970bcebb9711cd554874f4e423d6b3d7a0df9683c93afc89dd6fcb",
+    "20260918": "e8cf35263d42073aaae928f05ba58ab0b1f66df89b5d9cfe7a3944345c44dfe1"
+  },
+  "stella_identities": {
+    "42": "0a019474a437758214bb2eb3de8e13fb0a112320f6c69df0fe76b41166788be4",
+    "20260917": "a859aa7b9cbd9edc5121c6755f0a8eb0c32850bda08f31457187988fb7564b1b",
+    "20260918": "3e67a67e6fa8ed7d435ee58805a8af4584dfee8974a298d710da60ac2abe6699"
+  },
+  "tree_case": "NB_P24",
+  "stella_case": "L2",
+  "primary_case": "I3",
+  "weights_24h": [
+    0.5,
+    0.5
+  ],
+  "postprocess": {
+    "min": 0.0,
+    "max": 0.65,
+    "zero_below": 0.001
+  },
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20260910,
+  "windows": [
+    [
+      96,
+      119
+    ],
+    [
+      120,
+      143
+    ],
+    [
+      144,
+      215
+    ]
+  ],
+  "severity_edges": [
+    0.0,
+    0.01,
+    0.05
+  ],
+  "fixed_focus_counties": [
+    "42053",
+    "39117",
+    "18013",
+    "54015",
+    "54013",
+    "39115",
+    "42131",
+    "39157",
+    "39149",
+    "54101",
+    "54105"
+  ],
+  "approved_plan_sha256": "f536fd4c1b8db5a5ae523d878bb68e65977295838568998e678e2242d48bda23",
+  "root": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026",
+  "output": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration",
+  "new_fits": 0,
+  "new_models": 0,
+  "allow_weight_search": false
+}

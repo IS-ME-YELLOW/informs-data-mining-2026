@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 0,
+      "scope_invariance": true,
+      "unchanged_model_params": true
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 1,
+      "scope_invariance": true,
+      "unchanged_model_params": true
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 2,
+      "scope_invariance": true,
+      "unchanged_model_params": true
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 3,
+      "scope_invariance": true,
+      "unchanged_model_params": true
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 4,
+      "scope_invariance": true,
+      "unchanged_model_params": true
+    }
+  ],
+  "features": {
+    "status": "PASS",
+    "horizons": [
+      24
+    ],
+    "nodes": 302,
+    "edges": 2416,
+    "feature_count": 183,
+    "raw_view_max_abs_difference": 2.2551405187698492e-17,
+    "augmented_features_bitwise_exact": true,
+    "independent_geometry": true,
+    "rank_order_aggregation": true,
+    "lineage_rows": 347904,
+    "causality_checks": true
+  },
+  "reference": "399da73952d32a3e333a9933a0ed1a57a1ed39eada5477cdc3fa80c9eb56f3d4",
+  "training_performed": false
+}

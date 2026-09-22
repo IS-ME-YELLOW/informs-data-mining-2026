@@ -1,0 +1,101 @@
+P6 a outer0 inner1: best=150, score=0.00827647
+P6 a outer0 inner2: best=467, score=0.00938976
+P6 a outer0 inner3: best=182, score=0.00839862
+P6 a outer0 inner4: best=32, score=0.00719098
+P6 a outer0: refit=207, seconds=15.4
+P6 b outer0 inner1: best=592, score=0.01026504
+P6 b outer0 inner2: best=560, score=0.01905299
+P6 b outer0 inner3: best=35, score=0.01452688
+P6 b outer0 inner4: best=281, score=0.01128717
+P6 b outer0: refit=367, seconds=25.7
+P6 a outer1 inner0: best=107, score=0.00999691
+P6 a outer1 inner2: best=241, score=0.00774402
+P6 a outer1 inner3: best=74, score=0.00848800
+P6 a outer1 inner4: best=40, score=0.00897424
+P6 a outer1: refit=115, seconds=10.8
+P6 b outer1 inner0: best=167, score=0.00531285
+P6 b outer1 inner2: best=591, score=0.01879948
+P6 b outer1 inner3: best=12, score=0.01472487
+P6 b outer1 inner4: best=336, score=0.01091812
+P6 b outer1: refit=276, seconds=21.5
+P6 a outer2 inner0: best=145, score=0.01083105
+P6 a outer2 inner1: best=51, score=0.00776726
+P6 a outer2 inner3: best=160, score=0.00943963
+P6 a outer2 inner4: best=24, score=0.00824510
+P6 a outer2: refit=95, seconds=10.7
+P6 b outer2 inner0: best=57, score=0.00597921
+P6 b outer2 inner1: best=89, score=0.01021619
+P6 b outer2 inner3: best=10, score=0.01465896
+P6 b outer2 inner4: best=262, score=0.01133648
+P6 b outer2: refit=104, seconds=11.6
+P6 a outer3 inner0: best=153, score=0.01076167
+P6 a outer3 inner1: best=66, score=0.00889341
+P6 a outer3 inner2: best=426, score=0.00798519
+P6 a outer3 inner4: best=24, score=0.00847666
+P6 a outer3: refit=167, seconds=13.3
+P6 b outer3 inner0: best=155, score=0.00529763
+P6 b outer3 inner1: best=107, score=0.01051712
+P6 b outer3 inner2: best=876, score=0.01821371
+P6 b outer3 inner4: best=460, score=0.01058470
+P6 b outer3: refit=399, seconds=29.7
+P6 a outer4 inner0: best=84, score=0.00922574
+P6 a outer4 inner1: best=77, score=0.00777216
+P6 a outer4 inner2: best=567, score=0.00853446
+P6 a outer4 inner3: best=47, score=0.00820470
+P6 a outer4: refit=193, seconds=14.8
+P6 b outer4 inner0: best=156, score=0.00585285
+P6 b outer4 inner1: best=238, score=0.01047329
+P6 b outer4 inner2: best=471, score=0.02028844
+P6 b outer4 inner3: best=25, score=0.01455972
+P6 b outer4: refit=222, seconds=19.7
+P24 direct outer0 inner1: best=16, score=0.01368203
+P24 direct outer0 inner2: best=414, score=0.02157016
+P24 direct outer0 inner3: best=27, score=0.01178122
+P24 direct outer0 inner4: best=378, score=0.01306411
+P24 direct outer0: refit=208, seconds=16.4
+P24 direct outer1 inner0: best=228, score=0.00742045
+P24 direct outer1 inner2: best=525, score=0.02014207
+P24 direct outer1 inner3: best=45, score=0.00996858
+P24 direct outer1 inner4: best=429, score=0.01305668
+P24 direct outer1: refit=306, seconds=20.5
+P24 direct outer2 inner0: best=220, score=0.01092038
+P24 direct outer2 inner1: best=472, score=0.01253775
+P24 direct outer2 inner3: best=40, score=0.01030682
+P24 direct outer2 inner4: best=435, score=0.01286388
+P24 direct outer2: refit=291, seconds=19.3
+P24 direct outer3 inner0: best=144, score=0.00876591
+P24 direct outer3 inner1: best=13, score=0.01355048
+P24 direct outer3 inner2: best=285, score=0.02060263
+P24 direct outer3 inner4: best=480, score=0.01323896
+P24 direct outer3: refit=230, seconds=16.5
+P24 direct outer4 inner0: best=492, score=0.00776896
+P24 direct outer4 inner1: best=13, score=0.01376441
+P24 direct outer4 inner2: best=558, score=0.02220333
+P24 direct outer4 inner3: best=197, score=0.01047422
+P24 direct outer4: refit=315, seconds=22.3
+P48 direct outer0 inner1: best=16, score=0.00913376
+P48 direct outer0 inner2: best=715, score=0.02082319
+P48 direct outer0 inner3: best=21, score=0.00834488
+P48 direct outer0 inner4: best=108, score=0.01147041
+P48 direct outer0: refit=215, seconds=13.7
+P48 direct outer1 inner0: best=186, score=0.00615066
+P48 direct outer1 inner2: best=610, score=0.02065561
+P48 direct outer1 inner3: best=40, score=0.00818791
+P48 direct outer1 inner4: best=168, score=0.01221699
+P48 direct outer1: refit=251, seconds=15.0
+P48 direct outer2 inner0: best=97, score=0.00671010
+P48 direct outer2 inner1: best=125, score=0.00899821
+P48 direct outer2 inner3: best=10, score=0.00861336
+P48 direct outer2 inner4: best=318, score=0.01110865
+P48 direct outer2: refit=137, seconds=11.4
+P48 direct outer3 inner0: best=197, score=0.00617280
+P48 direct outer3 inner1: best=29, score=0.00875104
+P48 direct outer3 inner2: best=452, score=0.02104394
+P48 direct outer3 inner4: best=213, score=0.01130159
+P48 direct outer3: refit=222, seconds=13.5
+P48 direct outer4 inner0: best=222, score=0.00650495
+P48 direct outer4 inner1: best=33, score=0.00897745
+P48 direct outer4 inner2: best=550, score=0.02302431
+P48 direct outer4 inner3: best=92, score=0.00860548
+P48 direct outer4: refit=224, seconds=14.9
+All 100 fits completed: 20 outer models, three independent neighbor candidates

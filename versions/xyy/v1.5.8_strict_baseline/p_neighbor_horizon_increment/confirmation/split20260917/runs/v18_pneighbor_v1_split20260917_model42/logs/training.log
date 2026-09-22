@@ -1,0 +1,26 @@
+P24 direct outer0 inner1: best=101, score=0.01025620
+P24 direct outer0 inner2: best=62, score=0.01017003
+P24 direct outer0 inner3: best=272, score=0.01015128
+P24 direct outer0 inner4: best=749, score=0.02187188
+P24 direct outer0: refit=296, seconds=20.6
+P24 direct outer1 inner0: best=749, score=0.01690983
+P24 direct outer1 inner2: best=34, score=0.01063387
+P24 direct outer1 inner3: best=86, score=0.01049253
+P24 direct outer1 inner4: best=526, score=0.01924079
+P24 direct outer1: refit=348, seconds=23.0
+P24 direct outer2 inner0: best=1040, score=0.01638729
+P24 direct outer2 inner1: best=35, score=0.01082394
+P24 direct outer2 inner3: best=132, score=0.00977417
+P24 direct outer2 inner4: best=674, score=0.01847075
+P24 direct outer2: refit=470, seconds=29.0
+P24 direct outer3 inner0: best=912, score=0.01659720
+P24 direct outer3 inner1: best=40, score=0.01076950
+P24 direct outer3 inner2: best=32, score=0.01094281
+P24 direct outer3 inner4: best=615, score=0.01866301
+P24 direct outer3: refit=399, seconds=27.6
+P24 direct outer4 inner0: best=702, score=0.01678409
+P24 direct outer4 inner1: best=24, score=0.01163269
+P24 direct outer4 inner2: best=55, score=0.01044357
+P24 direct outer4 inner3: best=93, score=0.00927734
+P24 direct outer4: refit=218, seconds=16.3
+All 25 fits completed: 5 outer models, one P24 neighbor candidate

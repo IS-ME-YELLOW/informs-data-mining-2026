@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "source": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/evaluate_transfer.py",
+  "parent_sha256": "7776af2b86e75e72cacff4c0d184b40879e614ad02e0425b879aa264e8335a8d",
+  "adapted_sha256": "73e5e2491a71ed927292c7e5e44807016f950f0236207b047dedb27ff12d7cf3",
+  "unchanged_functions": [
+    "metric",
+    "comparison",
+    "bootstrap"
+  ],
+  "adaptations": [
+    "new baseline prefix",
+    "three horizon-specific feature candidates",
+    "P24/P48 direct diagnostics"
+  ]
+}

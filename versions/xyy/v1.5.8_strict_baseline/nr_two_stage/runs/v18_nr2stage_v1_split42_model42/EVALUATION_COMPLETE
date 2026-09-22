@@ -1,0 +1,28 @@
+{
+  "identity_hash": "85230ef5109061a99ff18fc3bdd3c9a170e600f8f456350b2b071938e9ece9c8",
+  "evaluation_code_sha256": "147014c04fdfa78b4880f82b38043d553ce38044d13ed8dddca27259af724b00",
+  "files": {
+    "NR1_oof_predictions.parquet": "8d96497b922aefbb051cdbac49763bbb9532aea2f976592b81775d853e38f30d",
+    "aligned_components.parquet": "4e9137d88b00aff6dca1ed07dbbf1a0a47639b4f20a33918d92d58d88cf159d9",
+    "component_predictions.parquet": "6ce317f0e9f27f27a19b37968da5bb86448caf0c365522f9b9984d7148795c75",
+    "control_predictions.parquet": "9f7b5c2247bc67d413eedd39ad67fe58e2de4bf77cea67c88b4f7f0295f5f916",
+    "execution.json": "1f5c3094993e26fdae59701922d6444d96de9b75b8621ce321c3371624bddce1",
+    "group_definitions.json": "328d3b1ad2f72f1ddf67a72f770cf6eef092de6b5a91a794cad12b8b47d22f0f",
+    "metrics/OSI_change_decomposition.csv": "9252e843eaee124d778694880437f2e704ea8e0c59c81a3159afc36e9f9e8db7",
+    "metrics/all_controls.csv": "c9e420583cf9580baed943ba635073bfbdf10d377eeb0c65dae2e98a67b0d001",
+    "metrics/amplitude_diagnostics.csv": "a36ff1dacc18e8f846b6603f7bbfed865ba8c5e8c4e1fc8dd584052703b460ba",
+    "metrics/bootstrap.csv": "60f1610211544b1a124fe3de4d25d313a417ab170d3a4a8f168ca6952f43177d",
+    "metrics/calibration.csv": "d3cd20b59872a59584df6df52a7ef0acb9b55ed1ed6ace65f3dc91469f2b1f1f",
+    "metrics/classification.csv": "150f25f56e6f13850cd5674fd267c927b3d99fdb9635cc08e7369fe967f87f49",
+    "metrics/comparisons.csv": "6cdc8a7ea526eb01d9be91d423ef51970a4cdf627b91567e3902fed422e56205",
+    "metrics/component_metrics.csv": "ca6b3a07c56620c1e68629d5c655f5a57fa35f6a0ef969b1163ed12cc2dd1809",
+    "metrics/county_metrics.csv": "19b709cf92a71eddcf4f0cfe449cec37c147104e0d6371ff6e10bf0dc420bf45",
+    "metrics/day_metrics.csv": "9fc1cf0b4da2951e84c236bf295984d6caad8d87014e2e357e4f26fb57220330",
+    "metrics/fold_metrics.csv": "f7ec0c6dccfc51fab354af6ac6b59ee8d5d5c8c2fde6faee5922fbff0e8ddb7c",
+    "metrics/group_metrics.csv": "9786ce6575bbd306f0869ae615d2fdfb8cedbb2e0192b0a600d6c595791edd83",
+    "metrics/primary_scores.csv": "e1cc9517cbeba14ef3595d9150abb39cb1cd027ce35ff25a43a2e0b16ffcd8a5",
+    "model_manifest.json": "f3a3d3aba7658c2d06a37d3dfe6b32f554d1857996cf8fb96a6c32ddcf5c20ea",
+    "row_changes.parquet": "02cc64d512037d90769d8893e23f9ecab55f5638eb2e319e19fcb8af800e55df",
+    "run_manifest.json": "4a15dae216fd1161aca1d1875d212a350dc117e6394db539ffc4fd1eb191859b"
+  }
+}

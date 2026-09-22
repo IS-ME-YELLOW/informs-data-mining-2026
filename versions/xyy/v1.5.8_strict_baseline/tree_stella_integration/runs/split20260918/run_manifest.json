@@ -1,0 +1,25 @@
+{
+  "identity": {
+    "protocol": "tree_stella_final_osi_v1",
+    "cv_seed": 20260918,
+    "T_identity": "e8cf35263d42073aaae928f05ba58ab0b1f66df89b5d9cfe7a3944345c44dfe1",
+    "S_identity": "3e67a67e6fa8ed7d435ee58805a8af4584dfee8974a298d710da60ac2abe6699",
+    "config_sha256": "3d67bd56ff4a51ef1ebab796390590460cd15138ccc9406d2bf83a8bf30ef7b6",
+    "input_manifest_sha256": "978da02691631aa8821f3a32ca53d2550d405cba137f40dd614902dc32551aba",
+    "evaluation_code_sha256": {
+      "integration_protocol.py": "31edf45788b4a7b9ceaa8f71840e20b46aeda41b5df18a880e1862547874a6f3",
+      "integrate_routes.py": "9df886386c350629d6cea66e750f26c1073371c101a1a5facc9c98a3864f8e28"
+    },
+    "environment": {
+      "python": "3.13.7",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.5",
+        "pyarrow": "25.0.1"
+      }
+    },
+    "new_fits": 0,
+    "source_models_reloaded": 0
+  },
+  "identity_hash": "28d63f4396ca0cc5788025001019bf99d6c1f0039584a9e1b07e3bdf19147a4c"
+}

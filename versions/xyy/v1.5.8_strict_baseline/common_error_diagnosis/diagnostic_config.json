@@ -1,0 +1,59 @@
+{
+  "protocol": "common_error_diagnosis_v1",
+  "seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "horizons": [
+    1,
+    6,
+    24,
+    48
+  ],
+  "tree_case": "NB_P24",
+  "stella_case": "L2",
+  "common_horizons": [
+    24,
+    48
+  ],
+  "common_top_counties": 5,
+  "short_top_counties": 3,
+  "common_score": "same_sign * min(eT^2,eS^2)",
+  "history_end": 71,
+  "matching_k": 5,
+  "matching_variants": [
+    "context",
+    "source_cache_rank"
+  ],
+  "whole_outer_fold_excluded": true,
+  "history_columns": [
+    "last_P_t",
+    "last_D_t",
+    "last_N_t",
+    "last_R_t",
+    "osi_max_72h",
+    "osi_mean_72h",
+    "osi_trend_last6h"
+  ],
+  "weather_columns": [
+    "gust_max",
+    "gust_mean",
+    "gust_hours_gt30",
+    "tp_sum",
+    "soil_mean",
+    "prior24_gust_max",
+    "prior24_tp_sum"
+  ],
+  "static_columns": [
+    "customers_at_cutoff",
+    "pop_density",
+    "pct_forest",
+    "n_utilities"
+  ],
+  "low_loss_peak_max": 0.01,
+  "high_loss_peak_min": 0.05,
+  "new_fits": 0,
+  "model_reloads": 0,
+  "plan_sha256": "521c29958329be88f8b9b1fd7d1de0e95de38290f57383a9d8f4815ab2d40d6d"
+}

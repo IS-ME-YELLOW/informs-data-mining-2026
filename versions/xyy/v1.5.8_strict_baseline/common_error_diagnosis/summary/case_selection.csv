@@ -1,0 +1,24 @@
+fipsCode,countyName,stateAbbr,horizon,rank,reason
+42053,Forest County,PA,1,1,short_top3
+54015,Clay County,WV,1,2,short_top3
+54013,Calhoun County,WV,1,3,short_top3
+42053,Forest County,PA,6,1,short_top3
+54015,Clay County,WV,6,2,short_top3
+54013,Calhoun County,WV,6,3,short_top3
+54015,Clay County,WV,24,1,common_top5
+54013,Calhoun County,WV,24,2,common_top5
+39115,Morgan County,OH,24,3,common_top5
+18013,Brown County,IN,24,4,common_top5
+39119,Muskingum County,OH,24,5,common_top5
+54015,Clay County,WV,48,1,common_top5
+54013,Calhoun County,WV,48,2,common_top5
+39115,Morgan County,OH,48,3,common_top5
+54007,Braxton County,WV,48,4,common_top5
+54041,Lewis County,WV,48,5,common_top5
+42053,Forest County,PA,0,0,historical_only
+39117,Morrow County,OH,0,0,historical_only
+18013,Brown County,IN,0,0,historical_only
+54015,Clay County,WV,0,0,historical_only
+54013,Calhoun County,WV,0,0,historical_only
+39115,Morgan County,OH,0,0,historical_only
+42131,Wyoming County,PA,0,0,historical_only

@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "identity_hash": "058cfe3544f724cc6223ab8cf4037527d1eadcc8b94b11853bc143b27b0ce9fc",
+  "model_fits": 0,
+  "old_P24_models_reloaded": 5,
+  "old_prediction_max_abs_difference": 0.0,
+  "independent_features": {
+    "status": "PASS",
+    "splits": {
+      "train": {
+        "rows": 34416,
+        "feature_columns": 191,
+        "valid_feature_rows": 28680
+      },
+      "test": {
+        "rows": 9072,
+        "feature_columns": 191,
+        "valid_feature_rows": 7560
+      }
+    },
+    "max_absolute_feature_difference": 0.0,
+    "verifier_sha256": "eeb5a3fecd489f71f9213bf379648f4026c8bd2bda533f2669e3c7de23bbb2f6"
+  },
+  "scope_poisoning_checks": 25,
+  "temporal_cutoff_checks": 3,
+  "synthetic_window_checks": 5,
+  "forbidden_label_columns_rejected": true,
+  "all_eight_nonconstant": true,
+  "no_exact_old_feature_duplicates": true,
+  "auxiliary_membership_frozen": true,
+  "source_files_unchanged": 126
+}

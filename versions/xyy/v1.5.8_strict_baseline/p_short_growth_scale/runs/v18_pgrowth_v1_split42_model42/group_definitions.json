@@ -1,0 +1,12 @@
+{
+  "all": "All 239 counties, complete valid rows for this horizon",
+  "early_73_95": "Valid target hours <=95",
+  "late_96_215": "Valid target hours >=96; explicit source reuse",
+  "test_like": "Frozen test-to-train context top5 union for the corresponding horizon and target day",
+  "not_test_like": "Complement of frozen test_like on valid rows",
+  "all_except_Forest": "All valid rows excluding FIPS42053; diagnostic only",
+  "test_like_except_Forest": "Frozen test_like excluding FIPS42053; diagnostic only",
+  "g_zero": "Known official N71 == 0",
+  "g_positive": "Known official N71 > 0",
+  "g_positive_low_early_damage": "N71 > 0 and official early (73-95) peak OSI <=.01; outcome-defined diagnosis only"
+}

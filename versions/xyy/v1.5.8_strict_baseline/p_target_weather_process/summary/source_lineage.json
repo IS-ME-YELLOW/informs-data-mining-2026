@@ -1,0 +1,31 @@
+{
+  "reference_case": "NB_P24",
+  "reference_tree_id": "bd4468e5c37fba7e93832153bc9847f807b8ae0054e45586f3c3853e96835bbd",
+  "reference_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_neighbor_horizon_increment/runs/v18_pneighbor_v1_split42_model42",
+  "candidate": "W1",
+  "new_source": "P_t_target_t24h",
+  "new_feature_columns": [
+    "exposure_decay_6h",
+    "exposure_decay_24h",
+    "hours_since_last_high_gust",
+    "has_high_gust_48h",
+    "high_gust_episode_count_48h",
+    "max_lull_between_episodes_48h",
+    "exposure_weighted_age_48h",
+    "recent6_exposure_fraction"
+  ],
+  "feature_count": 191,
+  "other_component_sources": "exact_copy_of_NB_P24",
+  "G2_applied": false,
+  "short_pre96": "exact_copy",
+  "final48": "exact_copy",
+  "C3": "original target-hour alignment and equal mean",
+  "source_prediction_file": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_target_weather_process/runs/v18_pweather_v1_split42_model42/P24_oof_predictions.parquet",
+  "new_model_ids": [
+    "de9c4c9ad86748e1ea36edac09abd9b6e3d292575b90b2099f4c3a3558999c73",
+    "473b9d5370dfa81fea54c378803335b9592dede6be324bdce00ccaa5394a1c78",
+    "e087e39c74836c81bd0be4bb6d5c17c585c0fe0ea836df9362dbfaac829fe2bd",
+    "e8963906befcb2e884e85c3304a1ca4c53dfb67b626a6ac1198ec0cb4b0ae53c",
+    "135831d78f35d3432ca617c26eb0d9b81a429805ee6b07b4734473095841b938"
+  ]
+}

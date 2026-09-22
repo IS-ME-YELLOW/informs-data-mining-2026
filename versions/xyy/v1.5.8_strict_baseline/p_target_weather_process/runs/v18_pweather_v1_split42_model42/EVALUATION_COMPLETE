@@ -1,0 +1,29 @@
+{
+  "identity_hash": "058cfe3544f724cc6223ab8cf4037527d1eadcc8b94b11853bc143b27b0ce9fc",
+  "evaluation_code_sha256": "3212bd8b919abdb88cf48279a83a3017791066cfdd3aa6bda7116e4027a81a66",
+  "files": {
+    "P24_oof_predictions.parquet": "3cd8460228b415fcd5761a6179f5fa1faa866abf268f5b2d2e035c5d397915ae",
+    "P_component_predictions.parquet": "4c7409be010517c8f2a2c28df7b4b2ab47a370f40267b96f70cb209f565d6bcc",
+    "case_trajectories.parquet": "a778e4933b75326c2765863904504d220016b28e70bd52df575c1a237e45fddb",
+    "component_predictions.parquet": "fb5f5f7b3146046b169dc66121c27b336fc6a57ed110ba285f84714b06744ede",
+    "control_predictions.parquet": "df4d14e5b5ce2596fd1437582818ffb05aff1902d574e6c7fdc22c8bcbb686ce",
+    "execution.json": "ae5c249a251e24ea40d464c1ab63e5010ad9fa5435dea0cd111f0cab2204cae5",
+    "group_definitions.json": "e1cc8096e1130c0f8b62c1872e2120b3b5371443d3060072aad32ca7f767423a",
+    "metrics/P_change_decomposition.csv": "3d75751ae45e95655cc064b28ed3055cfc36e2ac1b6d6763289f7b98b8d6ad42",
+    "metrics/P_metrics.csv": "f7a6a8e8cdd8443d4f1f4fddcbf1300961c9030b36d6421ecde0691df8a7d6ae",
+    "metrics/all_controls.csv": "54b57bbb4cedc43258e79426b6d5586505e738912bdfe3ff5218ac6ba6ad041d",
+    "metrics/bootstrap.csv": "e98197806addc2aa2848131c28b02ab8e64f080513d0cdd7290e83e0959af4a4",
+    "metrics/comparisons.csv": "cda8159386640006722fcd24fb3dba1183cace09a9d3649a5e79a090e2a917dc",
+    "metrics/county_day_24h.csv": "8ffb0dfd757622caeb4d3d16046efdc4813a51deac76848caa48fda74702969a",
+    "metrics/county_metrics.csv": "6cd6dee5e2233b8986e8048d92e22166e98473952b06d1a3f0d1967329b78302",
+    "metrics/day_metrics.csv": "4074a1a72dcca643715e5ce66cc5da8e03b108619ff6feae1c03f0b9ac81d72a",
+    "metrics/feature_importance.csv": "b247fed76f58aedf5f9ce6f1a007b7231f25b0e1b91f3411cb5b548051600579",
+    "metrics/fold_metrics.csv": "cff6cc2420fdf65d6da4e7b48857744bee697ab3a8aadf496fe5cb9e6798aa07",
+    "metrics/groups.csv": "ab73b772d64bfa07b9268806b485a67fc392b94470191e849167b9af95c13861",
+    "metrics/primary_scores.csv": "3545deaac724cfff767dc7f6a0cc67371d5b1f522e68a9d4f4955af3ea9b65b1",
+    "metrics/process_groups_24h.csv": "638c556abc8912708204a9044a73dce5a3913dfbc6334f9ccc9cb36319729971",
+    "model_manifest.json": "b00c9265a64fcfc42b8b0ea3ede8613e8469a1f711fa71e7a49ea4aba01464f1",
+    "row_changes.parquet": "0134ef9b5908e324bdc1233d67ebf94ebfc1d39a274e22ef0c2dec1e6a580769",
+    "run_manifest.json": "efd174379cbc02372e40bdabea7787b82e2e05415863f8ccb9780bd1067f036f"
+  }
+}

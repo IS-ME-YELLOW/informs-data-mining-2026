@@ -1,0 +1,25 @@
+{
+  "identity_hash": "847bc47ba2970bcebb9711cd554874f4e423d6b3d7a0df9683c93afc89dd6fcb",
+  "files": {
+    "logs/probes/outer0_P_direct_t24h.parquet": "490949ccecaecca67a66154bfb07d8f760c21f31dd541d9165011ed52013b4e7",
+    "logs/probes/outer1_P_direct_t24h.parquet": "d7eef0e528d23270654551bbfce817e41208ddc4be91bad81c1873b85992b41e",
+    "logs/probes/outer2_P_direct_t24h.parquet": "bd215d6b9c50590070c9c33a6db54943bca981211cb4efe53dd5e6f77bebf8ba",
+    "logs/probes/outer3_P_direct_t24h.parquet": "ada67f3a53c6989aa611048a227d0d53d88c5822360cefb5cbd88866247f0784",
+    "logs/probes/outer4_P_direct_t24h.parquet": "314f47300a5d03f6da4595439de08b29a1c78555cac4f5097a3cca29ba8321ec",
+    "logs/training.log": "ab880309dc21d4277b268a18617cf14e8ab99730d5db5957b65843029563226e",
+    "model_manifest.json": "84079c8eb5c689f3a485f2b61b42e83a461dda2ebb67d6b60457bfbce91e887c",
+    "models/outer0/P_direct_t24h.json": "6c932126ec8d0a6c4149dbcb2ae5c3c68d1a0a74878f1013182c2f584869705e",
+    "models/outer0/P_direct_t24h.txt": "fb81f9e2b116af6a4bdc76c5f03686c0ff6efc5e9896c1f06f7a8c0060c48a40",
+    "models/outer1/P_direct_t24h.json": "16fc697b769ee8f0228aed80db1d7ea716ada92694a652d9c23990787e35470c",
+    "models/outer1/P_direct_t24h.txt": "0f1af0b7aa356d52c2873f10ae459471f81c003e76c9f2e0d41b3116e0828f8a",
+    "models/outer2/P_direct_t24h.json": "d06ccf3a5bb565639a345ccc63ac2914213a06b98614d9c2c21208b131fbb647",
+    "models/outer2/P_direct_t24h.txt": "405f4756da8cdc9286c19c6c16fcccced2472f499f60fe5afbd3b5cbc2ba9c44",
+    "models/outer3/P_direct_t24h.json": "2a4345e325f4c53e6ad033ddc158e4734f7c64abff609e0d2cc1532a9c940b26",
+    "models/outer3/P_direct_t24h.txt": "d934f8c53a20cd3b67a02d452cc214b370facc87d4fd76b1baa1fee67213ef9d",
+    "models/outer4/P_direct_t24h.json": "1265872239ad0bb0f86cda6c182bdd7001a104dabc990225b5e8812fa9301779",
+    "models/outer4/P_direct_t24h.txt": "670329fed52c207776dbf6dc700062c9269d73a72f73a6163b728927436a806e",
+    "new_P_oof_predictions.parquet": "cfc1d93df6597632af4933b661cd742107abac6286a7d624d0e1dc724ccd092a",
+    "run_manifest.json": "b56351b613ab981219ddc4d7f56a10f5ba9ed1e69e1b372675ec1a50f8ea0638",
+    "source_registry.json": "1ed3722ebd75c4747a6b602c04934e78863341f312f192b6e56bd382ebfc7c2b"
+  }
+}

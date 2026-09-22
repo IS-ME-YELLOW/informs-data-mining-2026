@@ -1,0 +1,15 @@
+{
+  "status": "seed42_complete_not_adopted",
+  "reference_remains": "B0_NB_P24",
+  "best_point_estimate": "N_only",
+  "recommendation": "Stop this fixed two-stage version; preserve direct N/R, do not automatically confirm other CVs",
+  "reason": "N-only final1h gain is 0.04963 percent with CI crossing zero; both source tail errors worsen; R and joint do not justify additional heads",
+  "inference_limit": "Not proof that all two-stage models or N/R information improvements are ineffective",
+  "formal_fits": 100,
+  "new_outer_models": 20,
+  "saved_inner_models": 80,
+  "confirmation_started": false,
+  "parameter_search_started": false,
+  "test_inference": false,
+  "plots": 0
+}

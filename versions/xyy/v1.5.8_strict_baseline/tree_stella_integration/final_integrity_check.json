@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "source_files_unchanged": 59,
+  "all_three_CVs_pass": true,
+  "source_models_reloaded": 0,
+  "new_fits": 0,
+  "old_files_modified": false,
+  "verifier_sha256": "5adfb0dac77e28c7a7da93bc13e71634b4ae6f2a6965fb1a0a221598a7b89574"
+}

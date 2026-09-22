@@ -1,0 +1,40 @@
+{
+  "protocol": "v18_nr2stage_v1",
+  "cv_seed": 42,
+  "model_seed": 42,
+  "identity_hash": "85230ef5109061a99ff18fc3bdd3c9a170e600f8f456350b2b071938e9ece9c8",
+  "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/nr_two_stage/runs/v18_nr2stage_v1_split42_model42",
+  "cases": [
+    "B0",
+    "N_only",
+    "R_only",
+    "NR_both"
+  ],
+  "adopted": false,
+  "files": {
+    "control_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/nr_two_stage/runs/v18_nr2stage_v1_split42_model42/control_predictions.parquet",
+      "sha256": "9f7b5c2247bc67d413eedd39ad67fe58e2de4bf77cea67c88b4f7f0295f5f916"
+    },
+    "component_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/nr_two_stage/runs/v18_nr2stage_v1_split42_model42/component_predictions.parquet",
+      "sha256": "6ce317f0e9f27f27a19b37968da5bb86448caf0c365522f9b9984d7148795c75"
+    },
+    "aligned_components.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/nr_two_stage/runs/v18_nr2stage_v1_split42_model42/aligned_components.parquet",
+      "sha256": "4e9137d88b00aff6dca1ed07dbbf1a0a47639b4f20a33918d92d58d88cf159d9"
+    },
+    "NR1_oof_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/nr_two_stage/runs/v18_nr2stage_v1_split42_model42/NR1_oof_predictions.parquet",
+      "sha256": "8d96497b922aefbb051cdbac49763bbb9532aea2f976592b81775d853e38f30d"
+    },
+    "model_manifest.json": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/nr_two_stage/runs/v18_nr2stage_v1_split42_model42/model_manifest.json",
+      "sha256": "f3a3d3aba7658c2d06a37d3dfe6b32f554d1857996cf8fb96a6c32ddcf5c20ea"
+    },
+    "verification.json": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/nr_two_stage/runs/v18_nr2stage_v1_split42_model42/verification.json",
+      "sha256": "abc41797e458c0eb292a15182f9a5d5bd16e0060dc03da3da5b7930c1962d798"
+    }
+  }
+}

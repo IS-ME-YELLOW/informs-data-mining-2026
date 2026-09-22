@@ -1,0 +1,95 @@
+{
+  "status": "CV_route_comparison_not_final_submission",
+  "cases": [
+    "B0",
+    "I1",
+    "I2",
+    "I3"
+  ],
+  "candidate_to_validate": "I3",
+  "reference_for_next_stage": "I1",
+  "fits": 0,
+  "splits": [
+    {
+      "cv_seed": 42,
+      "identity_hash": "643c4b0a7ce6f91a2c09679c1077d74638d7b3ad57744785e816d24b171deed6",
+      "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split42",
+      "files": {
+        "source_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split42/source_predictions.parquet",
+          "sha256": "85715e6d07aa0c6ff4c591d2e2051df6587d59b356f1aa61bb83c9851ee685a1"
+        },
+        "integrated_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split42/integrated_predictions.parquet",
+          "sha256": "cbf3bc24f2e1f3f458eb62197fa4d17d791f230758a5e82776715c30661d9d48"
+        },
+        "source_lineage.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split42/source_lineage.json",
+          "sha256": "81ecb05b8066419baef3a83dff242f3433abdcb4eb7af98c50cddbf574f31b79"
+        },
+        "run_manifest.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split42/run_manifest.json",
+          "sha256": "34dd4052664634e508867fbf3266bc20e68401d67a1844459e099084a0780aa7"
+        },
+        "verification.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split42/verification.json",
+          "sha256": "dff999f35a054f33e738ed942a83942887455b9b9fcc6a3ba9637bfef28481b5"
+        }
+      }
+    },
+    {
+      "cv_seed": 20260917,
+      "identity_hash": "0636478951802fbc38f78f3a7a736d83d6af5402c300aef9da580b98bcbef8c7",
+      "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260917",
+      "files": {
+        "source_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260917/source_predictions.parquet",
+          "sha256": "e9b31bf274085cfc31cd141cb9ef5ecb82b06cf9c6f91a1e6a4a077c4081c605"
+        },
+        "integrated_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260917/integrated_predictions.parquet",
+          "sha256": "c6d10687860e921c13cac7d7da11fd67201fbcf0267bd3a515f24c2d6deacc3f"
+        },
+        "source_lineage.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260917/source_lineage.json",
+          "sha256": "e69b421a2d6d61d7a938a6240cd6378becce41c5a559df88c056d56a3f48b338"
+        },
+        "run_manifest.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260917/run_manifest.json",
+          "sha256": "840b38cf524c1edaefdaf433ef5caaf054810a65f83fb895f4c5fb91d1546398"
+        },
+        "verification.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260917/verification.json",
+          "sha256": "91d2203abb1a0561a282673bd3ab29145f968e348332cfea6e83801549a10669"
+        }
+      }
+    },
+    {
+      "cv_seed": 20260918,
+      "identity_hash": "28d63f4396ca0cc5788025001019bf99d6c1f0039584a9e1b07e3bdf19147a4c",
+      "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260918",
+      "files": {
+        "source_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260918/source_predictions.parquet",
+          "sha256": "7c96ab502cea2b040a59c70fcd1d8bd4c2e0f3610e9a197120968217cb826ddf"
+        },
+        "integrated_predictions.parquet": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260918/integrated_predictions.parquet",
+          "sha256": "6101da9a359dc6e4dd7e57b68f87611d2e6bcf52b4042b1779e4f691f83b6a9a"
+        },
+        "source_lineage.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260918/source_lineage.json",
+          "sha256": "419fc1c5295ec72bf695febb29bf96fa6b4e829706e5460b8f1884c92efceb9b"
+        },
+        "run_manifest.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260918/run_manifest.json",
+          "sha256": "40d6900c3e62f86468215a240eb2b173c8b1ace3a1027a071531a70927946f95"
+        },
+        "verification.json": {
+          "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/tree_stella_integration/runs/split20260918/verification.json",
+          "sha256": "3c2590164770d463a51922c587d568552b5d268113309dd3c2e6b31fc7c4e1e1"
+        }
+      }
+    }
+  ]
+}

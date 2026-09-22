@@ -1,0 +1,15 @@
+{
+  "status": "seed42_completed_not_adopted",
+  "candidate": "G2",
+  "reference_remains": "G0",
+  "category": "meaningful_point_estimate_single_county_dominated",
+  "confirmation_candidate": true,
+  "automatic_confirmation_started": false,
+  "reason": "1h/6h improve vs G0; gains dominated by Forest, other counties slightly worse, paired CIs cross zero",
+  "next_scope": "If continued, unchanged G2 with G0 on the two frozen CVs; do not expand parameter or county-rule search",
+  "new_fits": 50,
+  "new_outer_models": 10,
+  "new_inner_models": 40,
+  "test_inference": false,
+  "figures_created": 0
+}

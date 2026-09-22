@@ -1,0 +1,21 @@
+                pair  horizon     rmse  rmse_change_pct
+     N_only_minus_B0        1 0.010835        -0.049630
+     R_only_minus_B0        1 0.010841         0.006126
+    NR_both_minus_B0        1 0.010836        -0.046820
+NR_both_minus_N_only        1 0.010836         0.002811
+NR_both_minus_R_only        1 0.010836        -0.052943
+     N_only_minus_B0        6 0.009907        -0.024372
+     R_only_minus_B0        6 0.009911         0.016951
+    NR_both_minus_B0        6 0.009908        -0.011486
+NR_both_minus_N_only        6 0.009908         0.012889
+NR_both_minus_R_only        6 0.009908        -0.028432
+     N_only_minus_B0       24 0.008435         0.000000
+     R_only_minus_B0       24 0.008435         0.000000
+    NR_both_minus_B0       24 0.008435         0.000000
+NR_both_minus_N_only       24 0.008435         0.000000
+NR_both_minus_R_only       24 0.008435         0.000000
+     N_only_minus_B0       48 0.007691         0.000000
+     R_only_minus_B0       48 0.007691         0.000000
+    NR_both_minus_B0       48 0.007691         0.000000
+NR_both_minus_N_only       48 0.007691         0.000000
+NR_both_minus_R_only       48 0.007691         0.000000

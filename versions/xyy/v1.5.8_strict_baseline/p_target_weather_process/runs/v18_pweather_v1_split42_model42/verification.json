@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "identity_hash": "058cfe3544f724cc6223ab8cf4037527d1eadcc8b94b11853bc143b27b0ce9fc",
+  "independently_rebuilt_features": {
+    "status": "PASS",
+    "splits": {
+      "train": {
+        "rows": 34416,
+        "feature_columns": 191,
+        "valid_feature_rows": 28680
+      },
+      "test": {
+        "rows": 9072,
+        "feature_columns": 191,
+        "valid_feature_rows": 7560
+      }
+    },
+    "max_absolute_feature_difference": 0.0,
+    "verifier_sha256": "eeb5a3fecd489f71f9213bf379648f4026c8bd2bda533f2669e3c7de23bbb2f6"
+  },
+  "new_inner_models_reloaded": 20,
+  "new_outer_models_reloaded": 5,
+  "reference_P24_models_reloaded": 5,
+  "max_checkpoint_prediction_difference": 0.0,
+  "metric_rows_checked": 1093,
+  "process_group_rows_checked": 5,
+  "county_day_rows_checked": 1195,
+  "bootstrap_rows_checked": 8,
+  "row_changes_checked": 118783,
+  "unmodified_components_exact": true,
+  "final48_and_short_pre96_exact": true,
+  "independent_target_keyed_C3": true,
+  "aux_membership_exact": true,
+  "source_files_unchanged": 126,
+  "absolute_tolerance": 1e-12,
+  "verifier_sha256": "8a82b3c8dc75a4c0dc084e0fd5216134de3d18cde1640b9585edeb5c1bf9a782"
+}

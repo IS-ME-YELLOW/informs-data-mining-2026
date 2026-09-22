@@ -1,0 +1,14 @@
+{
+  "recommendation": "24h与短时方向均复现，支持将P24直接树＋邻县信息纳入后续优先组合",
+  "target_improves_splits": 3,
+  "short_improved_comparisons": 6,
+  "long48_unchanged": true,
+  "current_baseline_changed": false,
+  "feature_package_reused_readonly": true,
+  "new_fits": 50,
+  "new_outer_models": 10,
+  "P24_three_CV_fits": 75,
+  "P24_three_CV_outer_models": 15,
+  "underlying_events": 1,
+  "independent_test_evaluations": 0
+}

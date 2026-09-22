@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "identity_hash": "e8cf35263d42073aaae928f05ba58ab0b1f66df89b5d9cfe7a3944345c44dfe1",
+  "feature_verification": {
+    "status": "PASS",
+    "horizons": [
+      24
+    ],
+    "nodes": 302,
+    "edges": 2416,
+    "feature_count": 183,
+    "raw_view_max_abs_difference": 2.2551405187698492e-17,
+    "augmented_features_bitwise_exact": true,
+    "independent_geometry": true,
+    "rank_order_aggregation": true,
+    "lineage_rows": 347904,
+    "causality_checks": false
+  },
+  "models_reloaded": 5,
+  "probe_count": 20,
+  "control_metrics_checked": 40,
+  "bootstrap_intervals_checked": 6,
+  "independent_feature_arrays_used_for_model_reload": true,
+  "independent_math_source": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_structure_horizon_transfer/verify_transfer.py",
+  "unchanged_sources_verified": true,
+  "all_county_fold_window_metrics_verified": true,
+  "training_performed": false,
+  "verifier_sha256": "dc5b39529caaf9e00b2ecf7fe2ba4bed276df046459e7190b780ccc339c21eb5",
+  "models": [
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 0,
+      "model_id": "96f0680b1a5df0257ac57e33a68e581ef0db8b5dd9a09fbdd30cca20f5abecaf"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 1,
+      "model_id": "6ec31238a60a636e86ec18bf94b6fd8b6861680b8c707240db7e39729d5228d3"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 2,
+      "model_id": "f4581dda21b9a2e349c83e6624d105662f4934c68d505962c948069f8891398f"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 3,
+      "model_id": "ae48cadc813db60ac2e0a94ca58baf30247886e76d21eefea7ae21ceacfef52d"
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "kind": "direct",
+      "outer_fold": 4,
+      "model_id": "e7955de7914a52152aceec8d4b336c0d31d0426175a5b77d6432c3d6bbd52d20"
+    }
+  ]
+}

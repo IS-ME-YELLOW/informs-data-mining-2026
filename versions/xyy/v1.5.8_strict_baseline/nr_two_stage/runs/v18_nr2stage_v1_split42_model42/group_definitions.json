@@ -1,0 +1,9 @@
+{
+  "all": "All 239 counties, complete scoreable rows",
+  "early_73_95": "Target hour <=95",
+  "late_96_215": "Target hour >=96",
+  "test_like": "Frozen context test_to_train top5 matched county union by horizon and target day",
+  "not_test_like": "Complement of test_like",
+  "all_except_Forest": "All valid rows except FIPS42053, diagnostic only",
+  "test_like_except_Forest": "Frozen test_like except FIPS42053, diagnostic only"
+}

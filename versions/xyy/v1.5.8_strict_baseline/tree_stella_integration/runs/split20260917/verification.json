@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "cv_seed": 20260917,
+  "source_models_reloaded": 0,
+  "new_fits": 0,
+  "source_join": "independent keyed pandas",
+  "blend_formula": "independent scalar half-weight calculation and threshold branch",
+  "exact_copy_invariants": true,
+  "metrics_checked": 5215,
+  "nonconstant_bootstrap_intervals_checked": 6,
+  "row_change_records_checked": 593915,
+  "postprocessing_identity_checked": true,
+  "group_partitions_checked": true,
+  "source_gate_unchanged": true,
+  "verifier_sha256": "5adfb0dac77e28c7a7da93bc13e71634b4ae6f2a6965fb1a0a221598a7b89574",
+  "absolute_tolerance": 1e-12
+}

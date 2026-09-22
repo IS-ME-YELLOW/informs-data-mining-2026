@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "identity_hash": "5c35ef951b9f1ea0ab3fd06a8b1b2ab4c1bb4dc5419878e1da2cc7deec6a9de2",
+  "model_fits": 0,
+  "reference_models_reloaded": 10,
+  "reference_prediction_max_abs_diff": 0.0,
+  "poisoned_scopes_checked": 50,
+  "early_rows": 5497,
+  "p_one_counties": 0,
+  "feature_columns": 183,
+  "aux_membership_frozen": true,
+  "source_files_unchanged": 138
+}

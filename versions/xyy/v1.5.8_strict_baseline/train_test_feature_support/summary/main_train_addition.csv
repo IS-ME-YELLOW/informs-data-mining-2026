@@ -1,0 +1,8 @@
+comparison,cv_seed,view,fipsCode,windows,before_flagged,after_flagged,before_flagged_d5,after_flagged_d5,cleared,mean_distance_reduction_pct,test_nearest_windows,countyName,stateAbbr,dataset
+train_loo_vs_train_plus_test,0,context,18013,21,21,21,20,19,0,0.0,0,Brown County,IN,train
+train_loo_vs_train_plus_test,0,context,18111,21,21,21,21,21,0,5.99982224502264,19,Newton County,IN,train
+train_loo_vs_train_plus_test,0,context,39091,21,21,21,21,21,0,0.0,0,Logan County,OH,train
+train_loo_vs_train_plus_test,0,context,39117,21,21,13,8,4,8,10.190449262754365,21,Morrow County,OH,train
+train_loo_vs_train_plus_test,0,context,39149,21,21,21,21,21,0,0.0,0,Shelby County,OH,train
+train_loo_vs_train_plus_test,0,context,42053,21,21,0,21,21,21,59.98319762691381,21,Forest County,PA,train
+train_loo_vs_train_plus_test,0,context,42063,21,21,21,21,21,0,0.0,0,Indiana County,PA,train

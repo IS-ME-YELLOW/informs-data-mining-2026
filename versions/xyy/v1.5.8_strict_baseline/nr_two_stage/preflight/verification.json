@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "identity_hash": "85230ef5109061a99ff18fc3bdd3c9a170e600f8f456350b2b071938e9ece9c8",
+  "formal_fits": 0,
+  "old_models_reloaded": 10,
+  "old_prediction_max_abs_difference": 0.0,
+  "scope_poisoning_checks": 100,
+  "all_q_scopes_have_two_classes": true,
+  "all_m_scopes_have_positive_rows": true,
+  "full_validation_product_metric": true,
+  "feature_count": 163,
+  "both_positive_rows": 9059,
+  "source_files_unchanged": 126
+}

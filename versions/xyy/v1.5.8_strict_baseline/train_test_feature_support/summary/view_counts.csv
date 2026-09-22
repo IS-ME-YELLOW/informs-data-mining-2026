@@ -1,0 +1,6 @@
+view,total_test_counties,any_d1_counties,frequent_d1_counties,any_d5_counties,frequent_d5_counties,any_either_counties
+context,63,3,2,4,3,5
+history_only,63,4,4,4,4,6
+source_cache_rank,63,8,1,8,4,12
+static_only,63,1,1,4,4,4
+weather_only,63,7,0,5,0,8

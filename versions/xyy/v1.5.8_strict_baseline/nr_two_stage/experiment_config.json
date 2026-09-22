@@ -1,0 +1,113 @@
+{
+  "protocol": "v18_nr2stage_v1",
+  "cv_seed": 42,
+  "model_seed": 42,
+  "cases": [
+    "B0",
+    "N_only",
+    "R_only",
+    "NR_both"
+  ],
+  "pairs": [
+    [
+      "N_only",
+      "B0"
+    ],
+    [
+      "R_only",
+      "B0"
+    ],
+    [
+      "NR_both",
+      "B0"
+    ],
+    [
+      "NR_both",
+      "N_only"
+    ],
+    [
+      "NR_both",
+      "R_only"
+    ]
+  ],
+  "changed_sources": [
+    "N1",
+    "R1"
+  ],
+  "reference_tree_id": "bd4468e5c37fba7e93832153bc9847f807b8ae0054e45586f3c3853e96835bbd",
+  "feature_count": 163,
+  "occurrence": "official_Z>0",
+  "magnitude_training": "official_Z>0",
+  "magnitude_validation": "all_inner_rows_q_times_clip_m_RMSE_float64",
+  "params": {
+    "q": {
+      "objective": "binary",
+      "metric": "binary_logloss",
+      "learning_rate": 0.05,
+      "num_leaves": 31,
+      "max_depth": -1,
+      "min_child_samples": 50,
+      "feature_fraction": 0.8,
+      "bagging_fraction": 0.8,
+      "bagging_freq": 5,
+      "lambda_l1": 0.1,
+      "lambda_l2": 1.0,
+      "verbose": -1,
+      "seed": 42,
+      "feature_fraction_seed": 42,
+      "bagging_seed": 42,
+      "drop_seed": 42,
+      "data_random_seed": 42,
+      "num_threads": 1,
+      "force_col_wise": true,
+      "deterministic": true
+    },
+    "m": {
+      "objective": "regression",
+      "metric": "None",
+      "learning_rate": 0.05,
+      "num_leaves": 31,
+      "max_depth": -1,
+      "min_child_samples": 50,
+      "feature_fraction": 0.8,
+      "bagging_fraction": 0.8,
+      "bagging_freq": 5,
+      "lambda_l1": 0.1,
+      "lambda_l2": 1.0,
+      "verbose": -1,
+      "seed": 42,
+      "feature_fraction_seed": 42,
+      "bagging_seed": 42,
+      "drop_seed": 42,
+      "data_random_seed": 42,
+      "num_threads": 1,
+      "force_col_wise": true,
+      "deterministic": true
+    }
+  },
+  "max_rounds": 2000,
+  "early_stopping": 100,
+  "refit_rule": "floor_mean_four_inner_best",
+  "fits": 100,
+  "outer_models": 20,
+  "saved_inner_models": 80,
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20260910,
+  "focus_counties": [
+    "42053",
+    "39117",
+    "39115",
+    "18013",
+    "54015",
+    "54013",
+    "54007",
+    "39119",
+    "54087",
+    "54109",
+    "54041"
+  ],
+  "membership_sha256": "e9f15e62e6b7bee5cef08384ae5658553755ee319a13d6a30afb00dd9d1d642d",
+  "protocol_sha256": "3a40a708308bfc8f0ad61711906fdd164c0b39e8cd195f99162a4c9bb56156ca",
+  "plots": false,
+  "test_inference": false
+}

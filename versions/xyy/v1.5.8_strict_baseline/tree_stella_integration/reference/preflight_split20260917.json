@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "cv_seed": 20260917,
+  "counties": 239,
+  "rows": 34416,
+  "scoreable": {
+    "1": 34177,
+    "6": 32982,
+    "24": 28680,
+    "48": 22944
+  },
+  "source_metrics_reproduced": true,
+  "saved_gate_matches_thresholds": true,
+  "source_models_reloaded": 0,
+  "training_performed": false
+}

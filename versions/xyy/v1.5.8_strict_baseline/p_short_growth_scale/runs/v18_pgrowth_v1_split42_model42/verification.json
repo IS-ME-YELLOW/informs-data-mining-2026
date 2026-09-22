@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "identity_hash": "5c35ef951b9f1ea0ab3fd06a8b1b2ab4c1bb4dc5419878e1da2cc7deec6a9de2",
+  "new_inner_models_reloaded": 40,
+  "new_outer_models_reloaded": 10,
+  "reference_a_models_reloaded": 5,
+  "checkpoint_prediction_max_abs_diff": 0.0,
+  "metric_groups_checked": 3156,
+  "P_metric_groups_checked": 48,
+  "bootstrap_rows_checked": 24,
+  "row_changes_checked": 356349,
+  "late_and_long_invariants_exact": true,
+  "unmodified_components_exact": true,
+  "independent_target_keyed_C3": true,
+  "auxiliary_membership_exact": true,
+  "source_files_unchanged": 138,
+  "absolute_tolerance": 1e-12,
+  "verifier_sha256": "adb3f965a1700106deaf0a9d5129af4a6af985bea01063d601aa477bae2507f8"
+}

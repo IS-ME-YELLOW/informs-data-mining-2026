@@ -1,0 +1,20 @@
+{
+  "category": "tradeoff_requires_stress_test",
+  "I3_better_than_tree24_all_CVs": true,
+  "I3_not_worse_than_both_all_CVs": false,
+  "I3_better_than_Stella24_splits": 2,
+  "next_stage_reference": "I1",
+  "next_stage_candidate": "I3",
+  "retain_comparator": "I2",
+  "final_winner_declared": false,
+  "automatic_deployment": false,
+  "source_models_changed": false,
+  "new_fits": 0,
+  "source_models_reloaded": 0,
+  "weights_unchanged": [
+    0.5,
+    0.5
+  ],
+  "source_gate_unchanged": true,
+  "interpretation": "I3 improves current tree24 in all three CVs but trades off against Stella24; pressure testing remains separate"
+}

@@ -1,0 +1,25 @@
+{
+  "identity_hash": "e8cf35263d42073aaae928f05ba58ab0b1f66df89b5d9cfe7a3944345c44dfe1",
+  "files": {
+    "logs/probes/outer0_P_direct_t24h.parquet": "bff06aa4656558cff137b045b31801a86943e368341fee150201e2b40a5e795f",
+    "logs/probes/outer1_P_direct_t24h.parquet": "7816a276107b1e821ea271306a60a37989b34aadccd83b639d043f81bb27a777",
+    "logs/probes/outer2_P_direct_t24h.parquet": "84b86896454a55815c12ad97be10ea8b86173850e40e026e9af5eae378951832",
+    "logs/probes/outer3_P_direct_t24h.parquet": "e5044f5b7e77c51f67da0c792279fcca09fcfdfb0675456a95f7224c99dcefbd",
+    "logs/probes/outer4_P_direct_t24h.parquet": "a541a8220d93a386fc48a6107be995d09d9eea764b791e2fa588b46d0b36ff97",
+    "logs/training.log": "6ea7de9337b47754ef7e1640a31f6ffc3e77d29132c4ced0c4e274f869169fd3",
+    "model_manifest.json": "0bd251047c54c417f85dd5fb3a35a9ae4566d3e6d3617bdf692a1df9979defdc",
+    "models/outer0/P_direct_t24h.json": "9ce6908025031d9ffa813dc6596eb12a98c3879f1685f8ab239e15c3b85cc68b",
+    "models/outer0/P_direct_t24h.txt": "ffca99d4aea41d4beaed65e12628c8653c0f72c1d27facb5fc95d7b9a24b55dd",
+    "models/outer1/P_direct_t24h.json": "5a2c2a631782bb163c2f375e6d4209ac3a425b897f9a86c357ce95e71eb00fe7",
+    "models/outer1/P_direct_t24h.txt": "36c41fde51e719d0f381822a913c63b9c5d3d1b7c3397dae39ac7181b6840abd",
+    "models/outer2/P_direct_t24h.json": "7ec0aacd0d9531820347e9bfa9381ab04b5a318302e0bee307c05553ac190d30",
+    "models/outer2/P_direct_t24h.txt": "9315b185bc9dc2381cb38086f0ba2aab34d99aea5e0860e67218a9a5cb7612db",
+    "models/outer3/P_direct_t24h.json": "cabd1425fa1471b1df1278443de53e88796e814c38b2cb340bd8d6293608364e",
+    "models/outer3/P_direct_t24h.txt": "4395e681def11555684423da661e929bb26124ad5b2be2b700507d87118828df",
+    "models/outer4/P_direct_t24h.json": "62fa0ee2e83d82e37ab81e6e6cd6c193bc20a5928b02fc624e75e2328377b637",
+    "models/outer4/P_direct_t24h.txt": "527a2294126b33d79c986087a71de82c0244d4097dbf6c3071731bb7a7381f1b",
+    "new_P_oof_predictions.parquet": "8a6d98d09f2245c26763b599d64445b0c9b023aee9162f4cecbeddbc9ba2d0bc",
+    "run_manifest.json": "a8c8ee1022e6944025d8908d414c54beaab2d5f3edaabf1d1b2b9aaecee7dc0b",
+    "source_registry.json": "0c31aa716f66e20e0344d9b7faa82f22de7223196fcca1f4b4c11d4cd21960f2"
+  }
+}

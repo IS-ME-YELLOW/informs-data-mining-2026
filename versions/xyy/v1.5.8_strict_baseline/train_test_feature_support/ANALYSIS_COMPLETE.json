@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETE",
+  "input_rows": 6342,
+  "support_rows": 117033,
+  "nearest_pairs": 414750,
+  "addition_comparisons": 55209,
+  "source_files_unchanged": 19,
+  "old_oof_queries_reproduced": 30114,
+  "new_fits": 0,
+  "figures_created": 0,
+  "code_sha256": "21b7020ec436932295730a17e2ae5245effed22a75b6862d2b5b1fd8d49fb778",
+  "files": {
+    "data/addition_changes.parquet": "2328fe31f17d327619e2d578775d342fc71a7d18d5eaba54fdc6bddbd14a983c",
+    "data/allowed_inputs.parquet": "f8a94236e03c91d18933875af56c69aaf26ed83788259d38acc4b504443850fb",
+    "data/cache_blocks.json": "dcd34a632f05651a87eb8ace5c9597b6f959e5957e627831591f99be5f77c4ba",
+    "data/county_names.csv": "003c8b61ffac0d5de86e6477f386d7fa6d62540c824349662a98da666881a5ed",
+    "data/geographic_support.csv": "9bbf3868def0953f148217bc02a1a2a517ffe3f5042c880702c9ce8ad69a71c9",
+    "data/input_checks.json": "9a454b5f3bbe2b0a72c90b3de5c2711480ae30f661e00b9f436e92699ebdaa01",
+    "data/nearest_five.parquet": "0d598f7c44144cac6923dac61d585e45670852e73149dd034fab5945d2dc5f18",
+    "data/original_scale_ranges.parquet": "56453095dc8de43b73072ced7f09ee581a8a1fb916420bc804e5e7279549fe78",
+    "data/reference_thresholds.csv": "acd76d644560c60947732afa56c843599fb5b9296a820058736bf7f0e9678622",
+    "data/support_metrics.parquet": "a4471b5b2a0ecc96056cbb4e3b3a6f7416ebc8f432832bb24650ce51ded19e82",
+    "summary/all_county_support.csv": "a9b1a52f82967c9503b67d2de75755e66c175ed0f9b4af38c9e2d63f9a78a4fa",
+    "summary/by_horizon.csv": "bc17765582aa7e976b2f8b028dc50c345920b962530237405b5b1da00e6cfca7",
+    "summary/historical_focus_addition.csv": "601ad708fb40715c334841aee1145741726a84a85c5db5a48bb6bedeba19760a",
+    "summary/test_counties.csv": "b0f0689b26e45b0d5ac35f59ac694e8bc796d2937d473c70118ef7bbe5f0652a",
+    "summary/train_addition.csv": "aa01040226a884e57aa0b04dac674104817459d5b22fd64112724944e9b0fb08"
+  }
+}

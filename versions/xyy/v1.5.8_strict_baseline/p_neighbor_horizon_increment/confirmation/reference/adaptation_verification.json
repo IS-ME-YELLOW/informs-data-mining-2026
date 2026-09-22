@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "scope": "CV/source/output identities; P24 only; immutable feature package reuse; counts",
+  "files": {
+    "neighbor_protocol.py": {
+      "parent_sha256": "b5af28f992b7af24c248880499d0b4338cfe3117317054fc554f5f5044c2c690",
+      "adapted_sha256": "cca3307ed9167912f6eb5025e87b50decb36e6bde40d5827452f7cb223691372",
+      "unchanged_function_AST": [
+        "safe",
+        "clean",
+        "read_json",
+        "write_json",
+        "write_frame",
+        "array_sha",
+        "normalize",
+        "whitelist",
+        "added_columns",
+        "params",
+        "support",
+        "transform",
+        "reconstruct",
+        "subset",
+        "describe",
+        "specification",
+        "contribution_metric",
+        "build_cases"
+      ],
+      "allowed_adapted_functions": [
+        "assert_inputs",
+        "attach_features",
+        "initialize",
+        "load_context",
+        "load_data",
+        "snapshot_sources"
+      ]
+    },
+    "neighbor_features.py": {
+      "parent_sha256": "92bfd0b2e8e6c3ff3bfe15b0224951413345a5d0526ab46c57fac4ea078f8b06",
+      "adapted_sha256": "8805c4435d4d9bc153893490d7963199d21ecfa1b05bb6bae0da3a67b36604c7",
+      "unchanged_function_AST": [
+        "allowed_view",
+        "validate_view",
+        "aggregate",
+        "produce"
+      ],
+      "allowed_adapted_functions": [
+        "build"
+      ]
+    },
+    "independent_features.py": {
+      "parent_sha256": "aa16be880dd4f91ad1695665757bcf420e910a67fed311e0d75a088e8f07ccbd",
+      "adapted_sha256": "b8123ecbbfafafc0e3ce7c5fea6ea2cb4c1152914ca203d27e78c145435a187e",
+      "unchanged_function_AST": [
+        "raw_inputs",
+        "raw_view",
+        "geometry",
+        "aggregate_scalar"
+      ],
+      "allowed_adapted_functions": [
+        "verify_features"
+      ]
+    },
+    "train_neighbors.py": {
+      "parent_sha256": "2d49e98a41030e727c34e9c249422aabba338b823cffc7bad536c99098eb4dd3",
+      "adapted_sha256": "2860eb4606e8a7f215378ba80712003193f7098db17c3d1d0782f2c8ea72026d",
+      "unchanged_function_AST": [
+        "progress",
+        "fit_one"
+      ],
+      "allowed_adapted_functions": [
+        "main",
+        "preflight",
+        "train"
+      ]
+    },
+    "evaluate_neighbors.py": {
+      "parent_sha256": "73e5e2491a71ed927292c7e5e44807016f950f0236207b047dedb27ff12d7cf3",
+      "adapted_sha256": "2a6eeb32fc8ff344a6136238ccc59954e9ff18736f5179512013e58161b4171f",
+      "unchanged_function_AST": [
+        "metric",
+        "comparison",
+        "bootstrap"
+      ],
+      "allowed_adapted_functions": [
+        "evaluate"
+      ]
+    },
+    "verify_neighbors.py": {
+      "parent_sha256": "4763572ee062ef7d22d0b20e0e1ea654f49abd9b926849b9743188d763ae34bf",
+      "adapted_sha256": "dc5b39529caaf9e00b2ecf7fe2ba4bed276df046459e7190b780ccc339c21eb5",
+      "unchanged_function_AST": [
+        "close",
+        "independent_scope",
+        "independent_math"
+      ],
+      "allowed_adapted_functions": [
+        "verify"
+      ]
+    }
+  },
+  "parent_frozen_files": 138,
+  "explicit_CV_loader": true,
+  "model_seed_unchanged": 42,
+  "runtime_sha256": "09c1544fd38248f2e4b64f966832dd591828c57c23b807f354ea37247a3a5e70",
+  "preparation_sha256": "832a3ae8b21355a5c1185af50a814862daa0b994d3ecc267a777617268edc7d9"
+}

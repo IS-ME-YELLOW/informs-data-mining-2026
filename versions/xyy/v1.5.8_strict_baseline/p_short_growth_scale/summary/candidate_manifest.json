@@ -1,0 +1,34 @@
+{
+  "protocol": "v18_pgrowth_v1",
+  "cv_seed": 42,
+  "identity_hash": "5c35ef951b9f1ea0ab3fd06a8b1b2ab4c1bb4dc5419878e1da2cc7deec6a9de2",
+  "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_short_growth_scale/runs/v18_pgrowth_v1_split42_model42",
+  "cases": [
+    "G0",
+    "G1",
+    "G2"
+  ],
+  "adopted": false,
+  "files": {
+    "control_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_short_growth_scale/runs/v18_pgrowth_v1_split42_model42/control_predictions.parquet",
+      "sha256": "b291fcb6426cb72450b4bc07488358802a9900d3d8bfad38288e068c65b3ab34"
+    },
+    "component_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_short_growth_scale/runs/v18_pgrowth_v1_split42_model42/component_predictions.parquet",
+      "sha256": "4d4cc462b12152f00c4ca829c9dc539de3a844af991042a7780502d72c2d571c"
+    },
+    "branch_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_short_growth_scale/runs/v18_pgrowth_v1_split42_model42/branch_predictions.parquet",
+      "sha256": "809fc10e62d524ea8ff1fb06b6c9aa0246e1f3f68fa7a59d2697b1a9e907cd96"
+    },
+    "verification.json": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_short_growth_scale/runs/v18_pgrowth_v1_split42_model42/verification.json",
+      "sha256": "0996ab69556d9c9f84b3e5eee15ae447b786a35f793e6daeb263257513f58b88"
+    },
+    "model_manifest.json": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_short_growth_scale/runs/v18_pgrowth_v1_split42_model42/model_manifest.json",
+      "sha256": "afb21557012341416176dd1fb3c1dcf8b11dd93a3dd8fab81cdc2129c5a78a8e"
+    }
+  }
+}

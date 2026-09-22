@@ -1,0 +1,29 @@
+{
+  "protocol": "train_test_feature_support_v1",
+  "horizons": [
+    1,
+    6,
+    24,
+    48
+  ],
+  "cv_seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "quantile": 0.95,
+  "quantile_method": "linear",
+  "flag_tolerance": 1e-12,
+  "views": [
+    "context",
+    "history_only",
+    "weather_only",
+    "static_only",
+    "source_cache_rank"
+  ],
+  "new_fits": 0,
+  "draw_figures": false,
+  "reference_scaling": "training_only_frozen_before_test_addition",
+  "history_end": 71,
+  "plan_sha256": "69b08fc5a4cd3acf03609e924784b6280757e21846aae377844f5faae3d8a85b"
+}

@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "input_files_unchanged": 640,
+  "prior_frozen_artifacts_unchanged": {
+    "p_structure_horizon_transfer": 143,
+    "p_structure_horizon_transfer/confirmation": 171
+  },
+  "old_files_modified": false,
+  "output_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_neighbor_horizon_increment",
+  "formal_fits": 100,
+  "new_outer_models": 20,
+  "feature_views": [
+    6,
+    24,
+    48
+  ],
+  "features_per_view": 183,
+  "independent_features_and_model_reload": "PASS",
+  "other_CVs_trained": false,
+  "joint_candidate_evaluated": false,
+  "test_predictions_generated": false
+}

@@ -1,0 +1,56 @@
+{
+  "reference_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_neighbor_horizon_increment/runs/v18_pneighbor_v1_split42_model42",
+  "reference_tree_id": "bd4468e5c37fba7e93832153bc9847f807b8ae0054e45586f3c3853e96835bbd",
+  "reference_case": "NB_P24",
+  "cases": [
+    "B0",
+    "N_only",
+    "R_only",
+    "NR_both"
+  ],
+  "changed_sources": {
+    "B0": [],
+    "N_only": [
+      "N1"
+    ],
+    "R_only": [
+      "R1"
+    ],
+    "NR_both": [
+      "N1",
+      "R1"
+    ]
+  },
+  "feature_count": 163,
+  "fixed_sources": "all P/D plus N6/N24/N48/R6/R24/R48",
+  "final_unchanged_horizons": [
+    24,
+    48
+  ],
+  "G2_applied": false,
+  "W1_applied": false,
+  "C3": "original county-target-hour equal component mean",
+  "product_formula": "q*clip(m,0,1)",
+  "outer_model_ids": [
+    "54a4aa82ec3606e0b7d93cc264ab4b37ac06ded1c5dbdfe78844e559a346aae0",
+    "b272accd66dcfff3ad9bc1719fba6f706c51c0e6e5359bc42b86e83ac72ca2cf",
+    "332af7762968e442aa85e0bf79aa92275a5b6fd7e451003ec5a107caa16db301",
+    "d41c6631b7af0b1881d3c36c187b7815eaff47c41db5d6b574f32ce34f11d178",
+    "9474a554ac6c19c897cbb4951fbb85efca8ae1c8bf38e99405876ee202f69925",
+    "7547a5ffaa50d826a7382d77feb3a37368eb1bfa90b8d6674aa2e127b8284bdc",
+    "97510d4f1c254c075eea84da151bc81af1b6b309b2e908512c13f197cd35da81",
+    "3a4e8e72c8d1498338d820298140b73c3ac4b932b8b5aa332cde7f6fed7c9723",
+    "e9f3fa99f81c81008e9318779b3cfa9d975550275f70363a6d2627fce71317c5",
+    "aa6aefc58e4ca811086dc1dfebcee83b490033dbb9c46826ffc3c192b4e001a6",
+    "1d3db5bf06465145af5ef309775146d28794fc4ab4747caede0bdcfc3068730a",
+    "12fd8381d3af86e30e329aedd8fbf396a07109b64d3d0defd0c83dcc01e6d005",
+    "e9c88adea27e6c9d174130ca48b0107d22d1f602ee03e5cd8e3ec5129dfdaa39",
+    "c512f736cd1588e44b9cd4f4e5f6d598ab7a1c5a559bff8260c3182e29cb99e2",
+    "ff8dc82975f6a02eecfd9104d345d902f2c17ce7cc9066b6ee2ec8356763107b",
+    "59fdceff5d296d35a69d4c1049935242ce179d5f708ab87483f95b741fda7f5d",
+    "1d4742a84e733ca688532644277464acc05f8d7094d236a795fd540d14fc9240",
+    "a2b399abd7aee9675f388a079d4593e1a5d80bcceafbb83e479a83109904e50c",
+    "0bda70332b951137523f5c87a3df8ad0c93269caadadb12dbd4f4b1a725ea689",
+    "9d9cd58c1fc791f64f4a006ae6c077d00e61209ca3e00b03f9e6eeb6d6972369"
+  ]
+}

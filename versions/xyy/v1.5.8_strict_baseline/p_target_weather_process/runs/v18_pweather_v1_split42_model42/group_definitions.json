@@ -1,0 +1,18 @@
+{
+  "general": {
+    "all": "Full 239-county valid rows",
+    "pre96": "Valid target hours below96; unchanged",
+    "from96": "Valid target hours96-215",
+    "test_like": "Frozen original context test-to-train top5 union per horizon/target day",
+    "not_test_like": "Complement of frozen test_like",
+    "all_except_Forest": "Diagnostic only; exclude FIPS42053",
+    "test_like_except_Forest": "Diagnostic only; test_like without FIPS42053"
+  },
+  "process_24h": {
+    "no_high": "has_high_gust_48h=0",
+    "active_high": "has_high=1 and age=0",
+    "post_high_1_6": "has_high=1 and 1<=age<=6",
+    "post_high_7plus": "has_high=1 and 7<=age<=47",
+    "multiple_segments": "episode_count>=2; overlapping group"
+  }
+}

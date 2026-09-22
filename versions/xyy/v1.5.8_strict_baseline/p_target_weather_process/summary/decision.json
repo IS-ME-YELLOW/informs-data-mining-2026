@@ -1,0 +1,16 @@
+{
+  "status": "seed42_complete_not_adopted",
+  "candidate": "W1",
+  "reference_remains": "W0_NB_P24",
+  "category": "no_observed_increment",
+  "confirmation_recommended": false,
+  "automatic_confirmation_started": false,
+  "parameter_search_started": false,
+  "reason": "Full24h, short outputs and frozen test-like subset have no net improvement; fixed 8-column package stops here",
+  "inference_limit": "Does not prove all exposure/recovery representations lack value",
+  "new_fits": 25,
+  "new_outer_models": 5,
+  "saved_inner_models": 20,
+  "test_inference": false,
+  "plots": 0
+}

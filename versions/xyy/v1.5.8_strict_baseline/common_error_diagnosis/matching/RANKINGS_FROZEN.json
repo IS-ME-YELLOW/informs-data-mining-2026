@@ -1,0 +1,11 @@
+{
+  "status": "FROZEN_BEFORE_OUTCOME_JOIN",
+  "files": {
+    "inputs.parquet": "50929b12aabb3a94ec5edddaec506af78c59ef5644764e8509fc8823b1a0eb22",
+    "cache_blocks.json": "dcd34a632f05651a87eb8ace5c9597b6f959e5957e627831591f99be5f77c4ba",
+    "rankings.parquet": "d416d5ed6a1317e1f6b2aefff38d4d71f9f6aae48abf4f8766079ad6d182c53f",
+    "support.csv": "f633c20195dfae42294725cea588fb3e0742010237da5d2a6a0b66c70123eb2a",
+    "focus_feature_ranges.csv": "56e0e7e137bfad2af1d0a852e4bbca4c2f2d4aecea7edcecad99c7c5bdd7fe90"
+  },
+  "outcomes_used_for_ranking": false
+}

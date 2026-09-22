@@ -1,0 +1,56 @@
+{
+  "reference_tree": {
+    "identity": "bd4468e5c37fba7e93832153bc9847f807b8ae0054e45586f3c3853e96835bbd",
+    "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_neighbor_horizon_increment/runs/v18_pneighbor_v1_split42_model42",
+    "case": "NB_P24"
+  },
+  "reference_a": {
+    "identity": "e39b76d75f191891abda1939dc47933815cc4fa15796227b0c200eb1b96bfcac",
+    "run": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/runs/v18_pinfo_v1_split42_model42",
+    "case": "F2",
+    "column": "a_applied",
+    "source_column": "source_a_model_id",
+    "branch_file": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/runs/v18_pinfo_v1_split42_model42/branch_oof_predictions.parquet"
+  },
+  "feature_file": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_information_increment/features/v1/F2_train.parquet",
+  "feature_count": 183,
+  "new_branch_file": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_short_growth_scale/runs/v18_pgrowth_v1_split42_model42/branch_predictions.parquet",
+  "cases": {
+    "G0": {
+      "P1_early": "reference",
+      "P1_late": "exact_copy_of_NB_P24_P1",
+      "other_components": "exact_copy_of_NB_P24",
+      "new_b_column": null,
+      "model_id_column": null,
+      "new_models": []
+    },
+    "G1": {
+      "P1_early": "p71 * reference_a + clipped_new_increment",
+      "P1_late": "exact_copy_of_NB_P24_P1",
+      "other_components": "exact_copy_of_NB_P24",
+      "new_b_column": "G1_raw_b",
+      "model_id_column": "G1_model_id",
+      "new_models": [
+        "aadc6604c6e4857290dbf1fa464bbe1373da913f0ce82a371601374861d3a761",
+        "1395d9f8f516b869179bcf19de83c616334d33ae121c81f31163ddf57cf69c14",
+        "91b2cbdb2c97107d0e634dc678b92c415ab6fd7eb0cc3dbf4a39c1d433aeba78",
+        "8c97ac6f8860acb9f318357aa2fd21620277abd0f44cdbd36bc174378a220927",
+        "5d59d374e2fa3fcefccd985e46f30805566c14924bacea3487dc7fce947390a3"
+      ]
+    },
+    "G2": {
+      "P1_early": "p71 * reference_a + clipped_new_increment",
+      "P1_late": "exact_copy_of_NB_P24_P1",
+      "other_components": "exact_copy_of_NB_P24",
+      "new_b_column": "G2_raw_b",
+      "model_id_column": "G2_model_id",
+      "new_models": [
+        "b45ef14f2adc56fc008eed17379b084d375b1516797752f81f90326d6fb50d58",
+        "68fb7e90530a54b1290fbb4741385a7c16ee40060f97a754625b013c00d628ee",
+        "15b3199bddf99ac1d54a8763a91a4038b41e8857e9876f278d895b74c95c1403",
+        "c0afc56e23144b0174c3362f20df0d2ba0cd36046472c5906902f8516869d0a7",
+        "fc7c23c5985e7aea6a399948596427260dd583877ea2a3c3a15bc5248d4c0a3b"
+      ]
+    }
+  }
+}

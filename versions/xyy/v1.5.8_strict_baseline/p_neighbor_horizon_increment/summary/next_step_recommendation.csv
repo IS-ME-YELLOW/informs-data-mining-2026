@@ -1,0 +1,4 @@
+case,horizon,target_rmse_change_pct,maximum_short_horizon_change_pct,recommendation,adopted
+NB_P06,osi_target_t06h,-0.1573317969226551,-0.12690618839277246,保留候选，确认暂缓,False
+NB_P24,osi_target_t24h,-0.6825263747587518,-0.11415315131231285,优先重复CV确认,False
+NB_P48,osi_target_t48h,-0.17530056944516925,-0.017344212586400953,保留候选，确认暂缓,False

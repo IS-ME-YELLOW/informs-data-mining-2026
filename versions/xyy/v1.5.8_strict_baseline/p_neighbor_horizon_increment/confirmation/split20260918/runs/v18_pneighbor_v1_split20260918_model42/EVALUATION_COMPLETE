@@ -1,0 +1,26 @@
+{
+  "identity_hash": "e8cf35263d42073aaae928f05ba58ab0b1f66df89b5d9cfe7a3944345c44dfe1",
+  "files": {
+    "P_component_diagnostics.parquet": "656de6a69dbd24e4167ec73f1742b41ce1563f5be0f8f36e72473689370c2719",
+    "aligned_unique_components.parquet": "1c2f9ac5bfc22940e61ebb4e8f03097fffd566133fa0ddac7146aaec9938206e",
+    "component_predictions.parquet": "be74e5643cae3efcacc274b1071201be82c8c3720ea8d44d236f72cea158e01a",
+    "control_predictions.parquet": "26e4331cbeba3a2377317b351db0a955afded2a08f51d8f2aa030fd741d20d45",
+    "invariants.json": "6a4635c8c3926c9d5de66596368fd75837ae0d7904eb9fedd6e6aa5e1ec8f351",
+    "metrics/P71_bins.csv": "a5f8fdd4a5f3ca776b4ba6f94a5504abfd44c6221d04277065e328b8e6d0b837",
+    "metrics/P_component_metrics.csv": "1e7c10f0d81dc0e08c192e5f4203ab9ffce9573c3c36c60bc9b0c9631084002f",
+    "metrics/all_control_metrics.csv": "dff7a941884b688a5572c738d3c060871d82b5b5b8905e418d7719a09a782d2e",
+    "metrics/bootstrap_intervals.csv": "4f5e60ed6d168f862d413ce5caa35e4279922c3dfdcd805b1f335bb2f638cfeb",
+    "metrics/branch_diagnostics.csv": "c8ebe294c672e19001dac4280b0a63c498dcc50c7a8ed54c10d0b3afcbc751e5",
+    "metrics/branch_loss_decomposition.csv": "c0afe5ed9352d3801f7a464af51adf47a54cbb959bfccbf1994ddcce60c6c583",
+    "metrics/county_metrics.csv": "fff3399726b0478efa55ea6ead117def260d7c784303a4d876775b506a80cbd7",
+    "metrics/fold_metrics.csv": "d9eca7b58fe32a0d9174fe5c6dedd37c8aaf0ed75771d87e42f0ff85194c5803",
+    "metrics/primary_scores.csv": "920b7f50ef28701284ed6d23d9d13064ed0166594f19847fff53dc3b35841a1b",
+    "metrics/window_metrics.csv": "e3ba81242c1a3bfa42dbc55c81ee304a4b582eb39c51d7bd138246c60ae81e36",
+    "target_audit.parquet": "8ab4b21eae9be8e0380e1f310ec1a2739fc8ba1f29d485ad9f250fc14d19c16b"
+  },
+  "evaluation_code_sha256": "2a6eeb32fc8ff344a6136238ccc59954e9ff18736f5179512013e58161b4171f",
+  "cases": [
+    "B0",
+    "NB_P24"
+  ]
+}

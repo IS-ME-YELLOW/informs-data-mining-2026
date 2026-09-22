@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "horizons": [
+    6,
+    24,
+    48
+  ],
+  "nodes": 302,
+  "edges": 2416,
+  "feature_count": 183,
+  "raw_view_max_abs_difference": 2.2551405187698492e-17,
+  "augmented_features_bitwise_exact": true,
+  "independent_geometry": true,
+  "rank_order_aggregation": true,
+  "lineage_rows": 1043712,
+  "causality_checks": true
+}

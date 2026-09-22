@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "matching_input_county_windows_rebuilt": 5019,
+  "ranking_outcome_joins_checked": 150570,
+  "history_cutoff": 71,
+  "weather_scope": "provided official series",
+  "identifier_features_used": false,
+  "allowed_features_independently_rebuilt": true,
+  "verifier_sha256": "420a4b47cc2850ecee78fdb1debe8e8d1372329aeb8e7ba9a1705e6fb3cf91ab"
+}

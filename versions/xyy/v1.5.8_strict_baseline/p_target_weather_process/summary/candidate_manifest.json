@@ -1,0 +1,33 @@
+{
+  "protocol": "v18_pweather_v1",
+  "cv_seed": 42,
+  "identity_hash": "058cfe3544f724cc6223ab8cf4037527d1eadcc8b94b11853bc143b27b0ce9fc",
+  "run_directory": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_target_weather_process/runs/v18_pweather_v1_split42_model42",
+  "cases": [
+    "W0",
+    "W1"
+  ],
+  "adopted": false,
+  "files": {
+    "control_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_target_weather_process/runs/v18_pweather_v1_split42_model42/control_predictions.parquet",
+      "sha256": "df4d14e5b5ce2596fd1437582818ffb05aff1902d574e6c7fdc22c8bcbb686ce"
+    },
+    "component_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_target_weather_process/runs/v18_pweather_v1_split42_model42/component_predictions.parquet",
+      "sha256": "fb5f5f7b3146046b169dc66121c27b336fc6a57ed110ba285f84714b06744ede"
+    },
+    "P24_oof_predictions.parquet": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_target_weather_process/runs/v18_pweather_v1_split42_model42/P24_oof_predictions.parquet",
+      "sha256": "3cd8460228b415fcd5761a6179f5fa1faa866abf268f5b2d2e035c5d397915ae"
+    },
+    "model_manifest.json": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_target_weather_process/runs/v18_pweather_v1_split42_model42/model_manifest.json",
+      "sha256": "b00c9265a64fcfc42b8b0ea3ede8613e8469a1f711fa71e7a49ea4aba01464f1"
+    },
+    "verification.json": {
+      "path": "/home/jacklo/XYY/INFORMS/informs-data-mining-2026/versions/xyy/v1.5.8_strict_baseline/p_target_weather_process/runs/v18_pweather_v1_split42_model42/verification.json",
+      "sha256": "12a3bb9746537bd68ce2e03b673f596f7dba936c8613a2330fb4e1279dad8dd0"
+    }
+  }
+}

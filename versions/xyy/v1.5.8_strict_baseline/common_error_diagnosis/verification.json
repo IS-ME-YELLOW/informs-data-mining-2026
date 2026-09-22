@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "new_fits": 0,
+  "models_reloaded": 0,
+  "rows_checked": 356349,
+  "stella_rows_checked": 154872,
+  "metric_groups_checked": 18000,
+  "matching_queries_checked": 30114,
+  "ranked_pairs_checked": 150570,
+  "whole_outer_fold_exclusion": true,
+  "common_score_checked": true,
+  "component_sse_closure": true,
+  "source_files_unchanged": 50,
+  "outcome_blind_ranking_hashes_unchanged": true,
+  "absolute_tolerance": 1e-12,
+  "verifier_sha256": "38fb2477259212d9cbb3e0467e5b341f7c260260d872e183e2c372259bb88efc"
+}

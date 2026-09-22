@@ -1,0 +1,16 @@
+[
+  {
+    "dataset": "train",
+    "counties": 239,
+    "history_rows": 17208,
+    "future_weather_rows": 34416,
+    "future_outages_used": false
+  },
+  {
+    "dataset": "test",
+    "counties": 63,
+    "history_rows": 4536,
+    "future_weather_rows": 9072,
+    "future_outages_used": false
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "splits": {
+    "train": {
+      "rows": 34416,
+      "feature_columns": 191,
+      "valid_feature_rows": 28680
+    },
+    "test": {
+      "rows": 9072,
+      "feature_columns": 191,
+      "valid_feature_rows": 7560
+    }
+  },
+  "max_absolute_feature_difference": 0.0,
+  "verifier_sha256": "eeb5a3fecd489f71f9213bf379648f4026c8bd2bda533f2669e3c7de23bbb2f6"
+}

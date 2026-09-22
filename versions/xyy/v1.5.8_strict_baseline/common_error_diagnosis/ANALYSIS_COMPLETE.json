@@ -1,0 +1,33 @@
+{
+  "status": "COMPLETE",
+  "new_fits": 0,
+  "source_files_unchanged": 50,
+  "row_count": 356349,
+  "stella_row_count": 154872,
+  "ranking_rows": 150570,
+  "support_rows": 30114,
+  "code_sha256": "a8edd8ac08b61b4b0e0b383ab2137ba9d7e918d9aac1294bcb013c51f4117e25",
+  "files": {
+    "data/case_trajectories.parquet": "cb4bab2ca6c64e44dce8d5489cdce0b9c033f0360b9ee28a41ab3ac07770d93b",
+    "data/route_rows.parquet": "0824e31678f18f785f5344642df9c8a131da3dcd1e4db3586bd7d0ad2072064f",
+    "data/stella_source_rows.parquet": "e792e7316714ee57aef24707d70173f435eeed47bd5a0b4caaeb56fb17407bed",
+    "summary/case_daily_shapes.csv": "2331403217e16994dd227f7b1e813e39b5641cf233ca826e5070cd6c886b7206",
+    "summary/case_selection.csv": "9bb4d37e2c73d96fd0edc5afee3d8eb696d0ffaf7b5dd9e4b7aedbfd2910a680",
+    "summary/case_stability.csv": "2b2c9ef7e27cd47423770a15e0e75a965e62aad667e1f024fec040e188e3230b",
+    "summary/component_error_decomposition.csv": "2465ff4ddba553c8300d8a7842ec453f91ffc259857aff31cfbd7d544eb26375",
+    "summary/county_day_metrics.csv": "3aacf88a66929b7c46b9f188bda5ad589913312765dd15d97d4d701592625589",
+    "summary/county_metrics.csv": "2495bfdd5d5091e5efa7ca2f3e479e99a8643db75addaef2c93a723fd30b849c",
+    "summary/day_metrics.csv": "3e63417f55240947847a7b5ef5a1d959a85231bf89c6ea8888287bef9ddae07b",
+    "summary/overall_metrics.csv": "7c994c93dbb3c159d1102b01716e6dc6707ffcd737baaaaeb29001afb083116e",
+    "summary/stella_county_diagnostics.csv": "3b214bf84d051abdc0522edd3efc894fe84d76fa3cc20a58014b466aaba5e76c",
+    "matching/RANKINGS_FROZEN.json": "1133eee4f1199d3f2f08935b3e13a6f2bd34cdb17d15fdd6cbba5bc259d4dfba",
+    "matching/cache_blocks.json": "dcd34a632f05651a87eb8ace5c9597b6f959e5957e627831591f99be5f77c4ba",
+    "matching/control_summary.csv": "4a8be65b0155202936612eddbec6cd38c80c3a3f3efbaacd35db68a09c3cad2b",
+    "matching/focus_feature_ranges.csv": "56e0e7e137bfad2af1d0a852e4bbca4c2f2d4aecea7edcecad99c7c5bdd7fe90",
+    "matching/inputs.parquet": "50929b12aabb3a94ec5edddaec506af78c59ef5644764e8509fc8823b1a0eb22",
+    "matching/ranked_controls_with_outcomes.parquet": "13d16924b7c5c166e4be9f49a7eaacf6e7779ae088445891b43a2835fb9a8c17",
+    "matching/rankings.parquet": "d416d5ed6a1317e1f6b2aefff38d4d71f9f6aae48abf4f8766079ad6d182c53f",
+    "matching/support.csv": "f633c20195dfae42294725cea588fb3e0742010237da5d2a6a0b66c70123eb2a",
+    "matching/window_outcomes.csv": "abf585ec8e1ecd1e80a3b9100bc0f4d4d233c8aad362f964190525ff25747550"
+  }
+}
