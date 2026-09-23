@@ -1,0 +1,41 @@
+{
+  "seed": 42,
+  "scope": [
+    0
+  ],
+  "models": {
+    "P_t_24": {
+      "model_id": "fb27a9020664d0a5717a587463e4aa7e9a86fd8b8c68d643a30d58e44fd045f0",
+      "receipt": "training/split42/S0/lgb_P_t_24/receipt.json"
+    },
+    "N_t_24": {
+      "model_id": "2180b1c4e9d39c919d2fcce7bbb0efa523dff51f8d136fdf8f0d539e540829b6",
+      "receipt": "training/split42/S0/lgb_N_t_24/receipt.json"
+    },
+    "D_t_24": {
+      "model_id": "533f80fda623b6a13423ea0c821fb7c736993bdc36e26051e7923514fda30cd4",
+      "receipt": "training/split42/S0/lgb_D_t_24/receipt.json"
+    },
+    "R_t_24": {
+      "model_id": "41b86764eb1da9c79b3b2bcce294a651ceb36c2096a7918d7b37d9a8ea87fb81",
+      "receipt": "training/split42/S0/lgb_R_t_24/receipt.json"
+    },
+    "P_t_48": {
+      "model_id": "69b2b99fbfa9fa4398ea1f12c98b077a2ccfba53d543036b08d5b9f3f8ff07f0",
+      "receipt": "training/split42/S0/lgb_P_t_48/receipt.json"
+    },
+    "N_t_48": {
+      "model_id": "58c3daed66aec239f106a79a3b6794c15ae7c8e709517813e181e24e4556f216",
+      "receipt": "training/split42/S0/lgb_N_t_48/receipt.json"
+    },
+    "D_t_48": {
+      "model_id": "d5a5732a80182ac2d6ca7ab1211097b9a73fe2b9529a2fabccd2e4f5b3ad1b89",
+      "receipt": "training/split42/S0/lgb_D_t_48/receipt.json"
+    },
+    "R_t_48": {
+      "model_id": "5b414069e30d5f62fbd827b748d1fa0baa7a96b3e30781b95dea9705feb3cd6b",
+      "receipt": "training/split42/S0/lgb_R_t_48/receipt.json"
+    }
+  },
+  "prediction_sha256": "e28cbc2c4e27292643dcff4ad06bf6b453a2d3213f6a3082221cd7c63524a0d0"
+}

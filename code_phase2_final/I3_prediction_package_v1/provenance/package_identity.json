@@ -1,0 +1,33 @@
+{
+  "identity_hash": "c579e051d2af84dbea00eff19f76836ec7199206297d1dbd8076037bc86898c4",
+  "protocol": "i3_scope_prediction_v1",
+  "input_hashes": {
+    "inputs/cv_seed20260917.csv": "841e20daaacce2c43a63eed3ebb296c01b05e7811456f09ee16cc5c32bc98a0e",
+    "inputs/cv_seed20260918.csv": "0e16d14b6d6d5342ec34649e167521356d72af24d4a41538b6a124626e1b6a4f",
+    "inputs/cv_seed42.csv": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+    "inputs/features_base.parquet": "aca788c360b68ebc3ab5b0a90c5a35a3b106757380d41c32e1c8bebcd58e0ecd",
+    "inputs/features_p1.parquet": "a6b8510afb88d68ac9a8606f3d1f4d410db1f572fc3945fb0fc0d5d10abdb62a",
+    "inputs/features_p24.parquet": "228388229aae965742049ae1c7dd4bfb79252b30a9819f4b19cc44d983767087",
+    "inputs/folds_20260917.parquet": "dd673c882105a4ccf94e0dcbe8d04d75010414752afd2d9a01b160a7377f56d5",
+    "inputs/folds_20260918.parquet": "963f30847b140b1553cde6ab7e5120818cb6422de3c6ca5a06b584f78ef9634a",
+    "inputs/folds_42.parquet": "d76e72e0b64ba7db25c07557c91483dcb16599ca476e71580560db9d71095a5b",
+    "inputs/known_history.parquet": "3a5f1ceffaf3fd3cbc8029c60ddaab490e7563b5466362c9024b3822b9c5c150",
+    "inputs/labels.parquet": "81431be0d9a22b82f57de198aca6a834a014ff8115e2cb812fec36c33207a7a5",
+    "inputs/meta.parquet": "250e176ce5a3d620304686b30047be90a51613170e573267a1dc24d3a32e4ee6",
+    "inputs/observed_P_history.parquet": "b86fb4314e44518ad11202971c961d09fc33d7f656a63b2394aa6ec1a1a58bfb"
+  },
+  "environment": {
+    "python": "3.13.7",
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+    "libraries": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.5",
+      "lightgbm": "4.7.0",
+      "xgboost": "3.2.0",
+      "catboost": "1.2.10",
+      "scipy": "1.18.1",
+      "sklearn": "1.9.1",
+      "pyarrow": "25.0.1"
+    }
+  }
+}

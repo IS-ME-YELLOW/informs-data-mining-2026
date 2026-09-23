@@ -1,0 +1,259 @@
+{
+  "seed": 20260918,
+  "scope": [
+    1,
+    4
+  ],
+  "identity_hash": "c579e051d2af84dbea00eff19f76836ec7199206297d1dbd8076037bc86898c4",
+  "models": {
+    "P01_a": {
+      "model_id": "7ee94599c0572d7da0d81dbb6536a55cdfcdf89d99a40c4383466acdf44ef7cc",
+      "receipt": "training/split20260918/S14/P01_a/receipt.json"
+    },
+    "P01_b": {
+      "model_id": "309fedad0bb62302cb387ab97eba6d12d5c651bd52438177205dc6430d25af74",
+      "receipt": "training/split20260918/S14/P01_b/receipt.json"
+    },
+    "lgb_N_t_01": {
+      "model_id": "44fea5f21ef40ac9bb4b8bc6acf52485cb97ebb8bbe626e23f8b80bf0cd69743",
+      "receipt": "training/split20260918/S14/lgb_N_t_01/receipt.json"
+    },
+    "lgb_D_t_01": {
+      "model_id": "d5ad504f36016035f229b8d63d44c463b85c954a931493058fde29e4bc6aa2d4",
+      "receipt": "training/split20260918/S14/lgb_D_t_01/receipt.json"
+    },
+    "D01_unknown": {
+      "model_id": "35e3ee8d89d848c4aaea37764e5c84abf12fe9300d548e259e4b2d20b86896b1",
+      "receipt": "training/split20260918/S14/D01_unknown/receipt.json"
+    },
+    "lgb_R_t_01": {
+      "model_id": "9afe1f371b950e6d5f9deac178709bfacc79ac25163fc5f1ca0168e162b0ac85",
+      "receipt": "training/split20260918/S14/lgb_R_t_01/receipt.json"
+    },
+    "P06_a": {
+      "model_id": "5e8116847a192eac9321561d3e4829fb6efecc29f9e9e0546aedc3e4d86a7099",
+      "receipt": "training/split20260918/S14/P06_a/receipt.json"
+    },
+    "P06_b": {
+      "model_id": "91da96c9f384c73d26dab2a83b47e25dd2f4a0d08b4ed2e76893446d4c97f3f2",
+      "receipt": "training/split20260918/S14/P06_b/receipt.json"
+    },
+    "lgb_N_t_06": {
+      "model_id": "dc0d87be97a2f723f8851d4d1d66b93a285db2237ae525da08794a7b9225ece6",
+      "receipt": "training/split20260918/S14/lgb_N_t_06/receipt.json"
+    },
+    "lgb_D_t_06": {
+      "model_id": "d2bbd000aeeb587da8c22a74b1f03268556e945caaec8e305bd2e932f3ca7926",
+      "receipt": "training/split20260918/S14/lgb_D_t_06/receipt.json"
+    },
+    "lgb_R_t_06": {
+      "model_id": "39950fbe6974458aff9e2cd38ba9dc36cec5b7ac1509650544e7a60d9ae72680",
+      "receipt": "training/split20260918/S14/lgb_R_t_06/receipt.json"
+    },
+    "P24_neighbor": {
+      "model_id": "c395fd826a642ce195f9abcd1ca28ef737405f7b3588754e874b4435d5f7d0e3",
+      "receipt": "training/split20260918/S14/P24_neighbor/receipt.json"
+    },
+    "lgb_N_t_24": {
+      "model_id": "1de178a38699b2e89813f8fa0d0a26838a9c5541bf50920800e8bec988c119a9",
+      "receipt": "training/split20260918/S14/lgb_N_t_24/receipt.json"
+    },
+    "lgb_D_t_24": {
+      "model_id": "6fa81e40598afd2736d7554398eb02bb80bdc94d29d6bb83a9bbefae634ef4e4",
+      "receipt": "training/split20260918/S14/lgb_D_t_24/receipt.json"
+    },
+    "lgb_R_t_24": {
+      "model_id": "1299f909c33bcde1a1072c8d2cdc49989a87d83a3743fb3a3cd41e8970902ab9",
+      "receipt": "training/split20260918/S14/lgb_R_t_24/receipt.json"
+    },
+    "lgb_P_t_48": {
+      "model_id": "6f40543af465407158225996610ca7778d30caf9ae159988ea3f76f31811c1f6",
+      "receipt": "training/split20260918/S14/lgb_P_t_48/receipt.json"
+    },
+    "lgb_N_t_48": {
+      "model_id": "f5189a12cfe580476af25a248c841a05344358783735c375f361a70916197a36",
+      "receipt": "training/split20260918/S14/lgb_N_t_48/receipt.json"
+    },
+    "lgb_D_t_48": {
+      "model_id": "816b09a53b54e77875d51bbce2e9195d332b83dd3b89394d0caea1f4b7ebb8fc",
+      "receipt": "training/split20260918/S14/lgb_D_t_48/receipt.json"
+    },
+    "lgb_R_t_48": {
+      "model_id": "18a50e9bb9b44cb7a4de032e8d150b43b84a6ae0abe10720e0e85255255c2c17",
+      "receipt": "training/split20260918/S14/lgb_R_t_48/receipt.json"
+    },
+    "lgb_osi_24": {
+      "model_id": "3c892302150bf08c957f1807260d8574ccca09fbb9036c15b846b02d03ef6a24",
+      "receipt": "training/split20260918/S14/lgb_osi_24/receipt.json"
+    },
+    "lgb_P_t_24": {
+      "model_id": "fe5d53963e9adfe29bdc79c882849ca4edfe0754c5c1e7b9079567d3a389805d",
+      "receipt": "training/split20260918/S14/lgb_P_t_24/receipt.json"
+    },
+    "xgboost_osi_24": {
+      "model_id": "4547984efb5b38167208de8313450d3e4e568a417381dfd8cdcd4342223c2a6d",
+      "receipt": "training/split20260918/S14/xgboost_osi_24/receipt.json"
+    },
+    "xgboost_P_t_24": {
+      "model_id": "b1ccf5f9328d64612f77ce5cb7ffc0108b3d5cca8fb81e41f44dad872f0ef966",
+      "receipt": "training/split20260918/S14/xgboost_P_t_24/receipt.json"
+    },
+    "xgboost_N_t_24": {
+      "model_id": "6183c25f7d113f65c7f284905869baa60a25d56751a85e8d44a84e865001ff5d",
+      "receipt": "training/split20260918/S14/xgboost_N_t_24/receipt.json"
+    },
+    "xgboost_D_t_24": {
+      "model_id": "053576a3c7dd4e9cf4e9f55895e9b4dc279ce9f662bc5f3c2ebc93fcb7ec5a64",
+      "receipt": "training/split20260918/S14/xgboost_D_t_24/receipt.json"
+    },
+    "xgboost_R_t_24": {
+      "model_id": "4eacd29a4b34273d1d29e3ae5c254971dce8d4d8a5117b9e7d7aa8e50bcca743",
+      "receipt": "training/split20260918/S14/xgboost_R_t_24/receipt.json"
+    },
+    "catboost_osi_24": {
+      "model_id": "6ac912d3dbea3412031b1503dc8f3af6deb4b8ed4e2ac756f763329aeb70b44a",
+      "receipt": "training/split20260918/S14/catboost_osi_24/receipt.json"
+    },
+    "catboost_P_t_24": {
+      "model_id": "e50552d0297c9074aefb8c17dcac327c58ea42c2efe73e1e8d74750d5789fb42",
+      "receipt": "training/split20260918/S14/catboost_P_t_24/receipt.json"
+    },
+    "catboost_N_t_24": {
+      "model_id": "acda2768609cc30dfd78219bce28eacc61e2f058bef8c190255b4cbdd9dcf25a",
+      "receipt": "training/split20260918/S14/catboost_N_t_24/receipt.json"
+    },
+    "catboost_D_t_24": {
+      "model_id": "50bb8f338a3952682b53454c71ae75de47d519a4873ab4762fe9e0c193c55f53",
+      "receipt": "training/split20260918/S14/catboost_D_t_24/receipt.json"
+    },
+    "catboost_R_t_24": {
+      "model_id": "dd217024e4fa9286dbc6898478d6009ad57718d8377bd26bf31712d8b7a65cdd",
+      "receipt": "training/split20260918/S14/catboost_R_t_24/receipt.json"
+    },
+    "lgb_osi_48": {
+      "model_id": "f48d62b2c402d9313392f47b0e18d265061a8baaac11b32972001c0bed1feedc",
+      "receipt": "training/split20260918/S14/lgb_osi_48/receipt.json"
+    },
+    "xgboost_osi_48": {
+      "model_id": "bf11e831b9792e52456d53e82ceceb66ba226ab0bf49ecdd4b7e88b429c635e9",
+      "receipt": "training/split20260918/S14/xgboost_osi_48/receipt.json"
+    },
+    "xgboost_P_t_48": {
+      "model_id": "bd1d4e69f971749da9e0c59fe16ec80689527a40482afb4f1c6f52c1a1421409",
+      "receipt": "training/split20260918/S14/xgboost_P_t_48/receipt.json"
+    },
+    "xgboost_N_t_48": {
+      "model_id": "6adaf61229321d266cdf5854d32d067b6e043304793e43299d901757bc919695",
+      "receipt": "training/split20260918/S14/xgboost_N_t_48/receipt.json"
+    },
+    "xgboost_D_t_48": {
+      "model_id": "8f7547c041d9b3719e75ac1dc40018b2330cf8e459b190c8c7d92e8c8824b923",
+      "receipt": "training/split20260918/S14/xgboost_D_t_48/receipt.json"
+    },
+    "xgboost_R_t_48": {
+      "model_id": "af62b1111158a5b1c2bf9bbc92eb0df12640cdc064eb17b02f4ea1d6e25cd0fe",
+      "receipt": "training/split20260918/S14/xgboost_R_t_48/receipt.json"
+    },
+    "catboost_osi_48": {
+      "model_id": "b233e66bee369f24973add4790ee514140a29e732c86990a1c2862c997c86bab",
+      "receipt": "training/split20260918/S14/catboost_osi_48/receipt.json"
+    },
+    "catboost_P_t_48": {
+      "model_id": "98398c048178d1b704e615de960e8eb533f0d47092c451caf22ecc60b5cbe3c6",
+      "receipt": "training/split20260918/S14/catboost_P_t_48/receipt.json"
+    },
+    "catboost_N_t_48": {
+      "model_id": "d396c95ccd356a9bd9ae0f6b0d8a426e5697deec5d9e70443feecd88bd45b614",
+      "receipt": "training/split20260918/S14/catboost_N_t_48/receipt.json"
+    },
+    "catboost_D_t_48": {
+      "model_id": "0fd07532f167ac0aa4842773c34342c17cfcf2e082ed48bb83535f6697f0e720",
+      "receipt": "training/split20260918/S14/catboost_D_t_48/receipt.json"
+    },
+    "catboost_R_t_48": {
+      "model_id": "f0241fad6e34a2bec975742630707149b511c55894651696af004d740265923f",
+      "receipt": "training/split20260918/S14/catboost_R_t_48/receipt.json"
+    }
+  },
+  "gates": [
+    {
+      "horizon": 24,
+      "scope": [
+        1,
+        4
+      ],
+      "positive_count": 5227,
+      "valid_count": 11400,
+      "anchor_sha256": "df9fa0189fe20c1a62412952d4ed8092a5461de121a956901df06d2e223a4acf",
+      "sources": [
+        {
+          "predicted_fold": 1,
+          "source_scope": [
+            4
+          ],
+          "rows": 5640,
+          "model_ids": {
+            "P_t": "3b60c1db1731145be3d20b1147a832ab9b1884318f37832b98d2fbe25d986935",
+            "N_t": "718aad99347fc95194521f22e6cbe3b263d4b5e396662bae89f9e11f5071557b",
+            "D_t": "a2cd18fe259f3a9e6d199e408ad2c1d722c8c462c20c902ac11ec4a8b41f1dab",
+            "R_t": "180bc07137c7e5a1a79a74960775eb99a20bb65d8160a7c227531a260ec71c97"
+          }
+        },
+        {
+          "predicted_fold": 4,
+          "source_scope": [
+            1
+          ],
+          "rows": 5760,
+          "model_ids": {
+            "P_t": "a0bb70e00a79f26d896adbf47d3ef0ab5198ba7072c4aa33799a977110d10ae0",
+            "N_t": "8a433844d7f6de94329ee9544b072f53be5a79fa7afe6821b55b07b28caa30fb",
+            "D_t": "e45bc9faa075c0d99e69dddf35fcc979dbe3964f28281db21a82b96f468b44a3",
+            "R_t": "2a0440f3ec7ec3f67a4aadac544327b71eb0b756b70d0d6849c1e58dda5d1ddd"
+          }
+        }
+      ],
+      "theta": 0.018518963532159854
+    },
+    {
+      "horizon": 48,
+      "scope": [
+        1,
+        4
+      ],
+      "positive_count": 3854,
+      "valid_count": 9120,
+      "anchor_sha256": "fb89d801c9d909c5f9a5fc1b6be3929871e6b1dc50dacb693d24605112121e90",
+      "sources": [
+        {
+          "predicted_fold": 1,
+          "source_scope": [
+            4
+          ],
+          "rows": 4512,
+          "model_ids": {
+            "P_t": "8d39fa9b1442a63698cdc941db1f53c30f739cf8c1dd84e2f9c6f8c6554e3c94",
+            "N_t": "20479af2afda04c1f60bbfd6272c9ed313f90b0471d84a1bfb9d7fb8fe172e6b",
+            "D_t": "29f91d0b6f93de6db90bff26d468cbe31efa109ecdd9b0223ba46aca78e09584",
+            "R_t": "48c6ed39df8b45ba49d50df45ed049d6149a64ca21be11b78769d6f5ef77efee"
+          }
+        },
+        {
+          "predicted_fold": 4,
+          "source_scope": [
+            1
+          ],
+          "rows": 4608,
+          "model_ids": {
+            "P_t": "df632d7b55d8abcf092bff636a4eb59b3c2e4c8e3f5c45edcbe14d3e6f5cd917",
+            "N_t": "74eaf70428a2ae9aae83a917c1bd6e67441606d19e2f15defd59725d9ca2662c",
+            "D_t": "fcbc54ddabf943dd102454007424b85fcff71bd3d3f829cd3461e1af6ace3abe",
+            "R_t": "50d1b54062396bec127404e4a0001b9ed45cad29c3486835d00227f3a7c43981"
+          }
+        }
+      ],
+      "theta": 0.008611626691976123
+    }
+  ],
+  "prediction_sha256": "6865b927e43a09e8d1e71c60acef1fbbdf13883b04f22d586b6e83daa2b9ccda"
+}

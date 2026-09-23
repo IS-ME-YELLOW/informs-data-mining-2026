@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "complete": true,
+  "scoped_recipes": 78,
+  "independent_gate_checks": 156,
+  "GAT_contexts": 192,
+  "valid_scoped_prediction_rows": 6362097,
+  "final_OOF_max_difference": 0.0,
+  "all_component_sources_verified": true,
+  "all_I3_recipes_verified": true,
+  "adapter_scope_exclusion": true,
+  "forbidden_label_reads_rejected": true,
+  "invalid_tail_zero_only_for_graph_input": true,
+  "verifier_sha256": "63ffd3b9e2153d4fb34c59922e88da28b24beb8b91f80aded4630724b5f930bb"
+}

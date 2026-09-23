@@ -1,0 +1,12 @@
+{
+  "total_models": 3396,
+  "reused_models": 870,
+  "new_models": 2526,
+  "new_fit_calls": 9096,
+  "portable_contexts": 192,
+  "actual_formal_fit_calls": 9096,
+  "diagnostic_native_replay_fit_calls": 83,
+  "manual_diagnostic_fits_started": 3,
+  "manual_diagnostic_fits_completed": 2,
+  "GAT_fits": 0
+}

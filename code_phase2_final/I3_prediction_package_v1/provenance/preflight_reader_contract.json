@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "synthetic_contexts": 12,
+  "scope_routing": true,
+  "invalid_tail_isolation": true,
+  "label_access_rejection": true,
+  "formal_fits": 0,
+  "reader_sha256": "17f0d0fa28f2dc0b78c60f71ae56c1ca4ddfdc842566695636a2468c68803a7d"
+}

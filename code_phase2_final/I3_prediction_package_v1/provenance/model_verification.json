@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "complete": true,
+  "models": 3396,
+  "checkpoints_reloaded": 9966,
+  "maximum_prediction_difference": 0.0,
+  "prediction_rows": 66121740,
+  "old_prediction_rows_reproduced": 4026672,
+  "inputs": {
+    "raw_labels_exact": true,
+    "known_history_independent": true,
+    "source_files_unchanged": 1819
+  },
+  "seconds": 62.22883806900063,
+  "verifier_sha256": "4ee24d8388fd2208497302e7f86ee69c805b9f2286050df0fd1fa9115ef4096a",
+  "accepted_cached_models": 3028,
+  "newly_replayed_models": 368,
+  "checkpoint_count_semantics": "unique accepted checkpoints across this audit and hash-verified cached audits"
+}

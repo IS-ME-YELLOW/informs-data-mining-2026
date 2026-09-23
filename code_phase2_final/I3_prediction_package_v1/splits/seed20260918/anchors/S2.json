@@ -1,0 +1,41 @@
+{
+  "seed": 20260918,
+  "scope": [
+    2
+  ],
+  "models": {
+    "P_t_24": {
+      "model_id": "5c6e9093485f7fc01f424344bcf2faa875a705ed97e172ccf307e2e58b72916e",
+      "receipt": "training/split20260918/S2/lgb_P_t_24/receipt.json"
+    },
+    "N_t_24": {
+      "model_id": "493bbfbcfb1549d1bad780429cd1533adde347d041c29f064e9785f73e759d17",
+      "receipt": "training/split20260918/S2/lgb_N_t_24/receipt.json"
+    },
+    "D_t_24": {
+      "model_id": "0b9ced39c08bd5c9646e1addb6a1e2293ef90a2225b8be6e9076f90eb4f04088",
+      "receipt": "training/split20260918/S2/lgb_D_t_24/receipt.json"
+    },
+    "R_t_24": {
+      "model_id": "9731d63af92a7cc9a8763e980df4a5201731896f38cae089eeaef1be31b1a177",
+      "receipt": "training/split20260918/S2/lgb_R_t_24/receipt.json"
+    },
+    "P_t_48": {
+      "model_id": "b3ea5c83edab38ab66b2789b021b776ad66851e491c216de435bc05eeeb14d14",
+      "receipt": "training/split20260918/S2/lgb_P_t_48/receipt.json"
+    },
+    "N_t_48": {
+      "model_id": "86a83261a52d00475494cb10bc16c3db5026a4845f1a975c0e50f25f7bc49917",
+      "receipt": "training/split20260918/S2/lgb_N_t_48/receipt.json"
+    },
+    "D_t_48": {
+      "model_id": "22e4d0166f1e5ab656f0571d346ca990fd7769e13af71c73a3e845398a35b3df",
+      "receipt": "training/split20260918/S2/lgb_D_t_48/receipt.json"
+    },
+    "R_t_48": {
+      "model_id": "3f47b42df6158e5eb50175943f64ca0ddedf98e842fb4dcbe13f866026fbb93c",
+      "receipt": "training/split20260918/S2/lgb_R_t_48/receipt.json"
+    }
+  },
+  "prediction_sha256": "72cccff34780dc23dc90c18e0cec755f6d3d69209ba3983a7ed1cca66c0dabda"
+}

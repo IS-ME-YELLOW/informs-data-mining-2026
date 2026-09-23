@@ -1,0 +1,459 @@
+{
+  "protocol": "i3_scope_prediction_v1",
+  "split_seeds": [
+    42,
+    20260917,
+    20260918
+  ],
+  "model_seed": 42,
+  "recipes": {
+    "lgb_N_t_01": {
+      "name": "lgb_N_t_01",
+      "family": "lightgbm",
+      "component": "N_t",
+      "horizon": 1,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t01h"
+    },
+    "lgb_D_t_01": {
+      "name": "lgb_D_t_01",
+      "family": "lightgbm",
+      "component": "D_t",
+      "horizon": 1,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t01h"
+    },
+    "lgb_R_t_01": {
+      "name": "lgb_R_t_01",
+      "family": "lightgbm",
+      "component": "R_t",
+      "horizon": 1,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t01h"
+    },
+    "lgb_N_t_06": {
+      "name": "lgb_N_t_06",
+      "family": "lightgbm",
+      "component": "N_t",
+      "horizon": 6,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t06h"
+    },
+    "lgb_D_t_06": {
+      "name": "lgb_D_t_06",
+      "family": "lightgbm",
+      "component": "D_t",
+      "horizon": 6,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t06h"
+    },
+    "lgb_R_t_06": {
+      "name": "lgb_R_t_06",
+      "family": "lightgbm",
+      "component": "R_t",
+      "horizon": 6,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t06h"
+    },
+    "lgb_P_t_24": {
+      "name": "lgb_P_t_24",
+      "family": "lightgbm",
+      "component": "P_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "P_t_target_t24h"
+    },
+    "lgb_N_t_24": {
+      "name": "lgb_N_t_24",
+      "family": "lightgbm",
+      "component": "N_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t24h"
+    },
+    "lgb_D_t_24": {
+      "name": "lgb_D_t_24",
+      "family": "lightgbm",
+      "component": "D_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t24h"
+    },
+    "lgb_R_t_24": {
+      "name": "lgb_R_t_24",
+      "family": "lightgbm",
+      "component": "R_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t24h"
+    },
+    "lgb_P_t_48": {
+      "name": "lgb_P_t_48",
+      "family": "lightgbm",
+      "component": "P_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "P_t_target_t48h"
+    },
+    "lgb_N_t_48": {
+      "name": "lgb_N_t_48",
+      "family": "lightgbm",
+      "component": "N_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t48h"
+    },
+    "lgb_D_t_48": {
+      "name": "lgb_D_t_48",
+      "family": "lightgbm",
+      "component": "D_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t48h"
+    },
+    "lgb_R_t_48": {
+      "name": "lgb_R_t_48",
+      "family": "lightgbm",
+      "component": "R_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t48h"
+    },
+    "lgb_osi_24": {
+      "name": "lgb_osi_24",
+      "family": "lightgbm",
+      "component": "osi",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "osi_target_t24h"
+    },
+    "lgb_osi_48": {
+      "name": "lgb_osi_48",
+      "family": "lightgbm",
+      "component": "osi",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "osi_target_t48h"
+    },
+    "P01_a": {
+      "name": "P01_a",
+      "family": "lightgbm",
+      "component": "P_t",
+      "horizon": 1,
+      "feature": "p1",
+      "kind": "a",
+      "target": "P_t_target_t01h"
+    },
+    "P01_b": {
+      "name": "P01_b",
+      "family": "lightgbm",
+      "component": "P_t",
+      "horizon": 1,
+      "feature": "p1",
+      "kind": "b",
+      "target": "P_t_target_t01h"
+    },
+    "P06_a": {
+      "name": "P06_a",
+      "family": "lightgbm",
+      "component": "P_t",
+      "horizon": 6,
+      "feature": "base",
+      "kind": "a",
+      "target": "P_t_target_t06h"
+    },
+    "P06_b": {
+      "name": "P06_b",
+      "family": "lightgbm",
+      "component": "P_t",
+      "horizon": 6,
+      "feature": "base",
+      "kind": "b",
+      "target": "P_t_target_t06h"
+    },
+    "P24_neighbor": {
+      "name": "P24_neighbor",
+      "family": "lightgbm",
+      "component": "P_t",
+      "horizon": 24,
+      "feature": "p24",
+      "kind": "raw",
+      "target": "P_t_target_t24h"
+    },
+    "D01_unknown": {
+      "name": "D01_unknown",
+      "family": "lightgbm",
+      "component": "D_t",
+      "horizon": 1,
+      "feature": "base",
+      "kind": "u",
+      "target": "D_t_target_t01h"
+    },
+    "xgboost_osi_24": {
+      "name": "xgboost_osi_24",
+      "family": "xgboost",
+      "component": "osi",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "osi_target_t24h"
+    },
+    "xgboost_P_t_24": {
+      "name": "xgboost_P_t_24",
+      "family": "xgboost",
+      "component": "P_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "P_t_target_t24h"
+    },
+    "xgboost_N_t_24": {
+      "name": "xgboost_N_t_24",
+      "family": "xgboost",
+      "component": "N_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t24h"
+    },
+    "xgboost_D_t_24": {
+      "name": "xgboost_D_t_24",
+      "family": "xgboost",
+      "component": "D_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t24h"
+    },
+    "xgboost_R_t_24": {
+      "name": "xgboost_R_t_24",
+      "family": "xgboost",
+      "component": "R_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t24h"
+    },
+    "xgboost_osi_48": {
+      "name": "xgboost_osi_48",
+      "family": "xgboost",
+      "component": "osi",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "osi_target_t48h"
+    },
+    "xgboost_P_t_48": {
+      "name": "xgboost_P_t_48",
+      "family": "xgboost",
+      "component": "P_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "P_t_target_t48h"
+    },
+    "xgboost_N_t_48": {
+      "name": "xgboost_N_t_48",
+      "family": "xgboost",
+      "component": "N_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t48h"
+    },
+    "xgboost_D_t_48": {
+      "name": "xgboost_D_t_48",
+      "family": "xgboost",
+      "component": "D_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t48h"
+    },
+    "xgboost_R_t_48": {
+      "name": "xgboost_R_t_48",
+      "family": "xgboost",
+      "component": "R_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t48h"
+    },
+    "catboost_osi_24": {
+      "name": "catboost_osi_24",
+      "family": "catboost",
+      "component": "osi",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "osi_target_t24h"
+    },
+    "catboost_P_t_24": {
+      "name": "catboost_P_t_24",
+      "family": "catboost",
+      "component": "P_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "P_t_target_t24h"
+    },
+    "catboost_N_t_24": {
+      "name": "catboost_N_t_24",
+      "family": "catboost",
+      "component": "N_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t24h"
+    },
+    "catboost_D_t_24": {
+      "name": "catboost_D_t_24",
+      "family": "catboost",
+      "component": "D_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t24h"
+    },
+    "catboost_R_t_24": {
+      "name": "catboost_R_t_24",
+      "family": "catboost",
+      "component": "R_t",
+      "horizon": 24,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t24h"
+    },
+    "catboost_osi_48": {
+      "name": "catboost_osi_48",
+      "family": "catboost",
+      "component": "osi",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "osi_target_t48h"
+    },
+    "catboost_P_t_48": {
+      "name": "catboost_P_t_48",
+      "family": "catboost",
+      "component": "P_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "P_t_target_t48h"
+    },
+    "catboost_N_t_48": {
+      "name": "catboost_N_t_48",
+      "family": "catboost",
+      "component": "N_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "N_t_target_t48h"
+    },
+    "catboost_D_t_48": {
+      "name": "catboost_D_t_48",
+      "family": "catboost",
+      "component": "D_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "D_t_target_t48h"
+    },
+    "catboost_R_t_48": {
+      "name": "catboost_R_t_48",
+      "family": "catboost",
+      "component": "R_t",
+      "horizon": 48,
+      "feature": "base",
+      "kind": "raw",
+      "target": "R_t_target_t48h"
+    }
+  },
+  "scope_sizes": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "singleton_anchor": "FIPS sorted modulo 3 county groups; only LGB original components 24/48",
+  "component_formula": {
+    "P_t": 0.4,
+    "N_t": 0.35,
+    "D_t": 0.25,
+    "R_t": -0.1
+  },
+  "I3": {
+    "1": "T_C3",
+    "6": "T_C3",
+    "24": "H((T_C1+Stella_L2)/2)",
+    "48": "Stella_L2"
+  },
+  "scalar_gate": "positive cross-fitted LGB anchor q95 linear; L0>theta uses L0 else L1",
+  "max_rounds": {
+    "lgb_N_t_01": 2000,
+    "lgb_D_t_01": 2000,
+    "lgb_R_t_01": 2000,
+    "lgb_N_t_06": 2000,
+    "lgb_D_t_06": 2000,
+    "lgb_R_t_06": 2000,
+    "lgb_P_t_24": 2000,
+    "lgb_N_t_24": 2000,
+    "lgb_D_t_24": 2000,
+    "lgb_R_t_24": 2000,
+    "lgb_P_t_48": 2000,
+    "lgb_N_t_48": 2000,
+    "lgb_D_t_48": 2000,
+    "lgb_R_t_48": 2000,
+    "lgb_osi_24": 2000,
+    "lgb_osi_48": 2000,
+    "P01_a": 2000,
+    "P01_b": 2000,
+    "P06_a": 2000,
+    "P06_b": 2000,
+    "P24_neighbor": 2000,
+    "D01_unknown": 2000,
+    "xgboost_osi_24": 4000,
+    "xgboost_P_t_24": 8000,
+    "xgboost_N_t_24": 8000,
+    "xgboost_D_t_24": 8000,
+    "xgboost_R_t_24": 8000,
+    "xgboost_osi_48": 4000,
+    "xgboost_P_t_48": 8000,
+    "xgboost_N_t_48": 8000,
+    "xgboost_D_t_48": 8000,
+    "xgboost_R_t_48": 8000,
+    "catboost_osi_24": 4000,
+    "catboost_P_t_24": 4000,
+    "catboost_N_t_24": 4000,
+    "catboost_D_t_24": 4000,
+    "catboost_R_t_24": 4000,
+    "catboost_osi_48": 4000,
+    "catboost_P_t_48": 4000,
+    "catboost_N_t_48": 4000,
+    "catboost_D_t_48": 4000,
+    "catboost_R_t_48": 4000
+  },
+  "patience": 100,
+  "refit_rounds": "floor mean probe best rounds, min1",
+  "workers": 6,
+  "formal_GAT_training": false,
+  "submission": false,
+  "protocol_sha256": "80ba90c954710158678855dc966c82477f4678090d7a64abe4e1700bf8a7e690"
+}
