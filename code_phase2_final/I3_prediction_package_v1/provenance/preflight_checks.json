@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "identity_hash": "c579e051d2af84dbea00eff19f76836ec7199206297d1dbd8076037bc86898c4",
+  "label_poisoning_checks": 483,
+  "scoped_county_disjoint_probes": true,
+  "required_context_dependencies_complete": true,
+  "test_future_labels_absent": true,
+  "formal_fits": 0
+}
