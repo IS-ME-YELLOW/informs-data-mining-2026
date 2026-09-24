@@ -455,8 +455,16 @@ class FinalI3M2Runner:
                 "selected_alpha": alpha["selected_alpha"],
             })
         template = pd.read_csv(submission_template, dtype={"fipsCode": str})
-        if list(template.columns) != ["fipsCode", "timestamp_et", *HORIZONS]:
+
+        required = ["fipsCode", "timestamp_et", *HORIZONS]
+        allowed_templates = [
+            required,
+            ["fipsCode", "countyName", "stateAbbr", "timestamp_et", *HORIZONS],
+        ]
+
+        if list(template.columns) not in allowed_templates:
             raise ValueError("submission template columns differ from the official template")
+        
         template_keys = pd.MultiIndex.from_arrays([
             template["fipsCode"].astype(str).str.replace(r"\.0$", "", regex=True).str.zfill(5),
             pd.to_datetime(template["timestamp_et"]),
