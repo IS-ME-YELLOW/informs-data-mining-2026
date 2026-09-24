@@ -1,0 +1,48 @@
+{
+  "protocol": "i3_base_m2_robust_input_nested_outer_cv_v1",
+  "variant": "m2_robust_input",
+  "input_policy": {
+    "skip": true,
+    "input_clip_z": 5.0,
+    "correction_limit": null
+  },
+  "seed": 42,
+  "cv_file": "D:\\inform2026\\informs-data-mining-2026\\code_phase2_final\\I3_prediction_package_v1\\inputs\\cv_seed42.csv",
+  "cv_source": "I3 package inputs/cv_seed42.csv (same frozen compare hash)",
+  "cv_sha256": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+  "code_phase2_compare_cv_sha256": "2ee47b74590051cec9d0d1ed0ac7d7a640250c8370433b1dfdac9b281ffe4021",
+  "package_complete_sha256": "28a5e33009faae988ca44f5c4e4d79d42d9a26fb1928339ff0d8454885f61bcc",
+  "device": "cuda",
+  "epochs": 220,
+  "patience": 35,
+  "bootstrap_seed": 20260910,
+  "bootstrap_replicates": 2000,
+  "outer_folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "horizons": [
+    "osi_target_t01h",
+    "osi_target_t06h",
+    "osi_target_t24h",
+    "osi_target_t48h"
+  ],
+  "outer_rows": 137664,
+  "scoreable_rows": {
+    "osi_target_t01h": 34177,
+    "osi_target_t06h": 32982,
+    "osi_target_t24h": 28680,
+    "osi_target_t48h": 22944
+  },
+  "artifact_hashes": {
+    "outer_oof.parquet": "4c677438f89cc18803bd01c01166a47324006964fc2626180195bea6cea8fc4d",
+    "alpha_selection.csv": "c2e471169f52ad0bf178a80b3b12623722675b5ef3fbd06cb0da38ba867064b7",
+    "fold_metrics.csv": "345cc64a21831ef284140dc2dc9a5001edd5d30c379daae22afdba36d1b23dbc",
+    "cv_summary.csv": "9c3f3bddc676934d4184136066941345d69c6cb987cfb7802146733d0b07c03f",
+    "county_metrics.csv": "a92ccd713ebd9c683bac06e8ade15698fe1ae714210e471785e41f4895bc6aad",
+    "county_bootstrap.csv": "24ece5bcfd33cc9bcb33ebd01bcecac789f8b4a361c23b68a6f686f8faa49aff"
+  }
+}
