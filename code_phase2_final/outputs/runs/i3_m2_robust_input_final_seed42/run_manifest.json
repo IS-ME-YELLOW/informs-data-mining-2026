@@ -1,0 +1,49 @@
+{
+  "protocol": "i3_base_m2_robust_input_final_v1",
+  "variant": "m2_robust_input",
+  "seed": 42,
+  "device": "cuda",
+  "epochs": 220,
+  "patience": 35,
+  "package_dir": "D:\\inform2026\\informs-data-mining-2026\\code_phase2_final\\I3_prediction_package_v1",
+  "package_complete_sha256": "28a5e33009faae988ca44f5c4e4d79d42d9a26fb1928339ff0d8454885f61bcc",
+  "graph_hash": "0a38d1c05ff4b036026baa6a9b15029d0dc65b326d0f2c66b89f0e67f04b56dc",
+  "feature_shape": [
+    144,
+    302,
+    205
+  ],
+  "submission": "D:\\inform2026\\informs-data-mining-2026\\code_phase2_final\\outputs\\runs\\i3_m2_robust_input_final_seed42\\submission_i3_m2_gat.csv",
+  "checkpoints": [
+    {
+      "horizon": "osi_target_t01h",
+      "path": "checkpoints\\gat_t01h_S01234.pt",
+      "sha256": "1f5856cf5625719276125d0ecec74ec1c89229782e933263027cdc4c122f7b4a",
+      "selected_alpha": 0.5
+    },
+    {
+      "horizon": "osi_target_t06h",
+      "path": "checkpoints\\gat_t06h_S01234.pt",
+      "sha256": "d855a803cb7138e12770e581058e060e7428a8869f2f1f7b7a3dbd1fba731799",
+      "selected_alpha": 0.2
+    },
+    {
+      "horizon": "osi_target_t24h",
+      "path": "checkpoints\\gat_t24h_S01234.pt",
+      "sha256": "ab978551fbe18159a9a8ec558b5d6ba9cb4c0ac7f86021cff50f65ec13e3fd52",
+      "selected_alpha": 0.35
+    },
+    {
+      "horizon": "osi_target_t48h",
+      "path": "checkpoints\\gat_t48h_S01234.pt",
+      "sha256": "c4818d5b16b495107fce54d9ea609d072b084b599d795f71e05b07204cc50cd1",
+      "selected_alpha": 0.35
+    }
+  ],
+  "prediction_finite_counts": {
+    "osi_target_t01h": 9009,
+    "osi_target_t06h": 8694,
+    "osi_target_t24h": 7560,
+    "osi_target_t48h": 6048
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "osi_target_t01h": {
+    "n": 34177,
+    "rmse": 0.010840689291401098,
+    "mae": 0.003227290776446228,
+    "frozen_package_score_file": "D:\\inform2026\\informs-data-mining-2026\\code_phase2_final\\I3_prediction_package_v1\\provenance\\frozen_I3_scores.csv"
+  },
+  "osi_target_t06h": {
+    "n": 32982,
+    "rmse": 0.009909062742500467,
+    "mae": 0.0031004748883626883,
+    "frozen_package_score_file": "D:\\inform2026\\informs-data-mining-2026\\code_phase2_final\\I3_prediction_package_v1\\provenance\\frozen_I3_scores.csv"
+  },
+  "osi_target_t24h": {
+    "n": 28680,
+    "rmse": 0.008414292685097682,
+    "mae": 0.0026834502114672387,
+    "frozen_package_score_file": "D:\\inform2026\\informs-data-mining-2026\\code_phase2_final\\I3_prediction_package_v1\\provenance\\frozen_I3_scores.csv"
+  },
+  "osi_target_t48h": {
+    "n": 22944,
+    "rmse": 0.007661528701953814,
+    "mae": 0.0021067935790155074,
+    "frozen_package_score_file": "D:\\inform2026\\informs-data-mining-2026\\code_phase2_final\\I3_prediction_package_v1\\provenance\\frozen_I3_scores.csv"
+  }
+}
