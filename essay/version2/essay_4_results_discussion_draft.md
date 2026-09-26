@@ -1,0 +1,21 @@
+## 4. Results and Discussion
+
+All results are county-level out-of-fold validation scores on the training counties. Tree configurations are summarized across three fixed county partitions; spatial refinement is compared with its matching tree forecast on the seed42 partition. Within each experiment, the remaining pipeline is held fixed. The common reference predicts all four components directly with LightGBM and the 163 base features. All configurations use the same OSI postprocessing.
+
+<!-- Insert compact four-horizon RMSE table here. -->
+
+Across the three partitions, the complete tree forecast reduced mean RMSE over the reference by 9.17%, 5.65%, 1.51%, and 0.66% at 1h, 6h, 24h, and 48h. Every partition improved at every horizon.
+
+**Using known information in prediction.** On the seed42 partition, predicting the components and reconstructing OSI produced lower RMSE at every horizon than direct OSI regression with the same features. Building observed conditions into individual component forecasts provided further gains. Across three partitions, the initial-state formulation for the 1h $P$ source reduced final 1h OSI RMSE by 4.52%–7.46% relative to direct $P$ regression with the same objective. Reconstructing $D$ from its known historical contribution reduced 1h RMSE by 1.24%–1.45% relative to the component reference, despite applying only near the observation cutoff. Extending the $P$ formulation to 6h and adding neighbor features to selected $P$ sources also improved their controls. These staged gains are not additive.
+
+Added structure was less useful for $N$ and $R$. Their 1h occurrence–magnitude models improved predictions for zero and small positive values but increased errors above 0.01. Replacing $N$ alone reduced final 1h RMSE by only 0.05%; the other variants did not improve on it. We retained direct regression for both components. Component-specific designs should therefore reflect both their definitions and final OSI accuracy.
+
+**Combining forecasts according to their errors.** On the seed42 partition, common-target-time aggregation reduced RMSE by 1.04% at 1h and 1.83% at 6h, but increased 48h RMSE by 0.62%. We therefore used aggregation for the shorter horizons and separate long-horizon sources.
+
+At 24h and 48h, unconditional averaging performed worse than the reference in two of three partitions. Tail gating improved on both alternatives in every partition, reducing RMSE over the reference by 0.56%–2.18% at 24h and 0.39%–0.99% at 48h. The gate retained the reference for about 2% of observations. At 24h, averaging the gated ensemble with the enhanced component forecast improved on the latter in all three partitions, but surpassed the gated ensemble in two. Averaging can dilute useful high-severity predictions, while component errors may reinforce or offset one another when reconstructing OSI. We therefore select combinations by final OSI error.
+
+**Spatial gains and their distribution.** On the seed42 partition, spatial refinement reduced RMSE over the matching tree forecast by 2.10%, 0.55%, 2.38%, and 2.12% across the four horizons. RMSE improved in four of five folds at 24h and three of five at the other horizons. The gains were uneven: all county-bootstrap 95% intervals included zero, and Forest County accounted for 97.3% of the net 1h SSE reduction after county-level gains and losses were offset. Pooled improvements therefore coexist with concentrated gains and deterioration elsewhere.
+
+This comparison covers geographic inputs, neighborhood summaries, and the graph learner together, so it does not isolate message passing. A non-graph model with the same inputs would provide that comparison. Utility service relationships and electrical connectivity may also define more informative edges.
+
+**Transfer and operational forecasting.** Both evaluations use held-out counties within one storm, leaving transfer to other events and regions untested. Broader evaluation should compare event-relative features with the calendar-period code. Operational forecasting also changes the available information: a nominal 1h prediction late in this challenge may be days beyond the latest outage observation. Rolling observations would update the initial state for $P$ and the known contribution to $D$, requiring corresponding changes to features and training.
