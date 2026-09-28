@@ -1,0 +1,32 @@
+{
+  "status": "ANALYSIS_AND_STATIC_REVIEW_COMPLETE",
+  "timestamp_utc": "2026-09-21T12:21:36.806014+00:00",
+  "original_files_unchanged": 3981,
+  "training_performed": false,
+  "model_reload_performed": false,
+  "limit_173_cpu_preflight": "PREFLIGHT_OK",
+  "original_verifier_defects": [
+    "missing variant argument in check_alpha_group",
+    "inconsistent model_path separator comparison"
+  ],
+  "new_outputs_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_dem_eval_v158/diagnostics/variant_comparison_2026-09-21",
+  "artifacts": {
+    "README.md": "9e99795820c745869c52a053450b668157f33392ff05cadb141e73f855516e69",
+    "Results_and_Code_Audit_2026-09-21.md": "133bad93645da55e665013e24c78bb5d3f31a61dc57eec03cac258ebe17f7625",
+    "analyze_results.py": "39a9a088bde479b61b88cb56358396de31db4b8c839b6303ab90a2b0b99083eb",
+    "audit.json": "c8db9a79a9a8531b92fbb415da4167bc1e8f681e8c02cbbd29ee5ab5cf7e6e0b",
+    "limit_preflight.log": "4c37d61095d0015745c7ec6af54f19fb3a964e710a5ce289958fdd3050f4027b",
+    "source_snapshot.json": "bb5001c66f6afcc03f26d504a648caf8d4c34797cd12a9d8513d57fe77272417",
+    "tables/Newton.csv": "d85898bc85ca3440310054d3e0c3b50c41e59b6aa866ea4ff5961d1b2049387d",
+    "tables/bootstrap.csv": "a4790eb6c86d29114f670fe3c5219ad95f3f69de793ab588c35ebd0f20700219",
+    "tables/county_metrics.csv": "79ee7e666d8e3634ea42fd2e751677a1b6e4532900c9ebb670b25414dd311c23",
+    "tables/excluding_Newton_diagnostic_only.csv": "cca7d77138fe8e87745f9c03b304a00a518254dd14d1ee02355d7dcb6157a0b2",
+    "tables/final_alpha.csv": "6c76aafc132ef3011f005a0eac2c0b0eeccd3f5f427b20786932735368fcda77",
+    "tables/fold_metrics.csv": "a30e517b725d40a090ad039c6c508283112e235f9ee0b369d68788ca554f05de",
+    "tables/largest_benefit.csv": "f690b07b2b8bfef8f71e0dd4bc90e8ad732d1d2c42f643e09978b46f80956f75",
+    "tables/largest_harm.csv": "22e710f0d6f576f109af75a5b00e07d564cdef379d4a190155566d9f06a41715",
+    "tables/overall_metrics.csv": "0b894d2bce48e2b26b919449761e1633696fd454ec8e33acd32a82f1714c26cc",
+    "tables/source_code_match.csv": "7877e94ade72dd53fbbf1371d4a0e7d396feaca3e30c91395a491d84cd363ca1",
+    "tables/verifier_findings.csv": "70317a7f3117adae4ef0719ea8b8368b023b1c18b02b50ee3bf464a6db23ac6d"
+  }
+}

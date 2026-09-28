@@ -1,0 +1,5 @@
+variant,check,status,error
+m0_full,original_alpha_identity_check,PASS,
+m1_no_skip,original_alpha_identity_check,FAIL,alpha selection id: mismatch
+m2_robust_input,original_alpha_identity_check,FAIL,alpha selection id: mismatch
+m3_bounded,original_alpha_identity_check,FAIL,alpha selection id: mismatch

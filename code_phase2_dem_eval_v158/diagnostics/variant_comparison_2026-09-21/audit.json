@@ -1,0 +1,81 @@
+{
+  "status": "SAVED_ARTIFACT_ANALYSIS_PASS_WITH_VERIFIER_DEFECTS",
+  "runs": [
+    {
+      "variant": "m0_full",
+      "run_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_experiment/dem_compare_v1_m0_full_component_seed42_cuda_fix1/dem_compare_v1_m0_full_component_seed42_cuda_fix1/models/gat/runs/dem_compare_v1_m0_full_component_seed42_cuda_fix1",
+      "source_hashes_matched": 13,
+      "base_models_hashed": 416,
+      "GAT_files_hashed": 64,
+      "base_path_separator_mismatches": 416,
+      "full_reload": "not_run_in_this_process",
+      "COMPLETE_present": false,
+      "saved_numerical_and_scope_checks": "PASS"
+    },
+    {
+      "variant": "m1_no_skip",
+      "run_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_experiment/dem_compare_v1_m1_no_skip_component_seed42_cuda/dem_compare_v1_m0_full_component_seed42_cuda_fix1/models/gat/runs/dem_compare_v1_m1_no_skip_component_seed42_cuda",
+      "source_hashes_matched": 13,
+      "base_models_hashed": 416,
+      "GAT_files_hashed": 64,
+      "base_path_separator_mismatches": 416,
+      "full_reload": "not_run_in_this_process",
+      "COMPLETE_present": false,
+      "saved_numerical_and_scope_checks": "PASS"
+    },
+    {
+      "variant": "m2_robust_input",
+      "run_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_experiment/dem_compare_v1_m2_robust_input_component_seed42_cuda/dem_compare_v1_m0_full_component_seed42_cuda_fix1/models/gat/runs/dem_compare_v1_m2_robust_input_component_seed42_cuda",
+      "source_hashes_matched": 13,
+      "base_models_hashed": 416,
+      "GAT_files_hashed": 64,
+      "base_path_separator_mismatches": 416,
+      "full_reload": "not_run_in_this_process",
+      "COMPLETE_present": false,
+      "saved_numerical_and_scope_checks": "PASS"
+    },
+    {
+      "variant": "m3_bounded",
+      "run_root": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_experiment/dem_compare_v1_m3_bounded_component_seed42_cuda/dem_compare_v1_m0_full_component_seed42_cuda_fix1/models/gat/runs/dem_compare_v1_m3_bounded_component_seed42_cuda",
+      "source_hashes_matched": 13,
+      "base_models_hashed": 416,
+      "GAT_files_hashed": 64,
+      "base_path_separator_mismatches": 416,
+      "full_reload": "not_run_in_this_process",
+      "COMPLETE_present": false,
+      "saved_numerical_and_scope_checks": "PASS"
+    }
+  ],
+  "original_files_unchanged": 3981,
+  "training_performed": false,
+  "model_reload_performed": false,
+  "alpha_candidates_recomputed": 768,
+  "bootstrap_replicates_per_horizon": 2000,
+  "original_verifier_smoke_checks": [
+    {
+      "variant": "m0_full",
+      "check": "original_alpha_identity_check",
+      "status": "PASS"
+    },
+    {
+      "variant": "m1_no_skip",
+      "check": "original_alpha_identity_check",
+      "status": "FAIL",
+      "error": "alpha selection id: mismatch"
+    },
+    {
+      "variant": "m2_robust_input",
+      "check": "original_alpha_identity_check",
+      "status": "FAIL",
+      "error": "alpha selection id: mismatch"
+    },
+    {
+      "variant": "m3_bounded",
+      "check": "original_alpha_identity_check",
+      "status": "FAIL",
+      "error": "alpha selection id: mismatch"
+    }
+  ],
+  "source_root_for_results": "/home/jacklo/XYY/INFORMS/informs-data-mining-wendyxu/code_phase2_compare",
+  "requested_limit_source_is_different_173_dim_variant": true
+}
