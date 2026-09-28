@@ -7,3 +7,6 @@ tmp
 articles/
 archive/
 data\external\tl_2025_us_county\tl_2025_us_county.shp
+versions/xyy/v1.5.8_strict_baseline/i3_prediction_package
+submission_release
+submission_acceptance
